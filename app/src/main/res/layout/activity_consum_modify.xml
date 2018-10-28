@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--规划修改-消费-->
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/blueBackground"
+        app:navigationIcon="@mipmap/back"
+        app:title="规划修改-消费"
+        app:titleTextColor="@color/white" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingBottom="40px"
+        android:paddingLeft="30px"
+        android:paddingRight="30px">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30px"
+            android:text="规划金额"
+            android:textColor="@color/blueBackground"
+            android:textSize="24px" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60px"
+            android:layout_marginTop="10px"
+            android:background="@drawable/edt_search"
+            android:padding="4px">
+
+
+            <com.rflash.basemodule.view.DecimalEditText
+                android:id="@+id/edt_money"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="30px"
+                android:layout_toLeftOf="@+id/tv_yuan"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:hint="请输入规划金额"
+                android:inputType="number|numberDecimal"
+                android:lines="1"
+                android:paddingLeft="10px"
+                android:textColor="@color/colorPrimaryDark"
+                android:textColorHint="@color/edtHint"
+                android:textSize="28px"
+                app:decimalNumber="2" />
+
+            <TextView
+                android:id="@+id/tv_yuan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20px"
+                android:text="¥"
+                android:textColorHint="@color/loginHint"
+                android:textSize="28px" />
+
+        </RelativeLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30px"
+            android:text="规划商户"
+            android:textColor="@color/blueBackground"
+            android:textSize="24px" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60px"
+            android:layout_marginTop="10px">
+
+            <Spinner
+                android:id="@+id/spinner_channel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="60px"
+                android:layout_marginLeft="10px"
+                android:layout_toRightOf="@+id/spinner_channel"
+                android:background="@drawable/edt_search"
+                android:padding="4px">
+
+
+                <EditText
+                    android:id="@+id/edt_com"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="30px"
+                    android:layout_toLeftOf="@+id/iv_dismiss"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:hint="请输入规划商户"
+                    android:inputType="text"
+                    android:lines="1"
+                    android:paddingLeft="10px"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textColorHint="@color/edtHint"
+                    android:textSize="28px" />
+
+                <ImageView
+                    android:paddingLeft="10px"
+                    android:id="@+id/iv_dismiss"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:paddingRight="20px"
+                    android:src="@mipmap/dismiss"
+                    android:textSize="28px" />
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_modify"
+            android:layout_width="match_parent"
+            android:layout_height="60px"
+            android:layout_marginTop="30px"
+            android:background="@drawable/modify"
+            android:gravity="center"
+            android:text="修改"
+            android:textColor="@color/modify"
+            android:textSize="28px" />
+
+    </LinearLayout>
+
+    <com.rflash.basemodule.view.LoadRecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+</LinearLayout>

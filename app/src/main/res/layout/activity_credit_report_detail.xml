@@ -1,0 +1,4106 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/LinearLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/blueBackground"
+        app:navigationIcon="@mipmap/back"
+        app:titleTextColor="@color/white" />
+
+    <ScrollView
+        android:id="@+id/Scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!-- 银联用户画像查询报告 -->
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/ll_user_protrait"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <!-- 基本信息 -->
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:background="@color/colorPrimaryDark">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/tableRow1"
+                        android:gravity="center_vertical"
+                        android:text="基本信息"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="30px" />
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="姓名" />
+
+                        <TextView
+                            android:id="@+id/tv_user_name"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="证件类型" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center|left"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="身份证" />
+                    </TableRow>
+                </TableLayout>
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:background="@color/colorPrimaryDark">
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="证件号" />
+
+                        <TextView
+                            android:id="@+id/tv_user_identityCard"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="3"
+                            android:background="#ffffffff"
+                            android:text="" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="手机号" />
+
+                        <TextView
+                            android:id="@+id/tv_user_mobile"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="3"
+                            android:background="#ffffffff"
+                            android:text="" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="银行卡号" />
+
+                        <TextView
+                            android:id="@+id/tv_user_cardNo"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="3"
+                            android:background="#ffffffff"
+                            android:text="" />
+                    </TableRow>
+                </TableLayout>
+
+                <!-- 银行卡属性 -->
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorPrimaryDark">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/tableRow2"
+                        android:gravity="center_vertical"
+                        android:text="银行卡属性"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="30px" />
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="发卡地区" />
+
+                        <TextView
+                            android:id="@+id/tv_user_s0660"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="银行卡等级" />
+
+                        <TextView
+                            android:id="@+id/tv_user_s0467"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="银联高端客户" />
+
+                        <TextView
+                            android:id="@+id/tv_user_s0661"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="第一笔交易时间" />
+
+                        <TextView
+                            android:id="@+id/tv_user_s0506"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+                </TableLayout>
+
+                <!-- 持卡人身份特征 -->
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorPrimaryDark">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/tableRow3"
+                        android:gravity="center_vertical"
+                        android:text="持卡人身份特征"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="30px" />
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="近5年常住城市" />
+
+                        <TextView
+                            android:id="@+id/tv_user_s0503"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="近12月常住城市" />
+
+                        <TextView
+                            android:id="@+id/tv_user_s0504"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="城市消费达人" />
+
+                        <TextView
+                            android:id="@+id/tv_user_s0659"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="消费档次" />
+
+                        <TextView
+                            android:id="@+id/tv_user_s0476"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="每月还贷能力" />
+
+                        <TextView
+                            android:id="@+id/tv_user_s0474"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="消费行业偏好" />
+
+                        <TextView
+                            android:id="@+id/tv_user_s0477"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+                </TableLayout>
+
+                <!-- 持卡人资产状况 -->
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorPrimaryDark">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/tableRow4"
+                        android:gravity="center_vertical"
+                        android:text="持卡人资产状况"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="30px" />
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="是否有房" />
+
+                        <TextView
+                            android:id="@+id/tv_user_s0470"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="房产估值" />
+
+                        <TextView
+                            android:id="@+id/tv_user_s0663"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="是否有车" />
+
+                        <TextView
+                            android:id="@+id/tv_user_s0472"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="车辆估值" />
+
+                        <TextView
+                            android:id="@+id/tv_user_s0664"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                </TableLayout>
+
+                <!-- 近12月银行卡交易统计（金额） -->
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorPrimaryDark">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/tableRow5"
+                        android:gravity="center_vertical"
+                        android:text="近12月银行卡交易统计（金额）"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="30px" />
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="月份" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="消费类交易金额" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="银行类交易金额" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:id="@+id/tv_user_amount_data_1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_user_amount_consume_1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_user_amount_bank_1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+                    <TableRow>
+
+                        <TextView
+                            android:id="@+id/tv_user_amount_data_2"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_user_amount_consume_2"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_user_amount_bank_2"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+                    <TableRow>
+
+                        <TextView
+                            android:id="@+id/tv_user_amount_data_3"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_user_amount_consume_3"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_user_amount_bank_3"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+                    <TableRow>
+
+                        <TextView
+                            android:id="@+id/tv_user_amount_data_4"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_user_amount_consume_4"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_user_amount_bank_4"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+                    <TableRow>
+
+                        <TextView
+                            android:id="@+id/tv_user_amount_data_5"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_user_amount_consume_5"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_user_amount_bank_5"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+                    <TableRow>
+
+                        <TextView
+                            android:id="@+id/tv_user_amount_data_6"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_user_amount_consume_6"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_user_amount_bank_6"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+                    <TableRow>
+
+                        <TextView
+                            android:id="@+id/tv_user_amount_data_7"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_user_amount_consume_7"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_user_amount_bank_7"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+                    <TableRow>
+
+                        <TextView
+                            android:id="@+id/tv_user_amount_data_8"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_user_amount_consume_8"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_user_amount_bank_8"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+                    <TableRow>
+
+                        <TextView
+                            android:id="@+id/tv_user_amount_data_9"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_user_amount_consume_9"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_user_amount_bank_9"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+                    <TableRow>
+
+                        <TextView
+                            android:id="@+id/tv_user_amount_data_10"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_user_amount_consume_10"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_user_amount_bank_10"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+                    <TableRow>
+
+                        <TextView
+                            android:id="@+id/tv_user_amount_data_11"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_user_amount_consume_11"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_user_amount_bank_11"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+                    <TableRow>
+
+                        <TextView
+                            android:id="@+id/tv_user_amount_data_12"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_user_amount_consume_12"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_user_amount_bank_12"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+
+
+                </TableLayout>
+
+                <!-- 近12月银行卡交易统计（笔数） -->
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorPrimaryDark">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/tableRow5"
+                        android:gravity="center_vertical"
+                        android:text="近12月银行卡交易统计（笔数）"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="30px" />
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="月份" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="消费类交易笔数" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="银行类交易笔数" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:id="@+id/tv_user_count_data_1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_user_count_consume_1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_user_count_bank_1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+                    <TableRow>
+
+                        <TextView
+                            android:id="@+id/tv_user_count_data_2"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_user_count_consume_2"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_user_count_bank_2"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+                    <TableRow>
+
+                        <TextView
+                            android:id="@+id/tv_user_count_data_3"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_user_count_consume_3"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_user_count_bank_3"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+                    <TableRow>
+
+                        <TextView
+                            android:id="@+id/tv_user_count_data_4"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_user_count_consume_4"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_user_count_bank_4"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+                    <TableRow>
+
+                        <TextView
+                            android:id="@+id/tv_user_count_data_5"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_user_count_consume_5"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_user_count_bank_5"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+                    <TableRow>
+
+                        <TextView
+                            android:id="@+id/tv_user_count_data_6"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_user_count_consume_6"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_user_count_bank_6"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+                    <TableRow>
+
+                        <TextView
+                            android:id="@+id/tv_user_count_data_7"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_user_count_consume_7"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_user_count_bank_7"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+                    <TableRow>
+
+                        <TextView
+                            android:id="@+id/tv_user_count_data_8"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_user_count_consume_8"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_user_count_bank_8"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+                    <TableRow>
+
+                        <TextView
+                            android:id="@+id/tv_user_count_data_9"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_user_count_consume_9"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_user_count_bank_9"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+                    <TableRow>
+
+                        <TextView
+                            android:id="@+id/tv_user_count_data_10"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_user_count_consume_10"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_user_count_bank_10"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+                    <TableRow>
+
+                        <TextView
+                            android:id="@+id/tv_user_count_data_11"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_user_count_consume_11"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_user_count_bank_11"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+                    <TableRow>
+
+                        <TextView
+                            android:id="@+id/tv_user_count_data_12"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_user_count_consume_12"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_user_count_bank_12"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+
+                </TableLayout>
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:background="@color/colorPrimaryDark">
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="疑似套现金额" />
+
+                        <TextView
+                            android:id="@+id/tv_user_s0677_0"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="套现高危行业交易金额占比" />
+
+                        <TextView
+                            android:id="@+id/tv_user_s0677_1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="疑似套现笔数" />
+
+                        <TextView
+                            android:id="@+id/tv_user_s0677_2"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="套现高危行业交易笔数占比" />
+
+                        <TextView
+                            android:id="@+id/tv_user_s0677_3"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="信用卡还款金额" />
+
+                        <TextView
+                            android:id="@+id/tv_user_s0670"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="信用卡还款笔数" />
+
+                        <TextView
+                            android:id="@+id/tv_user_s0671"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="餐饮类消费金额" />
+
+                        <TextView
+                            android:id="@+id/tv_user_s0188"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="娱乐类消费笔数" />
+
+                        <TextView
+                            android:id="@+id/tv_user_s0185"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="旅行类消费金额" />
+
+                        <TextView
+                            android:id="@+id/tv_user_s0194"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="医药消费金额" />
+
+                        <TextView
+                            android:id="@+id/tv_user_s0200"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+                </TableLayout>
+
+
+            </LinearLayout>
+
+            <!-- 银联用户交易查询报告 -->
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/ll_trans_report"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <!-- 基本信息 -->
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:background="@color/colorPrimaryDark">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/tableRow1"
+                        android:gravity="center_vertical"
+                        android:text="基本信息"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="30px" />
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="姓名" />
+
+                        <TextView
+                            android:id="@+id/tv_trans_name"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="证件类型" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center|left"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="身份证" />
+                    </TableRow>
+                </TableLayout>
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:background="@color/colorPrimaryDark">
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="证件号" />
+
+                        <TextView
+                            android:id="@+id/tv_trans_identityCard"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="3"
+                            android:background="#ffffffff"
+                            android:text="" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="手机号" />
+
+                        <TextView
+                            android:id="@+id/tv_trans_mobile"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="3"
+                            android:background="#ffffffff"
+                            android:text="" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="银行卡号" />
+
+                        <TextView
+                            android:id="@+id/tv_trans_cardNo"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="3"
+                            android:background="#ffffffff"
+                            android:text="" />
+                    </TableRow>
+                </TableLayout>
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:background="@color/colorPrimaryDark">
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="卡品牌" />
+
+                        <TextView
+                            android:id="@+id/tv_trans_cardbrand"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="发卡行" />
+
+                        <TextView
+                            android:id="@+id/tv_trans_bankname"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="卡级别" />
+
+                        <TextView
+                            android:id="@+id/tv_trans_cardlevel"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="卡类型" />
+
+                        <TextView
+                            android:id="@+id/tv_trans_cardtype"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="" />
+                    </TableRow>
+                </TableLayout>
+
+                <!-- 核心消费指标 -->
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorPrimaryDark">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/tableRow2"
+                        android:gravity="center_vertical"
+                        android:text="核心消费指标"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="30px" />
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.2"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="卡性质" />
+
+                        <TextView
+                            android:id="@+id/tv_trans_cardProperty"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.2"
+                            android:background="#ffffffff"
+                            android:text="首次交易日期" />
+
+                        <TextView
+                            android:id="@+id/tv_trans_firstTransDate"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.2"
+                            android:background="#ffffffff"
+                            android:text="消费总金额" />
+
+                        <TextView
+                            android:id="@+id/tv_trans_transTotalAmt"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.2"
+                            android:background="#ffffffff"
+                            android:text="消费总笔数" />
+
+                        <TextView
+                            android:id="@+id/tv_trans_transTotalCnt"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.2"
+                            android:background="#ffffffff"
+                            android:text="取现总金额" />
+
+                        <TextView
+                            android:id="@+id/tv_trans_cashTotalAmt"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.2"
+                            android:background="#ffffffff"
+                            android:text="取现总笔数" />
+
+                        <TextView
+                            android:id="@+id/tv_trans_cashTotalCnt"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.2"
+                            android:background="#ffffffff"
+                            android:text="还款总金额" />
+
+                        <TextView
+                            android:id="@+id/tv_trans_refundTotalAmt"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.2"
+                            android:background="#ffffffff"
+                            android:text="还款总笔数" />
+
+                        <TextView
+                            android:id="@+id/tv_trans_refundTotalCnt"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.2"
+                            android:background="#ffffffff"
+                            android:text="刚需类消费占比" />
+
+                        <TextView
+                            android:id="@+id/tv_trans_rigidTransAmtPre"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.2"
+                            android:background="#ffffffff"
+                            android:text="常住城市" />
+
+                        <TextView
+                            android:id="@+id/tv_trans_fromCity"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.2"
+                            android:background="#ffffffff"
+                            android:text="近一年无交易周数占比" />
+
+                        <TextView
+                            android:id="@+id/tv_trans_noTransWeekPre"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.2"
+                            android:background="#ffffffff"
+                            android:text="最大单月消费金额" />
+
+                        <TextView
+                            android:id="@+id/tv_trans_monthCardLargeAmt"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+                </TableLayout>
+
+                <!-- 消费行为特征 -->
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorPrimaryDark">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/tableRow3"
+                        android:gravity="center_vertical"
+                        android:text="消费行为特征"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="30px" />
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.2"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="有无出差" />
+
+                        <TextView
+                            android:id="@+id/tv_trans_ifHasBusinessTrip"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.2"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="有无婚庆消费" />
+
+                        <TextView
+                            android:id="@+id/tv_trans_ifHasWeddingTrans"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.2"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="有无家庭特征" />
+
+                        <TextView
+                            android:id="@+id/tv_trans_ifHasFamily"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.2"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="有无境外消费" />
+
+                        <TextView
+                            android:id="@+id/tv_trans_ifHasOverseasTrans"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.2"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="有无夜消费" />
+
+                        <TextView
+                            android:id="@+id/tv_trans_ifHasNightTrans"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.2"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="有无博彩业消费" />
+
+                        <TextView
+                            android:id="@+id/tv_trans_ifHasLotteryTrans"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.2"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="有无无业特征" />
+
+                        <TextView
+                            android:id="@+id/tv_trans_ifHasUnemployed"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+                </TableLayout>
+
+                <!-- 每月消费金额情况 -->
+                <TableLayout
+                    android:id="@+id/tl_amt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorPrimaryDark">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/tableRow4"
+                        android:gravity="center_vertical"
+                        android:text="每月消费金额情况"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="30px" />
+                    <TableRow>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="月份" />
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="消费金额" />
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.4"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="消费金额在本市的排名" />
+                    </TableRow>
+                </TableLayout>
+
+                <!-- 每月消费笔数情况 -->
+                <TableLayout
+                    android:id="@+id/tl_cnt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorPrimaryDark">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/tableRow4"
+                        android:gravity="center_vertical"
+                        android:text="每月消费笔数情况"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="30px" />
+                    <TableRow>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="月份" />
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="消费笔数" />
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.4"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="消费笔数在本市的排名" />
+                    </TableRow>
+                </TableLayout>
+
+                <!-- 每月取现情况 -->
+                <TableLayout
+                    android:id="@+id/tl_cash"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorPrimaryDark">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/tableRow4"
+                        android:gravity="center_vertical"
+                        android:text="每月取现情况"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="30px" />
+                    <TableRow>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="月份" />
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="取现金额" />
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.4"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="取现笔数" />
+                    </TableRow>
+                </TableLayout>
+
+                <!-- 消费地点分布 -->
+                <TableLayout
+                    android:id="@+id/tl_places"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorPrimaryDark">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/tableRow6"
+                        android:gravity="center_vertical"
+                        android:text="消费地点分布"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="30px" />
+
+                    <TableRow>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="地区" />
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="消费金额分布" />
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.4"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="消费笔数分布" />
+                    </TableRow>
+
+
+                </TableLayout>
+
+                <!-- 消费大类分布 -->
+                <TableLayout
+                    android:id="@+id/tl_mcc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorPrimaryDark">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/tableRow7"
+                        android:gravity="center_vertical"
+                        android:text="消费大类分布"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="30px" />
+
+                    <TableRow>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="消费类型" />
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="消费金额分布" />
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.4"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="消费笔数分布" />
+                    </TableRow>
+                </TableLayout>
+
+                <!-- 特殊交易统计 -->
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorPrimaryDark">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/tableRow5"
+                        android:gravity="center_vertical"
+                        android:text="特殊交易统计"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="30px" />
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.2"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="公共事业缴费金额" />
+
+                        <TextView
+                            android:id="@+id/tv_trans_publicPayAmt"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.2"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="公共事业缴费笔数" />
+
+                        <TextView
+                            android:id="@+id/tv_trans_publicPayCnt"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.2"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="纳税金额" />
+
+                        <TextView
+                            android:id="@+id/tv_trans_taxAmt"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.2"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="纳税笔数" />
+
+                        <TextView
+                            android:id="@+id/tv_trans_taxCnt"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.2"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="夜消费金额" />
+
+                        <TextView
+                            android:id="@+id/tv_trans_nightTransAmt"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.2"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="夜消费笔数" />
+
+                        <TextView
+                            android:id="@+id/tv_trans_nightTransCnt"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.2"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="博彩业消费金额" />
+
+                        <TextView
+                            android:id="@+id/tv_trans_lotteryTransAmt"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.2"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="博彩业消费笔数" />
+
+                        <TextView
+                            android:id="@+id/tv_trans_lotteryTransCnt"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.2"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="网上消费金额" />
+
+                        <TextView
+                            android:id="@+id/tv_trans_onlineTransAmt"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.2"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="网上消费笔数" />
+
+                        <TextView
+                            android:id="@+id/tv_trans_onlineTransCnt"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+                </TableLayout>
+
+                <!-- 疑似套现甄别 -->
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorPrimaryDark">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/tableRow1"
+                        android:gravity="center_vertical"
+                        android:text="疑似套现甄别"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="30px" />
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="3"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="近一年疑似套现金额" />
+
+                        <TextView
+                            android:id="@+id/tv_trans_yearMisCreditCardCashAmt"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="3"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="近一年疑似套现笔数" />
+
+                        <TextView
+                            android:id="@+id/tv_trans_yearMisCreditCardCashCnt"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="3"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="近一年套现高危行业交易金额占比" />
+
+                        <TextView
+                            android:id="@+id/tv_trans_yearMisHighRiskCashAmtPre"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="3"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="近一年套现高危行业交易笔数占比" />
+
+                        <TextView
+                            android:id="@+id/tv_trans_yearMisHighRiskCashCntPre"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+                </TableLayout>
+
+            </LinearLayout>
+
+            <!-- 用户疑似套现查询报告 -->
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/ll_suspect_cash"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <!-- 基本信息 -->
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:background="@color/colorPrimaryDark">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/tableRow1"
+                        android:gravity="center_vertical"
+                        android:text="基本信息"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="30px" />
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="姓名" />
+
+                        <TextView
+                            android:id="@+id/tv_cash_name"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="证件类型" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center|left"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="身份证" />
+                    </TableRow>
+                </TableLayout>
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:background="@color/colorPrimaryDark">
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="证件号" />
+
+                        <TextView
+                            android:id="@+id/tv_cash_identityCard"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="3"
+                            android:background="#ffffffff"
+                            android:text="" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="手机号" />
+
+                        <TextView
+                            android:id="@+id/tv_cash_mobile"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="3"
+                            android:background="#ffffffff"
+                            android:text="" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="银行卡号" />
+
+                        <TextView
+                            android:id="@+id/tv_cash_cardNo"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="3"
+                            android:background="#ffffffff"
+                            android:text="" />
+                    </TableRow>
+                </TableLayout>
+
+                <!-- 查询情况 -->
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorPrimaryDark">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/tableRow2"
+                        android:gravity="center_vertical"
+                        android:text="查询情况"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="30px" />
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="近一年疑似套现金额" />
+
+                        <TextView
+                            android:id="@+id/tv_cash_cashOutAmount"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="近一年疑似套现金额占比" />
+
+                        <TextView
+                            android:id="@+id/tv_cash_cashOutAmountRate"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="近一年疑似套现笔数" />
+
+                        <TextView
+                            android:id="@+id/tv_cash_cashOutCount"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="近一年疑似套现笔数占比" />
+
+                        <TextView
+                            android:id="@+id/tv_cash_cashOutCountRate"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="近一年套现高危行业交易金额占比" />
+
+                        <TextView
+                            android:id="@+id/tv_cash_cashOutIndustryAmountRate"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="2"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="近一年套现高危行业交易笔数占比" />
+
+                        <TextView
+                            android:id="@+id/tv_cash_cashOutIndustryCountRate"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+                </TableLayout>
+
+
+            </LinearLayout>
+
+            <!-- 用户账单真伪核验查询报告 -->
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/ll_bill_check"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <!-- 基本信息 -->
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:background="@color/colorPrimaryDark">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/tableRow1"
+                        android:gravity="center_vertical"
+                        android:text="基本信息"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="30px" />
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="姓名" />
+
+                        <TextView
+                            android:id="@+id/tv_bill_name"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="证件类型" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center|left"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="身份证" />
+                    </TableRow>
+                </TableLayout>
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:background="@color/colorPrimaryDark">
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="证件号" />
+
+                        <TextView
+                            android:id="@+id/tv_bill_identityCard"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="3"
+                            android:background="#ffffffff"
+                            android:text="" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="手机号" />
+
+                        <TextView
+                            android:id="@+id/tv_bill_mobile"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="3"
+                            android:background="#ffffffff"
+                            android:text="" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="银行卡号" />
+
+                        <TextView
+                            android:id="@+id/tv_bill_cardNo"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="3"
+                            android:background="#ffffffff"
+                            android:text="" />
+                    </TableRow>
+                </TableLayout>
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:background="@color/colorPrimaryDark">
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="交易开始时间" />
+
+                        <TextView
+                            android:id="@+id/tv_bill_beginDate"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="交易结束时间" />
+
+                        <TextView
+                            android:id="@+id/tv_bill_endDate"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center|left"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="" />
+                    </TableRow>
+                </TableLayout>
+
+                <!-- 查询情况 -->
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorPrimaryDark">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/tableRow2"
+                        android:gravity="center_vertical"
+                        android:text="查询情况"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="30px" />
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="序号" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="3"
+                            android:background="#ffffffff"
+                            android:text="交易时间" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="交易金额" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="序号1" />
+
+                        <TextView
+                            android:id="@+id/tv_transTime_1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="3"
+                            android:background="#ffffffff"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_transAmount_1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="序号2" />
+
+                        <TextView
+                            android:id="@+id/tv_transTime_2"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="3"
+                            android:background="#ffffffff"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_transAmount_2"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="序号3" />
+
+                        <TextView
+                            android:id="@+id/tv_transTime_3"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="3"
+                            android:background="#ffffffff"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_transAmount_3"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="序号4" />
+
+                        <TextView
+                            android:id="@+id/tv_transTime_4"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="3"
+                            android:background="#ffffffff"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_transAmount_4"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="序号5" />
+
+                        <TextView
+                            android:id="@+id/tv_transTime_5"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="3"
+                            android:background="#ffffffff"
+                            android:text="——" />
+
+                        <TextView
+                            android:id="@+id/tv_transAmount_5"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1.5"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TextView
+                        android:paddingLeft="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:background="@color/white"
+                        android:gravity="center_vertical"
+                        android:text="提示：交易金额已做脱敏处理"
+                        android:textSize="20px"
+                        android:textColor="@color/consume"/>
+
+                </TableLayout>
+
+
+            </LinearLayout>
+
+            <!-- 云信贷申请反欺诈报告 -->
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/ll_credit_application"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <!-- 基本信息 -->
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:background="@color/colorPrimaryDark">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/tableRow1"
+                        android:gravity="center_vertical"
+                        android:text="基本信息"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="30px" />
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="姓名" />
+
+                        <TextView
+                            android:id="@+id/tv_application_name"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="手机号" />
+
+                        <TextView
+                            android:id="@+id/tv_application_mobile"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center|left"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="证件类型" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="身份证" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="证件号" />
+
+                        <TextView
+                            android:id="@+id/tv_application_identityCard"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center|left"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="" />
+                    </TableRow>
+                </TableLayout>
+
+                <!-- 查询情况 -->
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorPrimaryDark">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/tableRow2"
+                        android:gravity="center_vertical"
+                        android:text="信贷情况"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="30px" />
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="0.8"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="申请贷款时间" />
+
+                        <TextView
+                            android:id="@+id/tv_applicationTime"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="0.8"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="申请贷款额度的金额区间" />
+
+                        <TextView
+                            android:id="@+id/tv_applicationAmount"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="0.8"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="欠款金额区间" />
+
+                        <TextView
+                            android:id="@+id/tv_application_money"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="0.8"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="贷款放款时间" />
+
+                        <TextView
+                            android:id="@+id/tv_loanlendersTime"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="0.8"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="贷款放款额度的金额区间" />
+
+                        <TextView
+                            android:id="@+id/tv_loanlendersAmount"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="0.8"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="信贷平台注册时间" />
+
+                        <TextView
+                            android:id="@+id/tv_registerTime"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="0.8"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="贷款驳回时间" />
+
+                        <TextView
+                            android:id="@+id/tv_rejectionTime"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="0.8"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="该平台逾期数量" />
+
+                        <TextView
+                            android:id="@+id/tv_application_yq_counts"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="0.8"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="逾期金额区间" />
+
+                        <TextView
+                            android:id="@+id/tv_application_yq_money"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="0.8"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="最近逾期时间" />
+
+                        <TextView
+                            android:id="@+id/tv_application_yq_lastTime"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="——" />
+                    </TableRow>
+
+                </TableLayout>
+
+
+            </LinearLayout>
+
+            <!-- 云信贷互联反欺诈报告 -->
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/ll_credit_internet"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <!-- 基本信息 -->
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:background="@color/colorPrimaryDark">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/tableRow1"
+                        android:gravity="center_vertical"
+                        android:text="基本信息"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="30px" />
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="姓名" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="联系方式" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="手机号" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center|left"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="身份证" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="证件类型" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="联系方式" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="证件号" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center|left"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="身份证" />
+                    </TableRow>
+                </TableLayout>
+
+                <!-- 查询情况 -->
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorPrimaryDark">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/tableRow2"
+                        android:gravity="center_vertical"
+                        android:text="信贷情况"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="30px" />
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="0.8"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="申请贷款时间" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="交易时间" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="0.8"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="申请贷款额度的金额区间" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="交易时间" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="0.8"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="欠款金额区间" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="交易时间" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="0.8"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="贷款放款时间" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="交易时间" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="0.8"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="贷款放款额度的金额区间" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="交易时间" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="0.8"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="信贷平台注册时间" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="交易时间" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="0.8"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="贷款驳回时间" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="交易时间" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="0.8"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="该平台逾期数量" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="交易时间" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="0.8"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="逾期金额区间" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="交易时间" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="0.8"
+                            android:background="#ffffffff"
+                            android:gravity="left|center"
+                            android:text="最近逾期时间" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0.5dp"
+                            android:layout_weight="1"
+                            android:background="#ffffffff"
+                            android:text="交易时间" />
+                    </TableRow>
+
+                </TableLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

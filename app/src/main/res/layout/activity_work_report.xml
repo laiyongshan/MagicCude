@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/line"
+    android:orientation="vertical">
+
+
+    <!--工作报表-->
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/blueBackground"
+        app:navigationIcon="@mipmap/back"
+        app:title="工作报表"
+        app:titleTextColor="@color/white" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="740px"
+        android:layout_margin="10px"
+        android:background="@color/white">
+
+
+        <ImageView
+            android:id="@+id/iv_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30px"
+            android:src="@mipmap/viewpager_left" />
+
+
+        <ImageView
+            android:id="@+id/iv_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="30px"
+            android:src="@mipmap/viewpager_right" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@+id/iv_right"
+            android:layout_toRightOf="@+id/iv_left" />
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/ll_1"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/viewpager_click"
+            android:orientation="vertical">
+
+            <com.rflash.magiccube.view.CircleGraphView
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="40px" />
+
+            <TextView
+                android:id="@+id/tv_repay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20px"
+                android:text="今日还款"
+                android:textColor="@color/blueBackground"
+                android:textSize="24px" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_2"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <com.rflash.magiccube.view.CircleGraphView
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="40px"
+                app:circleColor2="@color/consume" />
+
+            <TextView
+                android:id="@+id/tv_consume"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20px"
+                android:text="今日消费"
+                android:textColor="@color/loginHint"
+                android:textSize="24px" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_3"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <com.rflash.magiccube.view.BarChartView
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="40px"
+                app:isDrawText="false" />
+
+            <TextView
+                android:id="@+id/tv_tree_repay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20px"
+                android:text="近三天还款"
+                android:textColor="@color/loginHint"
+                android:textSize="24px" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

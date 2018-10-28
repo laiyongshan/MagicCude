@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_content"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <!--未还款-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10px"
+        android:background="@color/line" />
+
+
+    <RelativeLayout
+        android:id="@+id/rl_only_card"
+        android:layout_width="match_parent"
+        android:layout_height="60px"
+        android:background="@drawable/layout_click"
+        android:clickable="true"
+        android:paddingRight="30px">
+
+        <View
+            android:layout_width="20px"
+            android:layout_height="match_parent"
+            android:background="@color/operationText" />
+
+        <!--日期-->
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30px"
+            android:text="10-11 11:00"
+            android:textColor="@color/operationText"
+            android:textSize="24px" />
+
+        <!--银行+后四位-->
+        <TextView
+            android:id="@+id/tv_bankcard"
+            android:layout_width="220px"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30px"
+            android:layout_toRightOf="@+id/tv_date"
+            android:text="中国农业银行1111"
+            android:textColor="@color/operationBlackText"
+            android:textSize="24px" />
+
+
+        <!--姓名-->
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical"
+            android:text="张三"
+            android:textColor="@color/blueBackground"
+            android:textSize="24px" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/line" />
+
+    <LinearLayout
+        android:id="@+id/ll_repay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/layout_click"
+        android:clickable="true"
+        android:orientation="vertical"
+        android:paddingBottom="25px"
+        android:paddingTop="10px">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15px"
+            android:paddingRight="30px">
+
+            <!--卡位：-->
+            <TextView
+                android:id="@+id/tv_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30px"
+                android:text="卡位：03"
+                android:textColor="@color/blueBackground"
+                android:textSize="24px" />
+
+
+            <!--金额-->
+            <TextView
+                android:id="@+id/tv_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="30px"
+                android:text="@string/money"
+                android:textColor="@color/operationText"
+                android:textSize="24px" />
+
+            <TextView
+                android:id="@+id/tv_operation_billtype"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="160px"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/operationBlackText"
+                android:gravity="left"
+                android:textSize="24px" />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

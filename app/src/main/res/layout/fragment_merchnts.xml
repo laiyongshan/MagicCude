@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:foreground="?attr/selectableItemBackground"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingBottom="12dp"
+                        android:paddingLeft="6dp"
+                        android:paddingRight="6dp"
+                        >
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true">
+
+
+                            <android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
+                                android:id="@+id/pager"
+                                android:layout_width="match_parent"
+                                android:layout_height="200dp" />
+
+                            <ImageView
+                                android:id="@+id/pre_iv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerVertical="true"
+                                android:scaleType="fitCenter"
+                                android:visibility="gone"
+                                android:src="@mipmap/icon_left" />
+
+
+                            <ImageView
+                                android:id="@+id/next_iv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:scaleType="fitCenter"
+                                android:visibility="gone"
+                                android:src="@mipmap/icon_right" />
+
+                        </RelativeLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            >
+
+                            <TextView
+                                android:id="@+id/renewal_tips_tv"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:drawablePadding="6dp"
+                                android:drawableTop="@mipmap/icon_xufeitixing"
+                                android:gravity="center"
+                                android:text="续费提醒"
+                                android:textColor="@color/text_color"
+                                android:textSize="14sp"
+                                />
+
+                            <LinearLayout
+                                android:id="@+id/refund_tips_ll"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1">
+
+                                <TextView
+                                    android:id="@+id/refund_tips_tv"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:drawablePadding="6dp"
+                                    android:drawableTop="@mipmap/icon_huankuan"
+                                    android:gravity="center"
+                                    android:text="还款提醒"
+                                    android:textColor="@color/text_color"
+                                    android:textSize="14sp"
+                                    />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/bill_sure_ll"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1">
+
+                                <TextView
+                                    android:id="@+id/bill_sure_tv"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:drawablePadding="6dp"
+                                    android:drawableTop="@mipmap/icon_bill"
+                                    android:gravity="center"
+                                    android:text="账单确认"
+                                    android:textColor="@color/text_color" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/notic_tv"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:drawablePadding="6dp"
+                                android:drawableTop="@mipmap/icon_notice"
+                                android:gravity="center"
+                                android:text="通知"
+                                android:textColor="@color/text_color" />
+
+                            <TextView
+                                android:id="@+id/mine_tv"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:drawablePadding="6dp"
+                                android:drawableTop="@mipmap/icon_mine"
+                                android:gravity="center"
+                                android:text="我的"
+                                android:textColor="@color/text_color" />
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+                </android.support.v7.widget.CardView>
+
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardUseCompatPadding="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="业务管理"
+                            android:textColor="@color/text_color"
+                            android:textSize="20sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp">
+
+                            <android.support.v7.widget.CardView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:foreground="?attr/selectableItemBackground"
+                                android:paddingBottom="12dp"
+                                android:paddingLeft="12dp"
+                                android:paddingRight="12dp"
+                                app:cardCornerRadius="5dp"
+                                app:cardElevation="2dp"
+                                app:cardPreventCornerOverlap="true"
+                                app:cardUseCompatPadding="true">
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="#F0F0F0"
+                                    android:paddingLeft="6dp"
+                                    android:paddingTop="6dp">
+
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:scaleType="fitCenter"
+                                            android:src="@mipmap/icon_yinhao" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginLeft="6dp"
+                                            android:text="今日操作"
+                                            android:textColor="@color/colorPrimary"
+                                            android:textSize="16sp" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginLeft="6dp"
+                                            android:text="Today's Operation"
+                                            android:textSize="12sp" />
+
+                                    </LinearLayout>
+
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentBottom="true"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_marginLeft="12dp"
+                                        android:layout_marginTop="12dp"
+                                        android:scaleType="fitCenter"
+                                        android:src="@mipmap/img_todays_operation" />
+
+                                </RelativeLayout>
+
+                            </android.support.v7.widget.CardView>
+
+                            <android.support.v7.widget.CardView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:foreground="?attr/selectableItemBackground"
+                                android:paddingBottom="12dp"
+                                android:paddingLeft="12dp"
+                                app:cardCornerRadius="5dp"
+                                app:cardElevation="2dp"
+                                app:cardPreventCornerOverlap="true"
+                                app:cardUseCompatPadding="true">
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="#F0F0F0"
+                                    android:paddingLeft="6dp"
+                                    android:paddingTop="6dp">
+
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:scaleType="fitCenter"
+                                            android:src="@mipmap/icon_yinhao" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginLeft="6dp"
+                                            android:text="规划查询"
+                                            android:textColor="@color/colorPrimary"
+                                            android:textSize="16sp" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginLeft="6dp"
+                                            android:text="Planning Query"
+                                            android:textSize="12sp" />
+
+                                    </LinearLayout>
+
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentBottom="true"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_marginLeft="12dp"
+                                        android:layout_marginTop="12dp"
+                                        android:scaleType="fitCenter"
+                                        android:src="@mipmap/img_planning_query" />
+
+                                </RelativeLayout>
+
+                            </android.support.v7.widget.CardView>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <android.support.v7.widget.CardView
+                                android:id="@+id/to_collection_cv"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:foreground="?attr/selectableItemBackground"
+                                android:padding="12dp"
+                                app:cardCornerRadius="5dp"
+                                app:cardElevation="2dp"
+                                app:cardPreventCornerOverlap="true"
+                                app:cardUseCompatPadding="true">
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="#F0F0F0"
+                                    android:paddingLeft="6dp"
+                                    android:paddingTop="6dp">
+
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:scaleType="fitCenter"
+                                            android:src="@mipmap/icon_yinhao" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginLeft="6dp"
+                                            android:text="收款"
+                                            android:textColor="@color/colorPrimary"
+                                            android:textSize="16sp" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginLeft="6dp"
+                                            android:text="Receivables"
+                                            android:textSize="12sp" />
+
+                                    </LinearLayout>
+
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentBottom="true"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_gravity="bottom|right"
+                                        android:layout_marginLeft="12dp"
+                                        android:layout_marginTop="12dp"
+                                        android:scaleType="fitCenter"
+                                        android:src="@mipmap/img_receivables" />
+
+                                </RelativeLayout>
+
+
+                            </android.support.v7.widget.CardView>
+
+                            <android.support.v7.widget.CardView
+                                android:id="@+id/to_salesmen_cv"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:foreground="?attr/selectableItemBackground"
+                                android:padding="12dp"
+                                app:cardCornerRadius="5dp"
+                                app:cardElevation="2dp"
+                                app:cardPreventCornerOverlap="true"
+                                app:cardUseCompatPadding="true">
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="#F0F0F0"
+                                    android:paddingLeft="6dp"
+                                    android:paddingTop="6dp">
+
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:scaleType="fitCenter"
+                                            android:src="@mipmap/icon_yinhao" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginLeft="6dp"
+                                            android:text="业务员管理"
+                                            android:textColor="@color/colorPrimary"
+                                            android:textSize="16sp" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginLeft="6dp"
+                                            android:text="Salesman"
+                                            android:textSize="12sp" />
+
+                                    </LinearLayout>
+
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentBottom="true"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_marginLeft="12dp"
+                                        android:layout_marginTop="12dp"
+                                        android:scaleType="fitCenter"
+                                        android:src="@mipmap/img_salesman" />
+
+                                </RelativeLayout>
+
+
+                            </android.support.v7.widget.CardView>
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</LinearLayout>

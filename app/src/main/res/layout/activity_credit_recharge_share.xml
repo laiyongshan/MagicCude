@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/blueBackground"
+        app:navigationIcon="@mipmap/back"
+        app:titleTextColor="@color/white"/>
+
+
+    <!-- 基础信息 -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80px">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="购买服务"
+            android:layout_marginLeft="30px"
+            android:textSize="28px"
+            android:layout_centerVertical="true"
+            android:textColor="@color/operationBlackText"
+            />
+
+        <TextView
+            android:id="@+id/tv_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_marginLeft="280px"
+            android:textSize="28px"
+            android:layout_centerVertical="true"
+            android:textColor="@color/blueBackground"
+            />
+
+        <TextView
+            android:id="@+id/tv_unitPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="￥ 0.00/次"
+            android:layout_marginRight="30px"
+            android:textSize="24px"
+            android:layout_centerVertical="true"
+            android:textColor="@color/blueBackground"
+            />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/line" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80px">
+
+        <TextView
+            android:id="@+id/tv_buy_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30px"
+            android:text="购买次数"
+            android:layout_centerVertical="true"
+            android:textColor="@color/operationBlackText"
+            android:textSize="28px" />
+
+        <com.rflash.basemodule.view.DecimalEditText
+            android:id="@+id/edt_buy_count"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="280px"
+            android:layout_marginRight="250px"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="请输入购买次数"
+            android:inputType="number|numberDecimal"
+            android:maxLength="10"
+            android:maxLines="1"
+            android:textColor="@color/loginHint"
+            android:textColorHint="@color/edtHint"
+            android:textSize="25px"
+            app:decimalNumber="2"
+            android:layout_centerVertical="true"/>
+
+        <Button
+            android:id="@+id/bt_change"
+            android:layout_width="110px"
+            android:layout_height="50px"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="30px"
+            android:layout_centerVertical="true"
+            android:text="更改"
+            android:textSize="28px"
+            android:textColor="@color/white"
+            android:background="@drawable/tv_consume"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/line" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80px">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30px"
+            android:text="总金额"
+            android:layout_centerVertical="true"
+            android:textColor="@color/operationBlackText"
+            android:textSize="28px" />
+
+        <TextView
+            android:id="@+id/tv_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="￥0"
+            android:layout_marginLeft="280px"
+            android:textSize="28px"
+            android:layout_centerVertical="true"
+            android:textColor="@color/consume"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/press">
+
+        <RadioGroup
+            android:id="@+id/rg_tran_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="30px">
+
+
+            <RadioButton
+                android:layout_width="200px"
+                android:layout_height="70px"
+                android:paddingLeft="30px"
+                android:button="@null"
+                android:drawableLeft="@mipmap/rb_zhifubao"
+                android:background="@drawable/rb_checked"
+                android:text="支付宝"
+                android:textSize="24px"
+                android:layout_marginLeft="30px"
+                android:drawablePadding="20px"
+                />
+
+            <RadioButton
+                android:layout_width="200px"
+                android:layout_height="70px"
+                android:paddingLeft="30px"
+                android:button="@null"
+                android:drawableLeft="@mipmap/rb_weixin"
+                android:background="@drawable/rb_checked"
+                android:text="微信"
+                android:textSize="24px"
+                android:layout_marginLeft="30px"
+                android:drawablePadding="20px"
+                />
+
+        </RadioGroup>
+
+        <ImageView
+            android:id="@+id/iv_qrcode"
+            android:layout_width="500px"
+            android:layout_height="500px"
+            android:layout_alignTop="@id/rg_tran_type"
+            android:layout_marginTop="110px"
+            android:layout_centerInParent="true"
+            />
+
+        <LinearLayout
+            android:visibility="invisible"
+            android:id="@+id/ll_money"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@id/iv_qrcode"
+            android:layout_marginTop="20px">
+            <TextView
+                android:id="@+id/tv_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="￥"
+                android:layout_gravity="center_horizontal"
+                android:textSize="48px"
+                android:textColor="@color/consume"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="请扫描二维码进行付款"
+                android:layout_marginTop="10px"
+                android:textSize="28px"
+                android:textColor="@color/blueBackground"
+                android:layout_gravity="center_horizontal"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>
+

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:paddingBottom="20px">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10px"
+        android:background="@color/line" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60px">
+
+        <View
+            android:layout_width="10px"
+            android:layout_height="match_parent"
+            android:background="@color/blueBackground" />
+
+        <!--卡位-->
+        <TextView
+            android:id="@+id/tv_num"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20px"
+            android:gravity="center_vertical"
+            android:paddingLeft="15px"
+            android:paddingRight="15px"
+            android:text="@string/card_num"
+            android:textColor="@color/blueBackground"
+            android:textSize="24px" />
+
+        <!--卡号-->
+
+        <TextView
+            android:id="@+id/tv_bankcard"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="30px"
+            android:text="666666****4444"
+            android:textColor="@color/blueBackground"
+            android:textSize="24px" />
+
+
+        <!--中国农业银行-->
+        <TextView
+            android:id="@+id/tv_bank"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="30px"
+            android:gravity="center_vertical"
+            android:text="中国农业银行"
+            android:textColor="@color/blueBackground"
+            android:textSize="24px" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/line" />
+
+
+    <!--账单月份  账单金额  姓名-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="160px"
+        android:paddingRight="30px">
+
+        <TextView
+            android:id="@+id/tv_bill"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:drawableLeft="@mipmap/main_bill_book"
+            android:drawablePadding="30px"
+            android:gravity="center_vertical"
+            android:paddingLeft="30px"
+            android:text="@string/main_bill"
+            android:textColor="@color/blueBackground"
+            android:textSize="28px" />
+
+        <!--姓名-->
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="姓名"
+            android:textColor="@color/blueBackground"
+            android:textSize="24px" />
+    </RelativeLayout>
+
+
+    <!--实际金额  确认金额-->
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60px">
+
+        <TextView
+            android:id="@+id/tv_actual_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30px"
+            android:text="实际金额"
+            android:textColor="@color/blueBackground"
+            android:textSize="28px" />
+
+        <TextView
+            android:id="@+id/tv_sure"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="30px"
+            android:background="@color/sureMoney"
+            android:gravity="center_vertical"
+            android:paddingLeft="40px"
+            android:paddingRight="40px"
+            android:text="确认金额"
+            android:textColor="@color/white"
+            android:textSize="24px" />
+
+        <com.rflash.basemodule.view.DecimalEditText
+            app:decimalNumber="2"
+            android:id="@+id/edt_actual_money"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10px"
+            android:layout_marginRight="20px"
+            android:layout_toLeftOf="@+id/tv_sure"
+            android:layout_toRightOf="@+id/tv_actual_money"
+            android:background="@drawable/bill_edt"
+            android:gravity="center_vertical"
+            android:hint="请输入金额"
+            android:inputType="number|numberDecimal"
+            android:maxLength="10"
+            android:maxLines="1"
+            android:paddingLeft="20px"
+            android:textColor="@color/loginHint"
+            android:textColorHint="@color/loginHint"
+            android:textSize="28px" />
+    </RelativeLayout>
+
+
+</LinearLayout>

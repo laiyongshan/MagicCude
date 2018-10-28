@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    >
+
+    <TextView
+        android:id="@+id/total_refund_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="￥0.00"
+        android:gravity="center"
+        android:textColor="@color/color_black"
+        android:textSize="20sp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="近三天还款总额"
+        android:gravity="center"
+        android:textSize="14sp"
+        />
+
+    <com.rflash.magiccube.view.kjchart.ChartView
+        android:id="@+id/days3_chart"
+        android:layout_width="280dp"
+        android:layout_height="140dp"
+        android:layout_marginLeft="5px"
+        android:layout_marginTop="20px"
+        />
+
+
+</LinearLayout>

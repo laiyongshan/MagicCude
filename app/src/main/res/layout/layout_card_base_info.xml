@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:rv="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/card_base_info_layout">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:layout_marginTop="6dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="6dp"
+        app:cardElevation="3dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@mipmap/icon_red_start"
+                android:drawablePadding="6dp"
+                android:gravity="left"
+                android:text="卡位："
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:textColor="#000"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:background="#c0c0c0" />
+
+            <EditText
+                android:id="@+id/cardSeqno_et"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:paddingRight="12dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:layout_weight="3"
+                android:background="#F3F0F0"
+                android:gravity="center"
+                android:hint="卡位"
+                android:text=""
+                android:textColor="#000"
+                />
+
+            <TextView
+                android:id="@+id/bankName_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="4dp"
+                android:text=""
+                android:padding="4dp"
+                android:layout_weight="4"
+                android:textColor="#000"
+                android:background="#F3F0F0"
+                android:gravity="center"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="6dp"
+        app:cardElevation="3dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            >
+
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@mipmap/icon_red_start"
+                android:drawablePadding="6dp"
+                android:gravity="left"
+                android:text="卡号："
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:textColor="#000"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:background="#c0c0c0" />
+
+            <EditText
+                android:id="@+id/cardNo_et"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#f3f0f0"
+                android:gravity="center_vertical"
+                android:paddingRight="12dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginRight="4dp"
+                android:hint="卡号"
+                android:text=""
+                android:textColor="#000"
+                android:textSize="14sp"
+                />
+
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="6dp"
+        app:cardElevation="3dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            >
+
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@mipmap/icon_red_start"
+                android:drawablePadding="6dp"
+                android:gravity="left"
+                android:text="持卡人 ："
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:textColor="#000"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:background="#c0c0c0" />
+
+            <EditText
+                android:id="@+id/customerName_et"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingRight="12dp"
+                android:gravity="center_vertical"
+                android:background="@null"
+                android:hint="持卡人"
+                android:text=""
+                android:textColor="#000"
+                android:textSize="14sp" />
+
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="6dp"
+        app:cardElevation="3dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            >
+
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@mipmap/icon_red_start"
+                android:drawablePadding="6dp"
+                android:gravity="left"
+                android:text="身份证 ："
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:textColor="#000"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:background="#c0c0c0" />
+
+            <EditText
+                android:id="@+id/customerID_et"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:paddingRight="12dp"
+                android:gravity="center_vertical"
+                android:hint="身份证号码"
+                android:text=""
+                android:textColor="#000"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="6dp"
+        app:cardElevation="3dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            >
+
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@mipmap/icon_red_start"
+                android:drawablePadding="6dp"
+                android:gravity="left"
+                android:text="预留手机 ："
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:textColor="#000"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:background="#c0c0c0" />
+
+            <EditText
+                android:id="@+id/phone_et"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:paddingRight="12dp"
+                android:gravity="center_vertical"
+                android:hint="银行预留手机号码"
+                android:text=""
+                android:textColor="#000"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="6dp"
+        app:cardElevation="3dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            >
+
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@mipmap/icon_red_start"
+                android:drawablePadding="6dp"
+                android:gravity="left"
+                android:text="账单日："
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:textColor="#000"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:background="#c0c0c0" />
+
+            <EditText
+                android:id="@+id/billDate_et"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:drawableRight="@mipmap/icon_time"
+                android:paddingRight="12dp"
+                android:gravity="center_vertical"
+                android:background="@null"
+                android:editable="false"
+                android:hint="请选择账单日"
+                android:text=""
+                android:textColor="#000"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="6dp"
+        app:cardElevation="3dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            >
+
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@mipmap/icon_red_start"
+                android:drawablePadding="6dp"
+                android:gravity="left"
+                android:text="最后还款日："
+                android:paddingLeft="16dp"
+                android:textColor="#000"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:background="#c0c0c0" />
+
+            <com.jaredrummler.materialspinner.MaterialSpinner
+                android:id="@+id/repayDateType_sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:textSize="12sp"
+                app:ms_background_color="@color/white"
+                app:ms_hide_arrow="false"
+                app:ms_text_color="@color/colorPrimary"
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingRight="12dp"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textColor="#000"
+                    android:textSize="14sp"
+                    android:visibility="gone"
+                    />
+
+                <TextView
+                    android:id="@+id/repayDate_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:drawableRight="@mipmap/icon_time"
+                    android:paddingRight="12dp"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textColor="#000"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="6dp"
+        app:cardElevation="3dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            >
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:drawablePadding="6dp"
+                android:gravity="left"
+                android:text="业务员 ："
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:textColor="#000"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:background="#c0c0c0" />
+
+            <com.jaredrummler.materialspinner.MaterialSpinner
+                android:id="@+id/salesMan_sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingRight="12dp"
+                android:layout_weight="4"
+                android:background="@null"
+                android:textSize="14sp"
+                app:ms_background_color="@color/white"
+                app:ms_hide_arrow="false"
+                app:ms_text_color="@color/colorPrimary"
+                android:textColor="@color/color_black" />
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="6dp"
+        app:cardElevation="3dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            >
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:drawablePadding="6dp"
+                android:gravity="left"
+                android:text="卡介质 ："
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:textColor="#000"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:background="#c0c0c0" />
+
+            <!--<EditText-->
+                <!--android:id="@+id/cardMedia_et"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:background="@null"-->
+                <!--android:paddingRight="12dp"-->
+                <!--android:gravity="center_vertical"-->
+                <!--android:text=""-->
+                <!--android:textColor="#000"-->
+                <!--android:textSize="14sp"-->
+                <!--/>-->
+
+            <com.jaredrummler.materialspinner.MaterialSpinner
+                android:id="@+id/cardMedia_sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="12dp"
+                android:layout_weight="4"
+                android:background="@null"
+                android:textSize="14sp"
+                app:ms_background_color="@color/white"
+                app:ms_hide_arrow="false"
+                app:ms_text_color="@color/colorPrimary"
+                />
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center_vertical"
+        >
+
+        <android.support.v7.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:layout_gravity="center_vertical"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="6dp"
+            app:cardElevation="3dp"
+           >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                >
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:text="四要素验证 ："
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:textColor="#000"
+                    android:textSize="14sp" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:background="#c0c0c0" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="剩余次数："
+                        android:textColor="@color/color_black"
+                        />
+
+                    <com.flyco.roundview.RoundTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="购买"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        android:gravity="center"
+                        rv:rv_backgroundColor="#5AAFAC"
+                        android:layout_alignParentRight="true"
+                        android:visibility="gone"
+                        />
+                    
+                </RelativeLayout>
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <com.flyco.roundview.RoundTextView
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="6dp"
+            android:text="验证"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:gravity="center"
+            rv:rv_backgroundColor="@color/colorPrimary"
+            rv:rv_backgroundPressColor="@color/luncy"
+            rv:rv_textPressColor="@color/luncy"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CircleGraphView">
+
+        <!--是否绘制中间的文字-->
+        <attr name="isDrawMidText" format="boolean" />
+        <!--第二个圆的颜色-->
+        <attr name="circleColor2" format="color" />
+
+    </declare-styleable>
+
+    <declare-styleable name="BarChartView">
+        <attr name="isDrawText" format="boolean" />
+    </declare-styleable>
+
+
+    <item type="id" name="checkbox_one_tag"></item>
+    <item type="id" name="checkbox_two_tag"></item>
+    <item type="id" name="checkbox_three_tag"></item>
+
+    <item type="id" name="tv_one_tag"></item>
+    <item type="id" name="tv_two_tag"></item>
+
+</resources>

@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:paddingBottom="20px">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/blueBackground"
+        android:orientation="vertical"
+        android:paddingBottom="30px">
+
+        <!--代付账户余额-->
+        <TextView
+            android:id="@+id/tv_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:text="@string/helpPay"
+            android:textColor="@color/white"
+            android:textSize="24px" />
+
+        <!--金额-->
+        <TextView
+            android:id="@+id/tv_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15px"
+            android:text="@string/money"
+            android:textColor="@color/white"
+            android:textSize="32px"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_refresh"
+            android:layout_width="110px"
+            android:layout_height="40px"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15px"
+            android:background="@drawable/refresh"
+            android:gravity="center"
+            android:text="刷新"
+            android:textColor="@color/white"
+            android:textSize="24px" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30px"
+        android:layout_marginRight="30px"
+        android:layout_marginTop="20px">
+        <!--起始时间-->
+        <TextView
+            android:id="@+id/tv_start_date"
+            android:layout_width="300px"
+            android:layout_height="60px"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/bill_edt"
+            android:gravity="center"
+            android:text="起始时间"
+            android:textColor="@color/loginHint"
+            android:textColorHint="@color/loginHint"
+            android:textSize="28px" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="10px"
+            android:text="~" />
+
+        <!--终止时间-->
+        <TextView
+            android:id="@+id/tv_end_date"
+            android:layout_width="300px"
+            android:layout_height="60px"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10px"
+            android:background="@drawable/bill_edt"
+            android:gravity="center"
+            android:text="终止时间"
+            android:textColor="@color/loginHint"
+            android:textColorHint="@color/loginHint"
+            android:textSize="28px" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60px"
+        android:layout_marginLeft="30px"
+        android:layout_marginRight="30px"
+        android:layout_marginTop="20px">
+        <!--请输入卡号后四位-->
+        <EditText
+            android:id="@+id/edt_bankcard"
+            android:layout_width="300px"
+            android:layout_height="60px"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/bill_edt"
+            android:gravity="center_vertical"
+            android:hint="请输入卡片后四位"
+            android:inputType="number"
+            android:maxLength="4"
+            android:maxLines="1"
+            android:paddingLeft="20px"
+            android:textColor="@color/loginHint"
+            android:textColorHint="@color/loginHint"
+            android:textSize="28px" />
+
+
+        <!--请输入卡位-->
+        <EditText
+            android:id="@+id/edt_num"
+            android:layout_width="300px"
+            android:layout_height="60px"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/bill_edt"
+            android:gravity="center_vertical"
+            android:hint="请输入卡位"
+            android:inputType="number"
+            android:maxLength="10"
+            android:maxLines="1"
+            android:paddingLeft="20px"
+            android:textColor="@color/loginHint"
+            android:textColorHint="@color/loginHint"
+            android:textSize="28px" />
+    </RelativeLayout>
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30px"
+        android:layout_marginRight="30px"
+        android:layout_marginTop="20px">
+
+        <!--查询-->
+        <TextView
+            android:id="@+id/tv_query"
+            android:layout_width="200px"
+            android:layout_height="60px"
+            android:layout_gravity="center_vertical"
+            android:background="@color/blueBackground"
+            android:gravity="center"
+            android:text="查询"
+            android:textColor="@color/white"
+            android:textSize="24px" />
+
+        <!--重置-->
+        <TextView
+            android:id="@+id/tv_reset"
+            android:layout_width="200px"
+            android:layout_height="60px"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_vertical"
+            android:background="@color/loginEdit"
+            android:gravity="center"
+            android:text="重置"
+            android:textColor="@color/white"
+            android:textSize="24px" />
+
+        <!--全选-->
+        <TextView
+            android:id="@+id/tv_selector_all"
+            android:layout_width="200px"
+            android:layout_height="60px"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_vertical"
+            android:background="@color/sureMoney"
+            android:gravity="center"
+            android:text="全选"
+            android:textColor="@color/white"
+            android:textSize="24px" />
+    </RelativeLayout>
+
+</LinearLayout>

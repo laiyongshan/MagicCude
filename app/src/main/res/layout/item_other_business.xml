@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:rv="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="22dp">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foreground="?attr/selectableItemBackground"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="5dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true"
+        >
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="12dp"
+            >
+
+            <ImageView
+                android:id="@+id/item_icon_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/icon_other1"
+                android:scaleType="fitCenter"
+                />
+
+            <TextView
+                android:id="@+id/item_other_business_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="信用卡办理"
+                android:textSize="18sp"
+                android:textColor="@color/color_black"
+                android:gravity="center_vertical"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="12dp"
+                android:layout_toRightOf="@+id/item_icon_iv"
+                />
+
+            <com.flyco.roundview.RoundTextView
+                android:id="@+id/item_go_rtv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:minWidth="80dp"
+                android:textColor="#fff"
+                android:text="前往"
+                android:textSize="16sp"
+                android:padding="6dp"
+                android:gravity="center"
+                rv:rv_backgroundColor="#FF3D2E"
+                rv:rv_backgroundPressColor="#00ffffff"
+                rv:rv_cornerRadius="5dp"
+                rv:rv_textPressColor="#00ffffff"
+                />
+
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

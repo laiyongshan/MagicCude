@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--近三天还款总额-->
+
+    <TextView
+        android:id="@+id/tv_total_amt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20px"
+        android:text="@string/money"
+        android:textColor="@color/blueBackground"
+        android:textSize="48px"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20px"
+        android:text="近三天还款总额"
+        android:textColor="@color/blueBackground"
+        android:textSize="28px" />
+
+    <com.rflash.magiccube.view.BarChartView
+        android:id="@+id/barChartView"
+        android:layout_width="500px"
+        android:layout_height="500px"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="40px"
+        app:isDrawText="true" />
+
+
+</LinearLayout>

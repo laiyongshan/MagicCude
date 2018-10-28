@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#3F51B5</color>
+
+    <color name="blueBackground">#474E7A</color>
+    <color name="loginEdit">#34C0E3</color>
+    <color name="loginHint">#999999</color>
+    <color name="white">#ffffff</color>
+    <color name="line">#f5f5f5</color>
+    <color name="userBackground">#6d7196</color>
+    <color name="operationText">#6CB7F1</color>
+    <color name="operationBlackText">#333333</color>
+    <color name="consume">#FF6D60</color>
+    <color name="workReport">#C7C7C7</color>
+    <color name="sureMoney">#5AAFAC</color>
+    <color name="bottom">#666666</color>
+    <color name="press">#e5e5e5</color>
+    <color name="channel">#34C0E3</color>
+    <color name="edtHint">#D4D4D4</color>
+    <color name="tableRow1">#C6D9F0</color>
+    <color name="tableRow2">#E5B8B7</color>
+    <color name="tableRow3">#C2D69B</color>
+    <color name="tableRow4">#E5DFEC</color>
+    <color name="tableRow5">#FBD4B4</color>
+    <color name="tableRow6">#00ACFF</color>
+    <color name="tableRow7">#B6DDE8</color>
+
+    <color name="invalid">#CD5C5C</color>
+
+    <color name="color_black">#000000</color>
+    <color name="color_while">#ffffff</color>
+
+    <color name="char_text_color">#fff</color>
+
+    <color name="line_color">#f0f0f0</color>
+    <color name="luncy">#00ffffff</color>
+
+    <color name="text_color">#626262</color>
+
+
+</resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tv_modify"
+    android:layout_width="500px"
+    android:layout_height="80px"
+    android:layout_gravity="center"
+    android:background="@drawable/layout_click"
+    android:gravity="center"
+    android:text="修改规则"
+    android:textColor="@color/operationBlackText"
+    android:textSize="28px">
+
+</TextView>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <!--批量操作-->
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/blueBackground"
+        app:navigationIcon="@mipmap/back"
+        app:title="批量操作"
+        app:titleTextColor="@color/white">
+
+        <ImageView
+            android:paddingLeft="20px"
+            android:id="@+id/iv_operation_record"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:paddingRight="30px"
+            android:src="@mipmap/record" />
+    </android.support.v7.widget.Toolbar>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.rflash.basemodule.view.LoadRecyclerView
+            android:background="@color/line"
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/bottom"
+            android:layout_marginBottom="20px" />
+
+        <RelativeLayout
+            android:id="@+id/bottom"
+            android:layout_width="match_parent"
+            android:layout_height="70px"
+            android:layout_alignParentBottom="true"
+            android:background="@color/bottom">
+
+            <TextView
+                android:id="@+id/tv_all"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30px"
+                android:gravity="center_vertical"
+                android:text="已选数量：0    选中金额：¥0.00"
+                android:textColor="@color/white"
+                android:textSize="24px" />
+
+            <TextView
+                android:id="@+id/tv_help_pay"
+                android:layout_width="90px"
+                android:layout_height="50px"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="30px"
+                android:background="@drawable/helppay"
+                android:gravity="center"
+                android:text="代付"
+                android:textColor="@color/white"
+                android:textSize="24px" />
+        </RelativeLayout>
+
+
+        <ImageView
+            android:id="@+id/iv_go_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="90px"
+            android:layout_marginRight="20px"
+            android:src="@mipmap/go_top"
+            android:visibility="gone" />
+
+        <ImageView
+            android:layout_marginBottom="120px"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/iv_nodata"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/nodata" />
+    </RelativeLayout>
+
+
+</LinearLayout>

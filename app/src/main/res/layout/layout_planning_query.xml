@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <!--规划查询列表-->
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10px"
+        android:background="@color/line" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60px">
+
+        <!--卡号-->
+        <TextView
+            android:id="@+id/tv_num"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/blueBackground"
+            android:gravity="center_vertical"
+            android:paddingLeft="15px"
+            android:paddingRight="15px"
+            android:text="@string/card_num"
+            android:textColor="@color/white"
+            android:textSize="24px" />
+
+        <!--姓名和卡号-->
+
+        <TextView
+            android:id="@+id/tv_name_and_card"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@+id/tv_num"
+            android:gravity="center_vertical"
+            android:paddingLeft="30px"
+            android:text="@string/name_and_card"
+            android:textColor="@color/blueBackground"
+            android:textSize="24px" />
+
+
+        <!--中国农业银行-->
+        <TextView
+            android:id="@+id/tv_bank"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="30px"
+            android:gravity="center_vertical"
+            android:text="中国农业银行"
+            android:textColor="@color/blueBackground"
+            android:textSize="24px" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/line" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="190px">
+
+        <!--图标-->
+        <ImageView
+            android:id="@+id/iv_planning_query"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30px"
+            android:src="@mipmap/planning_query" />
+
+        <!--服务起止-->
+
+        <TextView
+            android:id="@+id/tv_service_start_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/iv_planning_query"
+            android:layout_marginLeft="30px"
+            android:layout_marginTop="5px"
+            android:layout_toRightOf="@+id/iv_planning_query"
+            android:text="@string/service_start_end"
+            android:textColor="@color/blueBackground"
+            android:textSize="28px" />
+
+        <!--账单日，还款日-->
+        <TextView
+            android:id="@+id/tv_repay_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tv_service_start_end"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="48px"
+            android:text="@string/repay_date"
+            android:textColor="@color/blueBackground"
+            android:textSize="20px" />
+
+
+        <!--规划查询-->
+        <TextView
+            android:id="@+id/tv_query"
+            android:layout_width="200px"
+            android:layout_height="60px"
+            android:layout_alignBottom="@+id/iv_planning_query"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="30px"
+            android:background="@color/blueBackground"
+            android:gravity="center"
+            android:text="规划查询"
+            android:textColor="@color/white"
+            android:textSize="24px" />
+
+
+    </RelativeLayout>
+
+</LinearLayout>

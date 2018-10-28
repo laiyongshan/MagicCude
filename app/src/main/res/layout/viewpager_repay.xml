@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--今日还款-->
+
+    <TextView
+        android:id="@+id/tv_bill_amt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20px"
+        android:text="@string/money"
+        android:textColor="@color/blueBackground"
+        android:textSize="48px"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20px"
+        android:text="今日应还款总额"
+        android:textColor="@color/blueBackground"
+        android:textSize="28px" />
+
+    <com.rflash.magiccube.view.CircleGraphView
+        android:id="@+id/circleGraphView_repay"
+        android:layout_width="300px"
+        android:layout_height="300px"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="40px"
+        app:isDrawMidText="true" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:layout_marginTop="40px"
+        android:background="@color/line" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_nonRepayAmt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30px"
+                android:text="@string/money"
+                android:textColor="@color/workReport"
+                android:textSize="28px" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10px"
+                android:text="今日剩还款金额"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="28px" />
+
+            <View
+                android:layout_width="30px"
+                android:layout_height="30px"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10px"
+                android:background="@color/workReport" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="2px"
+            android:layout_height="80px"
+            android:layout_gravity="center_vertical"
+            android:background="@color/line" />
+
+
+        <LinearLayout
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_repayAmt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30px"
+                android:text="@string/money"
+                android:textColor="@color/operationText"
+                android:textSize="28px" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10px"
+                android:text="今日已还款金额"
+                android:textColor="@color/operationText"
+                android:textSize="28px" />
+
+            <View
+                android:layout_width="30px"
+                android:layout_height="30px"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10px"
+                android:background="@color/operationText" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

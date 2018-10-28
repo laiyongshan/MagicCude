@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <!--智能规划-->
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/blueBackground"
+        app:navigationIcon="@mipmap/back"
+        app:title="智能规划"
+        app:titleTextColor="@color/white" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100px"
+        android:orientation="horizontal">
+        <!--起始时间-->
+        <TextView
+            android:id="@+id/tv_start_date"
+            android:layout_width="190px"
+            android:layout_height="60px"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="30px"
+            android:background="@drawable/bill_edt"
+            android:gravity="center"
+            android:text="起始时间"
+            android:textColor="@color/loginHint"
+            android:textColorHint="@color/loginHint"
+            android:textSize="28px" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10px"
+            android:text="--" />
+
+        <!--终止时间-->
+        <TextView
+            android:id="@+id/tv_end_date"
+            android:layout_width="190px"
+            android:layout_height="60px"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10px"
+            android:background="@drawable/bill_edt"
+            android:gravity="center"
+            android:text="终止时间"
+            android:textColor="@color/loginHint"
+            android:textColorHint="@color/loginHint"
+            android:textSize="28px" />
+
+        <!--查询-->
+        <TextView
+            android:layout_width="100px"
+            android:layout_height="60px"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="20px"
+            android:background="@color/blueBackground"
+            android:gravity="center"
+            android:text="查询"
+            android:textColor="@color/white"
+            android:textSize="24px" />
+
+        <!--重置-->
+        <TextView
+            android:layout_width="100px"
+            android:layout_height="60px"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="20px"
+            android:background="@color/loginEdit"
+            android:gravity="center"
+            android:text="重置"
+            android:textColor="@color/white"
+            android:textSize="24px" />
+    </LinearLayout>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:background="@color/line"
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+</LinearLayout>

@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.rflash.magiccube">
+
+    <!-- 项目的权限 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/logo"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="meta-data-key"
+            android:value="(3,1)" />
+
+        <activity
+            android:name=".SplashActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+
+        <activity android:name=".ui.newmain.NewMainActivity"
+            android:screenOrientation="portrait"
+            />
+
+        <activity android:name=".ui.collection.CollectionActivity"
+            android:screenOrientation="portrait"
+            />
+
+        <activity android:name=".ui.finance.financedetail.FinanceDetailActivity"
+            android:screenOrientation="portrait"
+            />
+
+        <activity android:name=".ui.billconfirm.BillConfirmActivity"
+            android:screenOrientation="portrait"
+            />
+
+        <activity android:name=".ui.refund.RefundActivity"
+            android:screenOrientation="portrait"
+            />
+
+        <activity android:name=".ui.cardmanager.cardbase.CardBaseInforActivity" android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.cardmanager.cardbill.CardBillActivity" android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.cardmanager.increase.CardIncreaseActivity" android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.cardmanager.cardcharge.CardChargeActivity" android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.cardmanager.carddetail.CardInfoActivity" android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.cardmanager.increase.AddIncreaseActivity" android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.salesmen.SalesMenActivity" android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.shanghu.download.DownloadShanghuActivity" android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.addcard.AddCardActivity" android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.renewal.RenewalActivity" android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.cardmanager.carddetail.CardDetailActivity" android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.cardmanager.addplan.AddPlanActivity" android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".Test"
+            android:screenOrientation="portrait"
+            android:theme="@style/gray"
+            android:windowSoftInputMode="stateHidden">
+
+        </activity>
+
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.login.LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Login">
+
+        </activity>
+        <activity
+            android:name=".ui.bill.BillActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".ui.presentoperation.PresentOperationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.planningquery.PlanningQueryActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"></activity>
+        <activity
+            android:name=".ui.intelligentplanning.IntelligentPlanningActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.handswipecode.HandSwipeCodeActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".ui.cardrecord.CardRecordActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.workreport.WorkReportActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.consumemodify.ConsumeModifyActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/gray" />
+
+        <activity
+            android:name=".ui.repaymodify.RepayModifyActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/gray" />
+
+        <activity
+            android:name=".ui.batchrepay.BatchRepayActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/gray"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+
+        <activity
+            android:name=".ui.operationrecord.OperationRecordActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/gray"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+
+        <activity
+            android:name=".ui.creditquery.CreditQueryActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/gray" />
+
+        <activity
+            android:name=".ui.userportrait.UserPortraitActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/gray" />
+
+        <activity
+            android:name=".ui.transreport.TransReportActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/gray" />
+
+        <activity
+            android:name=".ui.suspectcash.SuspectCashActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/gray" />
+
+        <activity
+            android:name=".ui.billcheck.BillCheckActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/gray" />
+
+        <activity
+            android:name=".ui.creditapplication.CreditApplicationActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/gray" />
+
+        <activity
+            android:name=".ui.creditinternet.CreditInternetActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/gray" />
+
+        <activity
+            android:name=".ui.creditrecharge.CreditreChargeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/gray" />
+
+        <activity
+            android:name=".ui.creditpersonalmessage.CreditPersonalMessageActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/gray" />
+
+        <activity
+            android:name=".ui.creditreportmessage.CreditReportMessageActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/gray" />
+
+        <activity
+            android:name=".ui.creditqueryitem.CreditQueryItemActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/gray" />
+
+        <activity
+            android:name=".ui.credithandle.CreditHandleActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/gray" />
+        <activity
+            android:name=".ui.credithandleweb.CreditHandleWebActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/gray" />
+
+        <activity
+            android:name=".ui.loanhandle.LoanHandleActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/gray" />
+
+
+        <receiver android:name="com.rflash.magiccube.receiver.ApkInstallReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>

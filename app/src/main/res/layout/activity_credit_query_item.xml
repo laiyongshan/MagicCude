@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/blueBackground"
+        app:navigationIcon="@mipmap/back"
+        app:titleTextColor="@color/white"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80px">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="查询服务"
+            android:textSize="28px"
+            android:layout_marginLeft="30px"
+            android:layout_centerVertical="true"
+            android:textColor="@color/operationBlackText"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="280px"
+            android:textSize="28px"
+            android:textColor="@color/blueBackground"
+            />
+
+        <TextView
+            android:id="@+id/tv_times"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="30px"
+            android:layout_centerVertical="true"
+            android:text="剩余：次"
+            android:textSize="28px"
+            android:textColor="@color/blueBackground"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/line"
+            android:layout_alignParentBottom="true"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80px">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="姓名"
+            android:textSize="28px"
+            android:layout_marginLeft="30px"
+            android:layout_centerVertical="true"
+            android:textColor="@color/operationBlackText"
+            />
+
+        <com.rflash.basemodule.view.DecimalEditText
+            android:id="@+id/et_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="280px"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="请输入姓名"
+            android:maxLength="10"
+            android:maxLines="1"
+            android:textColor="@color/loginHint"
+            android:textColorHint="@color/edtHint"
+            android:textSize="28px"
+            android:layout_centerVertical="true"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="@color/line"
+            android:layout_alignParentBottom="true"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80px">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="身份证"
+            android:textSize="28px"
+            android:layout_marginLeft="30px"
+            android:layout_centerVertical="true"
+            android:textColor="@color/operationBlackText"
+            />
+
+        <com.rflash.basemodule.view.DecimalEditText
+            android:id="@+id/et_identityCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="280px"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="请输入身份证号码"
+            android:maxLength="10"
+            android:maxLines="1"
+            android:textColor="@color/loginHint"
+            android:textColorHint="@color/edtHint"
+            android:textSize="28px"
+            android:layout_centerVertical="true"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/line"
+            android:layout_alignParentBottom="true"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80px">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="银行卡"
+            android:textSize="28px"
+            android:layout_marginLeft="30px"
+            android:layout_centerVertical="true"
+            android:textColor="@color/operationBlackText"
+            />
+
+        <com.rflash.basemodule.view.DecimalEditText
+            android:id="@+id/et_cardNo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="280px"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="请输入银行卡号"
+            android:inputType="number|numberDecimal"
+            android:maxLength="10"
+            android:maxLines="1"
+            android:textColor="@color/loginHint"
+            android:textColorHint="@color/edtHint"
+            android:textSize="28px"
+            android:layout_centerVertical="true"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/line"
+            android:layout_alignParentBottom="true"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80px">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="银行预留电话"
+            android:textSize="28px"
+            android:layout_marginLeft="30px"
+            android:layout_centerVertical="true"
+            android:textColor="@color/operationBlackText"
+            />
+
+        <com.rflash.basemodule.view.DecimalEditText
+            android:id="@+id/et_mobile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="280px"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="请输入银行预留电话"
+            android:inputType="number|numberDecimal"
+            android:maxLength="10"
+            android:maxLines="1"
+            android:textColor="@color/loginHint"
+            android:textColorHint="@color/edtHint"
+            android:textSize="28px"
+            android:layout_centerVertical="true"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/line"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30px"
+        android:layout_marginRight="30px"
+        android:layout_marginTop="20px"
+        android:visibility="invisible">
+        <!--起始时间-->
+        <TextView
+            android:id="@+id/tv_start_date"
+            android:layout_width="300px"
+            android:layout_height="60px"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/bill_edt"
+            android:gravity="center"
+            android:text="起始时间"
+            android:textColor="@color/loginHint"
+            android:textColorHint="@color/loginHint"
+            android:textSize="28px" />
+
+        <TextView
+            android:id="@+id/tv_sign"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="10px"
+            android:text="~" />
+
+        <!--终止时间-->
+        <TextView
+            android:id="@+id/tv_end_date"
+            android:layout_width="300px"
+            android:layout_height="60px"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10px"
+            android:background="@drawable/bill_edt"
+            android:gravity="center"
+            android:text="终止时间"
+            android:textColor="@color/loginHint"
+            android:textColorHint="@color/loginHint"
+            android:textSize="28px" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_query"
+        android:layout_width="match_parent"
+        android:layout_height="80px"
+        android:layout_marginTop="40px"
+        android:layout_marginLeft="25px"
+        android:layout_marginRight="25px"
+        android:text="查询"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="28px"
+        android:background="@drawable/tv_repay"
+        />
+
+
+</LinearLayout>
+

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/blueBackground"
+        app:navigationIcon="@mipmap/back"
+        app:titleTextColor="@color/white"/>
+
+
+    <!--银联用户画像-->
+
+    <RelativeLayout
+        android:id="@+id/user_portrait_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25px"
+        android:layout_marginRight="25px"
+        android:layout_marginTop="40px"
+        android:gravity="center_vertical"
+        android:background="@mipmap/credit_user_portrait">
+
+        <TextView
+            android:id="@+id/tv_user_portrait"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="130px"
+            android:textSize="28px"
+            android:textColor="@color/white"
+            android:text="银联用户画像"/>
+
+        <TextView
+            android:id="@+id/tv_user_portrait_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="剩余次数："
+            android:textSize="24px"
+            android:textColor="@color/loginHint"
+            android:layout_marginRight="120px"
+            />
+    </RelativeLayout>
+
+    <!--银联用户交易报告-->
+
+    <RelativeLayout
+        android:id="@+id/trans_report_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25px"
+        android:layout_marginRight="25px"
+        android:layout_marginTop="30px"
+        android:gravity="center_vertical"
+        android:background="@mipmap/credit_trans_report">
+
+        <TextView
+            android:id="@+id/tv_trans_report"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="130px"
+            android:textSize="28px"
+            android:textColor="@color/white"
+            android:text="银联用户交易报告"/>
+
+        <TextView
+            android:id="@+id/tv_trans_report_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="剩余次数："
+            android:textSize="24px"
+            android:textColor="@color/loginHint"
+            android:layout_marginRight="120px"
+            />
+    </RelativeLayout>
+
+    <!--用户疑似套现-->
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/suspect_cash_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25px"
+        android:layout_marginRight="25px"
+        android:layout_marginTop="30px"
+        android:gravity="center_vertical"
+        android:background="@mipmap/credit_suspect_cash">
+
+        <TextView
+            android:id="@+id/tv_suspect_cash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="130px"
+            android:textSize="28px"
+            android:textColor="@color/white"
+            android:text="用户疑似套现"/>
+
+        <TextView
+            android:id="@+id/tv_suspect_cash_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="剩余次数："
+            android:textSize="24px"
+            android:textColor="@color/loginHint"
+            android:layout_marginRight="120px"
+            />
+    </RelativeLayout>
+
+    <!--用户账单真伪核验-->
+
+    <RelativeLayout
+        android:id="@+id/bill_check_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25px"
+        android:layout_marginRight="25px"
+        android:layout_marginTop="30px"
+        android:gravity="center_vertical"
+        android:background="@mipmap/credit_bill_check">
+
+        <TextView
+            android:id="@+id/tv_bill_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="130px"
+            android:textSize="28px"
+            android:textColor="@color/white"
+            android:text="用户账单真伪核验"/>
+
+        <TextView
+            android:id="@+id/tv_bill_check_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="剩余次数："
+            android:textSize="24px"
+            android:textColor="@color/loginHint"
+            android:layout_marginRight="120px"
+            />
+    </RelativeLayout>
+
+    <!--云信贷申请反欺诈-->
+
+    <RelativeLayout
+        android:id="@+id/cloud_credit_application_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25px"
+        android:layout_marginRight="25px"
+        android:layout_marginTop="30px"
+        android:gravity="center_vertical"
+        android:background="@mipmap/credit_cloud_credit_application">
+
+        <TextView
+            android:id="@+id/tv_cloud_credit_application"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="130px"
+            android:textSize="28px"
+            android:textColor="@color/white"
+            android:text="云信贷申请反欺诈"/>
+
+        <TextView
+            android:id="@+id/tv_cloud_credit_application_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="剩余次数："
+            android:textSize="24px"
+            android:textColor="@color/loginHint"
+            android:layout_marginRight="120px"
+            />
+    </RelativeLayout>
+
+    <!--云信贷互联反欺诈-->
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/cloud_credit_internet_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25px"
+        android:layout_marginRight="25px"
+        android:layout_marginTop="30px"
+        android:gravity="center_vertical"
+        android:background="@mipmap/credit_cloud_credit_internet">
+
+        <TextView
+            android:id="@+id/tv_cloud_credit_internet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="130px"
+            android:textSize="28px"
+            android:textColor="@color/white"
+            android:text="云信贷互联反欺诈"/>
+
+        <TextView
+            android:id="@+id/tv_cloud_credit_internet_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="剩余次数："
+            android:textSize="24px"
+            android:textColor="@color/loginHint"
+            android:layout_marginRight="120px"
+            />
+    </RelativeLayout>
+
+
+</LinearLayout>
+

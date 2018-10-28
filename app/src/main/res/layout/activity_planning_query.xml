@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--规划查询-->
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/blueBackground"
+        app:navigationIcon="@mipmap/back"
+        app:title="规划查询"
+        app:titleTextColor="@color/white" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100px"
+        android:orientation="horizontal">
+        <!--请输入卡片后四位-->
+        <EditText
+            android:id="@+id/edt_bankcard"
+            android:layout_width="350px"
+            android:layout_height="60px"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="30px"
+            android:background="@drawable/bill_edt"
+            android:gravity="center_vertical"
+            android:hint="请输入卡片后四位"
+            android:inputType="number"
+            android:maxLength="4"
+            android:maxLines="1"
+            android:paddingLeft="20px"
+            android:textColor="@color/loginHint"
+            android:textColorHint="@color/loginHint"
+            android:textSize="28px" />
+
+        <!--查询-->
+        <TextView
+            android:layout_width="100px"
+            android:layout_height="60px"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="20px"
+            android:background="@color/blueBackground"
+            android:gravity="center"
+            android:text="查询"
+            android:textColor="@color/white"
+            android:textSize="24px" />
+
+        <!--重置-->
+        <TextView
+            android:layout_width="100px"
+            android:layout_height="60px"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="20px"
+            android:background="@color/loginEdit"
+            android:gravity="center"
+            android:text="重置"
+            android:textColor="@color/white"
+            android:textSize="24px" />
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/line" />
+
+</LinearLayout>

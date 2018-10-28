@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_footer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="20px"
+    android:paddingTop="20px">
+    <ProgressBar
+        android:visibility="gone"
+        android:id="@+id/progressbar"
+        android:layout_width="40px"
+        android:layout_height="40px"
+        android:layout_marginRight="30px"
+        android:layout_toLeftOf="@+id/tv_load" />
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_load"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="上拉加载更多"
+        android:textColor="@color/blueBackground"
+        android:textSize="28px" />
+
+
+
+</RelativeLayout>

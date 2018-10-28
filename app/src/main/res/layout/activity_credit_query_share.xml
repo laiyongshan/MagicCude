@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/blueBackground"
+        app:navigationIcon="@mipmap/back"
+        app:titleTextColor="@color/white"/>
+
+
+    <!-- 充值与查询 -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100px"
+        android:gravity="center_vertical">
+
+        <Button
+            android:id="@+id/btn_recharge"
+            android:layout_width="130px"
+            android:layout_height="50px"
+            android:layout_marginLeft="30px"
+            android:text="充值次数"
+            android:textSize="24px"
+            android:layout_centerVertical="true"
+            android:textColor="@color/user_portrait_btn_press"
+            android:background="@drawable/user_portrait_btn"
+            />
+
+        <TextView
+            android:id="@+id/tv_over_times"
+            android:layout_width="wrap_content"
+            android:layout_height="50px"
+            android:text="剩余次数："
+            android:layout_marginLeft="180px"
+            android:gravity="center_vertical"
+            android:textSize="28px"
+            android:layout_centerVertical="true"
+            android:textColor="@color/blueBackground"/>
+
+        <Button
+            android:id="@+id/btn_query"
+            android:layout_width="170px"
+            android:layout_height="50px"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="30px"
+            android:text="查询"
+            android:textSize="28px"
+            android:textColor="@color/white"
+            android:layout_centerVertical="true"
+            android:background="@drawable/repay"
+            />
+
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="65px"
+        android:gravity="center_vertical"
+        android:background="@color/edtHint">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="查询结果"
+            android:gravity="center_vertical"
+            android:textSize="24px"
+            android:textColor="@color/blueBackground"
+            android:layout_marginLeft="30px"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.rflash.basemodule.view.LoadRecyclerView
+                android:background="@color/line"
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+        <ImageView
+            android:id="@+id/iv_nodata"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/nodata"/>
+
+    </RelativeLayout>
+
+
+
+
+</LinearLayout>
+
