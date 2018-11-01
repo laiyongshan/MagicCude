@@ -19,11 +19,11 @@ public class CardChargeAdapter extends BaseQuickAdapter<CardChargerBean.ResultBe
 
     @Override
     protected void convert(BaseViewHolder helper, CardChargerBean.ResultBean item) {
-        ((TextView)helper.getView(R.id.serviceAmt_tv)).setText("￥"+item.getServiceAmt());
+        ((TextView)helper.getView(R.id.serviceAmt_tv)).setText("￥"+item.getServiceAmt()/100);
         ((TextView)helper.getView(R.id.serviceDate_tv)).setText(item.getServiceStartDate()+"至"+item.getServiceEndDate());
         ((TextView)helper.getView(R.id.paidTime_tv)).setText(""+item.getPaidTime());
         ((TextView)helper.getView(R.id.serviceRate_tv)).setText(""+item.getServiceRate());
-        ((TextView)helper.getView(R.id.reciveAmt_tv)).setText("￥"+item.getReciveAmt());
-        ((TextView)helper.getView(R.id.paidAmt_tv)).setText("+"+item.getPaidAmt());
+        ((TextView)helper.getView(R.id.reciveAmt_tv)).setText("￥"+item.getReciveAmt()/100);
+        ((TextView)helper.getView(R.id.paidAmt_tv)).setText("+"+item.getPaidAmt()/100);
     }
 }

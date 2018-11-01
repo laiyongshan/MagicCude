@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#3F51B5</color>
 
+    <color name="txt_color">#48495F</color>
+
     <color name="blueBackground">#474E7A</color>
     <color name="loginEdit">#34C0E3</color>
     <color name="loginHint">#999999</color>

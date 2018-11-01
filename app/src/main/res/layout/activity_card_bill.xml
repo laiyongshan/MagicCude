@@ -91,7 +91,7 @@
         <android.support.v7.widget.CardView
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:layout_marginTop="12dp"
+            android:layout_margin="12dp"
             android:layout_below="@+id/filtrate_tv"
             app:cardUseCompatPadding="true"
             app:cardPreventCornerOverlap="false"
@@ -127,7 +127,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true">
 
-            <Button
+            <TextView
                 android:background="@drawable/sure_textview_bg"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
@@ -137,7 +137,7 @@
                 android:textSize="14sp"
                 android:textColor="@color/white"/>
 
-            <Button
+            <TextView
                 android:background="@drawable/cancle_textview_bg"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"

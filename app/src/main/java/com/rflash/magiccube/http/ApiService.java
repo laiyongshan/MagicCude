@@ -891,6 +891,10 @@ public interface ApiService {
                                    @Field("available") String available
                                    );
 
+
+
+
+
     /**
      * 卡片详情
      * @param version
@@ -997,4 +1001,21 @@ public interface ApiService {
                                  @Field(Config.SIGNATURE) String signature,
                                  @Field("cardNo") String cardNo,
                                  @Field("state") String state);
+
+    /**
+     * 字典同步
+     * @param version
+     * @param requestNo
+     * @param machineCode
+     * @param account
+     * @param signature
+     *
+     * */
+    @FormUrlEncoded
+    @POST("card-gate-web/dict/query")
+    Observable<BaseBean> queryDict(@Field(Config.VERSION)String version,
+                                         @Field(Config.REQUEST_NO) String requestNo,
+                                         @Field(Config.MACHINECODE) String machineCode,
+                                         @Field(Config.ACCOUNT) String account,
+                                         @Field(Config.SIGNATURE) String signature);
 }

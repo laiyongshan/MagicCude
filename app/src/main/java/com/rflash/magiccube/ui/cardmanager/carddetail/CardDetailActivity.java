@@ -1,10 +1,13 @@
 package com.rflash.magiccube.ui.cardmanager.carddetail;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.rflash.basemodule.BaseActivity;
@@ -33,9 +36,15 @@ public class CardDetailActivity extends MVPBaseActivity<CardDetailContract.View,
     @BindView(R.id.title_back_tv)
     TextView title_back_tv;
 
+    @BindView(R.id.card_type_bg)
+    ImageView card_type_bg;
+
     @BindViews({R.id.card_baseinfo_tv,R.id.card_bill_tv,R.id.card_increase_rv,R.id.card_charge_tv,
     R.id.freeze_card_tv,R.id.renewal_card_tv,R.id.add_consume_refund_tv,R.id.delete_card_tv})
     TextView[] tvs;
+
+    @BindView(R.id.freeze_icon_iv)
+    ImageView freeze_icon_iv;
 
     CardBean.ResultBean cardDetailBean;
     Intent intent;
@@ -53,9 +62,23 @@ public class CardDetailActivity extends MVPBaseActivity<CardDetailContract.View,
 
     private void initView(){
         cardDetailBean= (CardBean.ResultBean) getIntent().getSerializableExtra("cardDetail");
-        cardNo=cardDetailBean.getCardNo()+"";
-        cardState=cardDetailBean.getState()+"";
+
         if(cardDetailBean!=null){
+
+            cardNo=cardDetailBean.getCardNo()+"";
+            cardState=cardDetailBean.getState()+"";
+
+            if(cardState.equals("VALID")){//正常
+                card_type_bg.setVisibility(View.GONE);
+                freeze_icon_iv.setImageResource(R.mipmap.icon_dongjie);
+            }else if(cardState.equals("FREEZE")){//冻结
+                card_type_bg.setVisibility(View.VISIBLE);
+                freeze_icon_iv.setImageResource(R.mipmap.icon_card_jiedong);
+            }else if(cardState.equals("EXPIRE")){//过期
+                card_type_bg.setVisibility(View.VISIBLE);
+                freeze_icon_iv.setImageResource(R.mipmap.icon_dongjie);
+            }
+
             ((TextView)findViewById(R.id.bank_name_tv)).setText(cardDetailBean.getCardBankName()+"");
             ((TextView)findViewById(R.id.cardowner_name_tv)).setText("持卡人:"+cardDetailBean.getCustomerName()+"");
             ((TextView)findViewById(R.id.bank_card_num_tv)).setText(cardDetailBean.getCardNo()+"");
@@ -71,7 +94,7 @@ public class CardDetailActivity extends MVPBaseActivity<CardDetailContract.View,
     }
 
     @OnClick({R.id.title_back_tv,R.id.card_baseinfo_tv,R.id.card_bill_tv,R.id.card_increase_rv,R.id.card_charge_tv,
-            R.id.freeze_card_tv,R.id.renewal_card_tv,R.id.add_consume_refund_tv,R.id.delete_card_tv})
+            R.id.freeze_ll,R.id.renewal_card_tv,R.id.add_consume_refund_tv,R.id.delete_card_tv})
     public void click(View view){
         switch (view.getId()) {
             case R.id.title_back_tv:
@@ -103,17 +126,35 @@ public class CardDetailActivity extends MVPBaseActivity<CardDetailContract.View,
 //                ActivityIntent.readyGo(CardDetailActivity.this,CardChargeActivity.class);
                 break;
 
-            case R.id.freeze_card_tv://凍結
+            case R.id.freeze_ll://凍結
+                if(cardState.equals("VALID")){//正常
+                }else if(cardState.equals("FREEZE")){//冻结
+                }else if(cardState.equals("EXPIRE")){//过期
+                    Toast.makeText(CardDetailActivity.this,"卡片过期，无法进行该操作",Toast.LENGTH_SHORT).show();
+                }
                 break;
 
             case R.id.renewal_card_tv://續期
-                ActivityIntent.readyGo(CardDetailActivity.this,RenewalActivity.class);
+                if(cardState.equals("VALID")||cardState.equals("EXPIRE")){//正常或过期
+                    intent=new Intent(CardDetailActivity.this,RenewalActivity.class);
+                    intent.putExtra("cardDetail",cardDetailBean);
+                    startActivity(intent);
+                }else if(cardState.equals("FREEZE")){//冻结
+                    Toast.makeText(CardDetailActivity.this,"卡片冻结，无法进行该操作",Toast.LENGTH_SHORT).show();
+                }
                 break;
 
             case R.id.add_consume_refund_tv://添加交易
-                intent=new Intent(CardDetailActivity.this,AddPlanActivity.class);
-                intent.putExtra("cardDetail",cardDetailBean);
-                startActivity(intent);
+                if(cardState.equals("VALID")){//正常
+                    intent=new Intent(CardDetailActivity.this,AddPlanActivity.class);
+                    intent.putExtra("cardDetail",cardDetailBean);
+                    startActivity(intent);
+                }else if(cardState.equals("FREEZE")){//冻结
+                    Toast.makeText(CardDetailActivity.this,"卡片冻结，无法进行该操作",Toast.LENGTH_SHORT).show();
+                }else if(cardState.equals("EXPIRE")){//过期
+                    Toast.makeText(CardDetailActivity.this,"卡片过期，无法进行该操作",Toast.LENGTH_SHORT).show();
+                }
+
                 break;
 
             case R.id.delete_card_tv://刪除卡片

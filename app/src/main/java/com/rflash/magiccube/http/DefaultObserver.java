@@ -67,6 +67,7 @@ public abstract class DefaultObserver<T extends BaseBean> implements Observer<Ba
     @Override
     public void onNext(BaseBean baseBean) {
         baseView.dismissProgress();
+        Log.i(TAG, baseBean.isSuccess()+"");
         //处理结果
         if (baseBean.isSuccess()) {
             //服务器code 正确
@@ -77,10 +78,11 @@ public abstract class DefaultObserver<T extends BaseBean> implements Observer<Ba
                 //验签
                 boolean signSuccess = false;
                 signSuccess = SignUtil.verferSignDataWithStr(map, AssetsUtil.readAssetsTxt(baseView.getContext(), Config.DEFAULT_PUBLIC_PATH));
+
                 if (signSuccess) {
                     if (baseBean.getData() != null) {
                         String data = new String(Base64.decode(baseBean.getData()), "utf-8");
-                        Log.i(TAG, data);
+                        Log.i(TAG, data.toString());
                         //(Class) ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[0]
                         //  获取当前类的泛型
                         T t = (T) new Gson().fromJson(data, (Class) ((ParameterizedType) this.getClass().getGenericSuperclass())
@@ -91,6 +93,7 @@ public abstract class DefaultObserver<T extends BaseBean> implements Observer<Ba
                     }
                 } else {
                     onFail("验签失败，非法登录不通过");
+                    Log.i(TAG, "验签失败，非法登录不通过");
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -99,6 +102,7 @@ public abstract class DefaultObserver<T extends BaseBean> implements Observer<Ba
         } else {
             //返回错误code
             onFail(baseBean.getRespDesc());
+            Log.i(TAG, baseBean.getRespDesc()+"");
         }
     }
 
@@ -120,7 +124,7 @@ public abstract class DefaultObserver<T extends BaseBean> implements Observer<Ba
 
     @Override
     public void onError(Throwable e) {
-        Log.e("Retrofit", e.getMessage());
+        Log.e("Retrofit", e.getMessage()+"");
         baseView.dismissProgress();
         if (e instanceof HttpException) {     //   HTTP错误
             onException(ExceptionReason.BAD_NETWORK);

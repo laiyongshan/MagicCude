@@ -44,8 +44,20 @@ public class RefundPresenter extends BasePresenterImpl<RefundContract.View> impl
         try {
             signature = SignUtil.signDataWithStr(treeMap, SpUtil.getString(mView.getContext(), Config.USER_PRVKEY, ""));
             Observable<BaseBean> balance = RetrofitFactory.getApiService().getRefundList(version, requestNo, machineCode, account, signature, pageNum);
-            Observable<BaseBean> compose = balance.compose(((BaseActivity) mView).compose(((BaseActivity) mView).<BaseBean>bindToLifecycle()));
-            compose.subscribe(new DefaultObserver<RefundBean>((BaseActivity) mView) {
+            Observable<BaseBean> compose = balance.compose(((BaseActivity) mView.getContext()).compose(((BaseActivity) mView.getContext()).<BaseBean>bindToLifecycle()));
+            compose.subscribe(new DefaultObserver<RefundBean>((BaseActivity) mView.getContext()) {
+                @Override
+                public void onError(Throwable e) {
+                    super.onError(e);
+                    mView.getDataFail(e.getMessage()+"");
+                }
+
+                @Override
+                public void onComplete() {
+                    super.onComplete();
+                    mView.finishRefresh();
+                }
+
                 @Override
                 protected void onSuccess(RefundBean data) {
                     mView.getDataSuccess(data);

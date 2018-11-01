@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
@@ -12,15 +13,17 @@ import android.widget.Toast;
 
 import com.rflash.basemodule.BaseActivity;
 import com.rflash.magiccube.R;
+import com.rflash.magiccube.http.BaseBean;
 import com.rflash.magiccube.mvp.MVPBaseActivity;
 import com.rflash.magiccube.ui.cardmanager.CardManagerFragment;
 import com.rflash.magiccube.ui.finance.FinanceManagerFragment;
+import com.rflash.magiccube.ui.main.AppInfo;
 import com.rflash.magiccube.ui.merchants.MerchantsFragment;
 import com.rflash.magiccube.ui.other.OtherBusinessFragment;
 import com.rflash.magiccube.ui.shanghu.ShangHuFragment;
 import com.rflash.magiccube.view.TabBar;
 
-public class NewMainActivity extends BaseActivity {
+public class NewMainActivity extends MVPBaseActivity<NewMainContract.View,NewMainPresenter> implements NewMainContract.View{
 
 
     TabBar mTabBar;
@@ -54,8 +57,8 @@ public class NewMainActivity extends BaseActivity {
     }
 
     private void initView() {
-        Intent intent = getIntent();
-
+//        Intent intent = getIntent();
+        mPresenter.queryDirt();//获取字典
 //        if (null != intent) {
 //            Bundle bundle = getIntent().getExtras();
 //            String title = bundle.getString(JPushInterface.EXTRA_NOTIFICATION_TITLE);
@@ -95,4 +98,33 @@ public class NewMainActivity extends BaseActivity {
     }
 
 
+    @Override
+    public void showRefresh() {
+
+    }
+
+    @Override
+    public void finishRefresh() {
+
+    }
+
+    @Override
+    public void getDataFail(String msg) {
+
+    }
+
+    @Override
+    public void queryUpdateSuccess(AppInfo info) {
+
+    }
+
+    @Override
+    public void queryDirtSuccess(DirtBean response) {
+        if (response!=null){
+
+            for(DirtBean.ResultBean resultBean:response.getResult()){
+                Log.i("DefaultObserver",resultBean.getType().getDictTypeId()+resultBean.getType().getDictTypeName());
+            }
+        }
+    }
 }

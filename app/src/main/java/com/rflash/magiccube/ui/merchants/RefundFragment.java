@@ -93,16 +93,10 @@ public class RefundFragment extends BaseFragment {
             return;
         }
 
-        if (sum == 0) {
-            date[0] = 50;
-            date[1]=50;
-            sum = 100;
-        }
-
 
         refund_pieChart.setData(generatePieData(date));
 
-        legend.setEnabled(true);//图例显示
+        legend.setEnabled(false);//图例显示
         legend.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);//图例显示位置设置
 
         refund_pieChart.setHighlightPerTapEnabled(true);//点击响应
@@ -128,10 +122,10 @@ public class RefundFragment extends BaseFragment {
      */
     private SpannableString generateCenterText(int sum) {
         String total = Integer.toString(sum);
-        SpannableString s = new SpannableString(total +"/"+total+ "\n 笔数");
-        s.setSpan(new RelativeSizeSpan(3f), 0, total.length()+2, 2);
-        s.setSpan(new ForegroundColorSpan(Color.rgb(153, 153, 153)), 0, total.length()+2, 0);
-        s.setSpan(new ForegroundColorSpan(Color.rgb(88, 146, 240)), total.length(), s.length(), 0);
+        SpannableString s = new SpannableString(date[0] +"/"+date[1]+ "\n 笔数");
+        s.setSpan(new RelativeSizeSpan(3f), 0, (date[0]+"").length()+2, 2);
+        s.setSpan(new ForegroundColorSpan(Color.rgb(153, 153, 153)), 0, (date[0]+"").length()+2, 0);
+        s.setSpan(new ForegroundColorSpan(Color.rgb(88, 146, 240)), (date[1]+"").length(), s.length(), 0);
         return s;
     }
 
@@ -145,10 +139,8 @@ public class RefundFragment extends BaseFragment {
         ArrayList<Entry> yVals = new ArrayList<>();
         ArrayList<String> xVals = new ArrayList<>();
 
-//        int i1 = 222;
-//        int i2 = 222;
-//        xVals.add("今日未消费金额：" + i1+"\t\t\t\t\t\t\t\t");
-//        xVals.add("今日已消费金额：" + i2);
+        xVals.add("");
+        xVals.add("");
 
         yVals.add(new Entry((float) date[0], 0));
         yVals.add(new Entry((float) date[1], 1));
@@ -169,8 +161,8 @@ public class RefundFragment extends BaseFragment {
         });
 
         ArrayList<Integer> colors = new ArrayList<>();
-        colors.add(Color.rgb(245, 166, 35));
-        colors.add(Color.rgb(23, 213, 159));
+        colors.add(Color.rgb(153, 153, 153));
+        colors.add(Color.parseColor("#69B6F3"));
         pieDataSet.setColors(colors);//颜色设置
 
         pieDataSet.setSliceSpace(2f);

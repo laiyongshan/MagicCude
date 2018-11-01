@@ -7,6 +7,7 @@ import com.rflash.magiccube.http.BaseBean;
 import com.rflash.magiccube.http.DefaultObserver;
 import com.rflash.magiccube.http.RetrofitFactory;
 import com.rflash.magiccube.mvp.BasePresenterImpl;
+import com.rflash.magiccube.ui.finance.financedetail.FinanceDetailBean;
 import com.rflash.magiccube.ui.shanghu.ShanghuBean;
 import com.rflash.magiccube.ui.shanghu.ShanghuContract;
 import com.rflash.magiccube.util.SignUtil;
@@ -91,7 +92,7 @@ public class FinanceManagerPresenter extends BasePresenterImpl<FinanceManagerCon
             signature = SignUtil.signDataWithStr(treeMap, SpUtil.getString(mView.getContext(), Config.USER_PRVKEY, ""));
             Observable<BaseBean> confirm = RetrofitFactory.getApiService().queryPlan(version, requestNo, machineCode, account, signature, pageNum,cardNo,tranType,channelId);
             Observable<BaseBean> compose = confirm.compose(((BaseActivity) mView.getContext()).compose(((BaseActivity) mView.getContext()).<BaseBean>bindToLifecycle()));
-            compose.subscribe(new DefaultObserver<FinanceBean>((BaseActivity) mView.getContext()) {
+            compose.subscribe(new DefaultObserver<FinanceDetailBean>((BaseActivity) mView.getContext()) {
                 @Override
                 public void onError(Throwable e) {
                     super.onError(e);
@@ -104,7 +105,7 @@ public class FinanceManagerPresenter extends BasePresenterImpl<FinanceManagerCon
                     mView.finishRefresh();
                 }
                 @Override
-                protected void onSuccess(FinanceBean data) {
+                protected void onSuccess(FinanceDetailBean data) {
                     mView.getDataSuccess(data);
                 }
             });

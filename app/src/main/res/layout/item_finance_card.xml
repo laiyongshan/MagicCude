@@ -50,7 +50,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
                         android:textSize="18sp"
-                        android:text="中国农业银行"
+                        android:text=""
                         />
 
                     <TextView
@@ -59,16 +59,17 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
                         android:textSize="14sp"
-                        android:text="持卡人：赖先生"
+                        android:text="持卡人："
                         />
 
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/reportDate_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:text="服务月份：2018-09"
+                    android:text="服务月份："
                     android:textSize="12sp"
                     />
 
@@ -81,7 +82,7 @@
                 android:layout_gravity="center_vertical"
                 android:gravity="center"
                 android:textSize="24sp"
-                android:text="1234 5678 9009 8765"
+                android:text=""
                 android:padding="8dp"
                 android:textColor="@color/color_black"
                 />
@@ -111,7 +112,7 @@
                         android:id="@+id/card_seri_num_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="01"
+                        android:text=""
                         android:textSize="16sp"
                         android:textColor="@color/color_black"
                         android:layout_marginTop="4dp"
@@ -139,7 +140,7 @@
                         android:id="@+id/sales_man_name_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="无"
+                        android:text=""
                         android:textSize="16sp"
                         android:textColor="@color/color_black"
                         android:layout_marginTop="4dp"
@@ -168,7 +169,7 @@
                         android:id="@+id/sales_man_profit_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="20"
+                        android:text=""
                         android:textSize="16sp"
                         android:textColor="@color/color_black"
                         android:layout_marginTop="4dp"
@@ -193,10 +194,10 @@
                         />
 
                     <TextView
-                        android:id="@+id/cost_tv"
+                        android:id="@+id/tranCost_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="20.899"
+                        android:text=""
                         android:textSize="16sp"
                         android:textColor="@color/color_black"
                         android:layout_marginTop="4dp"
@@ -221,7 +222,7 @@
                         />
 
                     <TextView
-                        android:id="@+id/eranings_tv"
+                        android:id="@+id/revenue_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="2998.09"

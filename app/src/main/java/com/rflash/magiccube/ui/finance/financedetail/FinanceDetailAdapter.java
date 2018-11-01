@@ -13,23 +13,27 @@ import java.util.List;
  * Created by lenovo on 2018/10/9.
  */
 
-public class FinanceDetailAdapter extends BaseQuickAdapter<FinanceDetailBean,BaseViewHolder> {
+public class FinanceDetailAdapter extends BaseQuickAdapter<FinanceDetailBean.ResultBean,BaseViewHolder> {
 
-    int financeTye;
 
-    public FinanceDetailAdapter( int financeType,List<FinanceDetailBean> data) {
+
+    public FinanceDetailAdapter(List<FinanceDetailBean.ResultBean> data) {
         super(R.layout.item_financedetail_rv, data);
-        this.financeTye=financeType;
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, FinanceDetailBean item) {
-            if(financeTye==0){//消费
-                ((TextView)helper.getView(R.id.finance_type_tv)).setText("消费");
-                ((TextView)helper.getView(R.id.finance_type_tv)).setTextColor(Color.RED);
-            }else if(financeTye==1){//还款
-                ((TextView)helper.getView(R.id.finance_type_tv)).setText("还款");
-                ((TextView)helper.getView(R.id.finance_type_tv)).setTextColor(Color.parseColor("#3F51B5"));
-            }
+    protected void convert(BaseViewHolder helper, FinanceDetailBean.ResultBean item) {
+        ((TextView)helper.getView(R.id.merchantName_tv)).setText(item.getMerchantName()+"");
+        if(item.getTranType().equals("SALE")) {
+            ((TextView) helper.getView(R.id.tranType_tv)).setText("消费");
+            ((TextView) helper.getView(R.id.tranType_tv)).setTextColor(Color.RED);
+        }else if(item.getTranType().equals("REPAY")) {
+            ((TextView) helper.getView(R.id.tranType_tv)).setText("还款");
+            ((TextView) helper.getView(R.id.tranType_tv)).setTextColor(Color.parseColor("#3F51B5"));
+        }
+        ((TextView)helper.getView(R.id.channelName_tv)).setText(item.getChannelName()+"");
+        ((TextView)helper.getView(R.id.tranCost_tv)).setText(item.getTranCost()+"");
+        ((TextView)helper.getView(R.id.amt_tv)).setText("￥"+item.getAmt()+"");
+        ((TextView)helper.getView(R.id.operatorTime_tv)).setText(item.getOperatorTime()+"");
     }
 }

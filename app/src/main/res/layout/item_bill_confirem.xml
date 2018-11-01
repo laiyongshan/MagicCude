@@ -39,7 +39,7 @@
                     android:ellipsize="marquee"
                     android:focusable="true"
                     android:marqueeRepeatLimit="marquee_forever"
-                    android:text="中信銀行8325"
+                    android:text=""
                     android:singleLine="true"
                     android:textColor="@color/color_black"
                     android:textSize="14sp"
@@ -53,7 +53,7 @@
                     android:textColor="#f00"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:text="待确认"
+                    android:text=""
                     />
 
             </RelativeLayout>
@@ -84,10 +84,11 @@
                         />
 
                     <TextView
+                        android:id="@+id/cardSeqno_tv"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-                        android:text="001"
+                        android:text=""
                         />
 
                 </LinearLayout>
@@ -105,10 +106,11 @@
                         />
 
                     <TextView
+                        android:id="@+id/customerName_tv"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-                        android:text="Miss Chen"
+                        android:text=""
                         />
 
                 </LinearLayout>
@@ -126,10 +128,11 @@
                         />
 
                     <TextView
+                        android:id="@+id/billType_tv"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-                        android:text="还款账单"
+                        android:text=""
                         />
 
                 </LinearLayout>
@@ -147,10 +150,11 @@
                         />
 
                     <TextView
+                        android:id="@+id/billStart2EndDate_tv"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-                        android:text="2018-09-09至2215-09-09"
+                        android:text=""
                         />
 
                 </LinearLayout>
@@ -168,10 +172,11 @@
                         />
 
                     <TextView
+                        android:id="@+id/billAmt_tv"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-                        android:text="￥98070.00"
+                        android:text=""
                         android:textColor="#f00"
                         />
 
@@ -181,6 +186,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
+                    android:orientation="horizontal"
                     >
                     <TextView
                         android:layout_width="0dp"
@@ -189,11 +195,11 @@
                         android:text="实际金额："
                         />
 
-                    <TextView
-                        android:layout_width="0dp"
+                    <EditText
+                        android:id="@+id/the_fact_et"
+                        android:layout_width="110dp"
                         android:layout_height="30dp"
-                        android:layout_weight="1.4"
-                        android:text="￥98070.00"
+                        android:text=""
                         android:background="#EAE9E9"
                         android:gravity="center_vertical"
                         android:padding="6dp"
@@ -202,10 +208,13 @@
                     <com.flyco.roundview.RoundTextView
                         android:id="@+id/confirem_bill_rtv"
                         android:layout_width="0dp"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="6dp"
+                        android:paddingBottom="6dp"
                         android:layout_weight="0.8"
                         rv:rv_backgroundColor="#f00"
-                        app:rv_cornerRadius="5dp"
+                        rv:rv_backgroundPressColor="@color/luncy"
+                        rv:rv_cornerRadius="5dp"
                         android:textColor="@color/white"
                         android:text="确认"
                         android:gravity="center"
@@ -215,10 +224,13 @@
                     <com.flyco.roundview.RoundTextView
                         android:id="@+id/ignore_bill_rtv"
                         android:layout_width="0dp"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="6dp"
+                        android:paddingBottom="6dp"
                         android:layout_weight="0.8"
                         rv:rv_backgroundColor="#909090"
-                        app:rv_cornerRadius="5dp"
+                        rv:rv_cornerRadius="5dp"
+                        rv:rv_backgroundPressColor="@color/luncy"
                         android:textColor="@color/white"
                         android:text="忽略"
                         android:gravity="center"

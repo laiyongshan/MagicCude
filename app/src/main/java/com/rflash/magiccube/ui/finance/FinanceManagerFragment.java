@@ -1,6 +1,7 @@
 package com.rflash.magiccube.ui.finance;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -17,6 +18,7 @@ import com.rflash.basemodule.BaseFragment;
 import com.rflash.magiccube.R;
 import com.rflash.magiccube.mvp.MVPBaseFragment;
 import com.rflash.magiccube.ui.finance.financedetail.FinanceDetailActivity;
+import com.rflash.magiccube.ui.shanghu.ShanghuAdapter;
 import com.rflash.magiccube.ui.shanghu.ShanghuBean;
 import com.rflash.magiccube.util.TimerPikerTools;
 import com.rflash.magiccube.util.ToolUtils;
@@ -26,6 +28,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import butterknife.BindInt;
 import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.OnClick;
@@ -36,10 +39,16 @@ import butterknife.OnClick;
  * @desc:
  */
 
-public class FinanceManagerFragment extends MVPBaseFragment<FinanceManagerContract.View,FinanceManagerPresenter> implements FinanceManagerContract.View, SwipeRefreshLayout.OnRefreshListener{
+public class FinanceManagerFragment extends MVPBaseFragment<FinanceManagerContract.View,FinanceManagerPresenter> implements BaseQuickAdapter.RequestLoadMoreListener,FinanceManagerContract.View, SwipeRefreshLayout.OnRefreshListener{
 
     @BindView(R.id.refresh_layout)
     SwipeRefreshLayout refresh_layout;
+
+    @BindView(R.id.tranCost_tv)
+    TextView tranCost_tv;
+
+    @BindView(R.id.revenue_tv)
+    TextView revenue_tv;
 
     @BindView(R.id.finance_card_rv)
     RecyclerView finance_card_rv;
@@ -80,10 +89,13 @@ public class FinanceManagerFragment extends MVPBaseFragment<FinanceManagerContra
     String salesMan="";
     String startDate="";
     String endDate="";
-    int pageNum=1;
 
+    private int pageNum=1;
+    private int TOTAL_COUNTER ; //所有的数据总数
+
+    FinanceBean financeBean;
     FinanceAdapter financeAdapter;
-    List<FinanceBean> financeBeanList=new ArrayList<>();
+    List<FinanceBean.ResultBean> financeBeanList=new ArrayList<>();
 
     @Override
     protected int getLayout() {
@@ -96,15 +108,15 @@ public class FinanceManagerFragment extends MVPBaseFragment<FinanceManagerContra
         refresh_layout.setOnRefreshListener(this);
         refresh_layout.setColorSchemeColors(ToolUtils.Colors);
 
-        for(int i=0;i<20;i++){
-            financeBeanList.add(new FinanceBean());
-        }
         finance_card_rv.setLayoutManager(new LinearLayoutManager(getActivity()));
-        financeAdapter=new FinanceAdapter(financeBeanList);
+        financeAdapter = new FinanceAdapter(financeBeanList);
+        financeAdapter.setOnLoadMoreListener(this,finance_card_rv);
+        financeAdapter.disableLoadMoreIfNotFullPage();
         financeAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Intent i=new Intent(getActivity(),FinanceDetailActivity.class);
+                i.putExtra("financeBean",financeBeanList.get(position));
                 startActivity(i);
             }
         });
@@ -192,6 +204,39 @@ public class FinanceManagerFragment extends MVPBaseFragment<FinanceManagerContra
 
     @Override
     public void getDataSuccess(Object response) {
+        if(response!=null) {
+            financeBean= (FinanceBean) response;
+            TOTAL_COUNTER=financeBean.getTotalNum();
+//            data_count_tv.setText("共"+financeBean.getTotalNum()+"条数据");
+            tranCost_tv.setText("总成本：￥"+financeBean.getTranCost());
+            revenue_tv.setText("总收益：￥"+financeBean.getRevenue());
+            if(pageNum==1){
+                financeBeanList=financeBean.getResult();
+                financeAdapter.setNewData(financeBeanList);
+            }else {
+                financeBeanList.addAll(financeBean.getResult());
+                financeAdapter.addData(financeBean.getResult());
+                financeAdapter.loadMoreComplete();
+            }
+        }
+    }
 
+    @Override
+    public void onLoadMoreRequested() {
+        refresh_layout.setEnabled(false);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (financeAdapter.getData().size() >= TOTAL_COUNTER) {
+                    //数据全部加载完毕
+                    financeAdapter.loadMoreEnd();
+                } else {
+                    //获取更多数据
+                    pageNum++;
+                    getFinanceList();
+                }
+                refresh_layout.setEnabled(true);
+            }
+        },1500);
     }
 }

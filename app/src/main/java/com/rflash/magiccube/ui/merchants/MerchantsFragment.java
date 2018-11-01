@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.CardView;
@@ -131,8 +132,11 @@ public class MerchantsFragment extends MVPBaseFragment<MerchantsContract.View,Me
         });
 
         qBadgeView_xf = new QBadgeView(getActivity());
+        qBadgeView_xf.setGravityOffset(2,-1,true);
         qBadgeView_hk = new QBadgeView(getActivity());
+        qBadgeView_hk.setGravityOffset(2,-1,true);
         qBadgeView_zd = new QBadgeView(getActivity());
+        qBadgeView_zd.setGravityOffset(2,-1,true);
 
     }
 
@@ -214,15 +218,16 @@ public class MerchantsFragment extends MVPBaseFragment<MerchantsContract.View,Me
      * */
     private void bindCountData(HomeCountBean mHomeCountBean){
 
+
         mRefundFragment = new RefundFragment(mHomeCountBean.getResult().getRevertibleInfo());
         mConsumeFragment = new ConsumeFragment(mHomeCountBean.getResult().getPayableInfo());
         mDays3RefundFragment = new Days3RefundFragment(mHomeCountBean.getResult().getNearly3daysInfo());
         mCardsSituationFragment = new CardsSituationFragment(mHomeCountBean);
 
         mPagerAdapter = new SlidePagerAdapter(getChildFragmentManager());
+        mPagerAdapter.notifyDataSetChanged();
         mPager.setAdapter(mPagerAdapter);
     }
-
 
 
     @Override
@@ -240,7 +245,7 @@ public class MerchantsFragment extends MVPBaseFragment<MerchantsContract.View,Me
     }
 
     /* PagerAdapter class */
-    public class SlidePagerAdapter extends FragmentPagerAdapter {
+    public class SlidePagerAdapter extends FragmentStatePagerAdapter {
         public SlidePagerAdapter(FragmentManager fm) {
             super(fm);
         }
@@ -252,7 +257,10 @@ public class MerchantsFragment extends MVPBaseFragment<MerchantsContract.View,Me
 			 * a container for other fragments
 			 */
             if (position == 0) {
-                return mRefundFragment;
+                if(!mRefundFragment.isAdded())
+                    return mRefundFragment;
+                else
+                    return null;
             } else if (position == 1) {
                 return mConsumeFragment;
             } else if (position == 2) {

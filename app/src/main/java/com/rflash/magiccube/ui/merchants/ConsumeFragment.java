@@ -129,10 +129,10 @@ public class ConsumeFragment extends BaseFragment {
      */
     private SpannableString generateCenterText(int sum) {
         String total = Integer.toString(sum);
-        SpannableString s = new SpannableString(total +"/"+total+ "\n 笔数");
-        s.setSpan(new RelativeSizeSpan(3f), 0, total.length()+2, 2);
-        s.setSpan(new ForegroundColorSpan(Color.rgb(153, 153, 153)), 0, total.length()+2, 0);
-        s.setSpan(new ForegroundColorSpan(Color.parseColor("#FF6C5B")), total.length(), s.length(), 0);
+        SpannableString s = new SpannableString(date[0] +"/"+date[1]+ "\n 笔数");
+        s.setSpan(new RelativeSizeSpan(3f), 0, (date[0]+"").length()+2, 2);
+        s.setSpan(new ForegroundColorSpan(Color.rgb(153, 153, 153)), 0, (date[0]+"").length()+2, 0);
+        s.setSpan(new ForegroundColorSpan(Color.parseColor("#FF6C5B")), (date[1]+"").length(), s.length(), 0);
         return s;
     }
 
@@ -170,7 +170,7 @@ public class ConsumeFragment extends BaseFragment {
         });
 
         ArrayList<Integer> colors = new ArrayList<>();
-        colors.add(Color.rgb(245, 166, 35));
+        colors.add(Color.rgb(153, 153, 153));
         colors.add(Color.parseColor("#FF6C5B"));
         pieDataSet.setColors(colors);//颜色设置
 

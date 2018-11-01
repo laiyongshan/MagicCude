@@ -55,7 +55,7 @@ public class ShanghuPresenter extends BasePresenterImpl<ShanghuContract.View> im
                 @Override
                 public void onError(Throwable e) {
                     super.onError(e);
-                    mView.getDataFail(e.getMessage());
+                    mView.getDataFail(e.getMessage()+"");
                 }
 
                 @Override

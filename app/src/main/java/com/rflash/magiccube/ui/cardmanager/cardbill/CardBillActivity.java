@@ -7,6 +7,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
@@ -16,12 +17,15 @@ import com.bigkoo.pickerview.TimePickerView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.rflash.basemodule.BaseActivity;
 import com.rflash.magiccube.R;
+import com.rflash.magiccube.http.BaseBean;
 import com.rflash.magiccube.mvp.MVPBaseActivity;
 import com.rflash.magiccube.ui.cardmanager.CardBean;
 import com.rflash.magiccube.ui.cardmanager.increase.AddIncreaseActivity;
 import com.rflash.magiccube.ui.cardmanager.increase.CardIncreaseAdapter;
+import com.rflash.magiccube.ui.refund.RefundBean;
 import com.rflash.magiccube.util.TimerPikerTools;
 import com.rflash.magiccube.util.ToolUtils;
+import com.rflash.magiccube.view.SuccessProgressDialog;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -66,6 +70,8 @@ public class CardBillActivity extends MVPBaseActivity<CardBillContract.View,Card
     @BindView(R.id.card_bill_rv)
     RecyclerView card_bill_rv;
 
+    SuccessProgressDialog successProgressDialog;
+
     String cardNo="";
     String billMonth="";
     String available="";
@@ -76,7 +82,7 @@ public class CardBillActivity extends MVPBaseActivity<CardBillContract.View,Card
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM");
 
     CardBillAdapter cardBillAdapter;
-    List<CardBillBean> cardBillBeanList=new ArrayList<>();
+    List<CardBillBean.ResultBean> cardBillBeanList=new ArrayList<>();
 
     CardBean.ResultBean cardDetailBean;
 
@@ -98,10 +104,11 @@ public class CardBillActivity extends MVPBaseActivity<CardBillContract.View,Card
         refreshLayout.setColorSchemeColors(ToolUtils.Colors);
         refreshLayout.setOnRefreshListener(this);
 
+        successProgressDialog=new SuccessProgressDialog(this);
+
         card_bill_rv.setLayoutManager(new LinearLayoutManager(this));
 
-        cardBillAdapter=new CardBillAdapter(cardBillBeanList);
-        cardBillAdapter=new CardBillAdapter(cardBillBeanList);
+        cardBillAdapter=new CardBillAdapter(cardBillBeanList,mPresenter);
         cardBillAdapter.setOnLoadMoreListener(this,card_bill_rv);
         cardBillAdapter.disableLoadMoreIfNotFullPage();
         card_bill_rv.setAdapter(cardBillAdapter);
@@ -168,6 +175,30 @@ public class CardBillActivity extends MVPBaseActivity<CardBillContract.View,Card
 
     @Override
     public void getDataSuccess(CardBillBean response) {
+        if (response != null) {
+            TOTAL_COUNTER = response.getTotalNum();
+            cardBillBeanList.clear();
+            cardBillBeanList=response.getResult();
+            if (pageNum == 1) {
+                cardBillAdapter.setNewData(cardBillBeanList);
+            } else {
+                cardBillAdapter.addData(cardBillBeanList);
+                cardBillAdapter.loadMoreComplete();
+            }
+        }
+    }
+
+    @Override
+    public void updateCardBillSuccess() {
+        successProgressDialog.showDialog();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                successProgressDialog.dismiss();
+                pageNum=1;
+                queryBill();
+            }
+        },1500);
 
     }
 

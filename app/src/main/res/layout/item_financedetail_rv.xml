@@ -28,6 +28,7 @@
             >
 
             <com.rflash.magiccube.view.AlwaysMarqueeTextView
+                android:id="@+id/merchantName_tv"
                 android:layout_width="210dp"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@mipmap/icon_dianpu"
@@ -36,21 +37,21 @@
                 android:ellipsize="marquee"
                 android:focusable="true"
                 android:marqueeRepeatLimit="marquee_forever"
-                android:text="广州市花都区画成绩按甲方将案件"
+                android:text=""
                 android:singleLine="true"
                 android:textColor="@color/color_black"
                 android:textSize="14sp"
                 />
 
             <TextView
-                android:id="@+id/finance_type_tv"
+                android:id="@+id/tranType_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:textColor="#f00"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:text="消费"
+                android:text=""
                 />
 
         </RelativeLayout>
@@ -81,10 +82,11 @@
                     />
 
                 <TextView
+                    android:id="@+id/channelName_tv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:text="代付"
+                    android:text=""
                     />
 
             </LinearLayout>
@@ -102,10 +104,11 @@
                     />
 
                 <TextView
+                    android:id="@+id/tranCost_tv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:text="0"
+                    android:text=""
                     />
 
             </LinearLayout>
@@ -123,10 +126,11 @@
                     />
 
                 <TextView
+                    android:id="@+id/amt_tv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:text="￥1234.00"
+                    android:text=""
                     android:textColor="#f00"
                     />
 
@@ -145,10 +149,11 @@
                     />
 
                 <TextView
+                    android:id="@+id/operatorTime_tv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:text="2018-09-09 15:09:09"
+                    android:text=""
                     />
 
             </LinearLayout>

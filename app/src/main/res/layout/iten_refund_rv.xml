@@ -39,7 +39,7 @@
                     android:ellipsize="marquee"
                     android:focusable="true"
                     android:marqueeRepeatLimit="marquee_forever"
-                    android:text="中信銀行8325"
+                    android:text=""
                     android:singleLine="true"
                     android:textColor="@color/color_black"
                     android:textSize="14sp"
@@ -53,7 +53,7 @@
                     android:textColor="#f00"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:text="已还清"
+                    android:text=""
                     />
 
             </RelativeLayout>
@@ -83,10 +83,11 @@
                         />
 
                     <TextView
+                        android:id="@+id/cardSeqno_tv"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-                        android:text="B0001"
+                        android:text=""
                         />
 
                 </LinearLayout>
@@ -104,10 +105,11 @@
                         />
 
                     <TextView
+                        android:id="@+id/customerName_tv"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-                        android:text="Miss Chen"
+                        android:text=""
                         />
 
                 </LinearLayout>
@@ -125,10 +127,11 @@
                         />
 
                     <TextView
+                        android:id="@+id/billAmt_tv"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-                        android:text="￥1234.00"
+                        android:text=""
                         android:textColor="@color/colorPrimary"
                         />
 
@@ -147,10 +150,11 @@
                         />
 
                     <TextView
+                        android:id="@+id/noRepayAmt_tv"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-                        android:text="￥1234.00"
+                        android:text=""
                         android:textColor="@color/colorPrimary"
                         />
 
@@ -173,7 +177,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-                        android:text="2018-09-09"
+                        android:text=""
                         />
 
                 </LinearLayout>

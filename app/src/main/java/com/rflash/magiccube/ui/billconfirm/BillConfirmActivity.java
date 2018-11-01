@@ -3,14 +3,23 @@ package com.rflash.magiccube.ui.billconfirm;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
+import com.flyco.tablayout.SlidingTabLayout;
 import com.rflash.magiccube.R;
 import com.rflash.magiccube.mvp.MVPBaseActivity;
+import com.rflash.magiccube.ui.refund.HadRefundFragment;
+import com.rflash.magiccube.ui.refund.NoRefundFragment;
+import com.rflash.magiccube.ui.refund.OverTimeFragment;
+import com.rflash.magiccube.ui.refund.RefundActivity;
 import com.rflash.magiccube.util.ToolUtils;
 
 import java.util.ArrayList;
@@ -23,22 +32,18 @@ import butterknife.OnClick;
  * Created by lenovo on 2018/10/10.
  */
 
-public class BillConfirmActivity extends MVPBaseActivity<BillConfirmContract.View,BillConfirmPresenter> implements BillConfirmContract.View, SwipeRefreshLayout.OnRefreshListener {
-
-    @BindView(R.id.tablayout)
-    TabLayout tabLayout;
-
-    @BindView(R.id.refresh_layout)
-    SwipeRefreshLayout refresh_layout;
-
-    @BindView(R.id.bill_confirm_rv)
-    RecyclerView bill_confirm_rv;
+public class BillConfirmActivity extends MVPBaseActivity<BillConfirmContract.View,BillConfirmPresenter> {
 
     @BindView(R.id.title_back_tv)
     TextView title_back_tv;
+    @BindView(R.id.trand_type_stl)
+    SlidingTabLayout trand_type_stl;
 
-    int pageNum=1;
+    @BindView(R.id.viewpager)
+    ViewPager viewpager;
 
+    private ArrayList<Fragment> mFragments = new ArrayList<>();
+    private MyPagerAdapter mAdapter;
     private final String[] mTitles = {"待确认","已确认","已忽略"};
 
     BillConfirmAdapter billConfirmAdapter;
@@ -52,43 +57,15 @@ public class BillConfirmActivity extends MVPBaseActivity<BillConfirmContract.Vie
     }
 
     private void initView(){
-
-        refresh_layout.setColorSchemeColors(ToolUtils.Colors);
-        refresh_layout.setOnRefreshListener(this);
-
-        for(int i=0;i<mTitles.length;i++){
-            tabLayout.addTab(tabLayout.newTab().setText(mTitles[i]));
-        }
-
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                if(tab.getPosition()==0){//待确认
-                    billConfirmAdapter=new BillConfirmAdapter(0,billConfirmBeanList);
-                    bill_confirm_rv.setAdapter(billConfirmAdapter);
-                }else if(tab.getPosition()==1){//已确认
-                    billConfirmAdapter=new BillConfirmAdapter(1,billConfirmBeanList);
-                    bill_confirm_rv.setAdapter(billConfirmAdapter);
-                }else if(tab.getPosition()==2){//已忽略
-                    billConfirmAdapter=new BillConfirmAdapter(2,billConfirmBeanList);
-                    bill_confirm_rv.setAdapter(billConfirmAdapter);
-                }
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
-
-        bill_confirm_rv.setLayoutManager(new LinearLayoutManager(this));
-        billConfirmAdapter=new BillConfirmAdapter(0,billConfirmBeanList);
-        bill_confirm_rv.setAdapter(billConfirmAdapter);
+//        bill_confirm_rv.setLayoutManager(new LinearLayoutManager(this));
+//        billConfirmAdapter=new BillConfirmAdapter(0,billConfirmBeanList);
+//        bill_confirm_rv.setAdapter(billConfirmAdapter);
+        mFragments.add(RemidFragment.getInstance());//未確認
+        mFragments.add(DealFragment.getInstance());//已確認
+        mFragments.add(IgnoreFragment.getInstance());//忽略
+        mAdapter = new MyPagerAdapter(getSupportFragmentManager());
+        viewpager.setAdapter(mAdapter);
+        trand_type_stl.setViewPager(viewpager, mTitles);
     }
 
     @OnClick({R.id.title_back_tv})
@@ -100,44 +77,24 @@ public class BillConfirmActivity extends MVPBaseActivity<BillConfirmContract.Vie
         }
     }
 
+    private class MyPagerAdapter extends FragmentPagerAdapter {
+        public MyPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mPresenter.getBillConfirmList(pageNum+"");
-    }
+        @Override
+        public int getCount() {
+            return mFragments.size();
+        }
 
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mTitles[position];
+        }
 
-    @Override
-    public void onRefresh() {
-        pageNum=1;
-        mPresenter.getBillConfirmList(pageNum+"");
-    }
-
-    @Override
-    public void showRefresh() {
-        refresh_layout.setRefreshing(true);
-    }
-
-    @Override
-    public void finishRefresh() {
-        refresh_layout.setRefreshing(false);
-    }
-
-    @Override
-    public void getDataFail(String msg) {
-        refresh_layout.setRefreshing(false);
-    }
-
-    @Override
-    public void getDataSuccess(BillConfirmBean response) {
-            if(response!=null){
-                if(pageNum==1){
-
-                }else{
-                    pageNum++;
-//                    billConfirmBeanList.add(response.get)
-                }
-            }
+        @Override
+        public Fragment getItem(int position) {
+            return mFragments.get(position);
+        }
     }
 }

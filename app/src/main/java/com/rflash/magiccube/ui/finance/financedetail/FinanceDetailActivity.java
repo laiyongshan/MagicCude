@@ -1,19 +1,29 @@
 package com.rflash.magiccube.ui.finance.financedetail;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.flyco.tablayout.SlidingTabLayout;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.rflash.magiccube.R;
 import com.rflash.magiccube.mvp.MVPBaseActivity;
+import com.rflash.magiccube.ui.finance.FinanceBean;
 import com.rflash.magiccube.ui.finance.FinanceManagerContract;
 import com.rflash.magiccube.ui.finance.FinanceManagerPresenter;
 import com.rflash.magiccube.util.ToolUtils;
@@ -22,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.BindViews;
 import butterknife.OnClick;
 
 /**
@@ -30,7 +41,7 @@ import butterknife.OnClick;
  * @desc:
  */
 
-public class FinanceDetailActivity extends MVPBaseActivity<FinanceManagerContract.View,FinanceManagerPresenter> implements FinanceManagerContract.View,SwipeRefreshLayout.OnRefreshListener{
+public class FinanceDetailActivity extends MVPBaseActivity<FinanceManagerContract.View, FinanceManagerPresenter> {
 
     @BindView(R.id.title_back_tv)
     TextView title_back_tv;
@@ -41,38 +52,54 @@ public class FinanceDetailActivity extends MVPBaseActivity<FinanceManagerContrac
     @BindView(R.id.channelName_sp)
     MaterialSpinner channelName_sp;
 
-    @BindView(R.id.tablayout)
-    TabLayout tabLayout;
+    //    @BindView(R.id.tablayout)
+//    TabLayout tabLayout;
+    @BindView(R.id.trand_type_stl)
+    SlidingTabLayout trand_type_stl;
 
-    @BindView(R.id.refresh_layout)
-    SwipeRefreshLayout refresh_layout;
+    @BindView(R.id.viewpager)
+    ViewPager viewpager;
 
-    @BindView(R.id.finance_detail_rv)
-    RecyclerView finance_detail_rv;
+    @BindViews({R.id.saleNum_tv, R.id.saleAmt_tv, R.id.repayNum_tv, R.id.repayAmt_tv, R.id.serviceType_tv, R.id.serviceAmt_tv, R.id.serviceRate_tv, R.id.serviceFee_tv})
+    TextView[] financeInfoTvs;
 
-    FinanceDetailAdapter financeDetailAdapter;
-    List<FinanceDetailBean> financeDetailBeanList=new ArrayList<>();
 
-    private final String[] mTitles = {"消费","还款"};
+    private ArrayList<Fragment> mFragments = new ArrayList<>();
+    private final String[] mTitles = {"消费", "还款"};
+    private MyPagerAdapter mAdapter;
 
-    String cardNo="4392250810275866";
-    String tranType="";
-    String channelId="";
-    int pageNum=1;
+    String cardNo = "";
+
+    FinanceBean.ResultBean financeBean;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finance_detail);
         initView();
-
-        queryPlan();
     }
 
-    private void initView(){
+    private void initView() {
 
-        refresh_layout.setOnRefreshListener(this);
-        refresh_layout.setColorSchemeColors(ToolUtils.Colors);
+        financeBean = (FinanceBean.ResultBean) getIntent().getSerializableExtra("financeBean");
+        if (financeBean != null) {
+            cardNo = financeBean.getCardNo() + "";
+            financeInfoTvs[0].setText("总消费笔数：" + financeBean.getSaleNum());
+            financeInfoTvs[1].setText("总消费金额：￥" + financeBean.getSaleAmt());
+            financeInfoTvs[2].setText("总还款笔数：" + financeBean.getRepayNum());
+            financeInfoTvs[3].setText("总还款金额：￥" + financeBean.getRepayAmt());
+            if (financeBean.getServiceType().equals("FIXED_LIMIT")) {
+                financeInfoTvs[4].setText("费用基数类型：" + "固定额度");
+            } else if (financeBean.getServiceType().equals("REPAY_LIMIT")) {
+                financeInfoTvs[4].setText("费用基数类型：" + "还款额");
+            } else if (financeBean.getServiceType().equals("USER_DEFINED")) {
+                financeInfoTvs[4].setText("费用基数类型：" + "自定义");
+            }
+            financeInfoTvs[5].setText("收费基数：￥" + financeBean.getServiceAmt());
+            financeInfoTvs[6].setText("收费比例：" + financeBean.getServiceRate() + "");
+            financeInfoTvs[7].setText("服务费用：￥" + financeBean.getServiceFee() + "");
+        }
+
 
         channelName_sp.setItems("请选择渠道名");
         channelName_sp.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
@@ -82,50 +109,21 @@ public class FinanceDetailActivity extends MVPBaseActivity<FinanceManagerContrac
             }
         });
 
-        for(int i=0;i<mTitles.length;i++){
-            tabLayout.addTab(tabLayout.newTab().setText(mTitles[i]));
-        }
+        mFragments.add(SaleFragment.getInstance(financeBean));
+        mFragments.add(RepayFragment.getInstance(financeBean));
+        mAdapter = new MyPagerAdapter(getSupportFragmentManager());
+        viewpager.setAdapter(mAdapter);
+        trand_type_stl.setViewPager(viewpager, mTitles);
 
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                if(tab.getPosition()==0){//消费
-                    financeDetailAdapter=new FinanceDetailAdapter(0,financeDetailBeanList);
-                    finance_detail_rv.setAdapter(financeDetailAdapter);
-                }else if(tab.getPosition()==1){//还款
-                    financeDetailAdapter=new FinanceDetailAdapter(1,financeDetailBeanList);
-                    finance_detail_rv.setAdapter(financeDetailAdapter);
-                }
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
-
-        for(int i=0;i<20;i++){
-            financeDetailBeanList.add(new FinanceDetailBean());
-        }
-
-        financeDetailAdapter=new FinanceDetailAdapter(0,financeDetailBeanList);
-        finance_detail_rv.setLayoutManager(new LinearLayoutManager(this));
-        finance_detail_rv.setAdapter(financeDetailAdapter);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        ToolUtils.setIndicator(tabLayout,40,40);
     }
 
-    @OnClick({R.id.title_back_tv,R.id.filtrate_img,R.id.clear_filter_tv,R.id.sure_filter_tv})
-    public void OnClick(View view){
+    @OnClick({R.id.title_back_tv, R.id.filtrate_img, R.id.clear_filter_tv, R.id.sure_filter_tv})
+    public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.title_back_tv:
                 finish();
@@ -140,40 +138,31 @@ public class FinanceDetailActivity extends MVPBaseActivity<FinanceManagerContrac
                 break;
 
             case R.id.sure_filter_tv:
-                queryPlan();
                 finance_detail_drawerlayout.closeDrawer(Gravity.RIGHT);
                 break;
         }
     }
 
-    private void queryPlan(){
-        mPresenter.queryPlan(cardNo,tranType,channelId,pageNum+"");
-    }
 
-    @Override
-    public void onRefresh() {
-        pageNum=1;
-        queryPlan();
-    }
+    private class MyPagerAdapter extends FragmentPagerAdapter {
+        public MyPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
 
-    @Override
-    public void showRefresh() {
+        @Override
+        public int getCount() {
+            return mFragments.size();
+        }
 
-    }
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mTitles[position];
+        }
 
-    @Override
-    public void finishRefresh() {
-
-    }
-
-    @Override
-    public void getDataFail(Object msg) {
-
-    }
-
-    @Override
-    public void getDataSuccess(Object response) {
-
+        @Override
+        public Fragment getItem(int position) {
+            return mFragments.get(position);
+        }
     }
 
 }
