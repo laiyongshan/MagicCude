@@ -143,6 +143,7 @@ public class CardDetailActivity extends MVPBaseActivity<CardDetailContract.View,
                     intent=new Intent(CardDetailActivity.this,RenewalActivity.class);
                     intent.putExtra("cardDetail",cardDetailBean);
                     startActivity(intent);
+                    finish();
                 }else if(cardState.equals("FREEZE")){//冻结
                     Toast.makeText(CardDetailActivity.this,"卡片冻结，无法进行该操作",Toast.LENGTH_SHORT).show();
                 }

@@ -87,7 +87,7 @@
                         android:layout_weight="4"
                         android:background="@null"
                         android:paddingRight="12dp"
-                        android:textColor="#000"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="14sp" />
 
                 </LinearLayout>
@@ -563,6 +563,7 @@
                         android:background="#c0c0c0" />
 
                     <TextView
+                        android:id="@+id/serviceEndDate_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="4"
@@ -592,11 +593,12 @@
                 rv:rv_cornerRadius="3dp"
                 rv:rv_strokeColor="@color/colorPrimary"
                 rv:rv_strokeWidth="1dp"
-                rv:rv_textPressColor="@color/luncy" />
+                rv:rv_textPressColor="@color/luncy"
+                />
 
 
             <com.flyco.roundview.RoundTextView
-                android:id="@+id/updata_card_rtv"
+                android:id="@+id/sure_rtv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="36dp"

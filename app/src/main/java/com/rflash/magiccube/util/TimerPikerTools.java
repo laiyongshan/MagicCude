@@ -26,7 +26,7 @@ public class TimerPikerTools {
         Calendar startDate = Calendar.getInstance();
         startDate.set(2009, 0, 1);
         Calendar  endDate= Calendar.getInstance() ;//系统当前时间
-        endDate.add(Calendar.DATE,-1); //取到昨天的日期
+        endDate.add(Calendar.DATE,0); //取到昨天的日期
 
         //时间选择器 ，自定义布局
         mtimePickerView = new TimePickerView.Builder(context,onTimeSelectListener)
@@ -41,7 +41,6 @@ public class TimerPikerTools {
                 .setCancelColor(Color.parseColor("#5EB9F2"))
                 .setOutSideCancelable(false)//点击屏幕，点在控件外部范围时，是否取消显示
                 .setDate(endDate)
-                .setRangDate(startDate, endDate)
                 .isCyclic(false)//是否循环滚动
                 .setType(new boolean[]{isYear,isMonth,isDay, false, false, false})
                 .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。

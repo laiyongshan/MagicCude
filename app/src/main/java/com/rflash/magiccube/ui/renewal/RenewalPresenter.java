@@ -8,12 +8,15 @@ import com.rflash.magiccube.mvp.BasePresenterImpl;
  * @desc:
  */
 
-public class RenewalPresenter extends BasePresenterImpl<RenewalContract.View> implements RenewalContract.Presenter  {
+public class RenewalPresenter extends BasePresenterImpl<RenewalContract.View> implements RenewalContract.Presenter {
 
-
-    //卡片续期
     @Override
-    public void renewalCard(String cardNo) {
+    public void overdueRenewal() {
+
+    }
+
+    @Override
+    public void noOverdueRewal() {
 
     }
 }

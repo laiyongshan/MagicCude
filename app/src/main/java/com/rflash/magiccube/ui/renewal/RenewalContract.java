@@ -1,6 +1,5 @@
 package com.rflash.magiccube.ui.renewal;
 
-import com.rflash.magiccube.http.BaseBean;
 import com.rflash.magiccube.mvp.BasePresenter;
 import com.rflash.magiccube.mvp.BaseView;
 
@@ -15,13 +14,17 @@ public class RenewalContract {
         void showRefresh();
         void finishRefresh();
         void getDataFail(String msg);
-        void renewalResult(BaseBean respon );
+        void renewalResult();
     }
 
     interface  Presenter extends BasePresenter<RenewalContract.View> {
 
         //卡片续期
-        void renewalCard(String cardNo);
+        //到期状态
+        void overdueRenewal();
+
+        //未过期状态
+        void noOverdueRewal();
 
 
     }
