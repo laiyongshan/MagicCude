@@ -1,10 +1,7 @@
 package com.rflash.magiccube.ui.cardmanager.addplan;
 
-import com.rflash.magiccube.http.BaseBean;
 import com.rflash.magiccube.mvp.BasePresenter;
 import com.rflash.magiccube.mvp.BaseView;
-import com.rflash.magiccube.ui.cardmanager.cardbase.BaseInfoBean;
-import com.rflash.magiccube.ui.cardmanager.cardbase.CardBaseInfoContract;
 
 /**
  * Created by lenovo on 2018/10/27.
@@ -16,7 +13,7 @@ public class AddPlanContract {
         void showRefresh();
         void finishRefresh();
         void getDataFail(String msg);
-        void getResult(BaseBean respon );
+        void getResult();
     }
 
     interface  Presenter extends BasePresenter<AddPlanContract.View> {

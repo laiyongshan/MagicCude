@@ -1,7 +1,6 @@
 package com.rflash.magiccube.ui.cardmanager.carddetail;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -9,9 +8,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.rflash.basemodule.BaseActivity;
-import com.rflash.basemodule.utils.ActivityIntent;
 import com.rflash.magiccube.R;
 import com.rflash.magiccube.http.BaseBean;
 import com.rflash.magiccube.mvp.MVPBaseActivity;
@@ -23,9 +19,12 @@ import com.rflash.magiccube.ui.cardmanager.cardcharge.CardChargeActivity;
 import com.rflash.magiccube.ui.cardmanager.increase.CardIncreaseActivity;
 import com.rflash.magiccube.ui.renewal.RenewalActivity;
 
+import java.util.Map;
+
 import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.OnClick;
+import me.drakeet.materialdialog.MaterialDialog;
 
 /**
  * Created by lenovo on 2018/10/20.
@@ -51,7 +50,10 @@ public class CardDetailActivity extends MVPBaseActivity<CardDetailContract.View,
 
     String cardNo="";
     String cardState="";//VALID: 正常   FREEZE：冻结   EXPIRE:过期
-
+    String VALID="VALID";
+    String FREEZE="FREEZE";
+    String EXPIRE="EXPIRE";
+    String DELETE="DELETE";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -93,7 +95,7 @@ public class CardDetailActivity extends MVPBaseActivity<CardDetailContract.View,
         }
     }
 
-    @OnClick({R.id.title_back_tv,R.id.card_baseinfo_tv,R.id.card_bill_tv,R.id.card_increase_rv,R.id.card_charge_tv,
+    @OnClick({R.id.title_back_tv,R.id.card_baseinfo_tv,R.id.card_bill_tv,R.id.card_increase_rv,R.id.card_charge_tv,R.id.xuqi_ll,
             R.id.freeze_ll,R.id.renewal_card_tv,R.id.add_consume_refund_tv,R.id.delete_card_tv})
     public void click(View view){
         switch (view.getId()) {
@@ -127,14 +129,16 @@ public class CardDetailActivity extends MVPBaseActivity<CardDetailContract.View,
                 break;
 
             case R.id.freeze_ll://凍結
-                if(cardState.equals("VALID")){//正常
-                }else if(cardState.equals("FREEZE")){//冻结
+                if(cardState.equals("VALID")){//冻结
+                    freezeCard();
+                }else if(cardState.equals("FREEZE")){//解冻
+                    validCard();
                 }else if(cardState.equals("EXPIRE")){//过期
                     Toast.makeText(CardDetailActivity.this,"卡片过期，无法进行该操作",Toast.LENGTH_SHORT).show();
                 }
                 break;
 
-            case R.id.renewal_card_tv://續期
+            case R.id.xuqi_ll://續期
                 if(cardState.equals("VALID")||cardState.equals("EXPIRE")){//正常或过期
                     intent=new Intent(CardDetailActivity.this,RenewalActivity.class);
                     intent.putExtra("cardDetail",cardDetailBean);
@@ -158,9 +162,83 @@ public class CardDetailActivity extends MVPBaseActivity<CardDetailContract.View,
                 break;
 
             case R.id.delete_card_tv://刪除卡片
-
+                deleteCard();
                 break;
         }
+    }
+
+    //冻结卡片
+    private void freezeCard(){
+        final MaterialDialog mMaterialDialog = new MaterialDialog(CardDetailActivity.this);
+        mMaterialDialog.setTitle("提示");
+        mMaterialDialog.setMessage("确定冻结该卡片吗？");
+        mMaterialDialog.setPositiveButton("冻结",new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mMaterialDialog.dismiss();
+                updateCardState(FREEZE);
+            }
+        });
+
+        mMaterialDialog.setNegativeButton("取消", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mMaterialDialog.dismiss();
+            }
+        });
+        mMaterialDialog.show();
+    }
+
+    //解冻卡片，恢复正常
+    private void validCard(){
+        final MaterialDialog mMaterialDialog = new MaterialDialog(CardDetailActivity.this);
+        mMaterialDialog.setTitle("提示");
+        mMaterialDialog.setMessage("确定解冻该卡片吗？");
+        mMaterialDialog.setPositiveButton("确定",new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mMaterialDialog.dismiss();
+                updateCardState(VALID);
+            }
+        });
+
+        mMaterialDialog.setNegativeButton("取消", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mMaterialDialog.dismiss();
+            }
+        });
+        mMaterialDialog.show();
+    }
+
+    DeleteCardDialog deleteCardDialog;
+    //删除卡片
+    private void deleteCard(){
+        final MaterialDialog mMaterialDialog = new MaterialDialog(CardDetailActivity.this);
+        mMaterialDialog.setTitle("提示");
+        mMaterialDialog.setMessage("删除卡片后，卡片数据将无法恢复！");
+        mMaterialDialog.setPositiveButton("确定",new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mMaterialDialog.dismiss();
+                deleteCardDialog=new DeleteCardDialog(CardDetailActivity.this, R.style.Dialog, new DeleteCardDialog.DeleteCardListener() {
+                    @Override
+                    public void delete() {
+                        deleteCardDialog.dismiss();
+                        updateCardState(DELETE);
+                    }
+                });
+                deleteCardDialog.show();
+            }
+        });
+
+        mMaterialDialog.setNegativeButton("取消", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mMaterialDialog.dismiss();
+            }
+        });
+        mMaterialDialog.show();
     }
 
     private void updateCardState(String state){

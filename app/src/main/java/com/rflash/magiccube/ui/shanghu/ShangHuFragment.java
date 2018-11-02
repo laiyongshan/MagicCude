@@ -1,8 +1,6 @@
 package com.rflash.magiccube.ui.shanghu;
 
-import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -20,20 +19,24 @@ import com.bigkoo.pickerview.TimePickerView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.flyco.roundview.RoundTextView;
 import com.jaredrummler.materialspinner.MaterialSpinner;
-import com.rflash.basemodule.BaseFragment;
 import com.rflash.basemodule.utils.ActivityIntent;
 import com.rflash.magiccube.R;
+import com.rflash.magiccube.event.PositionMessage;
 import com.rflash.magiccube.http.BaseBean;
 import com.rflash.magiccube.mvp.MVPBaseFragment;
-import com.rflash.magiccube.ui.refund.RefundBean;
 import com.rflash.magiccube.ui.shanghu.download.DownloadShanghuActivity;
 import com.rflash.magiccube.util.TimerPikerTools;
 import com.rflash.magiccube.util.ToolUtils;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -132,6 +135,8 @@ public class ShangHuFragment extends MVPBaseFragment<ShanghuContract.View,Shangh
     ShanghuAdapter shanghuAdapter;
     List<ShanghuBean.ResultBean> shanghuBeanList=new ArrayList<>();
 
+    List<String> merchantList=new ArrayList<>();
+
     @Override
     protected int getLayout() {
         return R.layout.fragment_shanghu;
@@ -149,8 +154,8 @@ public class ShangHuFragment extends MVPBaseFragment<ShanghuContract.View,Shangh
         refresh_layout.setOnRefreshListener(this);
         refresh_layout.setRefreshing(true);
 
-        getMerchantData();
-//
+        EventBus.getDefault().register(this);//注册
+
         channelName_sp.setItems(channelNameArr);
         channelName_sp.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
             @Override
@@ -194,6 +199,21 @@ public class ShangHuFragment extends MVPBaseFragment<ShanghuContract.View,Shangh
         shanghuAdapter.setOnLoadMoreListener(this,shanghu_rv);
         shanghuAdapter.disableLoadMoreIfNotFullPage();
         shanghu_rv.setAdapter(shanghuAdapter);
+
+
+
+        all_selected_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                shanghuAdapter.selectAll();
+                if(isChecked)
+                    selected_count_tv.setText(shanghuAdapter.getData().size()+"");
+                else
+                    selected_count_tv.setText("0");
+            }
+        });
+
+        getMerchantData();//获取已下载的商户数据
     }
 
     @OnClick({R.id.shanghu_option_tv,R.id.download_shanghu_img,R.id.filtrate_img,R.id.delete_shanghu_rtv,
@@ -214,7 +234,7 @@ public class ShangHuFragment extends MVPBaseFragment<ShanghuContract.View,Shangh
                 shanghu_rv.setAdapter(shanghuAdapter);
                 break;
 
-            case R.id.download_shanghu_img:
+            case R.id.download_shanghu_img://跳转商户下载页面
                 ActivityIntent.readyGo(getActivity(),DownloadShanghuActivity.class);
                 break;
 
@@ -222,7 +242,7 @@ public class ShangHuFragment extends MVPBaseFragment<ShanghuContract.View,Shangh
                 shanghu_drawerLayout.openDrawer(Gravity.RIGHT);
                 break;
 
-            case R.id.delete_shanghu_rtv:
+            case R.id.delete_shanghu_rtv://解绑商户
                 final MaterialDialog mMaterialDialog = new MaterialDialog(context);
                 mMaterialDialog.setTitle("提示");
                 mMaterialDialog.setMessage("确定删除当前数据？");
@@ -230,9 +250,16 @@ public class ShangHuFragment extends MVPBaseFragment<ShanghuContract.View,Shangh
                     @Override
                     public void onClick(View v) {
                         mMaterialDialog.dismiss();
-                        Toast.makeText(context,"删除",Toast.LENGTH_SHORT).show();
+                        merchantList.clear();
+                        for (Map.Entry<Integer, Boolean> entry : shanghuAdapter.map.entrySet()) {
+                            if(entry.getValue()){
+                                merchantList.add(shanghuBeanList.get(entry.getKey()).getChannel()+"|"+shanghuBeanList.get(entry.getKey()).getMerchantCode());
+                            }
+                        }
+                        mPresenter.unbindShanghu(getMerchantParams(merchantList));
                     }
                 });
+
                 mMaterialDialog.setNegativeButton("取消", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -373,5 +400,35 @@ public class ShangHuFragment extends MVPBaseFragment<ShanghuContract.View,Shangh
                 refresh_layout.setEnabled(true);
             }
         },1500);
+    }
+
+    private String getMerchantParams(List<String> list){
+        StringBuffer sbf=new StringBuffer();
+        for(int i=0;i<list.size();i++){
+            if(i==0){
+                sbf.append(list.get(i)+"");
+            }else{
+                sbf.append(","+list.get(i));
+            }
+        }
+        return sbf.toString();
+    }
+
+    int selectedCount;
+    //ui主线程中执行
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMainEventBus(PositionMessage msg) {
+        if(msg.getChecked())
+            ++selectedCount;
+        else
+            --selectedCount;
+
+        selected_count_tv.setText(selectedCount+"");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);//解除注册
     }
 }
