@@ -25,6 +25,8 @@ import com.rflash.magiccube.view.SuccessProgressDialog;
 
 import java.util.Map;
 
+import java.util.Map;
+
 import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.OnClick;

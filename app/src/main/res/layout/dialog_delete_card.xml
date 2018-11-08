@@ -40,7 +40,10 @@
             android:layout_marginRight="12dp"
             android:text="取消"
             android:layout_toLeftOf="@+id/sure_rtv"
+<<<<<<< HEAD
             android:textColor="#909090"
+=======
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
             rv:rv_textPressColor="@color/luncy"
             />
 
@@ -50,7 +53,11 @@
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:padding="10dp"
+<<<<<<< HEAD
             android:text="再次确认"
+=======
+            android:text="确定"
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
             android:textColor="#f00"
             android:layout_alignParentRight="true"
             rv:rv_textPressColor="@color/luncy"

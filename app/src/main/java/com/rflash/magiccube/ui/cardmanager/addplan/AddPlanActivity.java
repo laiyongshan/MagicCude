@@ -170,7 +170,11 @@ public class AddPlanActivity extends MVPBaseActivity<AddPlanContract.View, AddPl
                 break;
 
             case R.id.repayDate_et:
+<<<<<<< HEAD
                 mTimePikerView = TimerPikerTools.creatTimePickerView(AddPlanActivity.this, "选择日期", true, true, true, new TimePickerView.OnTimeSelectListener() {
+=======
+                mTimePikerView = TimerPikerTools.creatTimePickerView(AddPlanActivity.this, "选择日期", true, true, false, new TimePickerView.OnTimeSelectListener() {
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
                     @Override
                     public void onTimeSelect(Date date, View v) {
                         plandate = simpleDateFormat.format(date);
@@ -181,11 +185,19 @@ public class AddPlanActivity extends MVPBaseActivity<AddPlanContract.View, AddPl
                 break;
 
             case R.id.swipecardDate_et:
+<<<<<<< HEAD
                 mTimePikerView = TimerPikerTools.creatTimePickerView(AddPlanActivity.this, "选择日期", true, true, true, new TimePickerView.OnTimeSelectListener() {
                     @Override
                     public void onTimeSelect(Date date, View v) {
                         plandate = simpleDateFormat.format(date);
                         swipecardDate_et.setText(plandate + "");
+=======
+                mTimePikerView = TimerPikerTools.creatTimePickerView(AddPlanActivity.this, "选择日期", true, true, false, new TimePickerView.OnTimeSelectListener() {
+                    @Override
+                    public void onTimeSelect(Date date, View v) {
+                        plandate = simpleDateFormat.format(date);
+                        repayDate_et.setText(plandate + "");
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
                     }
                 });
                 mTimePikerView.show();
@@ -204,6 +216,11 @@ public class AddPlanActivity extends MVPBaseActivity<AddPlanContract.View, AddPl
     private void addPlan() {
         if (amt_et.getText().toString().trim().equals("")) {
             Toast.makeText(AddPlanActivity.this, "请输入交易金额", Toast.LENGTH_SHORT).show();
+<<<<<<< HEAD
+=======
+        } else if ((repayDate_et.getText().toString().trim().equals("")) || swipecardDate_et.getText().toString().trim().equals("")) {
+            Toast.makeText(AddPlanActivity.this, "请选择交易时间", Toast.LENGTH_SHORT).show();
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
         } else {
             amt = amt_et.getText().toString().trim();
             tranType = dirtData.tranTypeOptions[tranType_sp.getSelectedIndex()];
@@ -218,7 +235,11 @@ public class AddPlanActivity extends MVPBaseActivity<AddPlanContract.View, AddPl
                 plandate = repayDate_et.getText().toString().trim();
             }
 
+<<<<<<< HEAD
             mPresenter.addPlan(tranType, cardNo, channel, merchantCode, termCode, amt, isNeedT0, plandate.replace("-",""), state);
+=======
+            mPresenter.addPlan(tranType, cardNo, channel, merchantCode, termCode, amt, isNeedT0, plandate, state);
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
         }
 
     }
@@ -240,7 +261,10 @@ public class AddPlanActivity extends MVPBaseActivity<AddPlanContract.View, AddPl
                 mMaterialDialog.dismiss();
             }
         });
+<<<<<<< HEAD
         mMaterialDialog.show();
+=======
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
     }
 
 

@@ -20,12 +20,17 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.flyco.roundview.RoundTextView;
 import com.rflash.magiccube.R;
 import com.rflash.magiccube.event.PositionMessage;
+<<<<<<< HEAD
 import com.rflash.magiccube.event.PositionMessage2;
 import com.rflash.magiccube.http.BaseBean;
 import com.rflash.magiccube.mvp.MVPBaseActivity;
 import com.rflash.magiccube.ui.shanghu.ShanghuBean;
 import com.rflash.magiccube.util.ToolUtils;
 import com.rflash.magiccube.view.SuccessProgressDialog;
+=======
+import com.rflash.magiccube.http.BaseBean;
+import com.rflash.magiccube.mvp.MVPBaseActivity;
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -79,8 +84,11 @@ public class DownloadShanghuActivity extends MVPBaseActivity<DownloadContrat.Vie
     @BindView(R.id.download_shanghu_rtv)
     RoundTextView download_shanghu_rtv;
 
+<<<<<<< HEAD
     SuccessProgressDialog successProgressDialog;
 
+=======
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
     private int TOTAL_COUNTER; //所有的数据总数
 
     DownloadAdapter downloadAdapter;
@@ -91,7 +99,13 @@ public class DownloadShanghuActivity extends MVPBaseActivity<DownloadContrat.Vie
     String startDate = "";
     String endDate = "";
     String bind = "N";
+<<<<<<< HEAD
     int pageNum=1;
+
+    List<String> merchantList=new ArrayList<>();
+=======
+    int pageNum;
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
 
     List<String> merchantList=new ArrayList<>();
 
@@ -111,6 +125,7 @@ public class DownloadShanghuActivity extends MVPBaseActivity<DownloadContrat.Vie
 
     private void initView() {
 
+<<<<<<< HEAD
         refresh_layout.setOnRefreshListener(this);
         refresh_layout.setColorSchemeColors(ToolUtils.Colors);
 
@@ -123,6 +138,16 @@ public class DownloadShanghuActivity extends MVPBaseActivity<DownloadContrat.Vie
                     downloadBeanList.get(i).setSelected(isChecked);
                 }
                 downloadAdapter.selectAll();
+=======
+        all_selected_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                downloadAdapter.selectAll();
+                if (isChecked)
+                    selected_count_tv.setText(downloadAdapter.getData().size() + "");
+                else
+                    selected_count_tv.setText("0");
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
             }
         });
 
@@ -149,8 +174,11 @@ public class DownloadShanghuActivity extends MVPBaseActivity<DownloadContrat.Vie
                 if (isOption) {
                     download_option_tv.setText("完成");
                     downloadAdapter = new DownloadAdapter(isOption, downloadBeanList);
+<<<<<<< HEAD
                     downloadAdapter.setOnLoadMoreListener(this, download_rv);
                     downloadAdapter.disableLoadMoreIfNotFullPage();
+=======
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
                     download_rv.setAdapter(downloadAdapter);
                     option_rl.setVisibility(View.VISIBLE);
                 } else {
@@ -163,9 +191,15 @@ public class DownloadShanghuActivity extends MVPBaseActivity<DownloadContrat.Vie
 
             case R.id.download_shanghu_rtv://下载商户
                 merchantList.clear();
+<<<<<<< HEAD
                 for (int i=0;i<downloadBeanList.size();i++) {
                     if (downloadBeanList.get(i).getSelected()) {
                         merchantList.add(downloadBeanList.get(i).getChannel() + "|" + downloadBeanList.get(i).getMerchantCode());
+=======
+                for (Map.Entry<Integer, Boolean> entry : downloadAdapter.map.entrySet()) {
+                    if(entry.getValue()){
+                        merchantList.add(downloadBeanList.get(entry.getKey()).getChannel()+"|"+downloadBeanList.get(entry.getKey()).getMerchantCode());
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
                     }
                 }
                 mPresenter.bindShanghu(getMerchantParams(merchantList));
@@ -256,6 +290,7 @@ public class DownloadShanghuActivity extends MVPBaseActivity<DownloadContrat.Vie
             }
         }, 1500);
     }
+<<<<<<< HEAD
 
     private String getMerchantParams(List<String> list){
         StringBuffer sbf=new StringBuffer();
@@ -279,6 +314,31 @@ public class DownloadShanghuActivity extends MVPBaseActivity<DownloadContrat.Vie
                 i++;
         }
         selected_count_tv.setText(i+"");
+=======
+
+    private String getMerchantParams(List<String> list){
+        StringBuffer sbf=new StringBuffer();
+        for(int i=0;i<list.size();i++){
+            if(i==0){
+                sbf.append(list.get(i)+"");
+            }else{
+                sbf.append(","+list.get(i));
+            }
+        }
+        return sbf.toString();
+    }
+
+    int selectedCount;
+    //ui主线程中执行
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMainEventBus(PositionMessage msg) {
+        if (msg.getChecked())
+            ++selectedCount;
+        else
+            --selectedCount;
+
+        selected_count_tv.setText(selectedCount + "");
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
     }
 
     @Override

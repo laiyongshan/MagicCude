@@ -37,6 +37,7 @@ public class DirtData {
 
     public DirtData(Context context) {
         this.context = context;
+<<<<<<< HEAD
         list = (List<DirtBean.ResultBean>) CatchManager.getCatchData(context, key);
     }
 
@@ -83,6 +84,16 @@ public class DirtData {
     public String[] isOrNoArr={"是","否"};//是否
     public String[] isOrNoOptions={"Y","N"};
 
+=======
+    }
+
+    public String[] tranTypeArr = {"消费", "还款"};//交易类型
+    public String[] tranTypeOptions={"SALE","REPAY"};
+
+    public String[] isNeedT0Arr={"是","否"};//是否需要T0
+    public String[] isNeedOptions={"Y","N"};
+
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
     public List<String> planStateList = new ArrayList<>();
     public List<DirtBean.ResultBean.OptionBean> planStateOptions = new ArrayList<>();
 
@@ -93,7 +104,11 @@ public class DirtData {
     public List<DirtBean.ResultBean.OptionBean> merchantsTypeOptions = new ArrayList<>();
 
 
+<<<<<<< HEAD
     List<DirtBean.ResultBean> list;
+=======
+    List<DirtBean.ResultBean> list = (List<DirtBean.ResultBean>) CatchManager.getCatchData(context, key);
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
 
     //卡片规划状态
     public List<DirtBean.ResultBean.OptionBean> cardPlanState() {
@@ -115,8 +130,12 @@ public class DirtData {
     }
 
     public List<String> getMerchantsTypeList() {
+<<<<<<< HEAD
         merchantsTypeList.clear();
         if (merchantsType() != null) {
+=======
+        if (channnel() != null) {
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
             for (DirtBean.ResultBean.OptionBean optionBean : merchantsTypeOptions) {
                 merchantsTypeList.add(optionBean.getDictName());
             }
@@ -135,7 +154,10 @@ public class DirtData {
     }
 
     public List<String> getChannelList() {
+<<<<<<< HEAD
         channelList.clear();
+=======
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
         if (channnel() != null) {
             for (DirtBean.ResultBean.OptionBean optionBean : channelOptions) {
                 channelList.add(optionBean.getDictName());

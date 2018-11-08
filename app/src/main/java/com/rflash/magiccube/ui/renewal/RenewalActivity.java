@@ -10,12 +10,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+<<<<<<< HEAD
 import com.bigkoo.pickerview.TimePickerView;
+=======
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
 import com.flyco.roundview.RoundTextView;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.rflash.magiccube.R;
 import com.rflash.magiccube.mvp.MVPBaseActivity;
 import com.rflash.magiccube.ui.cardmanager.CardBean;
+<<<<<<< HEAD
 import com.rflash.magiccube.ui.cardmanager.addplan.AddPlanActivity;
 import com.rflash.magiccube.ui.newmain.DirtData;
 import com.rflash.magiccube.util.TimerPikerTools;
@@ -23,6 +27,9 @@ import com.rflash.magiccube.view.SuccessProgressDialog;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+=======
+import com.rflash.magiccube.view.SuccessProgressDialog;
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -33,7 +40,11 @@ import me.drakeet.materialdialog.MaterialDialog;
  * 续费
  */
 
+<<<<<<< HEAD
 public class RenewalActivity extends MVPBaseActivity<RenewalContract.View,RenewalPresenter> implements RenewalContract.View {
+=======
+public class RenewalActivity extends MVPBaseActivity<RenewalContract.View, RenewalPresenter> implements RenewalContract.View {
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
 
     @BindView(R.id.title_back_tv)
     TextView title_back_tv;
@@ -60,6 +71,7 @@ public class RenewalActivity extends MVPBaseActivity<RenewalContract.View,Renewa
     MaterialSpinner serviceType_sp;//费用基数类型
 
     @BindView(R.id.paidAmt_et)
+<<<<<<< HEAD
     EditText paidAmt_et;//费用基数
 
     @BindView(R.id.serviceAmt_et)
@@ -76,10 +88,20 @@ public class RenewalActivity extends MVPBaseActivity<RenewalContract.View,Renewa
 
     @BindView(R.id.serviceEndDate_tv)
     TextView serviceEndDate_tv;//到期时间
+=======
+    MaterialSpinner paidAmt_et;//费用基数
+
+    @BindView(R.id.serviceAmt_et)
+    EditText serviceAmt_et;
+
+    @BindView(R.id.serviceEndDate)
+    TextView serviceEndDate;//到期时间
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
 
     @BindView(R.id.sure_rtv)
     RoundTextView sure_rtv;
 
+<<<<<<< HEAD
 
     SuccessProgressDialog successProgressDialog;
 
@@ -101,6 +123,12 @@ public class RenewalActivity extends MVPBaseActivity<RenewalContract.View,Renewa
     String state;
 
     DirtData dirtData;
+=======
+    SuccessProgressDialog successProgressDialog;
+
+    CardBean.ResultBean cardDetailBean;
+    String cardNo = "";
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -112,6 +140,7 @@ public class RenewalActivity extends MVPBaseActivity<RenewalContract.View,Renewa
 
     private void initView() {
         cardDetailBean = (CardBean.ResultBean) getIntent().getSerializableExtra("cardDetail");
+<<<<<<< HEAD
         cardNo = cardDetailBean.getCardNo();
         state= cardDetailBean.getState() + "";
         bankAndnum_tv.setText("(" + cardDetailBean.getCardBankName() + cardDetailBean.getCardNo().substring(cardNo.length() - 4) + ")");
@@ -137,16 +166,37 @@ public class RenewalActivity extends MVPBaseActivity<RenewalContract.View,Renewa
                 }
             }
         });
+=======
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
 
+        successProgressDialog = new SuccessProgressDialog(this);
+
+        if (cardDetailBean != null) {
+            cardNo = cardDetailBean.getCardNo();
+            bankAndnum_tv.setText("(" + cardDetailBean.getCardBankName() + cardDetailBean.getCardNo().substring(cardNo.length() - 4) + ")");
+
+            if (cardDetailBean.getState().equals("VALID")) {//正常
+                card_state_tv.setText("正常");
+                card_state_tv.setTextColor(Color.parseColor("#3F51B5"));
+            } else if (cardDetailBean.getState().equals("EXPIRE")) {
+                card_state_tv.setText("卡片过期");
+                card_state_tv.setTextColor(Color.RED);
+            }
+        }
     }
 
+<<<<<<< HEAD
     @OnClick({R.id.title_back_tv,R.id.serviceStartDate_tv,R.id.serviceEndDate_tv,R.id.sure_rtv})
+=======
+    @OnClick({R.id.title_back_tv, R.id.sure_rtv})
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
     public void click(View view) {
         switch (view.getId()) {
             case R.id.title_back_tv:
                 cancel();
                 break;
 
+<<<<<<< HEAD
             case R.id.serviceStartDate_tv:
                 mTimePikerView = TimerPikerTools.creatTimePickerView(RenewalActivity.this, "选择日期", true, true, true, new TimePickerView.OnTimeSelectListener() {
                     @Override
@@ -171,11 +221,16 @@ public class RenewalActivity extends MVPBaseActivity<RenewalContract.View,Renewa
 
             case R.id.sure_rtv:
                 renewalCard();
+=======
+            case R.id.sure_rtv:
+
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
                 break;
         }
     }
 
     //卡片续期
+<<<<<<< HEAD
     private void renewalCard(){
 //        if(cardDetailBean.getState().equals("VALID")){//正常
 //        }else if(cardDetailBean.getState().equals("EXPIRE")){//过期
@@ -217,6 +272,11 @@ public class RenewalActivity extends MVPBaseActivity<RenewalContract.View,Renewa
                     serviceRate,  paidAmt,
                     fixedLimit,  currentRepayAmt,  initAmt,  serviceStartDate.replace("-",""),
                     availableAmt,  state);
+=======
+    private void renewalCard() {
+        if (cardDetailBean.getState().equals("VALID")) {//正常
+        } else if (cardDetailBean.getState().equals("EXPIRE")) {//过期
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
         }
     }
 
@@ -237,7 +297,10 @@ public class RenewalActivity extends MVPBaseActivity<RenewalContract.View,Renewa
                 mMaterialDialog.dismiss();
             }
         });
+<<<<<<< HEAD
         mMaterialDialog.show();
+=======
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
     }
 
 
@@ -272,6 +335,10 @@ public class RenewalActivity extends MVPBaseActivity<RenewalContract.View,Renewa
                 successProgressDialog.dismiss();
                 finish();
             }
+<<<<<<< HEAD
         },2000);
+=======
+        }, 2000);
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
     }
 }

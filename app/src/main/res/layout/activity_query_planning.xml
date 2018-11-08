@@ -19,7 +19,11 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
+<<<<<<< HEAD
                 android:layout_height="wrap_content"
+=======
+                android:layout_height="@dimen/top_bar_size"
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
                 android:gravity="center_vertical">
 
                 <TextView
@@ -35,14 +39,23 @@
                     android:textSize="18sp" />
 
                 <com.flyco.roundview.RoundTextView
+<<<<<<< HEAD
                     android:id="@+id/get_count_tv"
+=======
+                    android:id="@+id/card_owner_tv"
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_toLeftOf="@+id/syn_planning_rtv"
+<<<<<<< HEAD
                     android:text="批量统计"
                     android:visibility="gone"
                     android:layout_marginRight="12dp"
+=======
+                    android:paddingTop="4dp"
+                    android:text="批量统计"
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
                     android:textColor="@color/white"
                     rv:rv_textPressColor="@color/luncy" />
 
@@ -52,8 +65,13 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_toLeftOf="@+id/filtrate_img"
+<<<<<<< HEAD
                     android:text="同步规划"
                     android:layout_marginRight="6dp"
+=======
+                    android:paddingTop="4dp"
+                    android:text="同步规划"
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
                     android:textColor="@color/white"
                     rv:rv_textPressColor="@color/luncy" />
 
@@ -62,6 +80,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
+<<<<<<< HEAD
+=======
+                    android:layout_marginRight="12dp"
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
                     android:padding="12dp"
                     android:scaleType="fitCenter"
                     android:src="@mipmap/icon_filtrate" />
@@ -72,11 +94,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="6dp"
+<<<<<<< HEAD
                 android:layout_marginTop="12dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/notOperatorSaleTranCost_tv"
+=======
+                android:layout_marginTop="6dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/saleNum_tv"
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="12dp"
@@ -86,7 +116,11 @@
                     android:textSize="14sp" />
 
                 <TextView
+<<<<<<< HEAD
                     android:id="@+id/dealSaleTranCost_tv"
+=======
+                    android:id="@+id/saleAmt_tv"
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -103,7 +137,11 @@
                 android:orientation="horizontal">
 
                 <TextView
+<<<<<<< HEAD
                     android:id="@+id/notOperatorSale_tv"
+=======
+                    android:id="@+id/repayNum_tv"
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="12dp"
@@ -113,7 +151,11 @@
                     android:textSize="14sp" />
 
                 <TextView
+<<<<<<< HEAD
                     android:id="@+id/dealSale_tv"
+=======
+                    android:id="@+id/repayAmt_tv"
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -130,7 +172,11 @@
                 android:orientation="horizontal">
 
                 <TextView
+<<<<<<< HEAD
                     android:id="@+id/notOperatorRepay_tv"
+=======
+                    android:id="@+id/serviceType_tv"
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="12dp"
@@ -140,7 +186,11 @@
                     android:textSize="14sp" />
 
                 <TextView
+<<<<<<< HEAD
                     android:id="@+id/dealRepay_tv"
+=======
+                    android:id="@+id/serviceAmt_tv"
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -192,6 +242,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/filtrate_tv"
+<<<<<<< HEAD
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
             android:orientation="vertical">
@@ -227,14 +278,28 @@
                 </com.flyco.roundview.RoundRelativeLayout>
 
             </android.support.v7.widget.CardView>
+=======
+            android:layout_margin="12dp"
+            android:orientation="vertical">
+
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+<<<<<<< HEAD
                 app:cardBackgroundColor="@color/white"
                 app:cardElevation="3dp"
                 app:cardPreventCornerOverlap="false"
                 app:cardUseCompatPadding="true">
+=======
+                android:layout_marginTop="12dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardElevation="3dp"
+                app:cardPreventCornerOverlap="true"
+                rv:cardUseCompatPadding="true">
+
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
 
                 <com.flyco.roundview.RoundRelativeLayout
                     android:layout_width="match_parent"
@@ -242,6 +307,7 @@
                     rv:rv_cornerRadius="26dp"
                     rv:rv_strokeColor="#909090">
 
+<<<<<<< HEAD
                     <EditText
                         android:id="@+id/cardNo_et"
                         android:layout_width="match_parent"
@@ -251,6 +317,15 @@
                         android:padding="12dp"
                         android:textColorHint="#909090"
                         android:textSize="14sp"
+=======
+                    <com.jaredrummler.materialspinner.MaterialSpinner
+                        android:id="@+id/channelName_sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="请选择渠道名"
+                        android:padding="6dp"
+                        android:textColorHint="#909090"
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
                         app:ms_arrow_tint="#909090"
                         app:ms_background_color="@color/white"
                         app:ms_hide_arrow="false"
@@ -263,6 +338,10 @@
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+<<<<<<< HEAD
+=======
+                android:layout_marginTop="6dp"
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
                 app:cardBackgroundColor="@color/white"
                 app:cardElevation="3dp"
                 app:cardPreventCornerOverlap="false"
@@ -275,11 +354,19 @@
                     rv:rv_strokeColor="#909090">
 
                     <EditText
+<<<<<<< HEAD
                         android:id="@+id/customerName_et"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:hint="请输入持卡人"
+=======
+                        android:id="@+id/merchantCode_et"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:hint="请输入商户号"
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
                         android:padding="12dp"
                         android:textColorHint="#909090"
                         android:textSize="14sp"
@@ -295,6 +382,7 @@
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+<<<<<<< HEAD
                 app:cardBackgroundColor="@color/white"
                 app:cardElevation="3dp"
                 app:cardPreventCornerOverlap="true"
@@ -390,6 +478,9 @@
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+=======
+                android:layout_marginTop="6dp"
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
                 app:cardBackgroundColor="@color/white"
                 app:cardElevation="3dp"
                 app:cardPreventCornerOverlap="false"
@@ -408,7 +499,11 @@
                         android:layout_height="wrap_content"
                         android:drawableRight="@mipmap/icon_time"
                         android:gravity="center_vertical"
+<<<<<<< HEAD
                         android:hint="请选择开始日期"
+=======
+                        android:hint="请选择上次下载时间(起)"
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
                         android:padding="12dp"
                         android:textColor="#000"
                         android:textSize="14sp" />
@@ -421,6 +516,10 @@
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+<<<<<<< HEAD
+=======
+                android:layout_marginTop="6dp"
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
                 app:cardBackgroundColor="@color/white"
                 app:cardElevation="3dp"
                 app:cardPreventCornerOverlap="false"
@@ -439,7 +538,11 @@
                         android:layout_height="wrap_content"
                         android:drawableRight="@mipmap/icon_time"
                         android:gravity="center_vertical"
+<<<<<<< HEAD
                         android:hint="请选择结束日期"
+=======
+                        android:hint="请选择上次下载时间(止)"
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
                         android:padding="12dp"
                         android:textColor="#000"
                         android:textSize="14sp" />
@@ -448,6 +551,7 @@
 
             </android.support.v7.widget.CardView>
 
+<<<<<<< HEAD
             <com.flyco.roundview.RoundTextView
                 android:id="@+id/fail_syncState_rtv"
                 android:layout_width="match_parent"
@@ -465,6 +569,8 @@
                 rv:rv_backgroundPressColor="#00ffffff"
                 />
 
+=======
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
         </LinearLayout>
 
         <LinearLayout
@@ -472,7 +578,11 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
+<<<<<<< HEAD
             android:layout_margin="6dp">
+=======
+            android:layout_margin="16dp">
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
 
             <TextView
                 android:id="@+id/clear_filter_tv"

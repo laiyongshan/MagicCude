@@ -10,7 +10,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.View;
+<<<<<<< HEAD
 import android.view.ViewGroup;
+=======
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.rflash.magiccube.R;
@@ -38,7 +41,12 @@ public class RenewalMindActivity  extends MVPBaseActivity<RenewalMindContract.Vi
     @BindView(R.id.renewalmind_rv)
     RecyclerView renewalmind_rv;
 
+<<<<<<< HEAD
     private View notDataView;
+=======
+    @BindView(R.id.renewalmind_drawerlayout)
+    DrawerLayout renewalmind_drawerlayout;
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
 
     RenewalMindAdapter renewalmindAdapter;
     List<RenewalMindBean.ResultBean> renewalMindList=new ArrayList<>();
@@ -57,9 +65,12 @@ public class RenewalMindActivity  extends MVPBaseActivity<RenewalMindContract.Vi
 
     //初始化控件
     private void initView(){
+<<<<<<< HEAD
 
         notDataView = getLayoutInflater().inflate(R.layout.empty_view, (ViewGroup) renewalmind_rv.getParent(), false);
 
+=======
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
         refresh_layout.setColorSchemeColors(ToolUtils.Colors);
         refresh_layout.setOnRefreshListener(this);
 
@@ -71,17 +82,37 @@ public class RenewalMindActivity  extends MVPBaseActivity<RenewalMindContract.Vi
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Intent intent=new Intent(RenewalMindActivity.this,RenewalActivity.class);
+<<<<<<< HEAD
+=======
+                intent.putExtra("renewalmind", renewalMindList.get(position));
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
                 RenewalMindActivity.this.startActivity(intent);
             }
         });
         renewalmind_rv.setAdapter(renewalmindAdapter);
     }
 
+<<<<<<< HEAD
     @OnClick({R.id.title_back_tv})
     public void click(View view) {
         switch (view.getId()) {
             case R.id.title_back_tv:
                finishRefresh();
+=======
+    @OnClick({R.id.filtrate_img, R.id.clear_filter_tv, R.id.sure_filter_tv})
+    public void click(View view) {
+        switch (view.getId()) {
+            case R.id.filtrate_img:
+                renewalmind_drawerlayout.openDrawer(Gravity.RIGHT);
+                break;
+
+            case R.id.clear_filter_tv:
+
+                break;
+
+            case R.id.sure_filter_tv:
+                renewalmind_drawerlayout.closeDrawer(Gravity.RIGHT);
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
                 break;
         }
     }
@@ -125,8 +156,11 @@ public class RenewalMindActivity  extends MVPBaseActivity<RenewalMindContract.Vi
                 renewalMindList.clear();
                 renewalMindList = renewalMindBean.getResult();
                 renewalmindAdapter.setNewData(renewalMindList);
+<<<<<<< HEAD
                 if(renewalMindList.isEmpty())
                     renewalmindAdapter.setEmptyView(notDataView);
+=======
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
             } else {
                 renewalMindList.addAll(renewalMindBean.getResult());
                 renewalmindAdapter.notifyDataSetChanged();

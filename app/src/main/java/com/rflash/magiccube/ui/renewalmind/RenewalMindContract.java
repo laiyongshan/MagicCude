@@ -17,7 +17,11 @@ public class RenewalMindContract {
         void getDataSuccess(RenewalMindBean renewalMindBean);
     }
 
+<<<<<<< HEAD
     interface  Presenter extends BasePresenter<View> {
+=======
+    interface  Presenter extends BasePresenter<RenewalMindContract.View> {
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
 
         //
         void getRenewalList(String pageNum);

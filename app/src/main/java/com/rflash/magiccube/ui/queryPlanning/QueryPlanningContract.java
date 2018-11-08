@@ -16,6 +16,7 @@ public class QueryPlanningContract {
         void finishRefresh();
         void getDataFail(Object msg);
         void getDataSuccess(PlaningBean response);
+<<<<<<< HEAD
         void syncPlanSuccess();
     }
 
@@ -25,5 +26,15 @@ public class QueryPlanningContract {
 
         //同步规划
         void syncPlan();
+=======
+    }
+
+    interface  Presenter extends BasePresenter<QueryPlanningContract.View> {
+        //财务详情
+        void queryPlan(String startDate,String endDate,String cardSeqno,String customerName,String cardNo,String state,String tranType,String accountType,String syncState,String pageNum);
+
+        //同步规划
+
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
     }
 }

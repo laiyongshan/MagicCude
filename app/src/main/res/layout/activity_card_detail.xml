@@ -72,6 +72,10 @@
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="80dp"
+<<<<<<< HEAD
+=======
+                            android:background="@mipmap/bg_item_finance_card"
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
                             android:paddingLeft="12dp"
                             android:paddingRight="6dp"
                             android:paddingTop="16dp">

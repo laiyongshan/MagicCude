@@ -29,7 +29,6 @@ public class PlanningQueryActivity extends MVPBaseActivity<PlanningQueryContract
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
-
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 

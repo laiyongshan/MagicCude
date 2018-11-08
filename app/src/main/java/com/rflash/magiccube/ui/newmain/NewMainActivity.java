@@ -121,7 +121,10 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View,NewMai
     public void queryDirtSuccess(DirtBean response) {
         if (response!=null){
             CatchManager.putData2Cache(NewMainActivity.this,DirtData.key, response.getResult());
+<<<<<<< HEAD
             List<DirtBean.ResultBean> list = (List<DirtBean.ResultBean>) CatchManager.getCatchData(NewMainActivity.this, DirtData.key);
+=======
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
             for(DirtBean.ResultBean resultBean:response.getResult()){
                 Log.i("DefaultObserver",list.size()+"");
             }

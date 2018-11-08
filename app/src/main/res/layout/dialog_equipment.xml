@@ -2,7 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+<<<<<<< HEAD
     android:layout_height="200dp"
+=======
+    android:layout_height="300dp"
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
     android:layout_gravity="center_vertical"
     android:layout_margin="16dp"
     android:orientation="vertical">
@@ -59,7 +63,11 @@
                 android:id="@+id/MACHINECODE_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+<<<<<<< HEAD
                 android:paddingLeft="16dp"
+=======
+                android:padding="16dp"
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
                 android:text="POS机序列号："
                 android:textColor="@color/black_de" />
 
@@ -72,7 +80,11 @@
                     android:id="@+id/TERMCODE_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+<<<<<<< HEAD
                     android:paddingLeft="16dp"
+=======
+                    android:padding="16dp"
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
                     android:text="终端号："
                     android:textColor="@color/black_de" />
 

@@ -192,7 +192,10 @@
                         android:layout_weight="4"
                         android:background="@null"
                         android:hint="请输入可用额度"
+<<<<<<< HEAD
                         android:inputType="numberDecimal"
+=======
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
                         android:paddingRight="12dp"
                         android:textColor="#000"
                         android:textSize="14sp" />
@@ -249,7 +252,10 @@
                         android:layout_weight="4"
                         android:background="@null"
                         android:hint="请输入待还款金额"
+<<<<<<< HEAD
                         android:inputType="numberDecimal"
+=======
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
                         android:paddingRight="12dp"
                         android:textColor="#000"
                         android:textSize="14sp" />
@@ -307,7 +313,10 @@
                         android:background="@null"
                         android:hint="请输入初始金额"
                         android:paddingRight="12dp"
+<<<<<<< HEAD
                         android:inputType="numberDecimal"
+=======
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
                         android:textColor="#000"
                         android:textSize="14sp" />
 
@@ -529,7 +538,10 @@
                         android:background="@null"
                         android:hint="请输入自定义金额"
                         android:paddingRight="12dp"
+<<<<<<< HEAD
                         android:inputType="numberDecimal"
+=======
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
                         android:textColor="#000"
                         android:textSize="14sp" />
 
@@ -664,6 +676,10 @@
                 android:id="@+id/sure_rtv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+<<<<<<< HEAD
+=======
+                android:layout_marginTop="36dp"
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
                 android:gravity="center"
                 android:padding="10dp"
                 android:text="确定"

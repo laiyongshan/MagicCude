@@ -29,8 +29,13 @@ import butterknife.OnClick;
 
 public class ChangePasswordActivity extends MVPBaseActivity<ChangePswContract.View, ChangePswPrsenter> implements ChangePswContract.View {
 
+<<<<<<< HEAD
     @BindView(R.id.title_back_tv)
     TextView title_back_tv;
+=======
+    @BindView(R.id.back_iv)
+    ImageView back_iv;
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
 
     @BindView(R.id.userName_tv)
     TextView userName_tv;
@@ -61,10 +66,17 @@ public class ChangePasswordActivity extends MVPBaseActivity<ChangePswContract.Vi
         userName_tv.setText(" "+SpUtil.getString(this, Config.ACCOUNT,"")+" ");
     }
 
+<<<<<<< HEAD
     @OnClick({R.id.title_back_tv, R.id.change_password_rtv})
     public void click(View view) {
         switch (view.getId()) {
             case R.id.title_back_tv:
+=======
+    @OnClick({R.id.back_iv, R.id.change_password_rtv})
+    public void click(View view) {
+        switch (view.getId()) {
+            case R.id.back_iv:
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
                 finish();
                 break;
             case R.id.change_password_rtv:

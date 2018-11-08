@@ -2,6 +2,10 @@ package com.rflash.magiccube.ui.renewalmind;
 
 import com.rflash.magiccube.http.BaseBean;
 
+<<<<<<< HEAD
+=======
+import java.io.Serializable;
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
 import java.util.List;
 
 /**
@@ -31,6 +35,7 @@ public class RenewalMindBean extends BaseBean {
         return totalPage;
     }
 
+<<<<<<< HEAD
     private List<ResultBean> result;
 
     public List<ResultBean> getResult() {
@@ -42,6 +47,19 @@ public class RenewalMindBean extends BaseBean {
     }
 
     public static class ResultBean {
+=======
+    private List<RenewalMindBean.ResultBean> result;
+
+    public List<RenewalMindBean.ResultBean> getResult() {
+        return result;
+    }
+
+    public void setResult(List<RenewalMindBean.ResultBean> result) {
+        this.result = result;
+    }
+
+    public static class ResultBean implements Serializable{
+>>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
 
     }
 
