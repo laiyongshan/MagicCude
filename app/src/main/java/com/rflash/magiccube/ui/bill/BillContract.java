@@ -14,6 +14,6 @@ public class BillContract {
 
     interface Presenter extends BasePresenter<View> {
         void queryCardBill(String isConfirm, String state, String pageNum);
-        void updateCardBill(String billId, String cardNo,String billMonth,String billAmt,String operate,int position);
+        void updateCardBill(String billId, String cardNo, String billMonth, String billAmt, String operate, int position);
     }
 }

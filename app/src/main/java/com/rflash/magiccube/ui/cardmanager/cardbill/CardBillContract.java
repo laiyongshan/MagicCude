@@ -19,11 +19,11 @@ public class CardBillContract {
         void updateCardBillSuccess();
     }
 
-    interface  Presenter extends BasePresenter<CardBillContract.View> {
+    interface  Presenter extends BasePresenter<View> {
         //queryCard 查询卡片账单信息
-        void queryBill(String cardNo,String billMonth,String available,String pageNum);
+        void queryBill(String cardNo, String billMonth, String available, String pageNum);
 
         //修改账单金额
-        void updateCardBill(String billId,String cardNo,String billMonth,String billAmt,String operate);
+        void updateCardBill(String billId, String cardNo, String billMonth, String billAmt, String operate);
     }
 }

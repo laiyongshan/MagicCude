@@ -59,19 +59,19 @@ public class OperationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         switch (viewType) {
             case UN_OPERATION_REPAY:
                 view = LayoutInflater.from(context).inflate(R.layout.layout_unoperation_repay, parent, false);
-                vh = new OperationAdapter.UnOperationRepayHolder(view);
+                vh = new UnOperationRepayHolder(view);
                 break;
             case UN_OPERATION_CONSUME:
                 view = LayoutInflater.from(context).inflate(R.layout.layout_unoperation_consume, parent, false);
-                vh = new OperationAdapter.UnOperationConsumeHolder(view);
+                vh = new UnOperationConsumeHolder(view);
                 break;
             case OPERATION_REPAY:
                 view = LayoutInflater.from(context).inflate(R.layout.layout_operation_repay, parent, false);
-                vh = new OperationAdapter.OperationRepayHolder(view);
+                vh = new OperationRepayHolder(view);
                 break;
             case OPERATION_CONSUME:
                 view = LayoutInflater.from(context).inflate(R.layout.layout_operation_consume, parent, false);
-                vh = new OperationAdapter.OperationConsumeHolder(view);
+                vh = new OperationConsumeHolder(view);
                 break;
 
         }
@@ -89,8 +89,8 @@ public class OperationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         OperationItem operationItem = list.get(position);
 
-        if (holder instanceof OperationAdapter.UnOperationRepayHolder) {//未操作还款
-            OperationAdapter.UnOperationRepayHolder uorh = (OperationAdapter.UnOperationRepayHolder) holder;
+        if (holder instanceof UnOperationRepayHolder) {//未操作还款
+            UnOperationRepayHolder uorh = (UnOperationRepayHolder) holder;
             //时间
             uorh.setText(R.id.tv_date, operationItem.getDate());
 
@@ -134,8 +134,8 @@ public class OperationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 }
             });
 
-        } else if (holder instanceof OperationAdapter.UnOperationConsumeHolder) {//未操作消费
-            OperationAdapter.UnOperationConsumeHolder uoch = (OperationAdapter.UnOperationConsumeHolder) holder;
+        } else if (holder instanceof UnOperationConsumeHolder) {//未操作消费
+            UnOperationConsumeHolder uoch = (UnOperationConsumeHolder) holder;
             //时间
             uoch.setText(R.id.tv_date, operationItem.getDate());
 
@@ -189,8 +189,8 @@ public class OperationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     consumeClick.onContentClick(operationItem);
                 }
             });
-        } else if (holder instanceof OperationAdapter.OperationRepayHolder) {//已操作还款
-            OperationAdapter.OperationRepayHolder orh = (OperationAdapter.OperationRepayHolder) holder;
+        } else if (holder instanceof OperationRepayHolder) {//已操作还款
+            OperationRepayHolder orh = (OperationRepayHolder) holder;
             //时间
             orh.setText(R.id.tv_date, operationItem.getDate());
 
@@ -225,8 +225,8 @@ public class OperationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     consumeClick.onContentClick(operationItem);
                 }
             });
-        } else if (holder instanceof OperationAdapter.OperationConsumeHolder) {//已操作消费
-            OperationAdapter.OperationConsumeHolder och = (OperationAdapter.OperationConsumeHolder) holder;
+        } else if (holder instanceof OperationConsumeHolder) {//已操作消费
+            OperationConsumeHolder och = (OperationConsumeHolder) holder;
             //时间
             och.setText(R.id.tv_date, operationItem.getDate());
 

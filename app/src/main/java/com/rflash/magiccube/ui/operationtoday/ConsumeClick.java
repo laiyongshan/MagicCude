@@ -9,5 +9,5 @@ import com.rflash.magiccube.ui.presentoperation.OperationItem;
 public interface ConsumeClick extends AdapterItemClick{
 
     void onConsumeClick(OperationItem operationItem, int position);
-    void onRepay(OperationItem operationItem,int position);
+    void onRepay(OperationItem operationItem, int position);
 }

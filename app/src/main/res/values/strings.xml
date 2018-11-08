@@ -1,8 +1,8 @@
 <resources>
-    <!--<string name="app_name">魔方信用卡管家</string>
-    <string name="app_update_name">魔方app更新</string>-->
-    <string name="app_name">熊猫金管家</string>
-    <string name="app_update_name">熊猫app更新</string>
+    <string name="app_name">魔方信用卡管家</string>
+    <string name="app_update_name">魔方app更新</string>
+    <!--<string name="app_name">熊猫金管家</string>-->
+    <!--<string name="app_update_name">熊猫app更新</string>-->
 
     <string name="main_user">你好！\n%s</string>
     <string name="card_num">卡位: %s</string>

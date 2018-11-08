@@ -18,12 +18,12 @@ public class CardBaseInfoContract {
         void verifyResult();
     }
 
-    interface  Presenter extends BasePresenter<CardBaseInfoContract.View> {
+    interface  Presenter extends BasePresenter<View> {
 
         //queryCard 查询卡片详情信息
         void queryCardDetail(String cardNo);
 
         //四要素验证
-        void relCard(String cardNo,String name,String identityCard,String mobile,String cardMedia);
+        void relCard(String cardNo, String name, String identityCard, String mobile, String cardMedia);
     }
 }

@@ -16,12 +16,12 @@ public class CardDetailContract {
         void showRefresh();
         void finishRefresh();
         void getDataFail(String msg);
-        void updateCardState(BaseBean baseBean);
+        void updateCardState();
     }
 
-    interface  Presenter extends BasePresenter<CardDetailContract.View> {
+    interface  Presenter extends BasePresenter<View> {
 
         //修改卡片状态
-        void updateCardState(String cardNo,String state);
+        void updateCardState(String cardNo, String state);
     }
 }

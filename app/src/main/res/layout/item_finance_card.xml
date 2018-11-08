@@ -23,6 +23,7 @@
             >
 
             <RelativeLayout
+                android:id="@+id/finance_card_rl"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:padding="12dp"

@@ -123,7 +123,7 @@
                 android:hint="卡号"
                 android:text=""
                 android:textColor="#000"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 />
 
 
@@ -175,7 +175,7 @@
                 android:hint="持卡人"
                 android:text=""
                 android:textColor="#000"
-                android:textSize="14sp" />
+                android:textSize="16sp" />
 
 
         </LinearLayout>
@@ -226,7 +226,7 @@
                 android:hint="身份证号码"
                 android:text=""
                 android:textColor="#000"
-                android:textSize="14sp" />
+                android:textSize="16sp" />
         </LinearLayout>
     </android.support.v7.widget.CardView>
 
@@ -273,9 +273,11 @@
                 android:paddingRight="12dp"
                 android:gravity="center_vertical"
                 android:hint="银行预留手机号码"
+                android:inputType="number"
+                android:maxLength="11"
                 android:text=""
                 android:textColor="#000"
-                android:textSize="14sp" />
+                android:textSize="16sp" />
         </LinearLayout>
     </android.support.v7.widget.CardView>
 
@@ -365,41 +367,112 @@
 
             <com.jaredrummler.materialspinner.MaterialSpinner
                 android:id="@+id/repayDateType_sp"
-                android:layout_width="wrap_content"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:textSize="12sp"
                 app:ms_background_color="@color/white"
                 app:ms_hide_arrow="false"
                 app:ms_text_color="@color/colorPrimary"
+                android:paddingRight="6dp"
                 />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <TextView
+                <RelativeLayout
+                    android:id="@+id/appointed_day_rl"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone"
+                    >
+
+                <EditText
+                    android:id="@+id/appointed_day_et"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:paddingRight="12dp"
                     android:gravity="center_vertical"
-                    android:text=""
+                    android:background="@null"
                     android:textColor="#000"
                     android:textSize="14sp"
-                    android:visibility="gone"
+                    android:maxEms="2"
                     />
-
                 <TextView
-                    android:id="@+id/repayDate_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="天"
+                    android:textColor="#000"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="12dp"
+                    />
+                </RelativeLayout>
+
+                <EditText
+                    android:id="@+id/repayDate_et"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:drawableRight="@mipmap/icon_time"
                     android:paddingRight="12dp"
                     android:gravity="center_vertical"
                     android:text=""
+                    android:editable="false"
+                    android:background="@null"
                     android:textColor="#000"
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
             </RelativeLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="6dp"
+        app:cardElevation="3dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            >
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="卡介质 ："
+                android:drawableLeft="@mipmap/icon_red_start"
+                android:drawablePadding="6dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:textColor="#000"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:background="#c0c0c0" />
+
+            <com.jaredrummler.materialspinner.MaterialSpinner
+                android:id="@+id/cardMedia_sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="12dp"
+                android:layout_weight="4"
+                android:background="@null"
+                android:textSize="16sp"
+                app:ms_background_color="@color/white"
+                app:ms_hide_arrow="false"
+                app:ms_text_color="@color/colorPrimary"
+                />
+
         </LinearLayout>
     </android.support.v7.widget.CardView>
 
@@ -436,85 +509,25 @@
                 android:layout_marginBottom="4dp"
                 android:background="#c0c0c0" />
 
-            <com.jaredrummler.materialspinner.MaterialSpinner
-                android:id="@+id/salesMan_sp"
+            <EditText
+                android:id="@+id/salesMan_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingRight="12dp"
                 android:layout_weight="4"
                 android:background="@null"
-                android:textSize="14sp"
-                app:ms_background_color="@color/white"
-                app:ms_hide_arrow="false"
-                app:ms_text_color="@color/colorPrimary"
+                android:textSize="16sp"
+                android:hint="请填写业务员(非必填)"
                 android:textColor="@color/color_black" />
 
         </LinearLayout>
     </android.support.v7.widget.CardView>
 
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="6dp"
-        app:cardElevation="3dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="46dp"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            >
-            <TextView
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:drawablePadding="6dp"
-                android:gravity="left"
-                android:text="卡介质 ："
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:textColor="#000"
-                android:textSize="14sp" />
-
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:layout_marginRight="12dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp"
-                android:background="#c0c0c0" />
-
-            <!--<EditText-->
-                <!--android:id="@+id/cardMedia_et"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:background="@null"-->
-                <!--android:paddingRight="12dp"-->
-                <!--android:gravity="center_vertical"-->
-                <!--android:text=""-->
-                <!--android:textColor="#000"-->
-                <!--android:textSize="14sp"-->
-                <!--/>-->
-
-            <com.jaredrummler.materialspinner.MaterialSpinner
-                android:id="@+id/cardMedia_sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingRight="12dp"
-                android:layout_weight="4"
-                android:background="@null"
-                android:textSize="14sp"
-                app:ms_background_color="@color/white"
-                app:ms_hide_arrow="false"
-                app:ms_text_color="@color/colorPrimary"
-                />
-
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
 
 
     <LinearLayout
+        android:id="@+id/verify_ll"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:gravity="center_vertical"
@@ -559,6 +572,7 @@
                     android:layout_height="wrap_content">
 
                     <TextView
+                        android:id="@+id/relcard_times_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
@@ -584,6 +598,7 @@
         </android.support.v7.widget.CardView>
 
         <com.flyco.roundview.RoundTextView
+            android:id="@+id/relCard_rtv"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="1"

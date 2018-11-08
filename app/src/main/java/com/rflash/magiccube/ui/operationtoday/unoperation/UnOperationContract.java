@@ -18,9 +18,9 @@ public class UnOperationContract {
 
     interface  Presenter extends BasePresenter<View> {
         //今日操作
-        void planQuery(String state, String tranType, String today, String pageNum,String cardNum);
+        void planQuery(String state, String tranType, String today, String pageNum, String cardNum);
         //确认还款
-        void confirm(String planId,int position);
+        void confirm(String planId, int position);
         //	校验卡片最后交易时间
         void lastOperator(OperationItem operationItem);
     }

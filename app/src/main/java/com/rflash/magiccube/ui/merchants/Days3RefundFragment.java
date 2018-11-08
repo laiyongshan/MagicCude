@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.rflash.basemodule.BaseFragment;
 import com.rflash.magiccube.R;
 import com.rflash.magiccube.mvp.MVPBaseFragment;
+import com.rflash.magiccube.util.DateUtil;
 import com.rflash.magiccube.util.ToolUtils;
 import com.rflash.magiccube.view.kjchart.ChartView;
 
@@ -71,7 +72,7 @@ public class Days3RefundFragment extends BaseFragment {
         mXvalue.clear();
         totalAmt=0;
         for(HomeCountBean.ResultBean.Nearly3daysInfoBean nearly3daysInfoBean:nearly3daysInfo){
-            mXvalue.add(nearly3daysInfoBean.getCurrentDate()+"");
+            mXvalue.add(DateUtil.formatDate1(nearly3daysInfoBean.getCurrentDate())+"");
             mYvalue.add(nearly3daysInfoBean.getAmt()+"");
             totalAmt+=Float.valueOf(nearly3daysInfoBean.getAmt());
         }
@@ -91,10 +92,10 @@ public class Days3RefundFragment extends BaseFragment {
         barChart.mIsShowPointColor = true;
 
         barChart.mIs_AccordingTo_PointLabelValue_JudgmentColor = false;
-
         barChart.mdefaulYValueTextColor = Color.GRAY;
 
         barChart.mXAxisEveryFewParagraphs = 0;
+        barChart.mIsBarChartRotatePointText90=false;
 
         barChart.mBarChartSize = barChart.dp2px(26);
         barChart.mXScaleWidth = barChart.dp2px(68);

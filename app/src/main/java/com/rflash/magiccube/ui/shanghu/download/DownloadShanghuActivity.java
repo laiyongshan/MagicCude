@@ -1,5 +1,6 @@
 package com.rflash.magiccube.ui.shanghu.download;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -10,25 +11,29 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.EditText;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.flyco.roundview.RoundTextView;
-import com.rflash.basemodule.BaseActivity;
 import com.rflash.magiccube.R;
+import com.rflash.magiccube.event.PositionMessage;
+import com.rflash.magiccube.event.PositionMessage2;
 import com.rflash.magiccube.http.BaseBean;
 import com.rflash.magiccube.mvp.MVPBaseActivity;
-import com.rflash.magiccube.ui.shanghu.ShanghuAdapter;
 import com.rflash.magiccube.ui.shanghu.ShanghuBean;
-import com.rflash.magiccube.ui.shanghu.download.DownloadAdapter;
-import com.rflash.magiccube.ui.shanghu.download.DownloadBean;
+import com.rflash.magiccube.util.ToolUtils;
+import com.rflash.magiccube.view.SuccessProgressDialog;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -39,7 +44,7 @@ import butterknife.OnClick;
  * @desc:
  */
 
-public class DownloadShanghuActivity extends MVPBaseActivity<DownloadContrat.View,DownloadPresenter> implements BaseQuickAdapter.RequestLoadMoreListener, DownloadContrat.View, SwipeRefreshLayout.OnRefreshListener {
+public class DownloadShanghuActivity extends MVPBaseActivity<DownloadContrat.View, DownloadPresenter> implements BaseQuickAdapter.RequestLoadMoreListener, DownloadContrat.View, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.download_drawerLayout)
     DrawerLayout download_drawerLayout;
@@ -74,17 +79,21 @@ public class DownloadShanghuActivity extends MVPBaseActivity<DownloadContrat.Vie
     @BindView(R.id.download_shanghu_rtv)
     RoundTextView download_shanghu_rtv;
 
-    private int TOTAL_COUNTER ; //所有的数据总数
+    SuccessProgressDialog successProgressDialog;
+
+    private int TOTAL_COUNTER; //所有的数据总数
 
     DownloadAdapter downloadAdapter;
-    List<DownloadBean.ResultBean> downloadBeanList=new ArrayList<>();
+    List<DownloadBean.ResultBean> downloadBeanList = new ArrayList<>();
 
-    String channelName="";
-    String merchantType="";
-    String startDate="";
-    String endDate="";
-    String bind="N";
-    int pageNum;
+    String channelName = "";
+    String merchantType = "";
+    String startDate = "";
+    String endDate = "";
+    String bind = "N";
+    int pageNum=1;
+
+    List<String> merchantList=new ArrayList<>();
 
     boolean isOption;
 
@@ -92,23 +101,41 @@ public class DownloadShanghuActivity extends MVPBaseActivity<DownloadContrat.Vie
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_download_shanghu);
+
+        EventBus.getDefault().register(this);//注册
+
         initView();
 
         getMerchantData();
     }
 
-    private void initView(){
+    private void initView() {
+
+        refresh_layout.setOnRefreshListener(this);
+        refresh_layout.setColorSchemeColors(ToolUtils.Colors);
+
+        successProgressDialog=new SuccessProgressDialog(this);
+
+        all_selected_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                for(int i=0;i<downloadBeanList.size();i++){
+                    downloadBeanList.get(i).setSelected(isChecked);
+                }
+                downloadAdapter.selectAll();
+            }
+        });
 
         download_rv.setLayoutManager(new LinearLayoutManager(this));
-        downloadAdapter=new DownloadAdapter(isOption,downloadBeanList);
-        downloadAdapter.setOnLoadMoreListener(this,download_rv);
+        downloadAdapter = new DownloadAdapter(isOption, downloadBeanList);
+        downloadAdapter.setOnLoadMoreListener(this, download_rv);
         downloadAdapter.disableLoadMoreIfNotFullPage();
         download_rv.setAdapter(downloadAdapter);
     }
 
-    @OnClick({R.id.title_back_tv,R.id.filtrate_img,R.id.download_option_tv,R.id.download_shanghu_rtv})
-    public void click(View view){
-        switch (view.getId()){
+    @OnClick({R.id.title_back_tv, R.id.filtrate_img, R.id.download_option_tv, R.id.download_shanghu_rtv})
+    public void click(View view) {
+        switch (view.getId()) {
             case R.id.title_back_tv:
                 finish();
                 break;
@@ -118,33 +145,41 @@ public class DownloadShanghuActivity extends MVPBaseActivity<DownloadContrat.Vie
                 break;
 
             case R.id.download_option_tv:
-                isOption=!isOption;
-                if(isOption){
+                isOption = !isOption;
+                if (isOption) {
                     download_option_tv.setText("完成");
-                    downloadAdapter=new DownloadAdapter(isOption,downloadBeanList);
+                    downloadAdapter = new DownloadAdapter(isOption, downloadBeanList);
+                    downloadAdapter.setOnLoadMoreListener(this, download_rv);
+                    downloadAdapter.disableLoadMoreIfNotFullPage();
                     download_rv.setAdapter(downloadAdapter);
                     option_rl.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     download_option_tv.setText("下载");
-                    downloadAdapter=new DownloadAdapter(isOption,downloadBeanList);
+                    downloadAdapter = new DownloadAdapter(isOption, downloadBeanList);
                     download_rv.setAdapter(downloadAdapter);
                     option_rl.setVisibility(View.GONE);
                 }
                 break;
 
             case R.id.download_shanghu_rtv://下载商户
-
+                merchantList.clear();
+                for (int i=0;i<downloadBeanList.size();i++) {
+                    if (downloadBeanList.get(i).getSelected()) {
+                        merchantList.add(downloadBeanList.get(i).getChannel() + "|" + downloadBeanList.get(i).getMerchantCode());
+                    }
+                }
+                mPresenter.bindShanghu(getMerchantParams(merchantList));
                 break;
         }
     }
 
-    private void getMerchantData(){
-        mPresenter.queryShanghu(channelName,"","","",merchantType,startDate,endDate,bind,pageNum+"");
+    private void getMerchantData() {
+        mPresenter.queryShanghu(channelName, "", "", "", merchantType, startDate, endDate, bind, pageNum + "");
     }
 
     @Override
     public void onRefresh() {
-        pageNum=1;
+        pageNum = 1;
         getMerchantData();
     }
 
@@ -161,7 +196,7 @@ public class DownloadShanghuActivity extends MVPBaseActivity<DownloadContrat.Vie
     @Override
     public void getDataFail(String msg) {
         refresh_layout.setRefreshing(false);
-        if(pageNum!=1) {
+        if (pageNum != 1) {
             //获取更多数据失败
             downloadAdapter.loadMoreFail();
         }
@@ -174,18 +209,28 @@ public class DownloadShanghuActivity extends MVPBaseActivity<DownloadContrat.Vie
 
     @Override
     public void bindSuccess(BaseBean response) {
-
+        successProgressDialog.showDialog();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                successProgressDialog.dismiss();
+                pageNum=1;
+                getMerchantData();
+                option_rl.setVisibility(View.GONE);
+                download_option_tv.setText("操作");
+            }
+        },1500);
     }
 
     @Override
     public void getDataSuccess(DownloadBean response) {
-        if(response!=null) {
-            TOTAL_COUNTER=response.getTotalNum();
-            data_count_tv.setText("共"+response.getTotalNum()+"条数据");
-            if(pageNum==1){
-                downloadBeanList=response.getResult();
+        if (response != null) {
+            TOTAL_COUNTER = response.getTotalNum();
+            data_count_tv.setText("共" + response.getTotalNum() + "条数据");
+            if (pageNum == 1) {
+                downloadBeanList = response.getResult();
                 downloadAdapter.setNewData(downloadBeanList);
-            }else {
+            } else {
                 downloadBeanList.addAll(response.getResult());
                 downloadAdapter.addData(response.getResult());
                 downloadAdapter.loadMoreComplete();
@@ -209,7 +254,36 @@ public class DownloadShanghuActivity extends MVPBaseActivity<DownloadContrat.Vie
                 }
                 refresh_layout.setEnabled(true);
             }
-        },1500);
+        }, 1500);
+    }
 
+    private String getMerchantParams(List<String> list){
+        StringBuffer sbf=new StringBuffer();
+        for(int i=0;i<list.size();i++){
+            if(i==0){
+                sbf.append(list.get(i)+"");
+            }else{
+                sbf.append(","+list.get(i));
+            }
+        }
+        return sbf.toString();
+    }
+
+    //ui主线程中执行
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMainEventBus(PositionMessage2 msg) {
+        int i = 0;
+        downloadBeanList.get(msg.getPosition()).setSelected(msg.getChecked());
+        for(DownloadBean.ResultBean bean:downloadBeanList){
+            if(bean.getSelected())
+                i++;
+        }
+        selected_count_tv.setText(i+"");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);//解除注册
     }
 }

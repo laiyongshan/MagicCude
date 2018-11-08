@@ -8,7 +8,9 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.flyco.roundview.RoundTextView;
+import com.rflash.basemodule.utils.StringUtil;
 import com.rflash.magiccube.R;
+import com.rflash.magiccube.util.DateUtil;
 
 import java.util.List;
 
@@ -38,11 +40,11 @@ public class CardBillAdapter extends BaseQuickAdapter<CardBillBean.ResultBean,Ba
             ((TextView) helper.getView(R.id.isConfirm_tv)).setTextColor(Color.parseColor("#3F51B5"));
         }
         ((TextView) helper.getView(R.id.billMonth_tv)).setText(item.getBillMonth()+"");
-        ((TextView) helper.getView(R.id.billStartToEndDate)).setText(item.getBillStartDate()+"至"+item.getBillEndDate());
-        ((TextView) helper.getView(R.id.consumeAmt_tv)).setText("￥"+item.getConsumeAmt()+"");
-        ((TextView) helper.getView(R.id.repayAmt_tv)).setText("￥"+item.getRepayAmt()+"");
-        ((TextView) helper.getView(R.id.billAmt_tv)).setText("￥"+item.getBillAmt()+"");
-//        ((EditText) helper.getView(R.id.factAmt_et))
+        ((TextView) helper.getView(R.id.billStartToEndDate)).setText(DateUtil.formatDate1(item.getBillStartDate())+"至"+DateUtil.formatDate1(item.getBillEndDate()));
+        ((TextView) helper.getView(R.id.consumeAmt_tv)).setText("￥"+ StringUtil.getTwoPointString(item.getConsumeAmt())+"");
+        ((TextView) helper.getView(R.id.repayAmt_tv)).setText("￥"+StringUtil.getTwoPointString(item.getRepayAmt())+"");
+        ((TextView) helper.getView(R.id.billAmt_tv)).setText("￥"+StringUtil.getTwoPointString(item.getBillAmt())+"");
+        ((EditText) helper.getView(R.id.factAmt_et)).setText("￥"+StringUtil.getTwoPointString(item.getBillAmt())+"");
         ((RoundTextView)helper.getView(R.id.update_rtv)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

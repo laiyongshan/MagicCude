@@ -71,6 +71,11 @@ public class DealFragment extends MVPBaseFragment<BillConfirmContract.View, Bill
         bill_deal_rv.setAdapter(billConfirmAdapter);
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        pageNum=1;
+    }
 
     @Override
     public void onRefresh() {
@@ -84,7 +89,7 @@ public class DealFragment extends MVPBaseFragment<BillConfirmContract.View, Bill
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (billConfirmAdapter.getData().size() >= TOTAL_COUNTER) {
+                if (billConfirmBeanList.size() >= TOTAL_COUNTER) {
                     //数据全部加载完毕
                     billConfirmAdapter.loadMoreEnd();
                 } else {
@@ -120,6 +125,7 @@ public class DealFragment extends MVPBaseFragment<BillConfirmContract.View, Bill
             if (pageNum == 1) {
                 billConfirmBeanList.clear();
                 DEAL_List.clear();
+                billConfirmBeanList.addAll(response.getResult());
                 for(BillConfirmBean.ResultBean bean:response.getResult())
                     if(bean.getState().equals("DEAL"))
                         DEAL_List.add(bean);
@@ -127,10 +133,10 @@ public class DealFragment extends MVPBaseFragment<BillConfirmContract.View, Bill
                 if(DEAL_List.isEmpty())
                     billConfirmAdapter.setEmptyView(notDataView);
             } else {
+                billConfirmBeanList.addAll(response.getResult());
                 for(BillConfirmBean.ResultBean bean:response.getResult())
                     if(bean.getState().equals("DEAL"))
-                        DEAL_List.add(bean);
-                billConfirmAdapter.addData(DEAL_List);
+                        billConfirmAdapter.addData(bean);
                 billConfirmAdapter.loadMoreComplete();
             }
         }

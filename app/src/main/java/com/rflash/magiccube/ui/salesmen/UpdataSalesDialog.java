@@ -49,7 +49,7 @@ public class UpdataSalesDialog extends Dialog {
     Context context;
 
     interface  UpdateSalesListener{
-        void updataSalesListener(String name,String profitRatio);
+        void updataSalesListener(String name, String profitRatio);
     }
 
     UpdateSalesListener updateSalesListener;
@@ -91,7 +91,7 @@ public class UpdataSalesDialog extends Dialog {
                 if(salesmen_name_et.getText().toString().trim().equals("")||salesman_profitRatio_et.getText().toString().trim().equals("")){
                     Toast.makeText(context,"请填写完整的信息",Toast.LENGTH_SHORT).show();
                 }else{
-                    updateSalesListener.updataSalesListener(salesmen_name_et.getText().toString().trim(),salesman_profitRatio_et.getText().toString().trim());
+                    updateSalesListener.updataSalesListener(salesmen_name_et.getText().toString().trim(),Double.valueOf(salesman_profitRatio_et.getText().toString().trim())/100+"");
                 }
                 break;
         }

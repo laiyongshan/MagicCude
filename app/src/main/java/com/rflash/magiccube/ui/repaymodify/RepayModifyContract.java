@@ -12,6 +12,6 @@ public class RepayModifyContract {
     }
 
     interface  Presenter extends BasePresenter<View> {
-        void modify(String planId,String amt);
+        void modify(String planId, String amt);
     }
 }

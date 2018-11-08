@@ -103,6 +103,7 @@
                 android:layout_weight="4"
                 android:background="@null"
                 android:hint="费用基数金额"
+                android:inputType="numberDecimal"
                 android:textColor="#000"
                 android:textSize="14sp" />
 
@@ -161,6 +162,7 @@
                 android:layout_weight="4"
                 android:background="@null"
                 android:hint="收费比例"
+                android:inputType="numberDecimal"
                 android:textColor="#000"
                 android:textSize="14sp" />
 
@@ -319,6 +321,7 @@
                 android:layout_weight="4"
                 android:background="@null"
                 android:hint="服务费实收"
+                android:inputType="numberDecimal"
                 android:textColor="#000"
                 android:textSize="14sp" />
 

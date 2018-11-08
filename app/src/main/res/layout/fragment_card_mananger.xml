@@ -100,7 +100,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
-                        android:text="卡片数量：30"
+                        android:text="卡片数量：0"
                         android:textSize="14sp"
                         android:gravity="center_vertical"
                         />
@@ -109,7 +109,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
-                        android:text="可用总余额：￥3444230.00"
+                        android:text="可用总余额：￥0.00"
                         android:textSize="14sp"
                         android:gravity="center_vertical"
                         android:layout_marginTop="4dp"
@@ -120,7 +120,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
-                        android:text="初始金额总额：￥8874230.00"
+                        android:text="初始金额总额：￥0.00"
                         android:textSize="14sp"
                         android:gravity="center_vertical"
                         android:layout_marginTop="4dp"
@@ -131,7 +131,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
-                        android:text="固定额度总额：￥8874230.00"
+                        android:text="固定额度总额：￥0.00"
                         android:textSize="14sp"
                         android:gravity="center_vertical"
                         android:layout_marginTop="4dp"
@@ -199,6 +199,7 @@
         android:background="@color/white"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
+        android:clickable="true"
         android:layout_gravity="right">
 
         <TextView
@@ -232,6 +233,7 @@
                     rv:rv_cornerRadius="26dp">
 
                     <EditText
+                        android:id="@+id/cardSeqno_et"
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent"
                         android:background="@null"
@@ -264,6 +266,7 @@
                     rv:rv_cornerRadius="26dp">
 
                     <EditText
+                        android:id="@+id/cardNo_et"
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent"
                         android:background="@null"
@@ -285,6 +288,7 @@
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_marginTop="6dp"
+                android:visibility="gone"
                 app:cardUseCompatPadding="true"
                 app:cardPreventCornerOverlap="false"
                 app:cardElevation="3dp"
@@ -329,6 +333,7 @@
                     rv:rv_cornerRadius="26dp">
 
                     <EditText
+                        android:id="@+id/salesMan_et"
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent"
                         android:background="@null"
@@ -362,6 +367,7 @@
                     rv:rv_cornerRadius="26dp">
 
                     <com.jaredrummler.materialspinner.MaterialSpinner
+                        android:id="@+id/state_sp"
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent"
                         android:padding="6dp"
@@ -392,13 +398,16 @@
                     rv:rv_strokeColor="#909090"
                     rv:rv_cornerRadius="26dp">
 
-                    <TextView
+                    <EditText
+                        android:id="@+id/billDate_et"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableRight="@mipmap/icon_time"
                         android:padding="12dp"
                         android:gravity="center_vertical"
                         android:hint="请选择账单日"
+                        android:background="@null"
+                        android:editable="false"
                         android:textColor="#000"
                         android:textSize="14sp" />
 
@@ -423,13 +432,16 @@
                     rv:rv_strokeColor="#909090"
                     rv:rv_cornerRadius="26dp">
 
-                    <TextView
+                    <EditText
+                        android:id="@+id/repayDate_et"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableRight="@mipmap/icon_time"
                         android:padding="12dp"
                         android:gravity="center_vertical"
                         android:hint="请选择还款日"
+                        android:background="@null"
+                        android:editable="false"
                         android:textColor="#000"
                         android:textSize="14sp" />
 
@@ -446,21 +458,21 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true">
 
-            <Button
+            <TextView
                 android:background="@drawable/sure_textview_bg"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:id="@+id/sure_filter_tv"
+                android:id="@+id/clear_filter_tv"
                 android:gravity="center"
                 android:text="重置"
                 android:textSize="14sp"
                 android:textColor="@color/white"/>
 
-            <Button
+            <TextView
                 android:background="@drawable/cancle_textview_bg"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:id="@+id/cancle_filter_tv"
+                android:id="@+id/sure_filter_tv"
                 android:gravity="center"
                 android:text="確定"
                 android:textSize="14sp"

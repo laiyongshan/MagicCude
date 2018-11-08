@@ -24,6 +24,7 @@ import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.rflash.basemodule.BaseFragment;
+import com.rflash.basemodule.utils.StringUtil;
 import com.rflash.magiccube.R;
 import com.rflash.magiccube.mvp.MVPBaseFragment;
 
@@ -69,9 +70,9 @@ public class ConsumeFragment extends BaseFragment {
         date=new int[]{payableInfoBean.getNonConsumeNum(),payableInfoBean.getConsumeNum()};
         initPieChat(date);
 
-        tvs[0].setText("￥"+payableInfoBean.getBillAmt());
-        tvs[1].setText("￥"+payableInfoBean.getNonConsumeAmt());
-        tvs[2].setText("￥"+payableInfoBean.getConsumeAmt());
+        tvs[0].setText("￥"+ StringUtil.getTwoPointString(payableInfoBean.getBillAmt()));
+        tvs[1].setText("￥"+StringUtil.getTwoPointString(payableInfoBean.getNonConsumeAmt()));
+        tvs[2].setText("￥"+StringUtil.getTwoPointString((payableInfoBean.getConsumeAmt())));
     }
 
 
@@ -82,8 +83,8 @@ public class ConsumeFragment extends BaseFragment {
         consume_pieChart.setDescription("");
         consume_pieChart.animateXY(1000, 1000);//设置动画效果
         consume_pieChart.setDrawSliceText(false);//圆环上不绘制图例文字
-        consume_pieChart.setHoleRadius(64f);//设置内圆环半径
-        consume_pieChart.setCenterTextSize(10f);//设置中间文字中大小
+        consume_pieChart.setHoleRadius(75f);//设置内圆环半径
+        consume_pieChart.setCenterTextSize(7f);//设置中间文字中大小
         consume_pieChart.setCenterText(generateCenterText(sum));
         Legend legend = consume_pieChart.getLegend();//获取图例
 
@@ -130,8 +131,8 @@ public class ConsumeFragment extends BaseFragment {
     private SpannableString generateCenterText(int sum) {
         String total = Integer.toString(sum);
         SpannableString s = new SpannableString(date[0] +"/"+date[1]+ "\n 笔数");
-        s.setSpan(new RelativeSizeSpan(3f), 0, (date[0]+"").length()+2, 2);
-        s.setSpan(new ForegroundColorSpan(Color.rgb(153, 153, 153)), 0, (date[0]+"").length()+2, 0);
+        s.setSpan(new RelativeSizeSpan(3f), 0, (date[0]+"").length()+(date[1]+"").length()+1, 2);
+        s.setSpan(new ForegroundColorSpan(Color.rgb(153, 153, 153)), 0, (date[0]+"").length()+1, 0);
         s.setSpan(new ForegroundColorSpan(Color.parseColor("#FF6C5B")), (date[1]+"").length(), s.length(), 0);
         return s;
     }

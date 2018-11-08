@@ -18,8 +18,8 @@ public class CardManagerContract {
         void getDataSuccess(CardBean response);
     }
 
-    interface  Presenter extends BasePresenter<CardManagerContract.View> {
+    interface  Presenter extends BasePresenter<View> {
        //queryCard 查询卡片信息
-        void queryCard(String cardNo,String cardSeqno,String salesMan,String billDate,String repayDate,String state,String pageNum,String count);
+        void queryCard(String cardNo, String cardSeqno, String salesMan, String billDate, String repayDate, String state, String pageNum, String count);
     }
 }

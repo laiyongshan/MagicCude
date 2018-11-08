@@ -113,6 +113,7 @@
 
 
     <android.support.v7.widget.CardView
+        android:id="@+id/freePlanRate_cd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardBackgroundColor="@color/white"
@@ -153,6 +154,7 @@
                 android:paddingRight="12dp"
                 android:layout_weight="4"
                 android:background="@null"
+                android:inputType="numberDecimal"
                 android:hint="规划比例"
                 android:textColor="#000"
                 android:textSize="14sp" />

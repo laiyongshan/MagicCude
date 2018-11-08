@@ -48,6 +48,7 @@
                 android:paddingRight="12dp"
                 android:layout_weight="4"
                 android:background="@null"
+                android:inputType="numberDecimal"
                 android:hint="固定额度"
                 android:textColor="#000"
                 android:textSize="14sp" />
@@ -104,6 +105,7 @@
                 android:paddingRight="12dp"
                 android:layout_weight="4"
                 android:background="@null"
+                android:inputType="numberDecimal"
                 android:hint="可用余额"
                 android:textColor="#000"
                 android:textSize="14sp" />
@@ -161,6 +163,7 @@
                 android:layout_weight="4"
                 android:background="@null"
                 android:hint="当前待还款金额"
+                android:inputType="numberDecimal"
                 android:textColor="#000"
                 android:textSize="14sp" />
 
@@ -216,6 +219,7 @@
                 android:paddingRight="12dp"
                 android:layout_weight="4"
                 android:background="@null"
+                android:inputType="numberDecimal"
                 android:hint="初始金额"
                 android:textColor="#000"
                 android:textSize="14sp" />
@@ -270,6 +274,7 @@
                 android:paddingRight="12dp"
                 android:layout_weight="4"
                 android:background="@null"
+                android:inputType="numberDecimal"
                 android:hint="临时金额"
                 android:textColor="#000"
                 android:textSize="14sp" />

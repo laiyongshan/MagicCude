@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -54,6 +55,8 @@ public class CardIncreaseActivity extends MVPBaseActivity<CardIncreaseContract.V
     @BindView(R.id.card_increase_rv)
     RecyclerView card_increase_rv;
 
+    private View notDataView;
+
     String cardNo="";
     String LIMIT_UP="LIMIT_UP";
     String LIMIT_DOWN="LIMIT_DOWN";
@@ -90,6 +93,8 @@ public class CardIncreaseActivity extends MVPBaseActivity<CardIncreaseContract.V
         cardNo=cardDetailBean.getCardNo();
 
         bankAndnum_tv.setText("("+cardDetailBean.getCardBankName()+cardDetailBean.getCardNo().substring(cardNo.length()-4)+")");
+
+        notDataView = getLayoutInflater().inflate(R.layout.empty_view, (ViewGroup) card_increase_rv.getParent(), false);
 
         refresh_layout.setColorSchemeColors(ToolUtils.Colors);
         refresh_layout.setOnRefreshListener(this);
@@ -153,7 +158,8 @@ public class CardIncreaseActivity extends MVPBaseActivity<CardIncreaseContract.V
                         queryLimitChange(LIMIT_DOWN);
                     }
                 }
-                refresh_layout.setEnabled(true);
+                if(refresh_layout!=null)
+                    refresh_layout.setEnabled(true);
             }
         },1500);
     }
@@ -183,6 +189,8 @@ public class CardIncreaseActivity extends MVPBaseActivity<CardIncreaseContract.V
                 if(pageNum==1){
                     cardIncreaseAdapter.setNewData(increaseBean.getResult());
                     cardIncreaseAdapter.notifyDataSetChanged();
+                    if(increaseBean.getResult().isEmpty())
+                        cardIncreaseAdapter.setEmptyView(notDataView);
                 }else{
                     increaseBeanList.addAll(increaseBean.getResult());
                     cardIncreaseAdapter.addData(increaseBean.getResult());
@@ -196,6 +204,11 @@ public class CardIncreaseActivity extends MVPBaseActivity<CardIncreaseContract.V
                 Log.i("lys","LIMIT_DOWN");
             }
         }
+    }
+
+    @Override
+    public void increaseSuccess() {
+
     }
 
 }

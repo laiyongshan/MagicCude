@@ -1,6 +1,7 @@
 package com.rflash.magiccube.ui.cardmanager.increase;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.EditText;
@@ -16,6 +17,7 @@ import com.rflash.magiccube.http.BaseBean;
 import com.rflash.magiccube.mvp.MVPBaseActivity;
 import com.rflash.magiccube.ui.cardmanager.CardBean;
 import com.rflash.magiccube.util.TimerPikerTools;
+import com.rflash.magiccube.view.SuccessProgressDialog;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -55,7 +57,7 @@ public class AddIncreaseActivity extends MVPBaseActivity<CardIncreaseContract.Vi
     @BindView(R.id.add_increase_rtv)
     RoundTextView add_increase_rtv;
 
-
+    SuccessProgressDialog successProgressDialog;
 
     CardBean.ResultBean cardDetailBean;
     String cardNo="";
@@ -78,6 +80,8 @@ public class AddIncreaseActivity extends MVPBaseActivity<CardIncreaseContract.Vi
         cardDetailBean= (CardBean.ResultBean) getIntent().getSerializableExtra("cardDetail");
         cardNo=cardDetailBean.getCardNo();
         bankAndnum_tv.setText("("+cardDetailBean.getCardBankName()+cardDetailBean.getCardNo().substring(cardNo.length()-4)+")");
+
+        successProgressDialog=new SuccessProgressDialog(this);
 
         changeType_sp.setItems("提额","降额");
         changeType_sp.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
@@ -150,9 +154,22 @@ public class AddIncreaseActivity extends MVPBaseActivity<CardIncreaseContract.Vi
 
     }
 
-    BaseBean baseBean;
     @Override
     public void getDataSuccess(Object response) {
-        finish();
+
     }
+
+    @Override
+    public void increaseSuccess() {
+        successProgressDialog.showDialog();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                successProgressDialog.dismiss();
+                finish();
+            }
+        },1500);
+    }
+
+
 }

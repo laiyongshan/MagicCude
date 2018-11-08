@@ -18,7 +18,7 @@ public class RefundContract {
         void getDataSuccess(RefundBean response);
     }
 
-    interface  Presenter extends BasePresenter<RefundContract.View> {
+    interface  Presenter extends BasePresenter<View> {
 
         void getRefundList(String pageNum);
 

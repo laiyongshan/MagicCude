@@ -39,7 +39,7 @@
 
                 <com.rflash.magiccube.view.AlwaysMarqueeTextView
                     android:id="@+id/merchantName_tv"
-                    android:layout_width="210dp"
+                    android:layout_width="256dp"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@mipmap/icon_dianpu"
                     android:drawablePadding="12dp"

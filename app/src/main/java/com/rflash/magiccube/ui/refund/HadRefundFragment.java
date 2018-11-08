@@ -6,6 +6,8 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.rflash.magiccube.R;
@@ -28,6 +30,8 @@ public class HadRefundFragment extends MVPBaseFragment<RefundContract.View, Refu
 
     @BindView(R.id.had_refund_rv)
     RecyclerView had_refund_rv;
+
+    private View notDataView;
 
     RefundAdapter refundAdapter;
     List<RefundBean.ResultBean> refunList=new ArrayList<>();
@@ -56,11 +60,13 @@ public class HadRefundFragment extends MVPBaseFragment<RefundContract.View, Refu
     protected void initView() {
         mPresenter.getRefundList(pageNum+"");
 
+        notDataView = getLayoutInflater().inflate(R.layout.empty_view, (ViewGroup) had_refund_rv.getParent(), false);
+
         refresh_layout.setColorSchemeColors(ToolUtils.Colors);
         refresh_layout.setOnRefreshListener(this);
 
         had_refund_rv.setLayoutManager(new LinearLayoutManager(getActivity()));
-        refundAdapter=new RefundAdapter(refunList);
+        refundAdapter=new RefundAdapter(REPAID_List);
         refundAdapter.setOnLoadMoreListener(this,had_refund_rv);
         refundAdapter.disableLoadMoreIfNotFullPage();
         had_refund_rv.setAdapter(refundAdapter);
@@ -69,6 +75,12 @@ public class HadRefundFragment extends MVPBaseFragment<RefundContract.View, Refu
     @Override
     protected int getLayout() {
         return R.layout.fragment_had_refund;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        pageNum=1;
     }
 
     @Override
@@ -83,7 +95,7 @@ public class HadRefundFragment extends MVPBaseFragment<RefundContract.View, Refu
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (refundAdapter.getData().size() >= TOTAL_COUNTER) {
+                if (refunList.size() >= TOTAL_COUNTER) {
                     //数据全部加载完毕
                     refundAdapter.loadMoreEnd();
                 } else {
@@ -115,20 +127,23 @@ public class HadRefundFragment extends MVPBaseFragment<RefundContract.View, Refu
     public void getDataSuccess(RefundBean response) {
         if (response != null) {
             refundBean = (RefundBean) response;
+
             TOTAL_COUNTER = refundBean.getTotalNum();
-            Log.i("lys", "总条数：" + TOTAL_COUNTER);
             if (pageNum == 1) {
-                refunList.clear();
                 REPAID_List.clear();
+                refunList.clear();
+                refunList.addAll(response.getResult());
                 for(RefundBean.ResultBean resultBean:refundBean.getResult())
                     if(resultBean.getRepayState().equals("REPAID"))
                         REPAID_List.add(resultBean);
                 refundAdapter.setNewData(REPAID_List);
+                if(REPAID_List.isEmpty())
+                    refundAdapter.setEmptyView(notDataView);
             } else {
+                refunList.addAll(response.getResult());
                 for(RefundBean.ResultBean resultBean:refundBean.getResult())
                     if(resultBean.getRepayState().equals("REPAID"))
-                        REPAID_List.add(resultBean);
-                refundAdapter.addData(REPAID_List);
+                        refundAdapter.addData(resultBean);
                 refundAdapter.loadMoreComplete();
             }
         }

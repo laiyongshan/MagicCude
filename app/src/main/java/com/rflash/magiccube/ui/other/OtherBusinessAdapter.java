@@ -7,7 +7,11 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.flyco.roundview.RoundTextView;
+import com.rflash.basemodule.utils.ActivityIntent;
 import com.rflash.magiccube.R;
+import com.rflash.magiccube.ui.credithandle.CreditHandleActivity;
+import com.rflash.magiccube.ui.creditquery.CreditQueryActivity;
+import com.rflash.magiccube.ui.loanhandle.LoanHandleActivity;
 
 import java.util.List;
 
@@ -29,7 +33,19 @@ public class OtherBusinessAdapter extends BaseQuickAdapter<OtherBean,BaseViewHol
         ((RoundTextView)helper.getView(R.id.item_go_rtv)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                switch (helper.getPosition()){
+                    case 0:
+                        ActivityIntent.readyGo(mContext, CreditHandleActivity.class);
+                        break;
 
+                    case 1:
+                        ActivityIntent.readyGo(mContext, CreditQueryActivity.class);
+                        break;
+
+                    case 2:
+                        ActivityIntent.readyGo(mContext, LoanHandleActivity.class);
+                        break;
+                }
             }
         });
     }

@@ -15,7 +15,7 @@ public class RepayContract {
 
     interface  Presenter extends BasePresenter<View> {
         //今日操作
-        void planQuery(String state, String tranType, String today, String pageNum,String cardNum);
+        void planQuery(String state, String tranType, String today, String pageNum, String cardNum);
         //确认还款
         void confirmRepay(String planId);
 

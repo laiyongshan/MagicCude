@@ -12,7 +12,6 @@ import com.rflash.magiccube.http.BaseBean;
 import com.rflash.magiccube.http.DefaultObserver;
 import com.rflash.magiccube.http.RetrofitFactory;
 import com.rflash.magiccube.mvp.BasePresenterImpl;
-import com.rflash.magiccube.ui.main.MainActivity;
 import com.rflash.magiccube.ui.newmain.NewMainActivity;
 import com.rflash.magiccube.util.AESUtil;
 import com.rflash.magiccube.util.SignUtil;
@@ -82,7 +81,7 @@ public class LoginPresenter extends BasePresenterImpl<LoginContract.View> implem
                         SpUtil.putString(mView.getContext(), Config.USER_PRVKEY, encryptPrvKey);
                         SpUtil.putString(mView.getContext(), Config.POINT_ID, data.getPointId());
                         SpUtil.putString(mView.getContext(),Config.TERMCODE,data.getTermCode());
-                        Log.i("lys",Config.TERMCODE+""+data.getTermCode());
+                        SpUtil.putString(mView.getContext(),Config.MERCHANTCODE,data.getMerchantCode());//商户号
                         mView.loginSuccess(account, password);
                         ActivityIntent.readyGo(mView.getContext(), NewMainActivity.class);
                         ((LoginActivity) mView).finish();

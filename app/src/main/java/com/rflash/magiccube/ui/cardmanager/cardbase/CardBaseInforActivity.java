@@ -3,6 +3,8 @@ package com.rflash.magiccube.ui.cardmanager.cardbase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -16,10 +18,13 @@ import com.flyco.roundview.RoundTextView;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.rflash.basemodule.BaseActivity;
 import com.rflash.basemodule.utils.ActivityIntent;
+import com.rflash.magiccube.Config;
 import com.rflash.magiccube.R;
 import com.rflash.magiccube.mvp.MVPBaseActivity;
 import com.rflash.magiccube.ui.cardmanager.CardBean;
+import com.rflash.magiccube.ui.newmain.DirtData;
 import com.rflash.magiccube.ui.renewal.RenewalActivity;
+import com.rflash.magiccube.util.AESUtil;
 import com.rflash.magiccube.util.ToolUtils;
 
 import org.w3c.dom.Text;
@@ -86,13 +91,21 @@ public class CardBaseInforActivity extends MVPBaseActivity<CardBaseInfoContract.
     EditText billDate_et;
     @BindView(R.id.repayDateType_sp)
     MaterialSpinner repayDateType_sp;
-    @BindView(R.id.repayDate_tv)
-    TextView repayDate_tv;
-    @BindView(R.id.salesMan_sp)
-    MaterialSpinner salesMan_sp;
+    RelativeLayout appointed_day_rl;
+    @BindView(R.id.appointed_day_et)
+    EditText appointed_day_et;//指定還款天數
+    @BindView(R.id.repayDate_et)
+    TextView repayDate_et;
+    @BindView(R.id.salesMan_et)
+    EditText salesMan_et;
     @BindView(R.id.cardMedia_sp)
     MaterialSpinner cardMedia_sp;
 
+
+    @BindView(R.id.verify_ll)
+    LinearLayout verify_ll;
+
+    //额度信息
     @BindViews({R.id.fixedLimit_et,R.id.availableAmt_et,R.id.currentRepayAmt_et,R.id.initAmt_et,R.id.tempLimit_et,R.id.tempLimitDate_et})
     EditText[] linesEts;
 
@@ -113,10 +126,18 @@ public class CardBaseInforActivity extends MVPBaseActivity<CardBaseInfoContract.
     //分期设置
     @BindView(R.id.aging_setting_rtv)
     RoundTextView aging_setting_rtv;
-    @BindView(R.id.partSeqno_et)
-    EditText partSeqno_et;
-    @BindView(R.id.partTotalAmt_et)
-    EditText partTotalAmt_et;
+    @BindView(R.id.aging_rv)
+    RecyclerView aging_rv;
+    @BindView(R.id.AllpartSeqno_et)
+    EditText AllpartSeqno_et;
+    @BindView(R.id.AllpartTotalAmt_et)
+    EditText AllpartTotalAmt_et;
+    @BindView(R.id.aging_emty_tv)
+    TextView aging_emty_tv;
+    @BindView(R.id.total_aging_size_cd)
+    CardView total_aging_size_cd;
+    @BindView(R.id.total_aging_amt_cd)
+    CardView total_aging_amt_cd;
 
     //网银信息
     @BindViews({R.id.loginUsername_et,R.id.loginPasswd_et,R.id.tranPasswd_et,R.id.queryPasswd_et})
@@ -130,12 +151,14 @@ public class CardBaseInforActivity extends MVPBaseActivity<CardBaseInfoContract.
     String cardNo="";
     CardBean.ResultBean cardDetailBean;
 
+    DirtData dirtData;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_base_info);
         initView();
-
+        dirtData=new DirtData(this);
         getCardInfo(cardNo);
     }
 
@@ -147,13 +170,12 @@ public class CardBaseInforActivity extends MVPBaseActivity<CardBaseInfoContract.
         refresh_layout.setColorSchemeColors(ToolUtils.Colors);
         refresh_layout.setOnRefreshListener(this);
 
-        repayDateType_sp.setItems("指定天数","固定还款日");
-        repayDateType_sp.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(MaterialSpinner materialSpinner, int i, long l, Object o) {
+        verify_ll.setVisibility(View.GONE);
 
-            }
-        });
+        aging_setting_rtv.setVisibility(View.GONE);
+        aging_emty_tv.setVisibility(View.VISIBLE);
+        total_aging_size_cd.setVisibility(View.GONE);
+        total_aging_amt_cd.setVisibility(View.GONE);
     }
 
     @OnClick({R.id.title_back_tv,R.id.card_renewal_tv,R.id.base_info_rl,R.id.lines_rl,R.id.plan_rl,R.id.service_cost_rl,R.id.aging_rl,R.id.ebank_rl,
@@ -280,12 +302,46 @@ public class CardBaseInforActivity extends MVPBaseActivity<CardBaseInfoContract.
         phone_et.setText(resultBean.getPhone()+"");
         billDate_et.setText(resultBean.getBillDate()+"");
         if(resultBean.getRepayDateType().equals("FIXED")){//固定还款日
-            repayDate_tv.setText(resultBean.getRepayDate()+"");
+            repayDate_et.setText(resultBean.getRepayDate()+"");
         }else if(resultBean.getRepayDateType().equals("APPOINTED_DAYS")){//指定天数
-            repayDate_tv.setText(resultBean.getRepayDate()+"");
+            appointed_day_et.setText(resultBean.getRepayDate()+"");
         }
 //        salesMan_tv.setText(resultBean.getSalesMan()+"");
 //        cardMedia_et.setText(resultBean.getCardMedia()+"");
+        if(resultBean.getRepayDateType().equals("FIXED")) {
+            repayDateType_sp.setItems(dirtData.repayDateArr[0]);
+        }else if(resultBean.getRepayDateType().equals("APPOINTED_DAYS")){
+            repayDateType_sp.setItems(dirtData.repayDateArr[1]);
+        }
+        if(resultBean.getCardMedia().equals("IC_CARD")) {
+            cardMedia_sp.setItems(dirtData.cardMediaArr[0]);
+        }else{
+            cardMedia_sp.setItems(dirtData.cardMediaArr[1]);
+        }
+        if(resultBean.getIsHolidayPlan().equals("Y")) {
+            isHolidayPlan_sp.setItems(dirtData.isHolidayArr[0]);
+        }else{
+            isHolidayPlan_sp.setItems(dirtData.isHolidayArr[1]);
+        }
+        if(resultBean.getIsFreePlan().equals("Y")) {
+            isFreePlan_sp.setItems(dirtData.isFreePlanArr[0]);
+        }else{
+            isFreePlan_sp.setItems(dirtData.isFreePlanArr[1]);
+        }
+        if(resultBean.getServiceType().equals(dirtData.serviceTypeOptions[0])) {
+            serviceType_sp.setItems(dirtData.serviceTypeArr[0]);
+        }else if(resultBean.getServiceType().equals(dirtData.serviceTypeOptions[1])){
+            serviceType_sp.setItems(dirtData.serviceTypeArr[1]);
+        }else if(resultBean.getServiceType().equals(dirtData.serviceTypeOptions[2])){
+            serviceType_sp.setItems(dirtData.serviceTypeArr[2]);
+        }
+        if(resultBean.getIsHaveKey().equals("Y")) {
+            isHaveKey_sp.setItems(dirtData.isHaveKeyArr[1]);
+        }else if(resultBean.getIsHaveKey().equals("N")){
+            isHaveKey_sp.setItems(dirtData.isHaveKeyArr[2]);
+        }else{
+            isHaveKey_sp.setItems(dirtData.isHaveKeyArr[0]);
+        }
 
         linesEts[0].setText(resultBean.getFixedLimit()/100+"");
         linesEts[1].setText(resultBean.getAvailableAmt()/100+"");
@@ -307,10 +363,10 @@ public class CardBaseInforActivity extends MVPBaseActivity<CardBaseInfoContract.
         //分期设置
 
         //网银信息
-        ebankEts[0].setText(resultBean.getLoginUsername()+"");
-        ebankEts[1].setText(resultBean.getLoginPasswd()+"");
-        ebankEts[2].setText(resultBean.getTranPasswd()+"");
-        ebankEts[3].setText(resultBean.getQueryPasswd()+"");
+        ebankEts[0].setText(AESUtil.decrypt(resultBean.getLoginUsername()+"",Config.AES));
+        ebankEts[1].setText(AESUtil.decrypt(resultBean.getLoginPasswd()+"",Config.AES));
+        ebankEts[2].setText(AESUtil.decrypt(resultBean.getTranPasswd()+"",Config.AES));
+        ebankEts[3].setText(AESUtil.decrypt(resultBean.getQueryPasswd()+"",Config.AES));
     }
 
     private float getFloatValue(String value){

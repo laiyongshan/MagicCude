@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -70,6 +71,8 @@ public class CardBillActivity extends MVPBaseActivity<CardBillContract.View,Card
     @BindView(R.id.card_bill_rv)
     RecyclerView card_bill_rv;
 
+    private View notDataView;
+
     SuccessProgressDialog successProgressDialog;
 
     String cardNo="";
@@ -103,6 +106,9 @@ public class CardBillActivity extends MVPBaseActivity<CardBillContract.View,Card
 
         refreshLayout.setColorSchemeColors(ToolUtils.Colors);
         refreshLayout.setOnRefreshListener(this);
+
+        notDataView = getLayoutInflater().inflate(R.layout.empty_view, (ViewGroup) card_bill_rv.getParent(), false);
+
 
         successProgressDialog=new SuccessProgressDialog(this);
 
@@ -181,6 +187,8 @@ public class CardBillActivity extends MVPBaseActivity<CardBillContract.View,Card
             cardBillBeanList=response.getResult();
             if (pageNum == 1) {
                 cardBillAdapter.setNewData(cardBillBeanList);
+                if(cardBillBeanList.isEmpty())
+                    cardBillAdapter.setEmptyView(notDataView);
             } else {
                 cardBillAdapter.addData(cardBillBeanList);
                 cardBillAdapter.loadMoreComplete();
@@ -218,7 +226,8 @@ public class CardBillActivity extends MVPBaseActivity<CardBillContract.View,Card
                     pageNum++;
                     queryBill();
                 }
-                refreshLayout.setEnabled(true);
+                if(refreshLayout!=null)
+                    refreshLayout.setEnabled(true);
             }
         },1500);
     }

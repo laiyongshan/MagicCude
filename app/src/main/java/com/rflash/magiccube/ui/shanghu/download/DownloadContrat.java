@@ -20,11 +20,11 @@ public class DownloadContrat {
         void getDataSuccess(DownloadBean response);
     }
 
-    interface  Presenter extends BasePresenter<DownloadContrat.View> {
+    interface  Presenter extends BasePresenter<View> {
         //商户下载（绑定商户）
         void bindShanghu(String merchant);
 
         //商户查询
-        void queryShanghu(String channelName,String merchantName,String merchantCode,String state,String merchantType,String startDate,String endDate,String bind,String pageNum);
+        void queryShanghu(String channelName, String merchantName, String merchantCode, String state, String merchantType, String startDate, String endDate, String bind, String pageNum);
     }
 }

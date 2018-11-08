@@ -21,6 +21,6 @@ public interface BatchOperationListener {
     /**
      * checkbox 改变监听
      */
-    void onCheckListener(int position,boolean checked);
+    void onCheckListener(int position, boolean checked);
 }
 

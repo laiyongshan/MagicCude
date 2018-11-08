@@ -69,19 +69,19 @@ public class IntelligentPlanningAdapter extends RecyclerView.Adapter<RecyclerVie
         switch (viewType) {
             case UN_OPERATION_REPAY:
                 view = LayoutInflater.from(context).inflate(R.layout.layout_unoperation_repay_, parent, false);
-                vh = new IntelligentPlanningAdapter.UnOperationRepayHolder(view);
+                vh = new UnOperationRepayHolder(view);
                 break;
             case UN_OPERATION_CONSUME:
                 view = LayoutInflater.from(context).inflate(R.layout.layout_unoperation_consume_, parent, false);
-                vh = new IntelligentPlanningAdapter.UnOperationConsumeHolder(view);
+                vh = new UnOperationConsumeHolder(view);
                 break;
             case OPERATION_REPAY:
                 view = LayoutInflater.from(context).inflate(R.layout.layout_operation_repay, parent, false);
-                vh = new IntelligentPlanningAdapter.OperationRepayHolder(view);
+                vh = new OperationRepayHolder(view);
                 break;
             case OPERATION_CONSUME:
                 view = LayoutInflater.from(context).inflate(R.layout.layout_operation_consume, parent, false);
-                vh = new IntelligentPlanningAdapter.OperationConsumeHolder(view);
+                vh = new OperationConsumeHolder(view);
                 break;
 
         }
@@ -93,8 +93,8 @@ public class IntelligentPlanningAdapter extends RecyclerView.Adapter<RecyclerVie
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         OperationToday operationToday = list.get(position);
 
-        if (holder instanceof IntelligentPlanningAdapter.UnOperationRepayHolder) {//未操作还款
-            IntelligentPlanningAdapter.UnOperationRepayHolder uorh = (IntelligentPlanningAdapter.UnOperationRepayHolder) holder;
+        if (holder instanceof UnOperationRepayHolder) {//未操作还款
+            UnOperationRepayHolder uorh = (UnOperationRepayHolder) holder;
             //时间
             ((TextView) uorh.getView(R.id.tv_date)).setText(operationToday.getDate());
 
@@ -114,8 +114,8 @@ public class IntelligentPlanningAdapter extends RecyclerView.Adapter<RecyclerVie
             ((TextView) uorh.getView(R.id.tv_num)).setText(context.getResources().getString(R.string.card_num, operationToday.getCardNum()));
 
 
-        } else if (holder instanceof IntelligentPlanningAdapter.UnOperationConsumeHolder) {//未操作消费
-            IntelligentPlanningAdapter.UnOperationConsumeHolder uoch = (IntelligentPlanningAdapter.UnOperationConsumeHolder) holder;
+        } else if (holder instanceof UnOperationConsumeHolder) {//未操作消费
+            UnOperationConsumeHolder uoch = (UnOperationConsumeHolder) holder;
             //时间
             ((TextView) uoch.getView(R.id.tv_date)).setText(operationToday.getDate());
 
@@ -141,8 +141,8 @@ public class IntelligentPlanningAdapter extends RecyclerView.Adapter<RecyclerVie
             ((TextView) uoch.getView(R.id.tv_consume_type)).setText(operationToday.getConsumType());
 
 
-        } else if (holder instanceof IntelligentPlanningAdapter.OperationRepayHolder) {//已操作还款
-            IntelligentPlanningAdapter.OperationRepayHolder orh = (IntelligentPlanningAdapter.OperationRepayHolder) holder;
+        } else if (holder instanceof OperationRepayHolder) {//已操作还款
+            OperationRepayHolder orh = (OperationRepayHolder) holder;
             //时间
             ((TextView) orh.getView(R.id.tv_date)).setText(operationToday.getDate());
 
@@ -164,8 +164,8 @@ public class IntelligentPlanningAdapter extends RecyclerView.Adapter<RecyclerVie
             //还款时间
             ((TextView) orh.getView(R.id.tv_date_repay)).setText(context.getResources().getString(R.string.date, operationToday.getOperationDate()));
 
-        } else if (holder instanceof IntelligentPlanningAdapter.OperationConsumeHolder) {//已操作消费
-            IntelligentPlanningAdapter.OperationConsumeHolder och = (IntelligentPlanningAdapter.OperationConsumeHolder) holder;
+        } else if (holder instanceof OperationConsumeHolder) {//已操作消费
+            OperationConsumeHolder och = (OperationConsumeHolder) holder;
             //时间
             ((TextView) och.getView(R.id.tv_date)).setText(operationToday.getDate());
 

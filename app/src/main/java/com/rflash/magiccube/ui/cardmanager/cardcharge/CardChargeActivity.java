@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -59,6 +60,8 @@ public class CardChargeActivity extends MVPBaseActivity<CardChargeContract.View,
     @BindView(R.id.service_start_time_tv)
     TextView service_start_time_tv;
 
+    private View notDataView;
+
     TimePickerView mTimePikerView;//时间选择器
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -94,6 +97,9 @@ public class CardChargeActivity extends MVPBaseActivity<CardChargeContract.View,
         cardNo=cardDetailBean.getCardNo();
 
         bankAndnum_tv.setText("("+cardDetailBean.getCardBankName()+cardNo.substring(cardNo.length()-4)+")");
+
+        notDataView = getLayoutInflater().inflate(R.layout.empty_view, (ViewGroup) card_chaege_rv.getParent(), false);
+
 
         refresh_layout.setColorSchemeColors(ToolUtils.Colors);
         refresh_layout.setOnRefreshListener(this);
@@ -174,6 +180,8 @@ public class CardChargeActivity extends MVPBaseActivity<CardChargeContract.View,
                 cardChargerBeanList=response.getResult();
                 cardChargeAdapter.setNewData(response.getResult());
                 cardChargeAdapter.notifyDataSetChanged();
+                if(response.getResult().isEmpty())
+                    cardChargeAdapter.setEmptyView(notDataView);
             }else{
                 cardChargerBeanList.addAll(response.getResult());
                 cardChargeAdapter.addData(response.getResult());

@@ -7,8 +7,6 @@ import com.rflash.magiccube.http.BaseBean;
 import com.rflash.magiccube.http.DefaultObserver;
 import com.rflash.magiccube.http.RetrofitFactory;
 import com.rflash.magiccube.mvp.BasePresenterImpl;
-import com.rflash.magiccube.ui.cardmanager.cardbase.BaseInfoBean;
-import com.rflash.magiccube.ui.cardmanager.cardbase.CardBaseInfoContract;
 import com.rflash.magiccube.util.SignUtil;
 
 import java.text.SimpleDateFormat;
@@ -50,7 +48,7 @@ public class AddPlanPresenter extends BasePresenterImpl<AddPlanContract.View> im
             signature = SignUtil.signDataWithStr(treeMap, SpUtil.getString(mView.getContext(), Config.USER_PRVKEY, ""));
             Observable<BaseBean> cardbaseinfo = RetrofitFactory.getApiService().addPlan(version, requestNo, machineCode, account, signature,tranType, cardNo,channel,merchantCode,termCode,amt,isNeedT0,date,state);
             Observable<BaseBean> compose = cardbaseinfo.compose(((BaseActivity) mView.getContext()).compose(((BaseActivity) mView.getContext()).<BaseBean>bindToLifecycle()));
-            compose.subscribe(new DefaultObserver<BaseInfoBean>((BaseActivity) mView.getContext()) {
+            compose.subscribe(new DefaultObserver<BaseBean>((BaseActivity) mView.getContext()) {
                 @Override
                 public void onError(Throwable e) {
                     mView.getDataFail(e.getMessage());
@@ -64,8 +62,8 @@ public class AddPlanPresenter extends BasePresenterImpl<AddPlanContract.View> im
 
 
                 @Override
-                protected void onSuccess(BaseInfoBean data) {
-                    mView.getResult(data);
+                protected void onSuccess() {
+                    mView.getResult();
                 }
             });
 

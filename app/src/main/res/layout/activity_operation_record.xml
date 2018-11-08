@@ -6,8 +6,6 @@
     android:orientation="vertical">
 
     <!--操作记录-->
-
-
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"

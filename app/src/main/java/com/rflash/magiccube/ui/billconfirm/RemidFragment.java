@@ -81,6 +81,11 @@ public class RemidFragment extends MVPBaseFragment<BillConfirmContract.View, Bil
         bill_remind_rv.setAdapter(billConfirmAdapter);
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        pageNum=1;
+    }
 
     @Override
     public void onRefresh() {
@@ -94,7 +99,7 @@ public class RemidFragment extends MVPBaseFragment<BillConfirmContract.View, Bil
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (billConfirmAdapter.getData().size() >= TOTAL_COUNTER) {
+                if (billConfirmBeanList.size() >= TOTAL_COUNTER) {
                     //数据全部加载完毕
                     billConfirmAdapter.loadMoreEnd();
                 } else {
@@ -130,6 +135,7 @@ public class RemidFragment extends MVPBaseFragment<BillConfirmContract.View, Bil
             if (pageNum == 1) {
                 billConfirmBeanList.clear();
                 REMIND_List.clear();
+                billConfirmBeanList.addAll(response.getResult());
                 for(BillConfirmBean.ResultBean bean:response.getResult())
                     if(bean.getState().equals("REMIND"))
                         REMIND_List.add(bean);
@@ -137,10 +143,11 @@ public class RemidFragment extends MVPBaseFragment<BillConfirmContract.View, Bil
                 if(REMIND_List.isEmpty())
                     billConfirmAdapter.setEmptyView(notDataView);
             } else {
+                billConfirmBeanList.addAll(response.getResult());
                 for(BillConfirmBean.ResultBean bean:response.getResult())
                     if(bean.getState().equals("REMIND"))
-                        REMIND_List.add(bean);
-                billConfirmAdapter.addData(REMIND_List);
+                        billConfirmAdapter.addData(bean);
+
                 billConfirmAdapter.loadMoreComplete();
             }
         }

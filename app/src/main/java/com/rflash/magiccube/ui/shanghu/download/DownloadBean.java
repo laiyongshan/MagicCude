@@ -21,7 +21,7 @@ public class DownloadBean extends BaseBean {
     private int maxDownloadNum;
     private int totalNum;
     private int totalPage;
-    private List<DownloadBean.ResultBean> result;
+    private List<ResultBean> result;
 
     public int getMaxDownloadNum() {
         return maxDownloadNum;
@@ -47,11 +47,11 @@ public class DownloadBean extends BaseBean {
         this.totalPage = totalPage;
     }
 
-    public List<DownloadBean.ResultBean> getResult() {
+    public List<ResultBean> getResult() {
         return result;
     }
 
-    public void setResult(List<DownloadBean.ResultBean> result) {
+    public void setResult(List<ResultBean> result) {
         this.result = result;
     }
 
@@ -85,6 +85,15 @@ public class DownloadBean extends BaseBean {
         private String merchantTypeName;
         private String region;
         private String state;
+        private boolean selected;
+
+        public void setSelected(boolean selected) {
+            this.selected = selected;
+        }
+
+        public boolean getSelected(){
+            return  selected;
+        }
 
         public String getChannel() {
             return channel;

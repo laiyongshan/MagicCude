@@ -85,6 +85,15 @@ public class ShanghuBean extends BaseBean {
         private String merchantTypeName;
         private String region;
         private String state;
+        private boolean selected;
+
+        public void setSelected(boolean selected) {
+            this.selected = selected;
+        }
+
+        public boolean getSelected(){
+            return  selected;
+        }
 
         public String getChannel() {
             return channel;

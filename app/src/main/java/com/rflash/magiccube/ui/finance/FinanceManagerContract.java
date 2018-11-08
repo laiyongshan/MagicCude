@@ -18,11 +18,11 @@ public class FinanceManagerContract {
         void getDataSuccess(Object response);
     }
 
-    interface  Presenter extends BasePresenter<FinanceManagerContract.View> {
+    interface  Presenter extends BasePresenter<View> {
        //财务管理列表
-        void queryReport(String cardSeqno,String cardNo,String customerNmae,String salesMan,String startDate,String endDate,String pageNum);
+        void queryReport(String cardSeqno, String cardNo, String customerNmae, String salesMan, String startDate, String endDate, String pageNum);
 
         //财务详情
-        void queryPlan(String cardNo,String tranType,String channelId,String pageNum);
+        void queryPlan(String cardNo, String tranType, String channelId, String pageNum);
     }
 }

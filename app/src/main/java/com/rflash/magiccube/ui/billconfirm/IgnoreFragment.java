@@ -75,6 +75,11 @@ public class IgnoreFragment extends MVPBaseFragment<BillConfirmContract.View, Bi
         bill_ignore_rv.setAdapter(billConfirmAdapter);
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        pageNum=1;
+    }
 
     @Override
     public void onRefresh() {
@@ -88,7 +93,7 @@ public class IgnoreFragment extends MVPBaseFragment<BillConfirmContract.View, Bi
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (billConfirmAdapter.getData().size() >= TOTAL_COUNTER) {
+                if (billConfirmBeanList.size() >= TOTAL_COUNTER) {
                     //数据全部加载完毕
                     billConfirmAdapter.loadMoreEnd();
                 } else {
@@ -124,6 +129,7 @@ public class IgnoreFragment extends MVPBaseFragment<BillConfirmContract.View, Bi
             if (pageNum == 1) {
                 billConfirmBeanList.clear();
                 IGNORE_List.clear();
+                billConfirmBeanList.addAll(response.getResult());
                 for(BillConfirmBean.ResultBean bean:response.getResult())
                     if(bean.getState().equals("IGNORE"))
                         IGNORE_List.add(bean);
@@ -131,10 +137,11 @@ public class IgnoreFragment extends MVPBaseFragment<BillConfirmContract.View, Bi
                 if(IGNORE_List.isEmpty())
                     billConfirmAdapter.setEmptyView(notDataView);
             } else {
+                billConfirmBeanList.addAll(response.getResult());
                 for(BillConfirmBean.ResultBean bean:response.getResult())
                     if(bean.getState().equals("IGNORE"))
-                        IGNORE_List.add(bean);
-                billConfirmAdapter.addData(IGNORE_List);
+                        billConfirmAdapter.addData(bean);
+
                 billConfirmAdapter.loadMoreComplete();
             }
         }

@@ -149,7 +149,7 @@
                         android:layout_centerVertical="true"
                         android:layout_toRightOf="@+id/all_selected_cb"
                         android:layout_marginLeft="4dp"
-                        android:text="2"
+                        android:text=""
                         android:textSize="18sp"
                         android:textColor="#f00"
                         android:layout_marginRight="4dp"
@@ -451,7 +451,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true">
 
-    <Button
+    <TextView
         android:background="@drawable/sure_textview_bg"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
@@ -461,7 +461,7 @@
         android:textSize="14sp"
         android:textColor="@color/white"/>
 
-    <Button
+    <TextView
         android:background="@drawable/cancle_textview_bg"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"

@@ -12,7 +12,7 @@ import java.util.List;
 
 public class CardLink  extends BaseBean implements Serializable{
 
-    private List<CardLink.ResultBean> result;
+    private List<ResultBean> result;
 
     public List<ResultBean> getResult() {
         return result;

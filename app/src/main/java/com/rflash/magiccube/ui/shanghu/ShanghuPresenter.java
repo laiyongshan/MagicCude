@@ -97,8 +97,8 @@ public class ShanghuPresenter extends BasePresenterImpl<ShanghuContract.View> im
         try {
             signature = SignUtil.signDataWithStr(treeMap, SpUtil.getString(mView.getContext(), Config.USER_PRVKEY, ""));
             Observable<BaseBean> balance = RetrofitFactory.getApiService().unbindShanghu(version, requestNo, machineCode, account, signature, merchant);
-            Observable<BaseBean> compose = balance.compose(((BaseActivity) mView).compose(((BaseActivity) mView).<BaseBean>bindToLifecycle()));
-            compose.subscribe(new DefaultObserver<BaseBean>((BaseActivity) mView) {
+            Observable<BaseBean> compose = balance.compose(((BaseActivity) mView.getContext()).compose(((BaseActivity) mView.getContext()).<BaseBean>bindToLifecycle()));
+            compose.subscribe(new DefaultObserver<BaseBean>((BaseActivity) mView.getContext()) {
                 @Override
                 public void onError(Throwable e) {
                     super.onError(e);
@@ -113,8 +113,8 @@ public class ShanghuPresenter extends BasePresenterImpl<ShanghuContract.View> im
 
 
                 @Override
-                protected void onSuccess(BaseBean data) {
-                    mView.unbindSuccess(data);
+                protected void onSuccess() {
+                    mView.unbindSuccess();
                 }
             });
 

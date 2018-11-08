@@ -1,8 +1,6 @@
 package com.rflash.magiccube.ui.shanghu;
 
-import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -20,20 +19,26 @@ import com.bigkoo.pickerview.TimePickerView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.flyco.roundview.RoundTextView;
 import com.jaredrummler.materialspinner.MaterialSpinner;
-import com.rflash.basemodule.BaseFragment;
 import com.rflash.basemodule.utils.ActivityIntent;
 import com.rflash.magiccube.R;
+import com.rflash.magiccube.event.PositionMessage;
 import com.rflash.magiccube.http.BaseBean;
 import com.rflash.magiccube.mvp.MVPBaseFragment;
-import com.rflash.magiccube.ui.refund.RefundBean;
+import com.rflash.magiccube.ui.newmain.DirtData;
 import com.rflash.magiccube.ui.shanghu.download.DownloadShanghuActivity;
 import com.rflash.magiccube.util.TimerPikerTools;
 import com.rflash.magiccube.util.ToolUtils;
+import com.rflash.magiccube.view.SuccessProgressDialog;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -80,6 +85,7 @@ public class ShangHuFragment extends MVPBaseFragment<ShanghuContract.View,Shangh
     @BindView(R.id.delete_shanghu_rtv)
     RoundTextView delete_shanghu_rtv;
 
+    //侧滑菜单里的控件
     @BindView(R.id.channelName_sp)
     MaterialSpinner channelName_sp;
 
@@ -107,12 +113,11 @@ public class ShangHuFragment extends MVPBaseFragment<ShanghuContract.View,Shangh
     @BindView(R.id.sure_filter_tv)
     TextView sure_filter_tv;
 
+    SuccessProgressDialog successProgressDialog;
+
     TimePickerView mTimePikerView;//时间选择器
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM");
 
-    String[] channelNameArr={"请选择渠道名","汇02","盛01","中04"};
-    String[] stateArr={"请选择商户状态","正常","冻结"};
-    String[] merchantTypeArr={"请选择商户类型","电子产品类","房车类"};
 
     String channelName;
     String merchantName;
@@ -122,16 +127,23 @@ public class ShangHuFragment extends MVPBaseFragment<ShanghuContract.View,Shangh
     String startDate;
     String endDate;
     String bind="Y";
-    int pageNum;
+    int pageNum=1;
 
     boolean isOption;
 
     private int TOTAL_COUNTER ; //所有的数据总数
 
+    DirtData dirtData;
+
     ShanghuBean shanghuBean;
     ShanghuAdapter shanghuAdapter;
     List<ShanghuBean.ResultBean> shanghuBeanList=new ArrayList<>();
 
+    List<String> merchantList=new ArrayList<>();
+
+
+    List<String> ChannelList=new ArrayList<>();
+    List<String> MerchantsTypeList=new ArrayList<>();
     @Override
     protected int getLayout() {
         return R.layout.fragment_shanghu;
@@ -145,25 +157,31 @@ public class ShangHuFragment extends MVPBaseFragment<ShanghuContract.View,Shangh
     @Override
     protected void initView() {
 
+        dirtData=new DirtData(getActivity());
+
         refresh_layout.setColorSchemeColors(ToolUtils.Colors);
         refresh_layout.setOnRefreshListener(this);
         refresh_layout.setRefreshing(true);
 
-        getMerchantData();
-//
-        channelName_sp.setItems(channelNameArr);
+        successProgressDialog=new SuccessProgressDialog(getActivity());
+
+        EventBus.getDefault().register(this);//注册
+
+        ChannelList=dirtData.getChannelList();
+        ChannelList.add(0,"请选择渠道名");
+        channelName_sp.setItems(ChannelList);
         channelName_sp.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
             @Override
             public void onItemSelected(MaterialSpinner materialSpinner, int i, long l, Object o) {
                 if(i!=0){
-                    channelName=channelNameArr[i];
+                    channelName=ChannelList.get(i);
                 }else{
                     channelName="";
                 }
             }
         });
 
-        state_sp.setItems(stateArr);
+        state_sp.setItems(dirtData.ShanghuStateArr);
         state_sp.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
             @Override
             public void onItemSelected(MaterialSpinner materialSpinner, int i, long l, Object o) {
@@ -176,13 +194,14 @@ public class ShangHuFragment extends MVPBaseFragment<ShanghuContract.View,Shangh
                 }
             }
         });
-
-        merchantType_sp.setItems(merchantTypeArr);
+        MerchantsTypeList=dirtData.getMerchantsTypeList();
+        MerchantsTypeList.add(0,"请选择商户类型");
+        merchantType_sp.setItems(MerchantsTypeList);
         merchantType_sp.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
             @Override
             public void onItemSelected(MaterialSpinner materialSpinner, int i, long l, Object o) {
                 if(i!=0){
-                    merchantType=merchantTypeArr[i];
+                    merchantType=MerchantsTypeList.get(i);
                 }else{
                     merchantType="";
                 }
@@ -194,6 +213,25 @@ public class ShangHuFragment extends MVPBaseFragment<ShanghuContract.View,Shangh
         shanghuAdapter.setOnLoadMoreListener(this,shanghu_rv);
         shanghuAdapter.disableLoadMoreIfNotFullPage();
         shanghu_rv.setAdapter(shanghuAdapter);
+
+
+
+        all_selected_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if(isChecked)
+//                    selected_count_tv.setText(shanghuAdapter.getData().size()+"");
+//                else
+//                    selected_count_tv.setText("0");
+
+                for(int i=0;i<shanghuBeanList.size();i++){
+                    shanghuBeanList.get(i).setSelected(isChecked);
+                }
+                shanghuAdapter.selectAll();
+            }
+        });
+
+        getMerchantData();//获取已下载的商户数据
     }
 
     @OnClick({R.id.shanghu_option_tv,R.id.download_shanghu_img,R.id.filtrate_img,R.id.delete_shanghu_rtv,
@@ -211,10 +249,12 @@ public class ShangHuFragment extends MVPBaseFragment<ShanghuContract.View,Shangh
                     shanghu_option_tv.setText("操作");
                 }
                 shanghuAdapter = new ShanghuAdapter(isOption, shanghuBeanList);
+                shanghuAdapter.setOnLoadMoreListener(this,shanghu_rv);
+                shanghuAdapter.disableLoadMoreIfNotFullPage();
                 shanghu_rv.setAdapter(shanghuAdapter);
                 break;
 
-            case R.id.download_shanghu_img:
+            case R.id.download_shanghu_img://跳转商户下载页面
                 ActivityIntent.readyGo(getActivity(),DownloadShanghuActivity.class);
                 break;
 
@@ -222,7 +262,7 @@ public class ShangHuFragment extends MVPBaseFragment<ShanghuContract.View,Shangh
                 shanghu_drawerLayout.openDrawer(Gravity.RIGHT);
                 break;
 
-            case R.id.delete_shanghu_rtv:
+            case R.id.delete_shanghu_rtv://解绑商户
                 final MaterialDialog mMaterialDialog = new MaterialDialog(context);
                 mMaterialDialog.setTitle("提示");
                 mMaterialDialog.setMessage("确定删除当前数据？");
@@ -230,9 +270,16 @@ public class ShangHuFragment extends MVPBaseFragment<ShanghuContract.View,Shangh
                     @Override
                     public void onClick(View v) {
                         mMaterialDialog.dismiss();
-                        Toast.makeText(context,"删除",Toast.LENGTH_SHORT).show();
+                        merchantList.clear();
+                        for (int i=0;i<shanghuBeanList.size();i++) {
+                            if (shanghuBeanList.get(i).getSelected()) {
+                                merchantList.add(shanghuBeanList.get(i).getChannel() + "|" + shanghuBeanList.get(i).getMerchantCode());
+                            }
+                        }
+                        mPresenter.unbindShanghu(getMerchantParams(merchantList));
                     }
                 });
+
                 mMaterialDialog.setNegativeButton("取消", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -329,7 +376,8 @@ public class ShangHuFragment extends MVPBaseFragment<ShanghuContract.View,Shangh
                 shanghuAdapter.setNewData(shanghuBeanList);
             }else {
                 shanghuBeanList.addAll(shanghuBean.getResult());
-                shanghuAdapter.addData(shanghuBean.getResult());
+                shanghuAdapter.notifyDataSetChanged();
+//                shanghuAdapter.addData(shanghuBean.getResult());
                 shanghuAdapter.loadMoreComplete();
             }
         }
@@ -346,8 +394,21 @@ public class ShangHuFragment extends MVPBaseFragment<ShanghuContract.View,Shangh
     }
 
     @Override
-    public void unbindSuccess(BaseBean baseBean) {
-
+    public void unbindSuccess() {
+        successProgressDialog.showDialog();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                successProgressDialog.dismiss();
+                pageNum=1;
+                getMerchantData();
+            }
+        },1500);
+        option_rl.setVisibility(View.GONE);
+        shanghu_option_tv.setText("操作");
+        shanghuAdapter = new ShanghuAdapter(false, shanghuBeanList);
+        shanghuAdapter.disableLoadMoreIfNotFullPage();
+        shanghu_rv.setAdapter(shanghuAdapter);
     }
 
 
@@ -373,5 +434,35 @@ public class ShangHuFragment extends MVPBaseFragment<ShanghuContract.View,Shangh
                 refresh_layout.setEnabled(true);
             }
         },1500);
+    }
+
+    private String getMerchantParams(List<String> list){
+        StringBuffer sbf=new StringBuffer();
+        for(int i=0;i<list.size();i++){
+            if(i==0){
+                sbf.append(list.get(i)+"");
+            }else{
+                sbf.append(","+list.get(i));
+            }
+        }
+        return sbf.toString();
+    }
+
+    //ui主线程中执行
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMainEventBus(PositionMessage msg) {
+        int i = 0;
+        shanghuBeanList.get(msg.getPosition()).setSelected(msg.getChecked());
+        for(ShanghuBean.ResultBean bean:shanghuBeanList){
+            if(bean.getSelected())
+                i++;
+        }
+        selected_count_tv.setText(i+"");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);//解除注册
     }
 }

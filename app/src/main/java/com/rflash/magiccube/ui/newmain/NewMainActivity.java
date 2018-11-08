@@ -1,19 +1,15 @@
 package com.rflash.magiccube.ui.newmain;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-import com.rflash.basemodule.BaseActivity;
 import com.rflash.magiccube.R;
-import com.rflash.magiccube.http.BaseBean;
 import com.rflash.magiccube.mvp.MVPBaseActivity;
 import com.rflash.magiccube.ui.cardmanager.CardManagerFragment;
 import com.rflash.magiccube.ui.finance.FinanceManagerFragment;
@@ -21,7 +17,10 @@ import com.rflash.magiccube.ui.main.AppInfo;
 import com.rflash.magiccube.ui.merchants.MerchantsFragment;
 import com.rflash.magiccube.ui.other.OtherBusinessFragment;
 import com.rflash.magiccube.ui.shanghu.ShangHuFragment;
+import com.rflash.magiccube.util.CatchManager;
 import com.rflash.magiccube.view.TabBar;
+
+import java.util.List;
 
 public class NewMainActivity extends MVPBaseActivity<NewMainContract.View,NewMainPresenter> implements NewMainContract.View{
 
@@ -121,9 +120,10 @@ public class NewMainActivity extends MVPBaseActivity<NewMainContract.View,NewMai
     @Override
     public void queryDirtSuccess(DirtBean response) {
         if (response!=null){
-
+            CatchManager.putData2Cache(NewMainActivity.this,DirtData.key, response.getResult());
+            List<DirtBean.ResultBean> list = (List<DirtBean.ResultBean>) CatchManager.getCatchData(NewMainActivity.this, DirtData.key);
             for(DirtBean.ResultBean resultBean:response.getResult()){
-                Log.i("DefaultObserver",resultBean.getType().getDictTypeId()+resultBean.getType().getDictTypeName());
+                Log.i("DefaultObserver",list.size()+"");
             }
         }
     }

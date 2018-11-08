@@ -10,7 +10,7 @@ public class ConsumeModifyContract {
     interface View extends BaseView {
         void getChannel(Channel channel);
 
-        void getMerchant(Merchant merchant,String highLightText);
+        void getMerchant(Merchant merchant, String highLightText);
 
         void modifySuccess();
 
@@ -19,7 +19,7 @@ public class ConsumeModifyContract {
     interface Presenter extends BasePresenter<View> {
         void queryChannel();
 
-        void queryMerchant(String channel, String merchantName,String pageNum);
+        void queryMerchant(String channel, String merchantName, String pageNum);
 
         void modify(String planId, String amt, String merchantCode, String channel);
     }

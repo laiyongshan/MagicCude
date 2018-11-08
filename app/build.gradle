@@ -88,4 +88,8 @@ dependencies {
     compile 'me.drakeet.materialdialog:library:1.3.1'
 
     compile 'com.contrarywind:Android-PickerView:3.2.5'
+
+    compile 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
+
+    compile 'com.jakewharton:disklrucache:2.0.2'
 }

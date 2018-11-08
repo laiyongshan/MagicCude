@@ -21,7 +21,6 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
-import butterknife.internal.ListenerClass;
 
 
 /**
@@ -78,6 +77,8 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
     @BindView(R.id.iv_pwd_dismiss)
     ImageView ivPwdDismiss;
 
+    int type;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,10 +92,17 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
     private void initView() {
         boolean checked = SpUtil.getBoolean(this, Config.USER_STORE, false);
         cbRemember.setChecked(checked);
-        if (checked) {
-            edtName.setText(SpUtil.getString(this, Config.ACCOUNT, ""));
-            edtPwd.setText(SpUtil.getString(this, Config.USER_PWD, ""));
-        }
+
+        type=getIntent().getIntExtra("fromType",0);
+       if(type==0) {
+           if (checked) {
+               edtName.setText(SpUtil.getString(this, Config.ACCOUNT, ""));
+               edtPwd.setText(SpUtil.getString(this, Config.USER_PWD, ""));
+           }
+       }else{
+           edtName.setText(SpUtil.getString(this, Config.ACCOUNT, ""));
+           edtPwd.setText("");
+       }
     }
 
 
@@ -170,13 +178,11 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
 
     @OnTextChanged(R.id.edt_name)
     public void onNameTextChanged(CharSequence s, int start, int before, int count){
-
         if (!TextUtils.isEmpty(s)){
             ivNameDismiss.setVisibility(View.VISIBLE);
         }else {
             ivNameDismiss.setVisibility(View.GONE);
         }
-
     }
 
     @OnTextChanged(R.id.edt_pwd)

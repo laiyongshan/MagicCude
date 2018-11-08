@@ -56,8 +56,8 @@ public class CardDetailPresenter  extends BasePresenterImpl<CardDetailContract.V
 
 
                 @Override
-                protected void onSuccess(BaseBean data) {
-                    mView.updateCardState(data);
+                protected void onSuccess() {
+                    mView.updateCardState();
                 }
             });
 

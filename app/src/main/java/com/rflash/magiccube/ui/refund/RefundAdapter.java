@@ -5,7 +5,9 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.rflash.basemodule.utils.StringUtil;
 import com.rflash.magiccube.R;
+import com.rflash.magiccube.util.DateUtil;
 
 import java.util.List;
 
@@ -31,12 +33,12 @@ public class RefundAdapter extends BaseQuickAdapter<RefundBean.ResultBean,BaseVi
             ((TextView) helper.getView(R.id.refund_type_tv)).setTextColor(Color.RED);
         }
 
-        ((TextView)helper.getView(R.id.bankcard_name_tv)).setText(item.getBankName()+"");
+        ((TextView)helper.getView(R.id.bankcard_name_tv)).setText(item.getBankName()+""+item.getCardNo().substring(item.getCardNo().length()-4));
         ((TextView)helper.getView(R.id.cardSeqno_tv)).setText(item.getCardSeqno()+"");
         ((TextView)helper.getView(R.id.customerName_tv)).setText(item.getCustomerName()+"");
-        ((TextView)helper.getView(R.id.billAmt_tv)).setText("￥"+item.getBillAmt()+"");
-        ((TextView)helper.getView(R.id.noRepayAmt_tv)).setText("￥"+item.getNoRepayAmt()+"");
-//        ((TextView)helper.getView(R.id.noRepayAmt_tv)).setText("￥"+item.getBillEndDate()+"");
+        ((TextView)helper.getView(R.id.billAmt_tv)).setText("￥"+ StringUtil.getTwoPointString(item.getBillAmt())+"");
+        ((TextView)helper.getView(R.id.noRepayAmt_tv)).setText("￥"+StringUtil.getTwoPointString(item.getNoRepayAmt())+"");
+        ((TextView)helper.getView(R.id.bill_end_date_tv)).setText(DateUtil.formatDate1(item.getBillEndDate())+"");
 
     }
 }

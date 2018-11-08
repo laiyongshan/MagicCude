@@ -8,9 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.rflash.basemodule.BaseFragment;
+import com.rflash.basemodule.utils.ActivityIntent;
 import com.rflash.magiccube.R;
 import com.rflash.magiccube.mvp.MVPBaseFragment;
+import com.rflash.magiccube.ui.credithandle.CreditHandleActivity;
+import com.rflash.magiccube.ui.creditquery.CreditQueryActivity;
+import com.rflash.magiccube.ui.loanhandle.LoanHandleActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +52,7 @@ public class OtherBusinessFragment extends BaseFragment {
 
         other_rv.setLayoutManager(new LinearLayoutManager(getActivity()));
         mOtherBusinessAdapter=new OtherBusinessAdapter(mList);
+
         other_rv.setAdapter(mOtherBusinessAdapter);
     }
 

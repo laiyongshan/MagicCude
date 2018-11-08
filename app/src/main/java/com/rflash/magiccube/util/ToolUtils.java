@@ -7,6 +7,8 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.rflash.magiccube.R;
+
 import java.lang.reflect.Field;
 
 /**
@@ -60,5 +62,152 @@ public class ToolUtils {
 
     }
 
+    public static int getBankIcon(String bankName){
+        if(bankName.contains("工商"))
+            return R.mipmap.icon_gongshan;
+        else if(bankName.contains("光大"))
+            return  R.mipmap.icon_guangda;
+        else if(bankName.contains("广发"))
+            return R.mipmap.icon_guangfa;
+        else if(bankName.contains("广州银行"))
+            return  R.mipmap.icon_guangzhou;
+        else if(bankName.contains("华夏"))
+            return  R.mipmap.icon_huaxia;
+        else if(bankName.contains("建设"))
+            return  R.mipmap.icon_jianshe;
+        else if(bankName.contains("交通"))
+            return  R.mipmap.icon_jiaotong;
+        else if(bankName.contains("民生"))
+            return  R.mipmap.icon_minsheng;
+        else if(bankName.contains("农业"))
+            return  R.mipmap.icon_nongye;
+        else if(bankName.contains("平安"))
+            return  R.mipmap.icon_pingan;
+        else if(bankName.contains("浦发"))
+            return  R.mipmap.icon_pufa;
+        else if(bankName.contains("兴业"))
+            return  R.mipmap.icon_xingye;
+        else if(bankName.contains("邮政"))
+            return  R.mipmap.icon_youzheng;
+        else if(bankName.contains("招商"))
+            return  R.mipmap.icon_zhaoshang;
+        else if(bankName.contains("中国银行"))
+            return  R.mipmap.icon_zhongguo;
+        else if(bankName.contains("中信"))
+            return  R.mipmap.icon_zhongxin;
+
+        return R.mipmap.icon_bank_defual_logo;
+    }
+
+    public static int getBankCardBg(String bankName){
+        if(bankName.contains("工商"))
+            return R.mipmap.bg_bank_card_red;
+        else if(bankName.contains("光大"))
+            return  R.mipmap.bg_bank_card_p;
+        else if(bankName.contains("广发"))
+            return R.mipmap.bg_bank_card_red;
+        else if(bankName.contains("广州银行"))
+            return  R.mipmap.bg_bank_card_red;
+        else if(bankName.contains("华夏"))
+            return  R.mipmap.bg_bank_card_red;
+        else if(bankName.contains("建设"))
+            return  R.mipmap.bg_bank_card_blue;
+        else if(bankName.contains("交通"))
+            return  R.mipmap.bg_bank_card_green;
+        else if(bankName.contains("民生"))
+            return  R.mipmap.bg_bank_card_blue;
+        else if(bankName.contains("农业"))
+            return  R.mipmap.bg_bank_card_green;
+        else if(bankName.contains("平安"))
+            return  R.mipmap.bg_bank_card_red;
+        else if(bankName.contains("浦发"))
+            return  R.mipmap.bg_bank_card_blue;
+        else if(bankName.contains("兴业"))
+            return  R.mipmap.bg_bank_card_blue;
+        else if(bankName.contains("邮政"))
+            return  R.mipmap.bg_bank_card_green;
+        else if(bankName.contains("招商"))
+            return  R.mipmap.bg_bank_card_red;
+        else if(bankName.contains("中国银行"))
+            return  R.mipmap.bg_bank_card_red;
+        else if(bankName.contains("中信"))
+            return  R.mipmap.bg_bank_card_red;
+
+        return R.mipmap.bg_bank_card_blue;
+    }
+
+    public static int getFinanceBankCardBg(String bankName){
+        if(bankName.contains("工商"))
+            return R.mipmap.bg_finance_card_red;
+        else if(bankName.contains("光大"))
+            return  R.mipmap.bg_finance_card_p;
+        else if(bankName.contains("广发"))
+            return R.mipmap.bg_finance_card_red;
+        else if(bankName.contains("广州银行"))
+            return  R.mipmap.bg_finance_card_red;
+        else if(bankName.contains("华夏"))
+            return  R.mipmap.bg_finance_card_red;
+        else if(bankName.contains("建设"))
+            return  R.mipmap.bg_finance_card_blue;
+        else if(bankName.contains("交通"))
+            return  R.mipmap.bg_finance_card_green;
+        else if(bankName.contains("民生"))
+            return  R.mipmap.bg_finance_card_blue;
+        else if(bankName.contains("农业"))
+            return  R.mipmap.bg_finance_card_green;
+        else if(bankName.contains("平安"))
+            return  R.mipmap.bg_finance_card_red;
+        else if(bankName.contains("浦发"))
+            return  R.mipmap.bg_finance_card_blue;
+        else if(bankName.contains("兴业"))
+            return  R.mipmap.bg_finance_card_blue;
+        else if(bankName.contains("邮政"))
+            return  R.mipmap.bg_finance_card_green;
+        else if(bankName.contains("招商"))
+            return  R.mipmap.bg_finance_card_red;
+        else if(bankName.contains("中国银行"))
+            return  R.mipmap.bg_finance_card_red;
+        else if(bankName.contains("中信"))
+            return  R.mipmap.bg_finance_card_red;
+
+        return R.mipmap.bg_finance_card_blue;
+    }
+
+    public static int getPlanItemCardBg(String bankName){
+        if(bankName.contains("工商"))
+            return R.mipmap.bg_planning_red;
+        else if(bankName.contains("光大"))
+            return  R.mipmap.bg_planning_p;
+        else if(bankName.contains("广发"))
+            return R.mipmap.bg_planning_red;
+        else if(bankName.contains("广州银行"))
+            return  R.mipmap.bg_planning_red;
+        else if(bankName.contains("华夏"))
+            return  R.mipmap.bg_planning_red;
+        else if(bankName.contains("建设"))
+            return  R.mipmap.bg_planning_blue;
+        else if(bankName.contains("交通"))
+            return  R.mipmap.bg_planning_green;
+        else if(bankName.contains("民生"))
+            return  R.mipmap.bg_planning_blue;
+        else if(bankName.contains("农业"))
+            return  R.mipmap.bg_planning_green;
+        else if(bankName.contains("平安"))
+            return  R.mipmap.bg_planning_red;
+        else if(bankName.contains("浦发"))
+            return  R.mipmap.bg_planning_blue;
+        else if(bankName.contains("兴业"))
+            return  R.mipmap.bg_planning_blue;
+        else if(bankName.contains("邮政"))
+            return  R.mipmap.bg_planning_green;
+        else if(bankName.contains("招商"))
+            return  R.mipmap.bg_planning_red;
+        else if(bankName.contains("中国银行"))
+            return  R.mipmap.bg_planning_red;
+        else if(bankName.contains("中信"))
+            return  R.mipmap.bg_planning_red;
+
+        return R.mipmap.bg_planning_blue;
+    }
 
 }

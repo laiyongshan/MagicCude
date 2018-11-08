@@ -19,8 +19,16 @@ public class Login extends BaseBean{
     private String prvKey;
     private String pubKey;
     private String posMachineCode;
-
+    private String merchantCode;//商户号
     private String termCode;//养卡点的终端号
+
+    public void setMerchantCode(String merchantCode) {
+        this.merchantCode = merchantCode;
+    }
+
+    public String getMerchantCode() {
+        return merchantCode;
+    }
 
     public void setTermCode(String termCode) {
         this.termCode = termCode;

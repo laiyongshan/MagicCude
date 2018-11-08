@@ -18,13 +18,13 @@ public class ShanghuContract {
         void getDataSuccess(ShanghuBean response);
         void unbindLoading();
         void unbindError(String msg);
-        void unbindSuccess(BaseBean baseBean);
+        void unbindSuccess();
         void unbindFinish();
     }
 
-    interface  Presenter extends BasePresenter<ShanghuContract.View> {
+    interface  Presenter extends BasePresenter<View> {
         //查询商户
-        void queryShanghu(String channelName,String merchantName,String merchantCode,String state,String merchantType,String startDate,String endDate,String bind,String pageNum);
+        void queryShanghu(String channelName, String merchantName, String merchantCode, String state, String merchantType, String startDate, String endDate, String bind, String pageNum);
 
         //删除商户
         /**

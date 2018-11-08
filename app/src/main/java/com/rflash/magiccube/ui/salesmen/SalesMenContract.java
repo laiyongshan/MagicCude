@@ -19,10 +19,10 @@ public class SalesMenContract  {
         void operaSalesManSuccess(Object response);
     }
 
-    interface  Presenter extends BasePresenter<SalesMenContract.View> {
-        void operaSalesMan(String id,String flag,String name,String profitRatio);//业务员新增/修改
-        void deleteSalesMan(String id,String name);//业务员删除
-        void querySalesMan(String name,String profitRatio);//业务员查询
+    interface  Presenter extends BasePresenter<View> {
+        void operaSalesMan(String id, String flag, String name, String profitRatio);//业务员新增/修改
+        void deleteSalesMan(String id, String name);//业务员删除
+        void querySalesMan(String name, String profitRatio);//业务员查询
     }
 
 }

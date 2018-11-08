@@ -69,7 +69,7 @@ public class CheckUtil {
             }
         } catch (NumberFormatException e) {
             e.printStackTrace();
-        } catch (java.text.ParseException e) {
+        } catch (ParseException e) {
             e.printStackTrace();
         }
         if (Integer.parseInt(strMonth) > 12 || Integer.parseInt(strMonth) == 0) {

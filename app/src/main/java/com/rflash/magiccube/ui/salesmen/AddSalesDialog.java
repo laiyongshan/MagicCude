@@ -47,7 +47,7 @@ public class AddSalesDialog extends Dialog {
     Context context;
 
     interface AddListener {
-        void SureListener(String name,String profitRatio);
+        void SureListener(String name, String profitRatio);
         void CancleListener();
     }
 
@@ -88,7 +88,7 @@ public class AddSalesDialog extends Dialog {
                 if(salesmen_name_et.getText().toString().trim().equals("")||salesman_profitRatio_et.getText().toString().trim().equals("")){
                     Toast.makeText(context,"请填写完整的信息",Toast.LENGTH_SHORT).show();
                 }else{
-                    addListener.SureListener(salesmen_name_et.getText().toString().trim(),salesman_profitRatio_et.getText().toString().trim());
+                    addListener.SureListener(salesmen_name_et.getText().toString().trim(),Double.valueOf(salesman_profitRatio_et.getText().toString().trim())/100+"");
                 }
 
                 break;

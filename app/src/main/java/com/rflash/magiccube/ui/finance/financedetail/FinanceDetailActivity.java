@@ -85,9 +85,9 @@ public class FinanceDetailActivity extends MVPBaseActivity<FinanceManagerContrac
         if (financeBean != null) {
             cardNo = financeBean.getCardNo() + "";
             financeInfoTvs[0].setText("总消费笔数：" + financeBean.getSaleNum());
-            financeInfoTvs[1].setText("总消费金额：￥" + financeBean.getSaleAmt());
+            financeInfoTvs[1].setText("总消费金额：￥" + Double.valueOf(financeBean.getSaleAmt())/100);
             financeInfoTvs[2].setText("总还款笔数：" + financeBean.getRepayNum());
-            financeInfoTvs[3].setText("总还款金额：￥" + financeBean.getRepayAmt());
+            financeInfoTvs[3].setText("总还款金额：￥" + Double.valueOf(financeBean.getRepayAmt())/100);
             if (financeBean.getServiceType().equals("FIXED_LIMIT")) {
                 financeInfoTvs[4].setText("费用基数类型：" + "固定额度");
             } else if (financeBean.getServiceType().equals("REPAY_LIMIT")) {
@@ -95,9 +95,9 @@ public class FinanceDetailActivity extends MVPBaseActivity<FinanceManagerContrac
             } else if (financeBean.getServiceType().equals("USER_DEFINED")) {
                 financeInfoTvs[4].setText("费用基数类型：" + "自定义");
             }
-            financeInfoTvs[5].setText("收费基数：￥" + financeBean.getServiceAmt());
-            financeInfoTvs[6].setText("收费比例：" + financeBean.getServiceRate() + "");
-            financeInfoTvs[7].setText("服务费用：￥" + financeBean.getServiceFee() + "");
+            financeInfoTvs[5].setText("收费基数：￥" + Double.valueOf(financeBean.getServiceAmt())/100);
+            financeInfoTvs[6].setText("收费比例：" + Double.valueOf(financeBean.getServiceRate())*100 + "%");
+            financeInfoTvs[7].setText("服务费用：￥" + Double.valueOf(financeBean.getServiceFee())/100 + "");
         }
 
 

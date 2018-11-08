@@ -9,12 +9,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.bigkoo.pickerview.TimePickerView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.rflash.basemodule.BaseFragment;
+import com.rflash.basemodule.utils.StringUtil;
 import com.rflash.magiccube.R;
 import com.rflash.magiccube.mvp.MVPBaseFragment;
 import com.rflash.magiccube.ui.finance.financedetail.FinanceDetailActivity;
@@ -50,6 +52,12 @@ public class FinanceManagerFragment extends MVPBaseFragment<FinanceManagerContra
     @BindView(R.id.revenue_tv)
     TextView revenue_tv;
 
+    @BindView(R.id.serviceFee_tv)
+    TextView serviceFee_tv;
+
+    @BindView(R.id.saleAmt_tv)
+    TextView saleAmt_tv;
+
     @BindView(R.id.finance_card_rv)
     RecyclerView finance_card_rv;
 
@@ -80,6 +88,8 @@ public class FinanceManagerFragment extends MVPBaseFragment<FinanceManagerContra
     @BindView(R.id.endDate_tv)
     TextView endDate_tv;
 
+    private View notDataView;
+
     TimePickerView mTimePikerView;//时间选择器
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM");
 
@@ -104,6 +114,8 @@ public class FinanceManagerFragment extends MVPBaseFragment<FinanceManagerContra
 
     @Override
     protected void initView() {
+
+        notDataView = getLayoutInflater().inflate(R.layout.empty_view, (ViewGroup) finance_card_rv.getParent(), false);
 
         refresh_layout.setOnRefreshListener(this);
         refresh_layout.setColorSchemeColors(ToolUtils.Colors);
@@ -176,8 +188,8 @@ public class FinanceManagerFragment extends MVPBaseFragment<FinanceManagerContra
         cardNo=cardNo_et.getText().toString().trim();
         customerNmae=customerNmae_et.getText().toString().trim();
         salesMan=salesMan_et.getText().toString().trim();
-        startDate=startDate_tv.getText().toString().trim();
-        endDate=endDate_tv.getText().toString().trim();
+        startDate=startDate_tv.getText().toString().trim().replace("-","");
+        endDate=endDate_tv.getText().toString().trim().replace("-","");
         mPresenter.queryReport(cardSeqno,cardNo,customerNmae,salesMan,startDate,endDate,pageNum+"");
     }
 
@@ -208,11 +220,17 @@ public class FinanceManagerFragment extends MVPBaseFragment<FinanceManagerContra
             financeBean= (FinanceBean) response;
             TOTAL_COUNTER=financeBean.getTotalNum();
 //            data_count_tv.setText("共"+financeBean.getTotalNum()+"条数据");
-            tranCost_tv.setText("总成本：￥"+financeBean.getTranCost());
-            revenue_tv.setText("总收益：￥"+financeBean.getRevenue());
+            tranCost_tv.setText("总成本：￥"+ StringUtil.getTwoPointString(financeBean.getTranCost())+"");
+            revenue_tv.setText("总收益：￥"+StringUtil.getTwoPointString(financeBean.getRevenue())+"");
+
+            serviceFee_tv.setText("总服务费：￥"+ StringUtil.getTwoPointString(financeBean.getServiceFee())+"");
+            saleAmt_tv.setText("总刷卡金额：￥"+StringUtil.getTwoPointString(financeBean.getSaleAmt())+"");
+
             if(pageNum==1){
                 financeBeanList=financeBean.getResult();
                 financeAdapter.setNewData(financeBeanList);
+                if(financeBeanList.isEmpty())
+                    financeAdapter.setEmptyView(notDataView);
             }else {
                 financeBeanList.addAll(financeBean.getResult());
                 financeAdapter.addData(financeBean.getResult());

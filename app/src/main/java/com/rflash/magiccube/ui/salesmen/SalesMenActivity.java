@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.rflash.basemodule.BaseActivity;
@@ -39,6 +40,8 @@ public class SalesMenActivity extends MVPBaseActivity<SalesMenContract.View,Sale
 
     @BindView(R.id.refresh_layout)
     SwipeRefreshLayout refresh_layout;
+
+    private View notDataView;
 
     String name="";//业务员
     String profitRatio="";//提成费率
@@ -80,6 +83,8 @@ public class SalesMenActivity extends MVPBaseActivity<SalesMenContract.View,Sale
     }
 
     private void initView(){
+
+        notDataView = getLayoutInflater().inflate(R.layout.empty_view, (ViewGroup) salesmen_rv.getParent(), false);
 
         refresh_layout.setOnRefreshListener(this);
         refresh_layout.setColorSchemeColors(ToolUtils.Colors);
@@ -140,6 +145,8 @@ public class SalesMenActivity extends MVPBaseActivity<SalesMenContract.View,Sale
             salesmenBean= (SalesmenBean) response;
             salesMenAdapter=new SalesMenAdapter(SalesMenActivity.this,salesmenBean.getResult());
             salesmen_rv.setAdapter(salesMenAdapter);
+            if(salesmenBean.getResult().isEmpty())
+                salesMenAdapter.setEmptyView(notDataView);
         }
     }
 

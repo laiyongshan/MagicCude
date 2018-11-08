@@ -100,8 +100,8 @@ public class CardIncreasePresenter extends BasePresenterImpl<CardIncreaseContrac
                     mView.finishRefresh();
                 }
                 @Override
-                protected void onSuccess(BaseBean data) {
-                    mView.getDataSuccess(data);
+                protected void onSuccess() {
+                    mView.increaseSuccess();
                 }
             });
 

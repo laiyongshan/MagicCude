@@ -77,9 +77,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="80dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1.1"
                         android:text="卡位："
                         />
 
@@ -99,9 +98,8 @@
                     android:layout_marginTop="6dp"
                     >
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="80dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1.1"
                         android:text="持卡人："
                         />
 
@@ -121,9 +119,8 @@
                     android:layout_marginTop="6dp"
                     >
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="80dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1.1"
                         android:text="账单类型："
                         />
 
@@ -143,9 +140,8 @@
                     android:layout_marginTop="6dp"
                     >
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="80dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1.1"
                         android:text="账单周期："
                         />
 
@@ -165,9 +161,8 @@
                     android:layout_marginTop="6dp"
                     >
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="80dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1.1"
                         android:text="账单金额："
                         />
 
@@ -183,26 +178,30 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/factAmt_ll"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
                     android:orientation="horizontal"
+                    android:gravity="center_vertical"
                     >
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1.1"
-                        android:text="实际金额："
+                        android:text="实际账单金额："
                         />
 
                     <EditText
                         android:id="@+id/the_fact_et"
-                        android:layout_width="110dp"
+                        android:layout_width="100dp"
                         android:layout_height="30dp"
                         android:text=""
                         android:background="#EAE9E9"
+                        android:inputType="numberDecimal"
                         android:gravity="center_vertical"
                         android:padding="6dp"
+                        android:textSize="14sp"
+                        android:layout_gravity="center_vertical"
                         />
 
                     <com.flyco.roundview.RoundTextView
@@ -211,7 +210,7 @@
                         android:layout_height="wrap_content"
                         android:paddingTop="6dp"
                         android:paddingBottom="6dp"
-                        android:layout_weight="0.8"
+                        android:layout_weight="1"
                         rv:rv_backgroundColor="#f00"
                         rv:rv_backgroundPressColor="@color/luncy"
                         rv:rv_cornerRadius="5dp"
@@ -227,7 +226,7 @@
                         android:layout_height="wrap_content"
                         android:paddingTop="6dp"
                         android:paddingBottom="6dp"
-                        android:layout_weight="0.8"
+                        android:layout_weight="1"
                         rv:rv_backgroundColor="#909090"
                         rv:rv_cornerRadius="5dp"
                         rv:rv_backgroundPressColor="@color/luncy"

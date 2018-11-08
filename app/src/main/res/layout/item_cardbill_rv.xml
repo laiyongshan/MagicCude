@@ -191,7 +191,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1.5"
-                        android:text="实际金额："
+                        android:text="实际账单金额："
                         />
 
                     <LinearLayout
@@ -209,6 +209,7 @@
                         android:minWidth="120dp"
                         android:lines="1"
                         android:singleLine="true"
+                        android:inputType="numberDecimal"
                         />
 
                     <com.flyco.roundview.RoundTextView

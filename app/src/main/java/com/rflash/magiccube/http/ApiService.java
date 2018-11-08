@@ -914,6 +914,29 @@ public interface ApiService {
                                    @Field("cardNo") String cardNo);
 
     /**
+     * 四要素验证
+     * @param version
+     * @param requestNo
+     * @param machineCode
+     * @param account
+     * @param signature
+     *
+     * */
+    @FormUrlEncoded
+    @POST("card-gate-web/product/relCard")
+    Observable<BaseBean> relCard(@Field(Config.VERSION)String version,
+                                         @Field(Config.REQUEST_NO) String requestNo,
+                                         @Field(Config.MACHINECODE) String machineCode,
+                                         @Field(Config.ACCOUNT) String account,
+                                         @Field(Config.SIGNATURE) String signature,
+                                        @Field("cardNo") String cardNo,
+                                        @Field("name") String name,
+                                        @Field("identityCard") String identityCard,
+                                        @Field("mobile") String mobile,
+                                        @Field("cardMedia") String cardMedia);
+
+
+    /**
      * 添加卡片
      * @param version
      * @param requestNo
@@ -941,6 +964,7 @@ public interface ApiService {
                                     @Field("salesMan")String salesMan,
                                     @Field("fixedLimit")String fixedLimit,
                                     @Field("availableAmt")String availableAmt,
+                                    @Field("currentRepayAmt")String currentRepayAmt,
                                     @Field("initAmt")String initAmt,
                                     @Field("tempLimit") String tempLimit,
                                     @Field("tempLimitDate")String tempLimitDate,
@@ -1018,4 +1042,114 @@ public interface ApiService {
                                          @Field(Config.MACHINECODE) String machineCode,
                                          @Field(Config.ACCOUNT) String account,
                                          @Field(Config.SIGNATURE) String signature);
+
+    /**
+     * 卡片續期
+     * @param version
+     * @param requestNo
+     * @param machineCode
+     * @param account
+     * @param signature
+     *
+     * */
+    @FormUrlEncoded
+    @POST("card-gate-web/card/renewalCard")
+    Observable<BaseBean> renewalCard(@Field(Config.VERSION)String version,
+                                   @Field(Config.REQUEST_NO) String requestNo,
+                                   @Field(Config.MACHINECODE) String machineCode,
+                                   @Field(Config.ACCOUNT) String account,
+                                   @Field(Config.SIGNATURE) String signature,
+                                    @Field("cardNo") String cardNo,
+                                     @Field("serviceEndDate") String serviceEndDate,
+                                     @Field("serviceType") String serviceType,
+                                     @Field("serviceAmt") String serviceAmt,
+                                     @Field("serviceRate") String serviceRate,
+                                     @Field("paidAmt") String paidAmt,
+                                     @Field("fixedLimit") String fixedLimit,
+                                     @Field("currentRepayAmt") String currentRepayAmt,
+                                     @Field("initAmt") String initAmt,
+                                     @Field("serviceStartDate") String serviceStartDate,
+                                     @Field("availableAmt") String availableAmt,
+                                     @Field("state") String state);
+
+    /**
+     * 續期提醒
+     * @param version
+     * @param requestNo
+     * @param machineCode
+     * @param account
+     * @param signature
+     *
+     * */
+    @FormUrlEncoded
+    @POST("card-gate-web/msg/expires")
+    Observable<BaseBean> expiresMsg(@Field(Config.VERSION)String version,
+                                     @Field(Config.REQUEST_NO) String requestNo,
+                                     @Field(Config.MACHINECODE) String machineCode,
+                                     @Field(Config.ACCOUNT) String account,
+                                     @Field(Config.SIGNATURE) String signature,
+                                     @Field("pageNum") String pageNum);
+
+    /**
+     *规划查询
+     * @param version
+     * @param requestNo
+     * @param machineCode
+     * @param account
+     * @param signature
+     *version, requestNo, machineCode, account, signature, pageNum,cardNo,tranType,
+    cardSeqno,customerName,state,accountType,startDate,endDate,syncState
+     * */
+    @FormUrlEncoded
+    @POST("card-gate-web/plan/query")
+    Observable<BaseBean> queryPlanning(@Field(Config.VERSION)String version,
+                                    @Field(Config.REQUEST_NO) String requestNo,
+                                    @Field(Config.MACHINECODE) String machineCode,
+                                    @Field(Config.ACCOUNT) String account,
+                                    @Field(Config.SIGNATURE) String signature,
+                                    @Field("pageNum") String pageNum,
+                                       @Field("cardNo") String cardNo,
+                                       @Field("tranType") String tranType,
+                                       @Field("cardSeqno") String cardSeqno,
+                                       @Field("customerName") String customerName,
+                                       @Field("state") String state,
+                                       @Field("accountType") String accountType,
+                                       @Field("startDate") String startDate,
+                                       @Field("endDate") String endDate,
+                                       @Field("syncState") String syncState,
+                                       @Field("count") String count);
+
+    /**
+     *同步规划
+     * @param version
+     * @param requestNo
+     * @param machineCode
+     * @param account
+     * @param signature
+     * */
+    @FormUrlEncoded
+    @POST("card-gate-web/plan/sync")
+    Observable<BaseBean> syncPlan(@Field(Config.VERSION)String version,
+                                       @Field(Config.REQUEST_NO) String requestNo,
+                                       @Field(Config.MACHINECODE) String machineCode,
+                                       @Field(Config.ACCOUNT) String account,
+                                       @Field(Config.SIGNATURE) String signature);
+
+
+    /**
+     * @param version
+     * @param requestNo
+     * @param machineCode
+     * @param account
+     * @param signature   //修改密码
+     */
+    @FormUrlEncoded
+    @POST("card-gate-web/password/modify")
+    Observable<BaseBean> modifyPassword(@Field(Config.VERSION) String version,
+                                        @Field(Config.REQUEST_NO) String requestNo,
+                                        @Field(Config.MACHINECODE) String machineCode,
+                                        @Field(Config.ACCOUNT) String account,
+                                        @Field(Config.SIGNATURE) String signature,
+                                        @Field("password") String password,
+                                        @Field("newPassword") String newPassword);
 }

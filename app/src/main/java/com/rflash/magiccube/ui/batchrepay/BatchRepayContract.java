@@ -19,9 +19,9 @@ public class BatchRepayContract {
 
     interface  Presenter extends BasePresenter<View> {
         void balance();
-        void planQuery(String startDate,String endDate,String cardSeqno,String cardNo,String state, String tranType, String today, String pageNum);
+        void planQuery(String startDate, String endDate, String cardSeqno, String cardNo, String state, String tranType, String today, String pageNum);
         //确认还款
-        void confirm(String planId,int position);
+        void confirm(String planId, int position);
         void helpPay(String planId, ArrayList<Integer> positions);
     }
 }

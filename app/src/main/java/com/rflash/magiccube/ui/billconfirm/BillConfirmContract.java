@@ -23,13 +23,13 @@ public class BillConfirmContract {
 
     }
 
-    interface  Presenter extends BasePresenter<BillConfirmContract.View> {
+    interface  Presenter extends BasePresenter<View> {
 
         //获取账单确认列表
         void getBillConfirmList(String pageNum);
 
         //修改账单金额,确认账单
-        void updateCardBill(String billId,String cardNo,String billMonth,String billAmt,String operate);
+        void updateCardBill(String billId, String cardNo, String billMonth, String billAmt, String operate);
 
     }
 

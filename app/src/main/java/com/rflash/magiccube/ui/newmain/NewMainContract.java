@@ -19,7 +19,7 @@ public class NewMainContract {
         void queryDirtSuccess(DirtBean response);
     }
 
-    interface  Presenter extends BasePresenter<NewMainContract.View> {
+    interface  Presenter extends BasePresenter<View> {
         void updateApp();//更新App
         void queryDirt();//字典同步
     }

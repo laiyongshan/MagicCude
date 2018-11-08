@@ -18,7 +18,7 @@ public class MerchantsContract {
         void getRemindDataSuccess(Object response);
     }
 
-    interface  Presenter extends BasePresenter<MerchantsContract.View> {
+    interface  Presenter extends BasePresenter<View> {
         void getCount();//获取首页统计
         void getRemindCount();//首页通知数量统计
     }
