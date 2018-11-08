@@ -13,7 +13,6 @@ import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.rflash.magiccube.R;
 import com.rflash.magiccube.mvp.MVPBaseActivity;
 import com.rflash.magiccube.ui.cardmanager.CardBean;
-import com.rflash.magiccube.ui.cardmanager.addplan.AddPlanActivity;
 import com.rflash.magiccube.view.SuccessProgressDialog;
 
 import butterknife.BindView;
@@ -25,7 +24,7 @@ import me.drakeet.materialdialog.MaterialDialog;
  * 续费
  */
 
-public class RenewalActivity extends MVPBaseActivity<RenewalContract.View,RenewalPresenter> implements RenewalContract.View {
+public class RenewalActivity extends MVPBaseActivity<RenewalContract.View, RenewalPresenter> implements RenewalContract.View {
 
     @BindView(R.id.title_back_tv)
     TextView title_back_tv;
@@ -63,7 +62,6 @@ public class RenewalActivity extends MVPBaseActivity<RenewalContract.View,Renewa
     @BindView(R.id.sure_rtv)
     RoundTextView sure_rtv;
 
-
     SuccessProgressDialog successProgressDialog;
 
     CardBean.ResultBean cardDetailBean;
@@ -78,23 +76,24 @@ public class RenewalActivity extends MVPBaseActivity<RenewalContract.View,Renewa
 
     private void initView() {
         cardDetailBean = (CardBean.ResultBean) getIntent().getSerializableExtra("cardDetail");
-        cardNo = cardDetailBean.getCardNo();
-        bankAndnum_tv.setText("(" + cardDetailBean.getCardBankName() + cardDetailBean.getCardNo().substring(cardNo.length() - 4) + ")");
 
-        successProgressDialog=new SuccessProgressDialog(this);
+        successProgressDialog = new SuccessProgressDialog(this);
 
-        if(cardDetailBean.getState().equals("VALID")){//正常
-            card_state_tv.setText("正常");
-            card_state_tv.setTextColor(Color.parseColor("#3F51B5"));
-        }else if(cardDetailBean.getState().equals("EXPIRE")){
-            card_state_tv.setText("卡片过期");
-            card_state_tv.setTextColor(Color.RED);
+        if (cardDetailBean != null) {
+            cardNo = cardDetailBean.getCardNo();
+            bankAndnum_tv.setText("(" + cardDetailBean.getCardBankName() + cardDetailBean.getCardNo().substring(cardNo.length() - 4) + ")");
+
+            if (cardDetailBean.getState().equals("VALID")) {//正常
+                card_state_tv.setText("正常");
+                card_state_tv.setTextColor(Color.parseColor("#3F51B5"));
+            } else if (cardDetailBean.getState().equals("EXPIRE")) {
+                card_state_tv.setText("卡片过期");
+                card_state_tv.setTextColor(Color.RED);
+            }
         }
-
-
     }
 
-    @OnClick({R.id.title_back_tv,R.id.sure_rtv})
+    @OnClick({R.id.title_back_tv, R.id.sure_rtv})
     public void click(View view) {
         switch (view.getId()) {
             case R.id.title_back_tv:
@@ -108,9 +107,9 @@ public class RenewalActivity extends MVPBaseActivity<RenewalContract.View,Renewa
     }
 
     //卡片续期
-    private void renewalCard(){
-        if(cardDetailBean.getState().equals("VALID")){//正常
-        }else if(cardDetailBean.getState().equals("EXPIRE")){//过期
+    private void renewalCard() {
+        if (cardDetailBean.getState().equals("VALID")) {//正常
+        } else if (cardDetailBean.getState().equals("EXPIRE")) {//过期
         }
     }
 
@@ -165,6 +164,6 @@ public class RenewalActivity extends MVPBaseActivity<RenewalContract.View,Renewa
                 successProgressDialog.dismiss();
                 finish();
             }
-        },2000);
+        }, 2000);
     }
 }

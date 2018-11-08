@@ -814,7 +814,7 @@ public interface ApiService {
                                        @Field("startDate") String startDate,
                                        @Field("endDate") String endDate,
                                        @Field("syncState") String syncState
-                                      );
+    );
 
     /**
      * （规划查询）
@@ -824,16 +824,16 @@ public interface ApiService {
      * @param machineCode
      * @param account
      * @param signature
-     * @param pageNum  续费提醒
+     * @param pageNum     续费提醒
      */
     @FormUrlEncoded
     @POST("card-gate-web/msg/expires")
-    Observable<BaseBean> expiresMsg (@Field(Config.VERSION) String version,
-                                       @Field(Config.REQUEST_NO) String requestNo,
-                                       @Field(Config.MACHINECODE) String machineCode,
-                                       @Field(Config.ACCOUNT) String account,
-                                       @Field(Config.SIGNATURE) String signature,
-                                       @Field("pageNum") String pageNum);
+    Observable<BaseBean> expiresMsg(@Field(Config.VERSION) String version,
+                                    @Field(Config.REQUEST_NO) String requestNo,
+                                    @Field(Config.MACHINECODE) String machineCode,
+                                    @Field(Config.ACCOUNT) String account,
+                                    @Field(Config.SIGNATURE) String signature,
+                                    @Field("pageNum") String pageNum);
 
 
     /**
@@ -1076,4 +1076,21 @@ public interface ApiService {
                                    @Field(Config.MACHINECODE) String machineCode,
                                    @Field(Config.ACCOUNT) String account,
                                    @Field(Config.SIGNATURE) String signature);
+
+    /**
+     * @param version
+     * @param requestNo
+     * @param machineCode
+     * @param account
+     * @param signature   //修改密码
+     */
+    @FormUrlEncoded
+    @POST("card-gate-web/password/modify")
+    Observable<BaseBean> modifyPassword(@Field(Config.VERSION) String version,
+                                        @Field(Config.REQUEST_NO) String requestNo,
+                                        @Field(Config.MACHINECODE) String machineCode,
+                                        @Field(Config.ACCOUNT) String account,
+                                        @Field(Config.SIGNATURE) String signature,
+                                        @Field("password") String password,
+                                        @Field("newPassword") String newPassword);
 }

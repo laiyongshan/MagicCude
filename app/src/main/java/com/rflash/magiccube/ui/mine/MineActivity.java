@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.rflash.magiccube.R;
+import com.rflash.magiccube.app.MyApplication;
 import com.rflash.magiccube.ui.login.LoginActivity;
 
 import butterknife.BindView;
@@ -37,6 +38,8 @@ public class MineActivity extends Activity {
     @BindView(R.id.exit_ll)
     LinearLayout exit_ll;
 
+    @BindView(R.id.version_info_tv)
+    TextView version_info_tv;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,7 +49,7 @@ public class MineActivity extends Activity {
     }
 
     private void initView(){
-
+        version_info_tv.setText(MyApplication.getMyApplicationVersionName()+"");
     }
 
     @OnClick({R.id.title_back_tv,R.id.changePsw_ll,R.id.about_us_ll,R.id.version_ll,R.id.exit_ll})
@@ -63,7 +66,8 @@ public class MineActivity extends Activity {
                 break;
 
             case R.id.about_us_ll:
-
+                EquipmentDialog equipmentDialog=new EquipmentDialog(MineActivity.this,R.style.Dialog);
+                equipmentDialog.show();
                 break;
 
             case R.id.version_ll:

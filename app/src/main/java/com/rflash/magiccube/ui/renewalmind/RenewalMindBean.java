@@ -2,6 +2,7 @@ package com.rflash.magiccube.ui.renewalmind;
 
 import com.rflash.magiccube.http.BaseBean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -41,7 +42,7 @@ public class RenewalMindBean extends BaseBean {
         this.result = result;
     }
 
-    public static class ResultBean {
+    public static class ResultBean implements Serializable{
 
     }
 

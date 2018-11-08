@@ -81,7 +81,6 @@ public class ChangePasswordActivity extends MVPBaseActivity<ChangePswContract.Vi
                 } else {
                     mPresenter.changePsw(old_password_et.getText().toString().trim(), new_password_et.getText().toString().trim());
                 }
-
                 break;
         }
     }

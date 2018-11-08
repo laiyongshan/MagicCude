@@ -32,6 +32,8 @@ public class Config {
     public static final String MACHINECODE = "machineCode";
     //终端号
     public static final String TERMCODE="termCode";
+    //商户号
+    public static final String MERCHANTCODE="merchantCode";
     //养卡点账号
     public static final String ACCOUNT = "account";
     //验签字段

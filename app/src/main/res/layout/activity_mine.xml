@@ -8,15 +8,17 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="@color/colorPrimary">
+        android:background="@color/colorPrimary"
+        android:gravity="center_vertical"
+        >
 
         <TextView
             android:id="@+id/title_back_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@mipmap/icon_back"
             android:drawablePadding="12dp"
-            android:padding="12dp"
+            android:paddingLeft="12dp"
+            android:drawableLeft="@mipmap/icon_back"
             android:text="个人中心"
             android:textColor="@color/white"
             android:textSize="@dimen/title_size" />
@@ -27,9 +29,8 @@
         android:id="@+id/changePsw_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_marginTop="16dp"
-        >
+        android:orientation="vertical">
 
         <View
             android:layout_width="match_parent"
@@ -44,9 +45,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:drawableLeft="@mipmap/icon_time"
+                android:drawableLeft="@mipmap/icon_changepassword"
                 android:drawablePadding="12dp"
-                android:drawableRight="@mipmap/icon_time"
+                android:drawableRight="@mipmap/icon_right"
                 android:padding="12dp"
                 android:text="修改密码"
                 android:textColor="@color/black_de"
@@ -67,9 +68,8 @@
         android:id="@+id/about_us_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_marginTop="16dp"
-        >
+        android:orientation="vertical">
 
         <View
             android:layout_width="match_parent"
@@ -84,9 +84,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:drawableLeft="@mipmap/icon_time"
+                android:drawableLeft="@mipmap/icon_equipment"
                 android:drawablePadding="12dp"
-                android:drawableRight="@mipmap/icon_time"
+                android:drawableRight="@mipmap/icon_right"
                 android:padding="12dp"
                 android:text="关于我们"
                 android:textColor="@color/black_de"
@@ -107,9 +107,8 @@
         android:id="@+id/version_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_marginTop="16dp"
-        >
+        android:orientation="vertical">
 
         <View
             android:layout_width="match_parent"
@@ -124,7 +123,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:drawableLeft="@mipmap/icon_time"
+                android:drawableLeft="@mipmap/icon_version"
                 android:drawablePadding="12dp"
                 android:padding="12dp"
                 android:text="版本信息"
@@ -132,14 +131,14 @@
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/version_info_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:text="V1.8.1"
-                android:textSize="14sp"
                 android:layout_centerVertical="true"
                 android:padding="12dp"
-                />
+                android:text="V1.8.0"
+                android:textSize="14sp" />
 
         </RelativeLayout>
 
@@ -156,9 +155,8 @@
         android:id="@+id/exit_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_marginTop="16dp"
-        >
+        android:orientation="vertical">
 
         <View
             android:layout_width="match_parent"
@@ -167,15 +165,16 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
+            android:padding="3dp"
             android:layout_height="50dp">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:drawableLeft="@mipmap/icon_time"
-                android:drawableRight="@mipmap/icon_time"
+                android:drawableLeft="@mipmap/icon_exit"
                 android:drawablePadding="12dp"
+                android:drawableRight="@mipmap/icon_right"
                 android:padding="12dp"
                 android:text="退出登录"
                 android:textColor="@color/black_de"

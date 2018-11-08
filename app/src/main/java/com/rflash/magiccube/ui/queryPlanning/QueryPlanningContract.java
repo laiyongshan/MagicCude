@@ -21,5 +21,8 @@ public class QueryPlanningContract {
     interface  Presenter extends BasePresenter<QueryPlanningContract.View> {
         //财务详情
         void queryPlan(String startDate,String endDate,String cardSeqno,String customerName,String cardNo,String state,String tranType,String accountType,String syncState,String pageNum);
+
+        //同步规划
+
     }
 }

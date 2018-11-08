@@ -68,6 +68,7 @@ public class RenewalMindActivity  extends MVPBaseActivity<RenewalMindContract.Vi
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Intent intent=new Intent(RenewalMindActivity.this,RenewalActivity.class);
+                intent.putExtra("renewalmind", renewalMindList.get(position));
                 RenewalMindActivity.this.startActivity(intent);
             }
         });

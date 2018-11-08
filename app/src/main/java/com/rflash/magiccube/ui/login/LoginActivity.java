@@ -178,13 +178,11 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
 
     @OnTextChanged(R.id.edt_name)
     public void onNameTextChanged(CharSequence s, int start, int before, int count){
-
         if (!TextUtils.isEmpty(s)){
             ivNameDismiss.setVisibility(View.VISIBLE);
         }else {
             ivNameDismiss.setVisibility(View.GONE);
         }
-
     }
 
     @OnTextChanged(R.id.edt_pwd)

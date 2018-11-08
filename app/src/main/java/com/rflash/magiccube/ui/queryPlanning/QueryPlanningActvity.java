@@ -171,4 +171,9 @@ public class QueryPlanningActvity extends MVPBaseActivity<QueryPlanningContract.
             }
         }, 1500);
     }
+
+    private void getCount(List<PlaningBean.ResultBean> list){
+        for(PlaningBean.ResultBean resultBean:list){
+        }
+    }
 }
