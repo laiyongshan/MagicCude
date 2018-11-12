@@ -18,6 +18,7 @@ import com.rflash.magiccube.R;
 import com.rflash.magiccube.mvp.MVPBaseActivity;
 import com.rflash.magiccube.ui.cardmanager.CardBean;
 import com.rflash.magiccube.ui.newmain.DirtData;
+import com.rflash.magiccube.ui.shanghu.ShanghuBean;
 import com.rflash.magiccube.util.TimerPikerTools;
 import com.rflash.magiccube.view.SuccessProgressDialog;
 
@@ -54,12 +55,6 @@ public class AddPlanActivity extends MVPBaseActivity<AddPlanContract.View, AddPl
     @BindView(R.id.channel_sp)
     MaterialSpinner channel_sp;
 
-    @BindView(R.id.merchantCode_sp)
-    MaterialSpinner merchantCode_sp;
-
-//    @BindView(R.id.mcc_sp)
-//    MaterialSpinner mcc_sp;
-
     @BindView(R.id.isNeedT0_sp)
     MaterialSpinner isNeedT0_sp;
 
@@ -78,6 +73,21 @@ public class AddPlanActivity extends MVPBaseActivity<AddPlanContract.View, AddPl
     @BindView(R.id.swipecardDate_cd)
     CardView swipecardDate_cd;
 
+    @BindView(R.id.merchantName_cd)
+            CardView merchantName_cd;
+    @BindView(R.id.merchantName_sp)
+            MaterialSpinner merchantName_sp;
+    @BindView(R.id.merchantCode_cd)
+            CardView merchantCode_cd;
+    @BindView(R.id.merchantCode_et)
+            EditText merchantCode_et;
+    @BindView(R.id.mcc_cd)
+            CardView mcc_cd;
+    @BindView(R.id.mcc_et)
+            EditText mcc_et;
+    @BindView(R.id.isNeedT0_cd)
+            CardView isNeedT0_cd;
+
     SuccessProgressDialog successProgressDialog;
 
     TimePickerView mTimePikerView;//时间选择器
@@ -86,7 +96,7 @@ public class AddPlanActivity extends MVPBaseActivity<AddPlanContract.View, AddPl
     CardBean.ResultBean cardDetailBean;
     String tranType;
     String channel;
-    String merchantCode;
+    String merchantCode="";
     String termCode;
     String amt;
     String isNeedT0;
@@ -97,11 +107,20 @@ public class AddPlanActivity extends MVPBaseActivity<AddPlanContract.View, AddPl
     DirtData dirtData;
     List<String> stateList = new ArrayList<>();
 
+    List<String> merchantList01=new ArrayList<>();//盛01商户
+    List<String> merchantList02=new ArrayList<>();//汇02商户
+    List<String> merchantList04=new ArrayList<>();//中04商户
+
+    List<ShanghuBean.ResultBean>  shanghuList01=new ArrayList<>();///盛01商户
+    List<ShanghuBean.ResultBean>  shanghuList02=new ArrayList<>();////汇02商户
+    List<ShanghuBean.ResultBean>  shanghuList04=new ArrayList<>();//中04商户
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_plan);
         initView();
+        getMerchantData();
     }
 
     private void initView() {
@@ -120,14 +139,24 @@ public class AddPlanActivity extends MVPBaseActivity<AddPlanContract.View, AddPl
                 if (i == 0) {//消费
                     repayDate_cd.setVisibility(View.GONE);
                     swipecardDate_cd.setVisibility(View.VISIBLE);
+                    merchantName_cd.setVisibility(View.VISIBLE);
+                    merchantCode_cd.setVisibility(View.VISIBLE);
+                    mcc_cd.setVisibility(View.VISIBLE);
+                    isNeedT0_cd.setVisibility(View.VISIBLE);
+                    channel_sp.setItems(dirtData.ChannelArr);
                 } else if (i == 1) {//还款
                     repayDate_cd.setVisibility(View.VISIBLE);
                     swipecardDate_cd.setVisibility(View.GONE);
+                    merchantName_cd.setVisibility(View.GONE);
+                    merchantCode_cd.setVisibility(View.GONE);
+                    mcc_cd.setVisibility(View.GONE);
+                    isNeedT0_cd.setVisibility(View.GONE);
+                    channel_sp.setItems(dirtData.ChannelArr2);
                 }
             }
         });
 
-        state_sp.setItems(dirtData.getPlanStateList());
+        state_sp.setItems(dirtData.planStateArr);
 //        state_sp.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
 //            @Override
 //            public void onItemSelected(MaterialSpinner materialSpinner, int i, long l, Object o) {
@@ -135,21 +164,55 @@ public class AddPlanActivity extends MVPBaseActivity<AddPlanContract.View, AddPl
 //            }
 //        });
 
-        channel_sp.setItems(dirtData.getChannelList());
-//        channel_sp.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(MaterialSpinner materialSpinner, int i, long l, Object o) {
-//
-//            }
-//        });
+        channel_sp.setItems(dirtData.ChannelArr);
+        channel_sp.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(MaterialSpinner materialSpinner, int i, long l, Object o) {
+                if(i!=0){
+                    if(tranType_sp.getSelectedIndex()==0) {
+                        channel = dirtData.ChannelIDOptions[i];
+                        if(i==1){//盛01
+                            merchantName_sp.setItems(merchantList01);
+                            merchantCode_et.setText(shanghuList01.get(0).getMerchantCode()+"");
+                            mcc_et.setText(shanghuList01.get(0).getMerchantMccSmallClassName());
+                        }else if(i==2){//汇02
+                            merchantName_sp.setItems(merchantList02);
+                            merchantCode_et.setText(shanghuList02.get(0).getMerchantCode()+"");
+                            mcc_et.setText(shanghuList02.get(0).getMerchantMccSmallClassName());
+                        }else if(i==3){//中04
+                            merchantName_sp.setItems(merchantList04);
+                            merchantCode_et.setText(shanghuList04.get(0).getMerchantCode()+"");
+                            mcc_et.setText(shanghuList04.get(0).getMerchantMccSmallClassName());
+                        }
+                    }else {
+                        channel = dirtData.ChannelIDOptions2[i];
+                        merchantCode="";
+                    }
+                }else{
+                    channel="";
+                }
 
-        merchantCode_sp.setItems(dirtData.getMerchantsTypeList());
-//        merchantCode_sp.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(MaterialSpinner materialSpinner, int i, long l, Object o) {
-//
-//            }
-//        });
+            }
+        });
+
+        merchantName_sp.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(MaterialSpinner materialSpinner, int i, long l, Object o) {
+                if(channel_sp.getSelectedIndex()==1){
+                    merchantCode_et.setText(shanghuList01.get(i).getMerchantCode()+"");
+                    mcc_et.setText(shanghuList01.get(i).getMerchantMccSmallClassName());
+                    merchantCode=shanghuList01.get(i).getMerchantCode();
+                }else if(channel_sp.getSelectedIndex()==2){
+                    merchantCode_et.setText(shanghuList02.get(i).getMerchantCode()+"");
+                    mcc_et.setText(shanghuList02.get(i).getMerchantMccSmallClassName());
+                    merchantCode=shanghuList02.get(i).getMerchantCode();
+                }else if (channel_sp.getSelectedIndex()==3){
+                    merchantCode_et.setText(shanghuList04.get(i).getMerchantCode()+"");
+                    mcc_et.setText(shanghuList04.get(i).getMerchantMccSmallClassName());
+                    merchantCode=shanghuList04.get(i).getMerchantCode();
+                }
+            }
+        });
 
         isNeedT0_sp.setItems(dirtData.isNeedT0Arr);
 //        isNeedT0_sp.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
@@ -170,11 +233,7 @@ public class AddPlanActivity extends MVPBaseActivity<AddPlanContract.View, AddPl
                 break;
 
             case R.id.repayDate_et:
-<<<<<<< HEAD
                 mTimePikerView = TimerPikerTools.creatTimePickerView(AddPlanActivity.this, "选择日期", true, true, true, new TimePickerView.OnTimeSelectListener() {
-=======
-                mTimePikerView = TimerPikerTools.creatTimePickerView(AddPlanActivity.this, "选择日期", true, true, false, new TimePickerView.OnTimeSelectListener() {
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
                     @Override
                     public void onTimeSelect(Date date, View v) {
                         plandate = simpleDateFormat.format(date);
@@ -185,22 +244,25 @@ public class AddPlanActivity extends MVPBaseActivity<AddPlanContract.View, AddPl
                 break;
 
             case R.id.swipecardDate_et:
-<<<<<<< HEAD
-                mTimePikerView = TimerPikerTools.creatTimePickerView(AddPlanActivity.this, "选择日期", true, true, true, new TimePickerView.OnTimeSelectListener() {
+                if(tranType_sp.getSelectedIndex()==0&&state_sp.getSelectedIndex()==0){
+                mTimePikerView = TimerPikerTools.creatTimePickerView3(AddPlanActivity.this, "选择日期", true, true, true, new TimePickerView.OnTimeSelectListener() {
                     @Override
                     public void onTimeSelect(Date date, View v) {
                         plandate = simpleDateFormat.format(date);
                         swipecardDate_et.setText(plandate + "");
-=======
-                mTimePikerView = TimerPikerTools.creatTimePickerView(AddPlanActivity.this, "选择日期", true, true, false, new TimePickerView.OnTimeSelectListener() {
-                    @Override
-                    public void onTimeSelect(Date date, View v) {
-                        plandate = simpleDateFormat.format(date);
-                        repayDate_et.setText(plandate + "");
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
                     }
                 });
                 mTimePikerView.show();
+                }else{
+                    mTimePikerView = TimerPikerTools.creatTimePickerView(AddPlanActivity.this, "选择日期", true, true, true, new TimePickerView.OnTimeSelectListener() {
+                        @Override
+                        public void onTimeSelect(Date date, View v) {
+                            plandate = simpleDateFormat.format(date);
+                            swipecardDate_et.setText(plandate + "");
+                        }
+                    });
+                    mTimePikerView.show();
+                }
                 break;
 
             case R.id.cancel_rtv://取消修改
@@ -216,17 +278,18 @@ public class AddPlanActivity extends MVPBaseActivity<AddPlanContract.View, AddPl
     private void addPlan() {
         if (amt_et.getText().toString().trim().equals("")) {
             Toast.makeText(AddPlanActivity.this, "请输入交易金额", Toast.LENGTH_SHORT).show();
-<<<<<<< HEAD
-=======
-        } else if ((repayDate_et.getText().toString().trim().equals("")) || swipecardDate_et.getText().toString().trim().equals("")) {
-            Toast.makeText(AddPlanActivity.this, "请选择交易时间", Toast.LENGTH_SHORT).show();
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
+        }else if(channel_sp.getSelectedIndex()==0){
+            Toast.makeText(AddPlanActivity.this, "请输入交易渠道号", Toast.LENGTH_SHORT).show();
         } else {
             amt = amt_et.getText().toString().trim();
             tranType = dirtData.tranTypeOptions[tranType_sp.getSelectedIndex()];
-            state = dirtData.planStateOptions.get(state_sp.getSelectedIndex()).getDictId();
-            channel = dirtData.channelOptions.get(channel_sp.getSelectedIndex()).getDictId();
-            merchantCode = dirtData.merchantsTypeOptions.get(merchantCode_sp.getSelectedIndex()).getDictId();
+            state = dirtData.planStateOptionArr[state_sp.getSelectedIndex()];
+//            if(tranType_sp.getSelectedIndex()==0) {//消费
+//                channel = dirtData.channelOptions.get(channel_sp.getSelectedIndex()).getDictId();
+//            }else if(tranType_sp.getSelectedIndex()==1){//还款
+//
+//            }
+//            merchantCode = dirtData.merchantsTypeOptions.get(merchantCode_sp.getSelectedIndex()).getDictId();
             termCode = SpUtil.getString(AddPlanActivity.this, Config.TERMCODE, "");
             isNeedT0 = dirtData.isNeedOptions[isNeedT0_sp.getSelectedIndex()];
             if (tranType.equals("SALE")) {
@@ -235,11 +298,7 @@ public class AddPlanActivity extends MVPBaseActivity<AddPlanContract.View, AddPl
                 plandate = repayDate_et.getText().toString().trim();
             }
 
-<<<<<<< HEAD
             mPresenter.addPlan(tranType, cardNo, channel, merchantCode, termCode, amt, isNeedT0, plandate.replace("-",""), state);
-=======
-            mPresenter.addPlan(tranType, cardNo, channel, merchantCode, termCode, amt, isNeedT0, plandate, state);
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
         }
 
     }
@@ -261,10 +320,11 @@ public class AddPlanActivity extends MVPBaseActivity<AddPlanContract.View, AddPl
                 mMaterialDialog.dismiss();
             }
         });
-<<<<<<< HEAD
         mMaterialDialog.show();
-=======
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
+    }
+
+    private void getMerchantData(){
+        mPresenter.queryShanghu("","","","","","","","Y","","200");
     }
 
 
@@ -299,5 +359,29 @@ public class AddPlanActivity extends MVPBaseActivity<AddPlanContract.View, AddPl
                 finish();
             }
         }, 1500);
+    }
+
+    @Override
+    public void queryShanghuResult(ShanghuBean response) {
+        if(response!=null){
+            shanghuList01.clear();
+            shanghuList02.clear();
+            shanghuList04.clear();
+            merchantList01.clear();
+            merchantList02.clear();
+            merchantList04.clear();
+            for(ShanghuBean.ResultBean resultBean:response.getResult()){
+                if(resultBean.getChannel().equals("38")){
+                    shanghuList01.add(resultBean);
+                    merchantList01.add(resultBean.getMerchantName()+"");
+                }else if(resultBean.getChannel().equals("17")){
+                    shanghuList02.add(resultBean);
+                    merchantList02.add(resultBean.getMerchantName()+"");
+                }else if(resultBean.getChannel().equals("42")){
+                    shanghuList04.add(resultBean);
+                    merchantList04.add(resultBean.getMerchantName()+"");
+                }
+            }
+        }
     }
 }

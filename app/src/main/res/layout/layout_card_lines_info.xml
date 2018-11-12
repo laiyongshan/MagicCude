@@ -22,14 +22,13 @@
             >
 
             <TextView
-                android:layout_width="120dp"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@mipmap/icon_red_start"
                 android:drawablePadding="6dp"
                 android:gravity="left"
                 android:text="固定额度："
                 android:paddingLeft="16dp"
-                android:paddingRight="16dp"
                 android:textColor="#000"
                 android:textSize="14sp" />
 
@@ -79,14 +78,13 @@
             >
 
             <TextView
-                android:layout_width="120dp"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@mipmap/icon_red_start"
                 android:drawablePadding="6dp"
                 android:gravity="left"
                 android:text="可用余额："
                 android:paddingLeft="16dp"
-                android:paddingRight="16dp"
                 android:textColor="#000"
                 android:textSize="14sp" />
 
@@ -136,7 +134,7 @@
             >
 
             <TextView
-                android:layout_width="120dp"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@mipmap/icon_red_start"
                 android:drawablePadding="6dp"
@@ -193,14 +191,13 @@
             >
 
             <TextView
-                android:layout_width="120dp"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@mipmap/icon_red_start"
                 android:drawablePadding="6dp"
                 android:gravity="left"
                 android:text="初始金额："
                 android:paddingLeft="16dp"
-                android:paddingRight="16dp"
                 android:textColor="#000"
                 android:textSize="14sp" />
 
@@ -250,12 +247,11 @@
             >
 
             <TextView
-                android:layout_width="120dp"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="临时金额："
                 android:paddingLeft="16dp"
-                android:paddingRight="16dp"
                 android:textColor="#000"
                 android:textSize="14sp" />
 
@@ -290,6 +286,7 @@
     </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.CardView
+        android:id="@+id/tempLimitDate_cb"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
@@ -305,12 +302,11 @@
             >
 
             <TextView
-                android:layout_width="120dp"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="临时期限："
                 android:paddingLeft="16dp"
-                android:paddingRight="16dp"
                 android:textColor="#000"
                 android:textSize="14sp" />
 
@@ -322,8 +318,8 @@
                 android:layout_marginBottom="4dp"
                 android:background="#c0c0c0" />
 
-            <EditText
-                android:id="@+id/tempLimitDate_et"
+            <TextView
+                android:id="@+id/tempLimitDate_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingRight="12dp"

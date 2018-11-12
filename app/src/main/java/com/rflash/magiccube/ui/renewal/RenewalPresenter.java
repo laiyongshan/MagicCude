@@ -1,6 +1,5 @@
 package com.rflash.magiccube.ui.renewal;
 
-<<<<<<< HEAD
 import com.rflash.basemodule.BaseActivity;
 import com.rflash.basemodule.utils.SpUtil;
 import com.rflash.magiccube.Config;
@@ -16,9 +15,6 @@ import java.util.Date;
 import java.util.TreeMap;
 
 import io.reactivex.Observable;
-=======
-import com.rflash.magiccube.mvp.BasePresenterImpl;
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
 
 /**
  * @author lys
@@ -28,7 +24,6 @@ import com.rflash.magiccube.mvp.BasePresenterImpl;
 
 public class RenewalPresenter extends BasePresenterImpl<RenewalContract.View> implements RenewalContract.Presenter {
 
-<<<<<<< HEAD
 
     @Override
     public void overdueRenewal(String cardNo, String serviceEndDate, String serviceType, String serviceAmt, String serviceRate, String paidAmt,
@@ -87,10 +82,6 @@ public class RenewalPresenter extends BasePresenterImpl<RenewalContract.View> im
         } catch (Exception e) {
             e.printStackTrace();
         }
-=======
-    @Override
-    public void overdueRenewal() {
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
 
     }
 

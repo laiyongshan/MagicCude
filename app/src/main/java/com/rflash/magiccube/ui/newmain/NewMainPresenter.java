@@ -14,6 +14,7 @@ import com.rflash.magiccube.mvp.BaseView;
 import com.rflash.magiccube.ui.main.AppInfo;
 import com.rflash.magiccube.ui.main.BillCount;
 import com.rflash.magiccube.ui.main.MainContract;
+import com.rflash.magiccube.ui.salesmen.SalesmenBean;
 import com.rflash.magiccube.util.SignUtil;
 
 import java.text.SimpleDateFormat;
@@ -105,6 +106,49 @@ public class NewMainPresenter extends BasePresenterImpl<NewMainContract.View> im
             e.printStackTrace();
         }
 
+    }
+
+    @Override
+    public void querySalesMan(String name, String profitRatio) {
+        String signature = "";
+        String version = Config.VERSION_CODE;
+        String requestNo = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+        String machineCode = SpUtil.getString(mView.getContext(), Config.MACHINECODE, "");
+        String account = SpUtil.getString(mView.getContext(), Config.ACCOUNT, "");
+        TreeMap<String, String> treeMap = new TreeMap<>();
+        treeMap.put("version", version);
+        treeMap.put("requestNo", requestNo);
+        treeMap.put("machineCode", machineCode);
+        treeMap.put("account", account);
+        treeMap.put("name",name);
+        treeMap.put("profitRatio",profitRatio);
+        try {
+            signature = SignUtil.signDataWithStr(treeMap, SpUtil.getString(mView.getContext(), Config.USER_PRVKEY, ""));
+            Observable<BaseBean> confirm = RetrofitFactory.getApiService().querySalesMan(version, requestNo, machineCode, account, signature,name,profitRatio);
+            Observable<BaseBean> compose = confirm.compose(((BaseActivity) mView.getContext()).compose(((BaseActivity) mView.getContext()).<BaseBean>bindToLifecycle()));
+            compose.subscribe(new DefaultObserver<SalesmenBean>((BaseActivity) mView.getContext()) {
+                @Override
+                public void onError(Throwable e) {
+                    super.onError(e);
+                    mView.getDataFail(e.getMessage()+"");
+                }
+
+                @Override
+                public void onComplete() {
+                    super.onComplete();
+                    mView.finishRefresh();
+                }
+                @Override
+                protected void onSuccess(SalesmenBean data) {
+                    super.onSuccess(data);
+                    mView.querySalMenSuccess(data);
+                }
+            });
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

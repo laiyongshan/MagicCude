@@ -15,11 +15,13 @@ import android.widget.TextView;
 
 import com.bigkoo.pickerview.TimePickerView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.rflash.basemodule.BaseFragment;
 import com.rflash.basemodule.utils.StringUtil;
 import com.rflash.magiccube.R;
 import com.rflash.magiccube.mvp.MVPBaseFragment;
 import com.rflash.magiccube.ui.finance.financedetail.FinanceDetailActivity;
+import com.rflash.magiccube.ui.newmain.DirtData;
 import com.rflash.magiccube.ui.shanghu.ShanghuAdapter;
 import com.rflash.magiccube.ui.shanghu.ShanghuBean;
 import com.rflash.magiccube.util.TimerPikerTools;
@@ -79,8 +81,8 @@ public class FinanceManagerFragment extends MVPBaseFragment<FinanceManagerContra
     @BindView(R.id.customerNmae_et)
     EditText customerNmae_et;
 
-    @BindView(R.id.salesMan_et)
-    EditText salesMan_et;
+    @BindView(R.id.salesMan_sp)
+    MaterialSpinner salesMan_sp;
 
     @BindView(R.id.startDate_tv)
     TextView startDate_tv;
@@ -107,6 +109,8 @@ public class FinanceManagerFragment extends MVPBaseFragment<FinanceManagerContra
     FinanceAdapter financeAdapter;
     List<FinanceBean.ResultBean> financeBeanList=new ArrayList<>();
 
+    DirtData dirtData;
+
     @Override
     protected int getLayout() {
         return R.layout.fragment_finance_manager;
@@ -114,6 +118,7 @@ public class FinanceManagerFragment extends MVPBaseFragment<FinanceManagerContra
 
     @Override
     protected void initView() {
+        dirtData=new DirtData(getActivity());
 
         notDataView = getLayoutInflater().inflate(R.layout.empty_view, (ViewGroup) finance_card_rv.getParent(), false);
 
@@ -133,6 +138,8 @@ public class FinanceManagerFragment extends MVPBaseFragment<FinanceManagerContra
             }
         });
         finance_card_rv.setAdapter(financeAdapter);
+
+        salesMan_sp.setItems(dirtData.getSalesMenList());
 
         getFinanceList();
     }
@@ -170,7 +177,7 @@ public class FinanceManagerFragment extends MVPBaseFragment<FinanceManagerContra
                 cardSeqno_et.setText("");
                 cardNo_et.setText("");
                 customerNmae_et.setText("");
-                salesMan_et.setText("");
+                salesMan_sp.setSelectedIndex(0);
                 startDate_tv.setText("");
                 endDate_tv.setText("");
                 break;
@@ -187,7 +194,7 @@ public class FinanceManagerFragment extends MVPBaseFragment<FinanceManagerContra
         cardSeqno=cardSeqno_et.getText().toString().trim();
         cardNo=cardNo_et.getText().toString().trim();
         customerNmae=customerNmae_et.getText().toString().trim();
-        salesMan=salesMan_et.getText().toString().trim();
+        salesMan=dirtData.getSalesIdList().get(salesMan_sp.getSelectedIndex());
         startDate=startDate_tv.getText().toString().trim().replace("-","");
         endDate=endDate_tv.getText().toString().trim().replace("-","");
         mPresenter.queryReport(cardSeqno,cardNo,customerNmae,salesMan,startDate,endDate,pageNum+"");

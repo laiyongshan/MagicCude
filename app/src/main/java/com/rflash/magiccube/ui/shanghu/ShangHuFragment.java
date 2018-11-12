@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -24,18 +25,11 @@ import com.rflash.magiccube.R;
 import com.rflash.magiccube.event.PositionMessage;
 import com.rflash.magiccube.http.BaseBean;
 import com.rflash.magiccube.mvp.MVPBaseFragment;
-<<<<<<< HEAD
 import com.rflash.magiccube.ui.newmain.DirtData;
-=======
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
 import com.rflash.magiccube.ui.shanghu.download.DownloadShanghuActivity;
 import com.rflash.magiccube.util.TimerPikerTools;
 import com.rflash.magiccube.util.ToolUtils;
 import com.rflash.magiccube.view.SuccessProgressDialog;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -123,7 +117,7 @@ public class ShangHuFragment extends MVPBaseFragment<ShanghuContract.View,Shangh
     SuccessProgressDialog successProgressDialog;
 
     TimePickerView mTimePikerView;//时间选择器
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM");
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
 
     String channelName;
@@ -135,6 +129,8 @@ public class ShangHuFragment extends MVPBaseFragment<ShanghuContract.View,Shangh
     String endDate;
     String bind="Y";
     int pageNum=1;
+
+    private View notDataView;
 
     boolean isOption;
 
@@ -148,12 +144,8 @@ public class ShangHuFragment extends MVPBaseFragment<ShanghuContract.View,Shangh
 
     List<String> merchantList=new ArrayList<>();
 
-<<<<<<< HEAD
 
-    List<String> ChannelList=new ArrayList<>();
     List<String> MerchantsTypeList=new ArrayList<>();
-=======
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
     @Override
     protected int getLayout() {
         return R.layout.fragment_shanghu;
@@ -169,28 +161,23 @@ public class ShangHuFragment extends MVPBaseFragment<ShanghuContract.View,Shangh
 
         dirtData=new DirtData(getActivity());
 
+        notDataView = getLayoutInflater().inflate(R.layout.empty_view, (ViewGroup) shanghu_rv.getParent(), false);
+
+
         refresh_layout.setColorSchemeColors(ToolUtils.Colors);
         refresh_layout.setOnRefreshListener(this);
         refresh_layout.setRefreshing(true);
 
-<<<<<<< HEAD
         successProgressDialog=new SuccessProgressDialog(getActivity());
 
         EventBus.getDefault().register(this);//注册
 
-        ChannelList=dirtData.getChannelList();
-        ChannelList.add(0,"请选择渠道名");
-        channelName_sp.setItems(ChannelList);
-=======
-        EventBus.getDefault().register(this);//注册
-
-        channelName_sp.setItems(channelNameArr);
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
+        channelName_sp.setItems(dirtData.ChannelArr);
         channelName_sp.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
             @Override
             public void onItemSelected(MaterialSpinner materialSpinner, int i, long l, Object o) {
                 if(i!=0){
-                    channelName=ChannelList.get(i);
+                    channelName = dirtData.ChannelArr[i];
                 }else{
                     channelName="";
                 }
@@ -210,16 +197,16 @@ public class ShangHuFragment extends MVPBaseFragment<ShanghuContract.View,Shangh
                 }
             }
         });
-        MerchantsTypeList=dirtData.getMerchantsTypeList();
+        MerchantsTypeList=dirtData.getMccList();
         MerchantsTypeList.add(0,"请选择商户类型");
         merchantType_sp.setItems(MerchantsTypeList);
         merchantType_sp.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
             @Override
             public void onItemSelected(MaterialSpinner materialSpinner, int i, long l, Object o) {
-                if(i!=0){
-                    merchantType=MerchantsTypeList.get(i);
-                }else{
+                if(i==0){
                     merchantType="";
+                }else{
+                    merchantType=dirtData.mccOptions.get(i-1).getDictId()+"";
                 }
             }
         });
@@ -235,7 +222,6 @@ public class ShangHuFragment extends MVPBaseFragment<ShanghuContract.View,Shangh
         all_selected_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-<<<<<<< HEAD
 //                if(isChecked)
 //                    selected_count_tv.setText(shanghuAdapter.getData().size()+"");
 //                else
@@ -245,13 +231,6 @@ public class ShangHuFragment extends MVPBaseFragment<ShanghuContract.View,Shangh
                     shanghuBeanList.get(i).setSelected(isChecked);
                 }
                 shanghuAdapter.selectAll();
-=======
-                shanghuAdapter.selectAll();
-                if(isChecked)
-                    selected_count_tv.setText(shanghuAdapter.getData().size()+"");
-                else
-                    selected_count_tv.setText("0");
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
             }
         });
 
@@ -295,15 +274,9 @@ public class ShangHuFragment extends MVPBaseFragment<ShanghuContract.View,Shangh
                     public void onClick(View v) {
                         mMaterialDialog.dismiss();
                         merchantList.clear();
-<<<<<<< HEAD
                         for (int i=0;i<shanghuBeanList.size();i++) {
                             if (shanghuBeanList.get(i).getSelected()) {
                                 merchantList.add(shanghuBeanList.get(i).getChannel() + "|" + shanghuBeanList.get(i).getMerchantCode());
-=======
-                        for (Map.Entry<Integer, Boolean> entry : shanghuAdapter.map.entrySet()) {
-                            if(entry.getValue()){
-                                merchantList.add(shanghuBeanList.get(entry.getKey()).getChannel()+"|"+shanghuBeanList.get(entry.getKey()).getMerchantCode());
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
                             }
                         }
                         mPresenter.unbindShanghu(getMerchantParams(merchantList));
@@ -320,7 +293,7 @@ public class ShangHuFragment extends MVPBaseFragment<ShanghuContract.View,Shangh
                 break;
 
             case R.id.startDate_tv:
-                mTimePikerView = TimerPikerTools.creatTimePickerView(getActivity(), "选择服务月份", true, true, false, new TimePickerView.OnTimeSelectListener() {
+                mTimePikerView = TimerPikerTools.creatTimePickerView(getActivity(), "选择日期", true, true, false, new TimePickerView.OnTimeSelectListener() {
                     @Override
                     public void onTimeSelect(Date date, View v) {
                         startDate = simpleDateFormat.format(date);
@@ -331,7 +304,7 @@ public class ShangHuFragment extends MVPBaseFragment<ShanghuContract.View,Shangh
                 break;
 
             case R.id.endDate_tv:
-                mTimePikerView = TimerPikerTools.creatTimePickerView(getActivity(), "选择服务月份", true, true, false, new TimePickerView.OnTimeSelectListener() {
+                mTimePikerView = TimerPikerTools.creatTimePickerView(getActivity(), "选择日期", true, true, false, new TimePickerView.OnTimeSelectListener() {
                     @Override
                     public void onTimeSelect(Date date, View v) {
                         endDate = simpleDateFormat.format(date);
@@ -404,6 +377,9 @@ public class ShangHuFragment extends MVPBaseFragment<ShanghuContract.View,Shangh
             if(pageNum==1){
                 shanghuBeanList=shanghuBean.getResult();
                 shanghuAdapter.setNewData(shanghuBeanList);
+                if(shanghuBeanList.isEmpty()){
+                    shanghuAdapter.setEmptyView(notDataView);
+                }
             }else {
                 shanghuBeanList.addAll(shanghuBean.getResult());
                 shanghuAdapter.notifyDataSetChanged();
@@ -478,7 +454,6 @@ public class ShangHuFragment extends MVPBaseFragment<ShanghuContract.View,Shangh
         return sbf.toString();
     }
 
-<<<<<<< HEAD
     //ui主线程中执行
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMainEventBus(PositionMessage msg) {
@@ -489,18 +464,6 @@ public class ShangHuFragment extends MVPBaseFragment<ShanghuContract.View,Shangh
                 i++;
         }
         selected_count_tv.setText(i+"");
-=======
-    int selectedCount;
-    //ui主线程中执行
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMainEventBus(PositionMessage msg) {
-        if(msg.getChecked())
-            ++selectedCount;
-        else
-            --selectedCount;
-
-        selected_count_tv.setText(selectedCount+"");
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
     }
 
     @Override

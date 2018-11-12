@@ -4,6 +4,7 @@ package com.rflash.magiccube.ui.login;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -102,6 +103,7 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
        }else{
            edtName.setText(SpUtil.getString(this, Config.ACCOUNT, ""));
            edtPwd.setText("");
+           SpUtil.putString(LoginActivity.this, Config.USER_PWD, "");
        }
     }
 
@@ -163,6 +165,26 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
         }
         mPresenter.login(Config.VERSION_CODE, SpUtil.getString(this, Config.MACHINECODE, ""), name, pwd);
     }
+
+
+    /**
+     * 监听Back键按下事件,方法2:
+     * 注意:
+     * 返回值表示:是否能完全处理该事件
+     * 在此处返回false,所以会继续传播该事件.
+     * 在具体项目中此处的返回值视情况而定.
+     */
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            System.exit(0);
+            return false;
+        }else {
+            return super.onKeyDown(keyCode, event);
+        }
+
+    }
+
 
 
     /**

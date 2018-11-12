@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bigkoo.pickerview.TimePickerView;
@@ -41,6 +42,9 @@ public class AgingSettingDialog extends Dialog {
     @BindView(R.id.sure_aging_rtv)
     RoundTextView sure_aging_rtv;
 
+    @BindView(R.id.agingsetting_title_tv)
+    TextView agingsetting_title_tv;
+
     String startTime,endTime;
 
     TimePickerView mTimePikerView;//时间选择器
@@ -51,7 +55,7 @@ public class AgingSettingDialog extends Dialog {
 
     AgingBean agingBean;
 
-    interface AgingListener{
+    public interface AgingListener{
         void sure(AgingBean agingBean);
     }
 
@@ -77,7 +81,7 @@ public class AgingSettingDialog extends Dialog {
         isRepaied_sp.setItems(dirtData.isOrNoArr);
     }
 
-    @OnClick({R.id.cancel_aging_rtv,R.id.sure_aging_rtv,R.id.startTime_et,R.id.endTime_et})
+    @OnClick({R.id.cancel_aging_rtv,R.id.sure_aging_rtv,R.id.startTime_et,R.id.endTime_et,R.id.agingsetting_title_tv})
     public void click(View view){
         switch (view.getId()){
             case R.id.cancel_aging_rtv:
@@ -86,6 +90,10 @@ public class AgingSettingDialog extends Dialog {
 
             case R.id.sure_aging_rtv:
                 sureAging();
+                dismiss();
+                break;
+
+            case R.id.agingsetting_title_tv:
                 dismiss();
                 break;
 

@@ -36,19 +36,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
+                    android:orientation="horizontal"
                     android:layout_centerVertical="true"
                     android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    >
 
                     <com.flyco.roundview.RoundTextView
                         android:id="@+id/shanghu_option_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="12dp"
                         android:text="操作"
                         android:textColor="@color/white"
                         android:textSize="16sp"
-                        rv:rv_textPressColor="@color/luncy" />
+                        android:padding="12dp"
+                        rv:rv_textPressColor="@color/luncy"
+                        />
 
                     <ImageView
                         android:id="@+id/download_shanghu_img"
@@ -58,13 +60,13 @@
                         android:scaleType="fitCenter"
                         android:src="@mipmap/icon_download" />
 
-                    <ImageView
-                        android:id="@+id/filtrate_img"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="12dp"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/icon_filtrate" />
+                <ImageView
+                    android:id="@+id/filtrate_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@mipmap/icon_filtrate" />
 
                 </LinearLayout>
 
@@ -75,7 +77,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
-                android:text="共200条数据"
+                android:text="共0条数据"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
 
@@ -86,46 +88,67 @@
             android:id="@+id/refresh_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="80dp">
+            android:layout_marginTop="80dp"
+            >
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                >
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/shanghu_rv"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_above="@+id/option_rl"
-                    android:paddingLeft="12dp"
-                    android:paddingRight="12dp" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/shanghu_rv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/option_rl"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                 />
 
                 <RelativeLayout
                     android:id="@+id/option_rl"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
                     android:background="@color/white"
+                    android:layout_alignParentBottom="true"
                     android:padding="12dp"
-                    android:visibility="gone">
+                    android:visibility="gone"
+                    >
 
                     <CheckBox
                         android:id="@+id/all_selected_cb"
                         style="@style/CustomCheckBoxTheme"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
                         android:gravity="center_vertical"
-                        android:paddingLeft="10dp"
                         android:text="全选"
-                        android:textSize="14sp" />
+                        android:paddingLeft="10dp"
+                        android:textSize="14sp"
+                        android:layout_centerVertical="true"
+                        />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
                         android:layout_marginLeft="4dp"
-<<<<<<< HEAD
+                        android:layout_toRightOf="@+id/all_selected_cb"
+                        android:layout_centerVertical="true"
+                        >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="(已选中"
+                        />
+
+                    <TextView
+                        android:id="@+id/selected_count_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/all_selected_cb"
+                        android:layout_marginLeft="4dp"
                         android:text=""
                         android:textSize="18sp"
                         android:textColor="#f00"
@@ -139,34 +162,6 @@
                         android:layout_toRightOf="@+id/all_selected_cb"
                         android:text="条数据)"
                         />
-=======
-                        android:layout_toRightOf="@+id/all_selected_cb">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:text="(已选中" />
-
-                        <TextView
-                            android:id="@+id/selected_count_tv"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginLeft="4dp"
-                            android:layout_marginRight="4dp"
-                            android:layout_toRightOf="@+id/all_selected_cb"
-                            android:text="2"
-                            android:textColor="#f00"
-                            android:textSize="18sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_toRightOf="@+id/all_selected_cb"
-                            android:text="条数据)" />
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
 
                     </LinearLayout>
 
@@ -174,20 +169,21 @@
                         android:id="@+id/delete_shanghu_rtv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:paddingBottom="6dp"
-                        android:paddingLeft="12dp"
-                        android:paddingRight="12dp"
-                        android:paddingTop="6dp"
                         android:text="删除"
                         android:textColor="#f00"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
                         android:textSize="16sp"
-                        rv:rv_cornerRadius="20dp"
+                        android:paddingTop="6dp"
+                        android:paddingBottom="6dp"
+                        android:paddingRight="12dp"
+                        android:paddingLeft="12dp"
                         rv:rv_strokeColor="#f00"
-                        rv:rv_strokePressColor="@color/luncy"
                         rv:rv_strokeWidth="1dp"
-                        rv:rv_textPressColor="@color/luncy" />
+                        rv:rv_cornerRadius="20dp"
+                        rv:rv_strokePressColor="@color/luncy"
+                        rv:rv_textPressColor="@color/luncy"
+                        />
 
                 </RelativeLayout>
 
@@ -199,288 +195,238 @@
 
 
     <!--侧滑菜单-->
-    <RelativeLayout
-        android:layout_width="match_parent"
+    <RelativeLayout android:background="@color/white"
         android:layout_height="match_parent"
-        android:layout_gravity="right"
-        android:background="@color/white"
-        android:clickable="true">
+        android:layout_width="match_parent"
+        android:clickable="true"
+        android:layout_gravity="right">
 
-        <TextView
-            android:id="@+id/filtrate_tv"
+    <TextView
+        android:background="#d2d2d2"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/filtrate_tv"
+        android:text="筛选"
+        android:padding="6dp"/>
+
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="12dp"
+        android:layout_below="@+id/filtrate_tv">
+
+
+    <android.support.v7.widget.CardView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        app:cardUseCompatPadding="true"
+        app:cardPreventCornerOverlap="false"
+        app:cardElevation="3dp"
+        app:cardBackgroundColor="@color/white">
+
+
+    <com.flyco.roundview.RoundRelativeLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        rv:rv_strokeColor="#909090"
+        rv:rv_cornerRadius="26dp">
+
+    <com.jaredrummler.materialspinner.MaterialSpinner
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/channelName_sp"
+        app:ms_text_color="@color/colorPrimary"
+        app:ms_hide_arrow="false"
+        app:ms_background_color="@color/white"
+        app:ms_arrow_tint="#909090"
+        android:textColorHint="#909090"
+        android:hint="请选择渠道名"/>
+
+</com.flyco.roundview.RoundRelativeLayout>
+
+</android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
+            android:layout_height="wrap_content"
             android:layout_width="match_parent"
+            android:layout_marginTop="6dp"
+            app:cardUseCompatPadding="true"
+            app:cardPreventCornerOverlap="false"
+            app:cardElevation="3dp"
+            app:cardBackgroundColor="@color/white">
+            <com.flyco.roundview.RoundRelativeLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                rv:rv_strokeColor="#909090"
+                rv:rv_cornerRadius="26dp">
+
+                <EditText
+                    android:id="@+id/merchantName_et"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:background="@null"
+                    android:padding="12dp"
+                    app:ms_text_color="@color/colorPrimary"
+                    app:ms_hide_arrow="false"
+                    app:ms_background_color="@color/white"
+                    app:ms_arrow_tint="#909090"
+                    android:textColorHint="#909090"
+                    android:textSize="14sp"
+                    android:hint="请输入商户名称"/>
+
+            </com.flyco.roundview.RoundRelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
             android:layout_height="wrap_content"
-            android:background="#d2d2d2"
-            android:padding="6dp"
-            android:text="筛选" />
-
-
-        <LinearLayout
             android:layout_width="match_parent"
+            android:layout_marginTop="6dp"
+            app:cardUseCompatPadding="true"
+            app:cardPreventCornerOverlap="false"
+            app:cardElevation="3dp"
+            app:cardBackgroundColor="@color/white">
+            <com.flyco.roundview.RoundRelativeLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                rv:rv_strokeColor="#909090"
+                rv:rv_cornerRadius="26dp">
+
+                <EditText
+                    android:id="@+id/merchantCode_et"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:background="@null"
+                    android:padding="12dp"
+                    app:ms_text_color="@color/colorPrimary"
+                    app:ms_hide_arrow="false"
+                    app:ms_background_color="@color/white"
+                    app:ms_arrow_tint="#909090"
+                    android:textColorHint="#909090"
+                    android:textSize="14sp"
+                    android:hint="请输入商户号"/>
+
+            </com.flyco.roundview.RoundRelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+            app:cardUseCompatPadding="true"
+            android:layout_marginTop="6dp"
+        app:cardPreventCornerOverlap="false"
+        app:cardElevation="3dp"
+        app:cardBackgroundColor="@color/white">
+
+
+    <com.flyco.roundview.RoundRelativeLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        rv:rv_strokeColor="#909090"
+        rv:rv_cornerRadius="26dp">
+
+    <com.jaredrummler.materialspinner.MaterialSpinner
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/state_sp"
+        android:padding="6dp"
+        app:ms_text_color="@color/colorPrimary"
+        app:ms_hide_arrow="false"
+        app:ms_background_color="@color/white"
+        app:ms_arrow_tint="#909090"
+        android:textColorHint="#909090"
+        android:hint="请选择商户状态"/>
+
+</com.flyco.roundview.RoundRelativeLayout>
+
+</android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
             android:layout_height="wrap_content"
-            android:layout_below="@+id/filtrate_tv"
-            android:layout_margin="12dp"
-            android:orientation="vertical">
+            android:layout_width="match_parent"
+            app:cardUseCompatPadding="true"
+            android:layout_marginTop="6dp"
+            app:cardPreventCornerOverlap="false"
+            app:cardElevation="3dp"
+            app:cardBackgroundColor="@color/white">
 
 
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
+            <com.flyco.roundview.RoundRelativeLayout
                 android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/white"
-                app:cardElevation="3dp"
-                app:cardPreventCornerOverlap="false"
-                app:cardUseCompatPadding="true">
-
-
-                <com.flyco.roundview.RoundRelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    rv:rv_cornerRadius="26dp"
-                    rv:rv_strokeColor="#909090">
-
-                    <com.jaredrummler.materialspinner.MaterialSpinner
-                        android:id="@+id/channelName_sp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="请选择渠道名"
-                        android:textColorHint="#909090"
-                        app:ms_arrow_tint="#909090"
-                        app:ms_background_color="@color/white"
-                        app:ms_hide_arrow="false"
-                        app:ms_text_color="@color/colorPrimary" />
-
-                </com.flyco.roundview.RoundRelativeLayout>
-
-            </android.support.v7.widget.CardView>
-
-
-            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardElevation="3dp"
-                app:cardPreventCornerOverlap="false"
-                app:cardUseCompatPadding="true">
+                rv:rv_strokeColor="#909090"
+                rv:rv_cornerRadius="26dp">
 
-                <com.flyco.roundview.RoundRelativeLayout
-                    android:layout_width="match_parent"
+                <com.jaredrummler.materialspinner.MaterialSpinner
+                    android:id="@+id/merchantType_sp"
                     android:layout_height="wrap_content"
-                    rv:rv_cornerRadius="26dp"
-                    rv:rv_strokeColor="#909090">
-
-                    <EditText
-                        android:id="@+id/merchantName_et"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@null"
-                        android:hint="请输入商户名称"
-                        android:padding="12dp"
-                        android:textColorHint="#909090"
-                        android:textSize="14sp"
-                        app:ms_arrow_tint="#909090"
-                        app:ms_background_color="@color/white"
-                        app:ms_hide_arrow="false"
-                        app:ms_text_color="@color/colorPrimary" />
-
-                </com.flyco.roundview.RoundRelativeLayout>
-
-            </android.support.v7.widget.CardView>
-
-
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardElevation="3dp"
-                app:cardPreventCornerOverlap="false"
-                app:cardUseCompatPadding="true">
-
-                <com.flyco.roundview.RoundRelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    rv:rv_cornerRadius="26dp"
-                    rv:rv_strokeColor="#909090">
+                    android:padding="6dp"
+                    app:ms_text_color="@color/colorPrimary"
+                    app:ms_hide_arrow="false"
+                    app:ms_background_color="@color/white"
+                    app:ms_arrow_tint="#909090"
+                    android:textColorHint="#909090"
+                    android:hint="请选择商户类型"/>
 
-                    <EditText
-                        android:id="@+id/merchantCode_et"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@null"
-                        android:hint="请输入商户号"
-                        android:padding="12dp"
-                        android:textColorHint="#909090"
-                        android:textSize="14sp"
-                        app:ms_arrow_tint="#909090"
-                        app:ms_background_color="@color/white"
-                        app:ms_hide_arrow="false"
-                        app:ms_text_color="@color/colorPrimary" />
+            </com.flyco.roundview.RoundRelativeLayout>
 
-                </com.flyco.roundview.RoundRelativeLayout>
+        </android.support.v7.widget.CardView>
 
-            </android.support.v7.widget.CardView>
-
-
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardElevation="3dp"
-                app:cardPreventCornerOverlap="false"
-                app:cardUseCompatPadding="true">
-
-
-                <com.flyco.roundview.RoundRelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    rv:rv_cornerRadius="26dp"
-                    rv:rv_strokeColor="#909090">
-
-                    <com.jaredrummler.materialspinner.MaterialSpinner
-                        android:id="@+id/state_sp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="请选择商户状态"
-                        android:padding="6dp"
-                        android:textColorHint="#909090"
-                        app:ms_arrow_tint="#909090"
-                        app:ms_background_color="@color/white"
-                        app:ms_hide_arrow="false"
-                        app:ms_text_color="@color/colorPrimary" />
-
-                </com.flyco.roundview.RoundRelativeLayout>
-
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardElevation="3dp"
-                app:cardPreventCornerOverlap="false"
-                app:cardUseCompatPadding="true">
-
-
-                <com.flyco.roundview.RoundRelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    rv:rv_cornerRadius="26dp"
-                    rv:rv_strokeColor="#909090">
-
-                    <com.jaredrummler.materialspinner.MaterialSpinner
-                        android:id="@+id/merchantType_sp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="请选择商户类型"
-                        android:padding="6dp"
-                        android:textColorHint="#909090"
-                        app:ms_arrow_tint="#909090"
-                        app:ms_background_color="@color/white"
-                        app:ms_hide_arrow="false"
-                        app:ms_text_color="@color/colorPrimary" />
-
-                </com.flyco.roundview.RoundRelativeLayout>
-
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardElevation="3dp"
-                app:cardPreventCornerOverlap="false"
-                app:cardUseCompatPadding="true">
-
-
-                <com.flyco.roundview.RoundRelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    rv:rv_cornerRadius="26dp"
-                    rv:rv_strokeColor="#909090">
-
-                    <TextView
-                        android:id="@+id/startDate_tv"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:drawableRight="@mipmap/icon_time"
-                        android:gravity="center_vertical"
-                        android:hint="请选择上次下载时间(起)"
-                        android:padding="12dp"
-                        android:textColor="#000"
-                        android:textSize="14sp" />
-
-                </com.flyco.roundview.RoundRelativeLayout>
-
-            </android.support.v7.widget.CardView>
-
-
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardElevation="3dp"
-                app:cardPreventCornerOverlap="false"
-                app:cardUseCompatPadding="true">
-
-
-                <com.flyco.roundview.RoundRelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    rv:rv_cornerRadius="26dp"
-                    rv:rv_strokeColor="#909090">
-
-                    <TextView
-                        android:id="@+id/endDate_tv"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:drawableRight="@mipmap/icon_time"
-                        android:gravity="center_vertical"
-                        android:hint="请选择上次下载时间(止)"
-                        android:padding="12dp"
-                        android:textColor="#000"
-                        android:textSize="14sp" />
-
-                </com.flyco.roundview.RoundRelativeLayout>
-
-            </android.support.v7.widget.CardView>
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <android.support.v7.widget.CardView
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_margin="12dp">
+            android:layout_width="match_parent"
+            android:layout_marginTop="6dp"
+            app:cardUseCompatPadding="true"
+            app:cardPreventCornerOverlap="false"
+            app:cardElevation="3dp"
+            app:cardBackgroundColor="@color/white">
 
-            <Button
-                android:id="@+id/clear_filter_tv"
-                android:layout_width="wrap_content"
+
+            <com.flyco.roundview.RoundRelativeLayout
                 android:layout_height="wrap_content"
-                android:background="@drawable/sure_textview_bg"
-                android:gravity="center"
-                android:text="重置"
-                android:textColor="@color/white"
-                android:textSize="14sp" />
+                android:layout_width="match_parent"
+                rv:rv_strokeColor="#909090"
+                rv:rv_cornerRadius="26dp">
 
-            <Button
-                android:id="@+id/sure_filter_tv"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/startDate_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@mipmap/icon_time"
+                    android:padding="12dp"
+                    android:gravity="center_vertical"
+                    android:hint="请选择上次下载时间(起)"
+                    android:textColor="#000"
+                    android:textSize="14sp" />
+
+            </com.flyco.roundview.RoundRelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginTop="6dp"
+            app:cardUseCompatPadding="true"
+            app:cardPreventCornerOverlap="false"
+            app:cardElevation="3dp"
+            app:cardBackgroundColor="@color/white">
+
+
+            <com.flyco.roundview.RoundRelativeLayout
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="3dp"
-                android:background="@drawable/cancle_textview_bg"
-                android:gravity="center"
-                android:text="确定"
-                android:textColor="@color/white"
-                android:textSize="14sp" />
+                android:layout_width="match_parent"
+                rv:rv_strokeColor="#909090"
+                rv:rv_cornerRadius="26dp">
 
-<<<<<<< HEAD
                 <TextView
                     android:id="@+id/endDate_tv"
                     android:layout_width="match_parent"
@@ -529,11 +475,6 @@
 </LinearLayout>
 
 </RelativeLayout>
-=======
-        </LinearLayout>
-
-    </RelativeLayout>
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
 
 
 </android.support.v4.widget.DrawerLayout>

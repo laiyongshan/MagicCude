@@ -19,7 +19,8 @@ public class DateUtil {
         String dateStr = "";
         try {
             date = new SimpleDateFormat("yyyyMMdd").parse(str);
-            dateStr = new SimpleDateFormat("yyyy-MM-dd").format(date);
+            if(date!=null)
+                dateStr = new SimpleDateFormat("yyyy-MM-dd").format(date);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -55,14 +56,18 @@ public class DateUtil {
 
     //System.currentTimeMillis()与日期之间转换
     public static String mills2Date(long timeMillis){
-<<<<<<< HEAD
-        SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
-=======
         SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
         String dateStr = dateformat.format(timeMillis);
         return dateStr;
     }
+
+    //System.currentTimeMillis()与日期之间转换
+    public static String mills2Date2(long timeMillis){
+        SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
+        String dateStr = dateformat.format(timeMillis);
+        return dateStr;
+    }
+
 
     //System.currentTimeMillis()与日期之间转换
     public static long Date2Mills(String date){
@@ -77,14 +82,11 @@ public class DateUtil {
         return time;
     }
 
-<<<<<<< HEAD
     public static String dayFormart(String day){
         if(day.length()<=1) {
             day = "0" + day;
         }
             return day;
     }
-=======
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
 
 }

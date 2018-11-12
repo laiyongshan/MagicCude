@@ -103,7 +103,6 @@ public class PlaningBean extends BaseBean {
         return totalPage;
     }
 
-<<<<<<< HEAD
     private List<ResultBean> result;
 
     public List<ResultBean> getResult() {
@@ -111,15 +110,6 @@ public class PlaningBean extends BaseBean {
     }
 
     public void setResult(List<ResultBean> result) {
-=======
-    private List<PlaningBean.ResultBean> result;
-
-    public List<PlaningBean.ResultBean> getResult() {
-        return result;
-    }
-
-    public void setResult(List<PlaningBean.ResultBean> result) {
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
         this.result = result;
     }
 
@@ -176,7 +166,6 @@ public class PlaningBean extends BaseBean {
         private String merchantName;
         private String merchantState;
         private String operatorTime;
-<<<<<<< HEAD
         private String modifyTime;
 
         public void setModifyTime(String modifyTime) {
@@ -186,8 +175,6 @@ public class PlaningBean extends BaseBean {
         public String getModifyTime() {
             return modifyTime;
         }
-=======
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
 
         public void setOperatorTime(String operatorTime) {
             this.operatorTime = operatorTime;

@@ -84,7 +84,6 @@ public class RemidFragment extends MVPBaseFragment<BillConfirmContract.View, Bil
     @Override
     public void onStart() {
         super.onStart();
-        pageNum=1;
     }
 
     @Override

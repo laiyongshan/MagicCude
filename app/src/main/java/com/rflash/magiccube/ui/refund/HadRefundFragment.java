@@ -37,7 +37,7 @@ public class HadRefundFragment extends MVPBaseFragment<RefundContract.View, Refu
     List<RefundBean.ResultBean> refunList=new ArrayList<>();
     List<RefundBean.ResultBean> REPAID_List=new ArrayList<>();
     RefundBean refundBean;
-    int pageNum;
+    int pageNum=1;
     private int TOTAL_COUNTER; //所有的数据总数
 
     static HadRefundFragment hadRefundFragment;
@@ -80,7 +80,6 @@ public class HadRefundFragment extends MVPBaseFragment<RefundContract.View, Refu
     @Override
     public void onStart() {
         super.onStart();
-        pageNum=1;
     }
 
     @Override

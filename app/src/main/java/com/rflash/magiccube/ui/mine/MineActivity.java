@@ -13,10 +13,7 @@ import com.rflash.magiccube.app.MyApplication;
 import com.rflash.magiccube.ui.login.LoginActivity;
 
 import butterknife.BindView;
-<<<<<<< HEAD
 import butterknife.ButterKnife;
-=======
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
 import butterknife.OnClick;
 
 /**
@@ -49,10 +46,7 @@ public class MineActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mine);
-<<<<<<< HEAD
         ButterKnife.bind(this);
-=======
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
         initView();
     }
 

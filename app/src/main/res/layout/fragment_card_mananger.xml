@@ -332,8 +332,8 @@
                     rv:rv_strokeColor="#909090"
                     rv:rv_cornerRadius="26dp">
 
-                    <EditText
-                        android:id="@+id/salesMan_et"
+                    <com.jaredrummler.materialspinner.MaterialSpinner
+                        android:id="@+id/salesMan_sp"
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent"
                         android:background="@null"

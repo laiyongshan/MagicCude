@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -22,6 +23,7 @@ import com.flyco.roundview.RoundTextView;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.rflash.basemodule.BaseFragment;
 import com.rflash.basemodule.utils.ActivityIntent;
+import com.rflash.basemodule.utils.StringUtil;
 import com.rflash.magiccube.R;
 import com.rflash.magiccube.mvp.MVPBaseFragment;
 import com.rflash.magiccube.ui.addcard.AddCardActivity;
@@ -85,12 +87,14 @@ public class CardManagerFragment extends MVPBaseFragment<CardManagerContract.Vie
     EditText billDate_et;
     @BindView(R.id.state_sp)
     MaterialSpinner state_sp;
-    @BindView(R.id.salesMan_et)
-    EditText salesMan_et;
+    @BindView(R.id.salesMan_sp)
+    MaterialSpinner salesMan_sp;
     @BindView(R.id.cardNo_et)
     EditText cardNo_et;
     @BindView(R.id.cardSeqno_et)
     EditText cardSeqno_et;
+
+    private View notDataView;
 
     String cardNo="";
     String cardSeqno="";
@@ -127,6 +131,9 @@ public class CardManagerFragment extends MVPBaseFragment<CardManagerContract.Vie
 
         dirtData=new DirtData(getActivity());
 
+        notDataView = getLayoutInflater().inflate(R.layout.empty_view, (ViewGroup) card_manager_rv.getParent(), false);
+
+
         card_manager_rv.setLayoutManager(new LinearLayoutManager(getActivity()));
         cardManagerAdapter=new CardManagerAdapter(isOption,cardBeanList);
         cardManagerAdapter.setOnItemClickListener(onItemClickListener);
@@ -135,6 +142,8 @@ public class CardManagerFragment extends MVPBaseFragment<CardManagerContract.Vie
         card_manager_rv.setAdapter(cardManagerAdapter);
 
         state_sp.setItems(dirtData.cardStateArr);
+
+        salesMan_sp.setItems(dirtData.getSalesMenList());
     }
 
     @Override
@@ -149,7 +158,7 @@ public class CardManagerFragment extends MVPBaseFragment<CardManagerContract.Vie
         showRefresh();
         cardNo=cardNo_et.getText().toString().trim();
         cardSeqno=cardSeqno_et.getText().toString().trim();
-        salesMan=salesMan_et.getText().toString().trim();
+        salesMan=dirtData.getSalesIdList().get(salesMan_sp.getSelectedIndex());
         billDate=billDate_et.getText().toString().trim();
         repayDate=repayDate_et.getText().toString().trim();
         state=dirtData.cardStateOptions[state_sp.getSelectedIndex()];
@@ -192,7 +201,7 @@ public class CardManagerFragment extends MVPBaseFragment<CardManagerContract.Vie
             case R.id.clear_filter_tv:
                 repayDate_et.setText("");
                 billDate_et.setText("");
-                salesMan_et.setText("");
+                salesMan_sp.setSelectedIndex(0);
                 cardNo_et.setText("");
                 cardSeqno_et.setText("");
                 state_sp.setSelectedIndex(0);
@@ -267,12 +276,14 @@ public class CardManagerFragment extends MVPBaseFragment<CardManagerContract.Vie
             TOTAL_COUNTER=response.getTotalNum();
             if(pageNum==1){
                 countTvs[0].setText("卡片数量："+response.getTotalNum());
-                countTvs[1].setText("可用总余额：￥"+Double.valueOf(response.getAvailableAmt())/100);
-                countTvs[2].setText("初始金额总额：￥"+Double.valueOf(response.getInitAmt())/100);
-                countTvs[3].setText("固定额度总额：￥"+Double.valueOf(response.getFixedLimit())/100);
+                countTvs[1].setText("可用总余额：￥"+ StringUtil.getTwoPointString(response.getAvailableAmt()));
+                countTvs[2].setText("初始金额总额：￥"+StringUtil.getTwoPointString(response.getInitAmt()));
+                countTvs[3].setText("固定额度总额：￥"+StringUtil.getTwoPointString(response.getFixedLimit()));
                 cardBeanList=response.getResult();
                 cardManagerAdapter.setNewData(response.getResult());
                 cardManagerAdapter.notifyDataSetChanged();
+                if(cardBeanList.isEmpty())
+                    cardManagerAdapter.setEmptyView(notDataView);
             }else{
                 cardBeanList.addAll(response.getResult());
                 cardManagerAdapter.addData(response.getResult());

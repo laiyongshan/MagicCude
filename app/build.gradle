@@ -12,7 +12,7 @@ android {
         config {
             keyAlias 'rflash'
             keyPassword '123456'
-            storeFile file('C:\\Users\\Hjo\\Documents\\GitHub\\MagicCude\\app\\src\\main\\jks\\mofang.jks')
+            storeFile file('E:\\MoFang\\MagicCube\\app\\src\\main\\jks\\mofang.jks')
             storePassword '123456'
         }
     }
@@ -21,8 +21,8 @@ android {
         applicationId "com.rflash.magiccube"
         minSdkVersion 15
         targetSdkVersion 26
-        versionCode 8
-        versionName "1.7"
+        versionCode 9
+        versionName "V1.8.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -84,11 +84,8 @@ dependencies {
     compile 'org.greenrobot:eventbus:3.1.1'
     compile 'com.flyco.roundview:FlycoRoundView_Lib:1.1.4@aar'
     implementation project(':material-spinner-1.0.5')
-    compile 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
 
     compile 'me.drakeet.materialdialog:library:1.3.1'
-
-    compile 'com.jakewharton:disklrucache:2.0.2'
 
     compile 'com.contrarywind:Android-PickerView:3.2.5'
 

@@ -2,6 +2,7 @@ package com.rflash.magiccube.ui.newmain;
 
 import android.content.Context;
 
+import com.rflash.magiccube.ui.salesmen.SalesmenBean;
 import com.rflash.magiccube.util.CatchManager;
 
 import java.util.ArrayList;
@@ -32,13 +33,14 @@ import java.util.List;
  */
 
 public class DirtData {
-    public final static String key = "Dirt";
+    public final static String key1 = "Dirt";
+    public final static String SALEMEN_KEY="salemen";
     Context context;
 
     public DirtData(Context context) {
         this.context = context;
-<<<<<<< HEAD
-        list = (List<DirtBean.ResultBean>) CatchManager.getCatchData(context, key);
+        list = (List<DirtBean.ResultBean>) CatchManager.getCatchData(context, key1);
+        salesList= (List<SalesmenBean.ResultBean>) CatchManager.getCatchData(context,SALEMEN_KEY);
     }
 
     public String[] tranTypeArr1 = {"请选择操作类型","消费", "还款"};//操作类型
@@ -63,11 +65,23 @@ public class DirtData {
     public String[] isNeedT0Arr={"是","否"};//是否需要T0
     public String[] isNeedOptions={"Y","N"};
 
-    public String[] serviceTypeArr={"固定信用额度","需还款金额","自定义金额"};//收费基数类型
+    public String[] serviceTypeArr={"固定额度","需还款金额","自定义金额"};//收费基数类型
     public String[] serviceTypeOptions={"FIXED_LIMIT","REPAY_LIMIT","USER_DEFINED"};
 
     public String[] repayDateArr={"固定还款日","指定天数"};//还款日类型
     public String[] repayDateOptions={"FIXED","APPOINTED_DAYS"};//还款日类型
+
+    public String[] planStateArr={"未操作","已操作"};//规划状态
+    public String[] planStateOptionArr={"NOT_OPERATOR","DEAL"};
+
+    public String[] ChannelArr={"请选择渠道号","盛01","汇02","中04"};
+    public String[] ChannelIDOptions={"","38","17","42"};
+
+    public String[] ChannelArr2={"请选择渠道号","代付"};
+    public String[] ChannelIDOptions2={"","37"};
+
+    public String[] ChannelArr3={"请选择渠道","盛01","汇02","中04","代付"};
+    public String[] ChannelIDOptions3={"","38","17","42","37"};
 
     public String[] cardMediaArr={"IC卡","磁条卡"};//卡介质
     public String[] cardMediaOptions={"IC_CARD","STRIP_CARD"};
@@ -84,16 +98,6 @@ public class DirtData {
     public String[] isOrNoArr={"是","否"};//是否
     public String[] isOrNoOptions={"Y","N"};
 
-=======
-    }
-
-    public String[] tranTypeArr = {"消费", "还款"};//交易类型
-    public String[] tranTypeOptions={"SALE","REPAY"};
-
-    public String[] isNeedT0Arr={"是","否"};//是否需要T0
-    public String[] isNeedOptions={"Y","N"};
-
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
     public List<String> planStateList = new ArrayList<>();
     public List<DirtBean.ResultBean.OptionBean> planStateOptions = new ArrayList<>();
 
@@ -103,12 +107,36 @@ public class DirtData {
     public List<String> merchantsTypeList = new ArrayList<>();//商户类型
     public List<DirtBean.ResultBean.OptionBean> merchantsTypeOptions = new ArrayList<>();
 
+    public List<String> mccList=new ArrayList<>();
+    public List<DirtBean.ResultBean.OptionBean> mccOptions=new ArrayList<>();
 
-<<<<<<< HEAD
+
+    //业务员
+    public List<String> salesMenList=new ArrayList<>();
+    public List<String> salesIdList=new ArrayList<>();
+
     List<DirtBean.ResultBean> list;
-=======
-    List<DirtBean.ResultBean> list = (List<DirtBean.ResultBean>) CatchManager.getCatchData(context, key);
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
+    List<SalesmenBean.ResultBean> salesList=new ArrayList<>();
+
+    //业务员
+    public List<String> getSalesMenList(){
+        salesMenList.clear();
+        for (SalesmenBean.ResultBean resultBean:salesList){
+            salesMenList.add(resultBean.getName()+"");
+        }
+        salesMenList.add(0,"");
+        return salesMenList;
+    }
+
+    public List<String> getSalesIdList(){
+        salesIdList.clear();
+        for (SalesmenBean.ResultBean resultBean:salesList){
+            salesIdList.add(resultBean.getId()+"");
+        }
+        salesIdList.add(0,"");
+        return salesIdList;
+    }
+
 
     //卡片规划状态
     public List<DirtBean.ResultBean.OptionBean> cardPlanState() {
@@ -117,6 +145,25 @@ public class DirtData {
                 return resultBean.getOption();
         }
         return null;
+    }
+
+    //18MCC小类
+    public List<DirtBean.ResultBean.OptionBean> mcc() {
+        for (DirtBean.ResultBean resultBean : list) {
+            if (resultBean.getType().getDictTypeId().equals("18"))
+                mccOptions = resultBean.getOption();
+        }
+        return mccOptions;
+    }
+
+    public List<String> getMccList() {
+        mccList.clear();
+        if (mcc() != null) {
+            for (DirtBean.ResultBean.OptionBean optionBean : mccOptions) {
+                mccList.add(optionBean.getDictName());
+            }
+        }
+        return mccList;
     }
 
 
@@ -130,12 +177,8 @@ public class DirtData {
     }
 
     public List<String> getMerchantsTypeList() {
-<<<<<<< HEAD
         merchantsTypeList.clear();
         if (merchantsType() != null) {
-=======
-        if (channnel() != null) {
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
             for (DirtBean.ResultBean.OptionBean optionBean : merchantsTypeOptions) {
                 merchantsTypeList.add(optionBean.getDictName());
             }
@@ -154,10 +197,7 @@ public class DirtData {
     }
 
     public List<String> getChannelList() {
-<<<<<<< HEAD
         channelList.clear();
-=======
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
         if (channnel() != null) {
             for (DirtBean.ResultBean.OptionBean optionBean : channelOptions) {
                 channelList.add(optionBean.getDictName());
@@ -196,14 +236,6 @@ public class DirtData {
     }
 
 
-    //18MCC小类
-    public List<DirtBean.ResultBean.OptionBean> mcc() {
-        for (DirtBean.ResultBean resultBean : list) {
-            if (resultBean.getType().getDictTypeId().equals("18"))
-                return resultBean.getOption();
-        }
-        return null;
-    }
 
 
     //21账单类型

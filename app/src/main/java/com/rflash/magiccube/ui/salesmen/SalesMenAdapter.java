@@ -38,7 +38,7 @@ public class SalesMenAdapter extends BaseQuickAdapter<SalesmenBean.ResultBean,Ba
         ((TextView)helper.getView(R.id.sales_serinum_tv)).setText(item.getId()+"");
         ((TextView)helper.getView(R.id.sales_man_name_tv)).setText(item.getName()+"");
         ((TextView)helper.getView(R.id.profitRatio_tv)).setText(Float.valueOf(item.getProfitRatio())*100+"%");
-        ((TextView)helper.getView(R.id.modifyTime_tv)).setText(DateUtil.mills2Date(item.getModifyTime())+"");
+        ((TextView)helper.getView(R.id.modifyTime_tv)).setText(DateUtil.mills2Date2(item.getModifyTime())+"");
 
         ((RoundTextView)helper.getView(R.id.update_sales_rtv)).setOnClickListener(new View.OnClickListener() {
             @Override

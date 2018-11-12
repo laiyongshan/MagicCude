@@ -78,7 +78,6 @@ public class IgnoreFragment extends MVPBaseFragment<BillConfirmContract.View, Bi
     @Override
     public void onStart() {
         super.onStart();
-        pageNum=1;
     }
 
     @Override

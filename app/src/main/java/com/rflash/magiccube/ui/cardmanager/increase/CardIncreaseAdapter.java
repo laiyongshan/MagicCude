@@ -6,6 +6,7 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.rflash.magiccube.R;
+import com.rflash.magiccube.util.DateUtil;
 
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class CardIncreaseAdapter extends BaseQuickAdapter<IncreaseBean.ResultBea
             ((TextView)helper.getView(R.id.increase_Amt_tv)).setText("-"+item.getAmt()/100);
             ((TextView)helper.getView(R.id.increase_type_tv)).setText("降额");
         }
-        ((TextView)helper.getView(R.id.increase_time_tv)).setText(item.getChangeTime()+"");
+        ((TextView)helper.getView(R.id.increase_time_tv)).setText(DateUtil.mills2Date(item.getChangeTime())+"");
         ((TextView)helper.getView(R.id.originalLimit_newLimit_tv)).setText("原始固定额度：￥"+item.getOriginalLimit()/100+" | "+"当前固定额度：￥"+item.getNewLimit()/100);
 
     }

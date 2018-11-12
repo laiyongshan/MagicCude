@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/MagicCude.iml" filepath="$PROJECT_DIR$/MagicCude.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MagicCube.iml" filepath="$PROJECT_DIR$/MagicCube.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/basemodule/basemodule.iml" filepath="$PROJECT_DIR$/basemodule/basemodule.iml" />
       <module fileurl="file://$PROJECT_DIR$/material-spinner-1.0.5/material-spinner-1.0.5.iml" filepath="$PROJECT_DIR$/material-spinner-1.0.5/material-spinner-1.0.5.iml" />

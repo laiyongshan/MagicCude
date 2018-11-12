@@ -162,8 +162,8 @@ public class RefundFragment extends BaseFragment {
         });
 
         ArrayList<Integer> colors = new ArrayList<>();
-        colors.add(Color.rgb(153, 153, 153));
         colors.add(Color.parseColor("#69B6F3"));
+        colors.add(Color.rgb(153, 153, 153));
         pieDataSet.setColors(colors);//颜色设置
 
         pieDataSet.setSliceSpace(2f);

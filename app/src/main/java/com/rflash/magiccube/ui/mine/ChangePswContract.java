@@ -17,17 +17,10 @@ public class ChangePswContract {
         void getDataSuccess();
     }
 
-<<<<<<< HEAD
     interface  Presenter extends BasePresenter<View> {
 
         //
         void changePsw(String password, String newPassword);
-=======
-    interface  Presenter extends BasePresenter<ChangePswContract.View> {
-
-        //
-        void changePsw(String password,String newPassword);
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
 
 
 

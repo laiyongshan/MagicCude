@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.rflash.basemodule.utils.StringUtil;
 import com.rflash.magiccube.R;
 import com.rflash.magiccube.util.DateUtil;
 import com.rflash.magiccube.util.ToolUtils;
@@ -41,7 +42,7 @@ public class FinanceAdapter extends BaseQuickAdapter<FinanceBean.ResultBean,Base
         ((TextView)helper.getView(R.id.card_seri_num_tv)).setText(item.getCardSeqno()+"");
         ((TextView)helper.getView(R.id.sales_man_name_tv)).setText("无");
         ((TextView)helper.getView(R.id.sales_man_profit_tv)).setText("无");
-        ((TextView)helper.getView(R.id.tranCost_tv)).setText(Double.valueOf(item.getTranCost())/100+"");
-        ((TextView)helper.getView(R.id.revenue_tv)).setText(Double.valueOf(item.getRevenue())/100+"");
+        ((TextView)helper.getView(R.id.tranCost_tv)).setText(StringUtil.getTwoPointString(item.getTranCost())+"");
+        ((TextView)helper.getView(R.id.revenue_tv)).setText(StringUtil.getTwoPointString(item.getRevenue())+"");
     }
 }

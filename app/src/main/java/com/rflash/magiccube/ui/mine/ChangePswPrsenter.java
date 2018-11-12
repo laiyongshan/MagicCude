@@ -42,7 +42,7 @@ public class ChangePswPrsenter extends BasePresenterImpl<ChangePswContract.View>
 //        AESUtil.encrypt(password, Config.AES);
         try {
             signature = SignUtil.signDataWithStr(treeMap, SpUtil.getString(mView.getContext(), Config.USER_PRVKEY, ""));
-            Observable<BaseBean> confirm = RetrofitFactory.getApiService().modifyPassword(version, requestNo, machineCode, account, signature, AESUtil.encrypt(password, Config.AES),AESUtil.encrypt(newPassword, Config.AES));
+            Observable<BaseBean> confirm = RetrofitFactory.getApiService().modifyPassword(version, requestNo, machineCode, account, signature, password,newPassword);
             Observable<BaseBean> compose = confirm.compose(((BaseActivity) mView.getContext()).compose(((BaseActivity) mView.getContext()).<BaseBean>bindToLifecycle()));
             compose.subscribe(new DefaultObserver<BaseBean>((BaseActivity) mView.getContext()) {
                 @Override

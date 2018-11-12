@@ -23,6 +23,6 @@ public class FinanceManagerContract {
         void queryReport(String cardSeqno, String cardNo, String customerNmae, String salesMan, String startDate, String endDate, String pageNum);
 
         //财务详情
-        void queryPlan(String cardNo, String tranType, String channelId, String pageNum);
+        void queryPlan(String cardNo,String state, String tranType, String channelId,String startDate,String endDae, String pageNum);
     }
 }

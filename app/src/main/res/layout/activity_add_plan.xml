@@ -284,6 +284,7 @@
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:textSize="12sp"
+                        android:hint="请选择渠道号"
                         app:ms_background_color="@color/white"
                         app:ms_hide_arrow="false"
                         app:ms_text_color="@color/colorPrimary" />
@@ -291,7 +292,7 @@
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
-                android:id="@+id/merchantCode_cd"
+                android:id="@+id/merchantName_cd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
@@ -325,7 +326,7 @@
                         android:background="#c0c0c0" />
 
                     <com.jaredrummler.materialspinner.MaterialSpinner
-                        android:id="@+id/merchantCode_sp"
+                        android:id="@+id/merchantName_sp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
@@ -337,11 +338,54 @@
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
+                android:id="@+id/merchantCode_cd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="6dp"
+                app:cardElevation="3dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@mipmap/icon_red_start"
+                        android:drawablePadding="6dp"
+                        android:gravity="left"
+                        android:paddingLeft="16dp"
+                        android:text="商户号 ："
+                        android:textColor="#000"
+                        android:textSize="14sp" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="4dp"
+                        android:layout_marginRight="12dp"
+                        android:layout_marginTop="4dp"
+                        android:background="#c0c0c0" />
+
+                    <EditText
+                        android:id="@+id/merchantCode_et"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:textSize="12sp"
+                        android:editable="false" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
                 android:id="@+id/mcc_cd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
-                android:visibility="gone"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="6dp"
                 app:cardElevation="3dp">
@@ -371,15 +415,13 @@
                         android:layout_marginTop="4dp"
                         android:background="#c0c0c0" />
 
-                    <com.jaredrummler.materialspinner.MaterialSpinner
-                        android:id="@+id/mcc_sp"
+                    <EditText
+                        android:id="@+id/mcc_et"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:textSize="12sp"
-                        app:ms_background_color="@color/white"
-                        app:ms_hide_arrow="false"
-                        app:ms_text_color="@color/colorPrimary" />
+                        android:editable="false" />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
@@ -557,7 +599,7 @@
                 android:layout_marginTop="16dp"
                 android:gravity="center"
                 android:padding="10dp"
-                android:text="确定"
+                android:text="添加记录"
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 rv:rv_backgroundColor="@color/colorPrimary"

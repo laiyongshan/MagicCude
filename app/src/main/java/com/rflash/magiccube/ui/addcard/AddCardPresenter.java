@@ -21,6 +21,7 @@ import io.reactivex.Observable;
 
 public class AddCardPresenter extends BasePresenterImpl<AddCardContract.View> implements AddCardContract.Presenter{
 
+    //新增卡片
     @Override
     public void insertCard(String cardNo, String cardSeqno, String bankCode, String customerName,
                            String customerID, String phone, String billDate, String repayDateType,
@@ -80,7 +81,7 @@ public class AddCardPresenter extends BasePresenterImpl<AddCardContract.View> im
                      serviceRate,  serviceStartDate,  serviceEndDate,
                      paidAmt,  ebankinfo,  stagesList,  cardMedia);
             Observable<BaseBean> compose = addCard.compose(((BaseActivity) mView.getContext()).compose(((BaseActivity) mView.getContext()).<BaseBean>bindToLifecycle()));
-            compose.subscribe(new DefaultObserver<VerfyBean>((BaseActivity) mView.getContext()) {
+            compose.subscribe(new DefaultObserver<BaseBean>((BaseActivity) mView.getContext()) {
                 @Override
                 public void onError(Throwable e) {
                     mView.insertCardFail(e.getMessage());
@@ -94,8 +95,8 @@ public class AddCardPresenter extends BasePresenterImpl<AddCardContract.View> im
 
 
                 @Override
-                protected void onSuccess(VerfyBean data) {
-                    mView.verifyResult(data);
+                protected void onSuccess() {
+                    mView.insertCardSuccess();
                 }
             });
 
@@ -105,6 +106,7 @@ public class AddCardPresenter extends BasePresenterImpl<AddCardContract.View> im
     }
 
 
+    //四要素验证
     @Override
     public void relCard(String cardNo, String name, String identityCard, String mobile, String cardMedia) {
         String signature;
@@ -142,10 +144,79 @@ public class AddCardPresenter extends BasePresenterImpl<AddCardContract.View> im
                     mView.finishinsertCard();
                 }
 
-
                 @Override
                 protected void onSuccess(VerfyBean bean) {
                     mView.verifyResult(bean);
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    //购买征信产品
+    @Override
+    public void productBuy(String creditType, String num, String payType) {
+        String signature;
+        String version = Config.VERSION_CODE;
+        String requestNo = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+        String machineCode = SpUtil.getString(mView.getContext(), Config.MACHINECODE, "");
+        String account = SpUtil.getString(mView.getContext(), Config.ACCOUNT, "");
+        String pointId = SpUtil.getString(mView.getContext(), Config.POINT_ID, "");
+        TreeMap<String, String> treeMap = new TreeMap<>();
+        treeMap.put("version", version);
+        treeMap.put("requestNo", requestNo);
+        treeMap.put("machineCode", machineCode);
+        treeMap.put("account", account);
+        treeMap.put("creditType",creditType);
+        treeMap.put("num",num);
+        treeMap.put("payType",payType);
+
+        try {
+            signature = SignUtil.signDataWithStr(treeMap, SpUtil.getString(mView.getContext(), Config.USER_PRVKEY, ""));
+            Observable<BaseBean> addCard = RetrofitFactory.getApiService().productBuy(version, requestNo, machineCode, account, signature,
+                    creditType,num,payType );
+            Observable<BaseBean> compose = addCard.compose(((BaseActivity) mView.getContext()).compose(((BaseActivity) mView.getContext()).<BaseBean>bindToLifecycle()));
+            compose.subscribe(new DefaultObserver<PayBean>((BaseActivity) mView.getContext()) {
+
+                @Override
+                protected void onSuccess(PayBean bean) {
+                    mView.toPayResult(bean);
+                }
+            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    //查询征信产品详细信息
+    @Override
+    public void productDetail(String creditType) {
+        String signature;
+        String version = Config.VERSION_CODE;
+        String requestNo = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+        String machineCode = SpUtil.getString(mView.getContext(), Config.MACHINECODE, "");
+        String account = SpUtil.getString(mView.getContext(), Config.ACCOUNT, "");
+        String pointId = SpUtil.getString(mView.getContext(), Config.POINT_ID, "");
+        TreeMap<String, String> treeMap = new TreeMap<>();
+        treeMap.put("version", version);
+        treeMap.put("requestNo", requestNo);
+        treeMap.put("machineCode", machineCode);
+        treeMap.put("account", account);
+        treeMap.put("creditType",creditType);
+
+        try {
+            signature = SignUtil.signDataWithStr(treeMap, SpUtil.getString(mView.getContext(), Config.USER_PRVKEY, ""));
+            Observable<BaseBean> addCard = RetrofitFactory.getApiService().queryProductDetail(version, requestNo, machineCode, account, signature,
+                    creditType);
+            Observable<BaseBean> compose = addCard.compose(((BaseActivity) mView.getContext()).compose(((BaseActivity) mView.getContext()).<BaseBean>bindToLifecycle()));
+            compose.subscribe(new DefaultObserver<ProductDetailBean>((BaseActivity) mView.getContext()) {
+
+                @Override
+                protected void onSuccess(ProductDetailBean bean) {
+                    mView.queryProductDetailResult(bean);
                 }
             });
 

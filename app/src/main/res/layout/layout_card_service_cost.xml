@@ -23,14 +23,14 @@
             >
 
             <TextView
-                android:layout_width="120dp"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@mipmap/icon_red_start"
                 android:drawablePadding="6dp"
                 android:gravity="left"
                 android:text="费用基数类型："
                 android:paddingLeft="16dp"
-                android:paddingRight="0dp"
+                android:paddingRight="16dp"
                 android:textColor="#000"
                 android:textSize="14sp" />
 
@@ -76,7 +76,7 @@
             >
 
             <TextView
-                android:layout_width="120dp"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@mipmap/icon_red_start"
                 android:drawablePadding="6dp"
@@ -135,7 +135,7 @@
             >
 
             <TextView
-                android:layout_width="120dp"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@mipmap/icon_red_start"
                 android:drawablePadding="6dp"
@@ -194,14 +194,14 @@
             >
 
             <TextView
-                android:layout_width="120dp"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@mipmap/icon_red_start"
                 android:drawablePadding="6dp"
                 android:gravity="left"
                 android:text="服务开始时间："
                 android:paddingLeft="16dp"
-                android:paddingRight="0dp"
+                android:paddingRight="16dp"
                 android:textColor="#000"
                 android:textSize="14sp" />
 
@@ -214,7 +214,7 @@
                 android:background="#c0c0c0" />
 
             <EditText
-                android:id="@+id/serviceStartDate_et"
+                android:id="@+id/serviceStartDate_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingRight="12dp"
@@ -245,14 +245,14 @@
             >
 
             <TextView
-                android:layout_width="120dp"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@mipmap/icon_red_start"
                 android:drawablePadding="6dp"
                 android:gravity="left"
                 android:text="服务结束时间："
                 android:paddingLeft="16dp"
-                android:paddingRight="0dp"
+                android:paddingRight="16dp"
                 android:textColor="#000"
                 android:textSize="14sp" />
 
@@ -265,7 +265,7 @@
                 android:background="#c0c0c0" />
 
             <EditText
-                android:id="@+id/serviceEndDate_et"
+                android:id="@+id/serviceEndDate_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingRight="12dp"
@@ -294,14 +294,14 @@
             >
 
             <TextView
-                android:layout_width="120dp"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@mipmap/icon_red_start"
                 android:drawablePadding="6dp"
                 android:gravity="left"
                 android:text="服务费实收："
                 android:paddingLeft="16dp"
-                android:paddingRight="0dp"
+                android:paddingRight="26dp"
                 android:textColor="#000"
                 android:textSize="14sp" />
 

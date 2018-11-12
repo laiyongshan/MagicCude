@@ -74,7 +74,6 @@ public class DealFragment extends MVPBaseFragment<BillConfirmContract.View, Bill
     @Override
     public void onStart() {
         super.onStart();
-        pageNum=1;
     }
 
     @Override

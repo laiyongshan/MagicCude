@@ -17,7 +17,6 @@ public class RenewalContract {
         void renewalResult();
     }
 
-<<<<<<< HEAD
     interface  Presenter extends BasePresenter<View> {
 
         //卡片续期
@@ -25,13 +24,6 @@ public class RenewalContract {
         void overdueRenewal(String cardNo,String serviceEndDate,String serviceType,String serviceAmt,String serviceRate,
                             String paidAmt,String fixedLimit,String currentRepayAmt,String initAmt,String serviceStartDate,
                             String availableAmt,String state);
-=======
-    interface  Presenter extends BasePresenter<RenewalContract.View> {
-
-        //卡片续期
-        //到期状态
-        void overdueRenewal();
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
 
         //未过期状态
         void noOverdueRewal();

@@ -19,9 +19,14 @@ import com.rflash.magiccube.ui.finance.FinanceBean;
 import com.rflash.magiccube.ui.finance.FinanceManagerContract;
 import com.rflash.magiccube.ui.finance.FinanceManagerPresenter;
 import com.rflash.magiccube.ui.salesmen.SalesmenBean;
+import com.rflash.magiccube.util.DateUtil;
+import com.rflash.magiccube.util.TimerPikerTools;
 import com.rflash.magiccube.util.ToolUtils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -31,7 +36,7 @@ import butterknife.BindView;
  */
 
 @SuppressLint("ValidFragment")
-public class SaleFragment extends MVPBaseFragment<FinanceManagerContract.View, FinanceManagerPresenter> implements FinanceManagerContract.View, BaseQuickAdapter.RequestLoadMoreListener, SwipeRefreshLayout.OnRefreshListener{
+public class SaleFragment extends MVPBaseFragment<FinanceManagerContract.View, FinanceManagerPresenter> implements FinanceManagerContract.View, BaseQuickAdapter.RequestLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.refresh_layout)
     SwipeRefreshLayout refresh_layout;
@@ -40,30 +45,31 @@ public class SaleFragment extends MVPBaseFragment<FinanceManagerContract.View, F
     RecyclerView finance_sale_rv;
 
     FinanceDetailAdapter financeDetailAdapter;
-    List<FinanceDetailBean.ResultBean> REPAY_List = new ArrayList<>();//收款
+    List<FinanceDetailBean.ResultBean> SALE_List = new ArrayList<>();//收款
 
     String cardNo = "";
     String tranType = "SALE";
+    String state = "DEAL";
+    String startDate="";
+    String endDate="";
     String channelId = "";
     private int pageNum = 1;
     private int TOTAL_COUNTER; //所有的数据总数
     FinanceBean.ResultBean financeBean;
     FinanceDetailBean financeDetailBean;
 
+    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM");
+    Date date2;
 
     static SaleFragment saleFragment;
 
-    public static SaleFragment getInstance(FinanceBean.ResultBean financeBean){
-        if(saleFragment==null){
-            saleFragment=new SaleFragment(financeBean);
-            return  saleFragment;
-        }
-        return  saleFragment;
+    public static SaleFragment getInstance(FinanceBean.ResultBean financeBean) {
+        saleFragment = new SaleFragment(financeBean);
+        return saleFragment;
     }
 
-    public SaleFragment(FinanceBean.ResultBean financeBean){
+    public SaleFragment(FinanceBean.ResultBean financeBean) {
         this.financeBean = financeBean;
-        cardNo = financeBean.getCardNo() + "";
     }
 
     @Override
@@ -74,21 +80,36 @@ public class SaleFragment extends MVPBaseFragment<FinanceManagerContract.View, F
     @Override
     protected void initView() {
 
+        try {
+            date2 = format.parse(DateUtil.formatDate2(financeBean.getReportDate()));
+            Log.i("lys",date2.getYear()+"");
+            startDate= TimerPikerTools.getFirstDayOfMonth(date2).replace("-","");
+            endDate=TimerPikerTools.getLastDayOfMonth(date2).replace("-","");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        cardNo = financeBean.getCardNo() + "";
         queryPlan();
 
         refresh_layout.setColorSchemeColors(ToolUtils.Colors);
         refresh_layout.setOnRefreshListener(this);
 
         finance_sale_rv.setLayoutManager(new LinearLayoutManager(getActivity()));
-        financeDetailAdapter=new FinanceDetailAdapter(REPAY_List);
-        financeDetailAdapter.setOnLoadMoreListener(this,finance_sale_rv);
+        financeDetailAdapter = new FinanceDetailAdapter(SALE_List);
+        financeDetailAdapter.setOnLoadMoreListener(this, finance_sale_rv);
         financeDetailAdapter.disableLoadMoreIfNotFullPage();
         finance_sale_rv.setAdapter(financeDetailAdapter);
     }
 
 
-    private void queryPlan() {
-        mPresenter.queryPlan(cardNo, tranType, channelId, pageNum + "");
+    public void queryPlan() {
+        mPresenter.queryPlan(cardNo, state, tranType, channelId,startDate,endDate, pageNum + "");
+    }
+
+    public void queryPlanByChannelId(String channelId) {
+        pageNum = 1;
+        mPresenter.queryPlan(cardNo, state, tranType, channelId,startDate,endDate, pageNum + "");
     }
 
     @Override
@@ -138,12 +159,16 @@ public class SaleFragment extends MVPBaseFragment<FinanceManagerContract.View, F
             TOTAL_COUNTER = financeDetailBean.getTotalNum();
             Log.i("lys", "总条数：" + TOTAL_COUNTER);
             if (pageNum == 1) {
-                REPAY_List.clear();
-                REPAY_List = financeDetailBean.getResult();
-                financeDetailAdapter.setNewData(REPAY_List);
+                SALE_List.clear();
+                SALE_List = financeDetailBean.getResult();
+                financeDetailAdapter.setNewData(SALE_List);
+                for (FinanceDetailBean.ResultBean bean : SALE_List) {
+                    Log.i("lys", "消费：" + bean.getState());
+                }
             } else {
-                REPAY_List.addAll(financeDetailBean.getResult());
-                financeDetailAdapter.addData(REPAY_List);
+                SALE_List.addAll(financeDetailBean.getResult());
+                financeDetailAdapter.notifyDataSetChanged();
+//                financeDetailAdapter.addData(SALE_List);
                 financeDetailAdapter.loadMoreComplete();
             }
         }

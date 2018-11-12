@@ -89,11 +89,7 @@ public class EquipmentDialog extends Dialog {
 
         MACHINECODE_tv.setText("POS机序列号："+ SpUtil.getString(context, Config.MACHINECODE,""));
         TERMCODE_tv.setText("终端号："+SpUtil.getString(context,Config.TERMCODE,""));
-<<<<<<< HEAD
         merchantCode_tv.setText("商户号："+SpUtil.getString(context,Config.MERCHANTCODE,""));
-=======
-        merchantCode_tv.setText("");
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
     }
 
 
@@ -166,13 +162,8 @@ public class EquipmentDialog extends Dialog {
         try {
             if(sb != null){
                 JSONObject jsonAllData = new JSONObject(sb.toString());
-<<<<<<< HEAD
                 String city=jsonAllData.getString("city")+"市";
                 String provice=jsonAllData.getString("regionName")+"省";
-=======
-                String city=jsonAllData.getString("city");
-                String provice=jsonAllData.getString("regionName");
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
                 local_area_tv.setText("当前区域是："+provice+city);
                 Log.e("lys","获取到的城市是："+provice+city+"");
                 return city;

@@ -124,6 +124,8 @@ public class Config {
     public static  final  String CLOUD_CREDIT_APPLICATION = "0116";
     //云信贷互联反欺诈
     public static  final  String CLOUD_CREDIT_INTERNET = "0147";
+    //四要素验证
+    public static final String FOUR_ELEMNETS_VERICATION="0070";
 
     // startActivityForResult中requestCode标识
     public static  final  int INTENTOK = 101;

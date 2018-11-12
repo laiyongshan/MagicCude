@@ -136,7 +136,7 @@ public class AddIncreaseActivity extends MVPBaseActivity<CardIncreaseContract.Vi
     private void insertLimitChange(){
         amt=Integer.parseInt(amt_et.getText().toString().trim())*100;
         createUser=creater_et.getText().toString();
-        mPresenter.insertLimitChange(cardNo,time,changeType,amt+"",createUser);
+        mPresenter.insertLimitChange(cardNo,time,changeType,amt+"",cardDetailBean.getCustomerName()+"");
     }
 
     @Override

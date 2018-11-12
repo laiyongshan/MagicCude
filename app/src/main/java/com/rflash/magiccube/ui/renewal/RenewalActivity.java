@@ -5,31 +5,28 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.CardView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-<<<<<<< HEAD
 import com.bigkoo.pickerview.TimePickerView;
-=======
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
 import com.flyco.roundview.RoundTextView;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.rflash.magiccube.R;
 import com.rflash.magiccube.mvp.MVPBaseActivity;
 import com.rflash.magiccube.ui.cardmanager.CardBean;
-<<<<<<< HEAD
 import com.rflash.magiccube.ui.cardmanager.addplan.AddPlanActivity;
 import com.rflash.magiccube.ui.newmain.DirtData;
+import com.rflash.magiccube.ui.renewalmind.RenewalMindBean;
 import com.rflash.magiccube.util.TimerPikerTools;
 import com.rflash.magiccube.view.SuccessProgressDialog;
 
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-=======
-import com.rflash.magiccube.view.SuccessProgressDialog;
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -40,11 +37,7 @@ import me.drakeet.materialdialog.MaterialDialog;
  * 续费
  */
 
-<<<<<<< HEAD
 public class RenewalActivity extends MVPBaseActivity<RenewalContract.View,RenewalPresenter> implements RenewalContract.View {
-=======
-public class RenewalActivity extends MVPBaseActivity<RenewalContract.View, RenewalPresenter> implements RenewalContract.View {
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
 
     @BindView(R.id.title_back_tv)
     TextView title_back_tv;
@@ -71,7 +64,6 @@ public class RenewalActivity extends MVPBaseActivity<RenewalContract.View, Renew
     MaterialSpinner serviceType_sp;//费用基数类型
 
     @BindView(R.id.paidAmt_et)
-<<<<<<< HEAD
     EditText paidAmt_et;//费用基数
 
     @BindView(R.id.serviceAmt_et)
@@ -88,25 +80,17 @@ public class RenewalActivity extends MVPBaseActivity<RenewalContract.View, Renew
 
     @BindView(R.id.serviceEndDate_tv)
     TextView serviceEndDate_tv;//到期时间
-=======
-    MaterialSpinner paidAmt_et;//费用基数
-
-    @BindView(R.id.serviceAmt_et)
-    EditText serviceAmt_et;
-
-    @BindView(R.id.serviceEndDate)
-    TextView serviceEndDate;//到期时间
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
 
     @BindView(R.id.sure_rtv)
     RoundTextView sure_rtv;
 
-<<<<<<< HEAD
 
     SuccessProgressDialog successProgressDialog;
 
     TimePickerView mTimePikerView;//时间选择器
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+    RenewalMindBean.ResultBean renewalMindBean;
 
     CardBean.ResultBean cardDetailBean;
     String cardNo = "";
@@ -123,12 +107,6 @@ public class RenewalActivity extends MVPBaseActivity<RenewalContract.View, Renew
     String state;
 
     DirtData dirtData;
-=======
-    SuccessProgressDialog successProgressDialog;
-
-    CardBean.ResultBean cardDetailBean;
-    String cardNo = "";
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -139,64 +117,81 @@ public class RenewalActivity extends MVPBaseActivity<RenewalContract.View, Renew
     }
 
     private void initView() {
-        cardDetailBean = (CardBean.ResultBean) getIntent().getSerializableExtra("cardDetail");
-<<<<<<< HEAD
-        cardNo = cardDetailBean.getCardNo();
-        state= cardDetailBean.getState() + "";
-        bankAndnum_tv.setText("(" + cardDetailBean.getCardBankName() + cardDetailBean.getCardNo().substring(cardNo.length() - 4) + ")");
-
         successProgressDialog=new SuccessProgressDialog(this);
 
-        if(cardDetailBean.getState().equals("VALID")){//正常
-            card_state_tv.setText("正常");
-            card_state_tv.setTextColor(Color.parseColor("#3F51B5"));
-        }else if(cardDetailBean.getState().equals("EXPIRE")){
-            card_state_tv.setText("卡片过期");
-            card_state_tv.setTextColor(Color.RED);
+        serviceAmt_cd.setVisibility(View.GONE);
+        renewalMindBean= (RenewalMindBean.ResultBean) getIntent().getSerializableExtra("renewalMindBean");
+        cardDetailBean = (CardBean.ResultBean) getIntent().getSerializableExtra("cardDetail");
+        if(cardDetailBean!=null) {
+            cardNo = cardDetailBean.getCardNo()+"";
+            state = cardDetailBean.getState() + "";
+            bankAndnum_tv.setText("(" + cardDetailBean.getCardBankName() + cardDetailBean.getCardNo().substring(cardNo.length() - 4) + ")");
+
+        }else if (renewalMindBean!=null){
+            cardNo = renewalMindBean.getCardNo()+"";
+            state = renewalMindBean.getState() + "";
+            if(cardNo.length()>4)
+                 bankAndnum_tv.setText("(" + renewalMindBean.getBankName()+"" +cardNo.substring(cardNo.length() - 4) + ")");
         }
+
+            if (state.equals("VALID")) {//正常
+                card_state_tv.setText("正常");
+                card_state_tv.setTextColor(Color.parseColor("#3F51B5"));
+            } else if (state.equals("EXPIRE")) {
+                card_state_tv.setText("卡片过期");
+                card_state_tv.setTextColor(Color.RED);
+            }
+
+        paidAmt_et.setEnabled(false);
 
         serviceType_sp.setItems(dirtData.serviceTypeArr);
         serviceType_sp.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
             @Override
             public void onItemSelected(MaterialSpinner materialSpinner, int i, long l, Object o) {
                 if(i==2){//自定义金额
-                    serviceAmt_cd.setVisibility(View.VISIBLE);
-                }else{
                     serviceAmt_cd.setVisibility(View.GONE);
+                    paidAmt_et.setEnabled(true);
+                }else if(i==1){//还款额
+                    serviceAmt_cd.setVisibility(View.GONE);
+                    paidAmt_et.setEnabled(true);
+                }else if(i==0){//固定额度
+                    serviceAmt_cd.setVisibility(View.GONE);
+                    paidAmt_et.setEnabled(false);
                 }
             }
         });
-=======
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
 
-        successProgressDialog = new SuccessProgressDialog(this);
+        fixedLimit_et.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-        if (cardDetailBean != null) {
-            cardNo = cardDetailBean.getCardNo();
-            bankAndnum_tv.setText("(" + cardDetailBean.getCardBankName() + cardDetailBean.getCardNo().substring(cardNo.length() - 4) + ")");
-
-            if (cardDetailBean.getState().equals("VALID")) {//正常
-                card_state_tv.setText("正常");
-                card_state_tv.setTextColor(Color.parseColor("#3F51B5"));
-            } else if (cardDetailBean.getState().equals("EXPIRE")) {
-                card_state_tv.setText("卡片过期");
-                card_state_tv.setTextColor(Color.RED);
             }
-        }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if(serviceType_sp.getSelectedIndex()==0){//固定额度
+                    paidAmt_et.setText(editable.toString());
+                }
+            }
+        });
+
+        serviceStartDate=TimerPikerTools.getTodayDate();
+        serviceStartDate_tv.setText(serviceStartDate+"");
+
     }
 
-<<<<<<< HEAD
     @OnClick({R.id.title_back_tv,R.id.serviceStartDate_tv,R.id.serviceEndDate_tv,R.id.sure_rtv})
-=======
-    @OnClick({R.id.title_back_tv, R.id.sure_rtv})
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
     public void click(View view) {
         switch (view.getId()) {
             case R.id.title_back_tv:
                 cancel();
                 break;
 
-<<<<<<< HEAD
             case R.id.serviceStartDate_tv:
                 mTimePikerView = TimerPikerTools.creatTimePickerView(RenewalActivity.this, "选择日期", true, true, true, new TimePickerView.OnTimeSelectListener() {
                     @Override
@@ -212,7 +207,8 @@ public class RenewalActivity extends MVPBaseActivity<RenewalContract.View, Renew
                 mTimePikerView = TimerPikerTools.creatTimePickerView(RenewalActivity.this, "选择日期", true, true, true, new TimePickerView.OnTimeSelectListener() {
                     @Override
                     public void onTimeSelect(Date date, View v) {
-                        serviceEndDate = simpleDateFormat.format(date);
+//                        serviceEndDate = simpleDateFormat.format(date);
+                        serviceEndDate=TimerPikerTools.getLastDayOfMonth(date);
                         serviceEndDate_tv.setText(serviceEndDate + "");
                     }
                 });
@@ -221,16 +217,11 @@ public class RenewalActivity extends MVPBaseActivity<RenewalContract.View, Renew
 
             case R.id.sure_rtv:
                 renewalCard();
-=======
-            case R.id.sure_rtv:
-
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
                 break;
         }
     }
 
     //卡片续期
-<<<<<<< HEAD
     private void renewalCard(){
 //        if(cardDetailBean.getState().equals("VALID")){//正常
 //        }else if(cardDetailBean.getState().equals("EXPIRE")){//过期
@@ -256,13 +247,19 @@ public class RenewalActivity extends MVPBaseActivity<RenewalContract.View, Renew
         }else {
             serviceEndDate=serviceEndDate_tv.getText().toString().trim();
             serviceType=dirtData.serviceTypeOptions[serviceType_sp.getSelectedIndex()];
-            serviceAmt=serviceAmt_et.getText().toString().trim();
+
+//            serviceAmt=serviceAmt_et.getText().toString().trim();
             try {
                 serviceRate = Double.valueOf(serviceRate_et.getText().toString().trim())/100+"";
             }catch (Exception e){
                 Toast.makeText(RenewalActivity.this,e.getMessage()+"",Toast.LENGTH_SHORT).show();
             }
             paidAmt=paidAmt_et.getText().toString().trim();
+            if(serviceType_sp.getSelectedIndex()==2){//自定义金额
+                serviceAmt=paidAmt;
+            }else{
+                serviceAmt="";
+            }
             fixedLimit=fixedLimit_et.getText().toString().trim();
             currentRepayAmt=currentRepayAmt_et.getText().toString().trim();
             initAmt=initAmt_et.getText().toString().trim();
@@ -272,11 +269,6 @@ public class RenewalActivity extends MVPBaseActivity<RenewalContract.View, Renew
                     serviceRate,  paidAmt,
                     fixedLimit,  currentRepayAmt,  initAmt,  serviceStartDate.replace("-",""),
                     availableAmt,  state);
-=======
-    private void renewalCard() {
-        if (cardDetailBean.getState().equals("VALID")) {//正常
-        } else if (cardDetailBean.getState().equals("EXPIRE")) {//过期
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
         }
     }
 
@@ -297,10 +289,7 @@ public class RenewalActivity extends MVPBaseActivity<RenewalContract.View, Renew
                 mMaterialDialog.dismiss();
             }
         });
-<<<<<<< HEAD
         mMaterialDialog.show();
-=======
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
     }
 
 
@@ -335,10 +324,6 @@ public class RenewalActivity extends MVPBaseActivity<RenewalContract.View, Renew
                 successProgressDialog.dismiss();
                 finish();
             }
-<<<<<<< HEAD
         },2000);
-=======
-        }, 2000);
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
     }
 }

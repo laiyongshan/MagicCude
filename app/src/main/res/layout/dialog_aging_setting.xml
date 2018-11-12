@@ -13,7 +13,9 @@
         android:background="#f0f0f0"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:id="@+id/filtrate_tv"
+        android:id="@+id/agingsetting_title_tv"
+        android:drawableLeft="@mipmap/icon_back_black"
+        android:drawablePadding="12dp"
         android:text="新增分期设置"
         android:textColor="@color/color_black"
         android:padding="12dp"/>

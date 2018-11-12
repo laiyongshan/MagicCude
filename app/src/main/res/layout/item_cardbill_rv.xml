@@ -198,6 +198,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
+                        android:layout_gravity="center_vertical"
                         >
                     <EditText
                         android:id="@+id/factAmt_et"
@@ -209,6 +210,8 @@
                         android:minWidth="120dp"
                         android:lines="1"
                         android:singleLine="true"
+                        android:textSize="14sp"
+                        android:gravity="center_vertical"
                         android:inputType="numberDecimal"
                         />
 

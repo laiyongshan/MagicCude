@@ -43,7 +43,7 @@ public class NoRefundFragment extends MVPBaseFragment<RefundContract.View, Refun
     List<RefundBean.ResultBean> refunList=new ArrayList<>();
     List<RefundBean.ResultBean> NO_REPAID_List=new ArrayList<>();
     RefundBean refundBean;
-    int pageNum;
+    int pageNum=1;
     private int TOTAL_COUNTER; //所有的数据总数
 
     static NoRefundFragment noRefundFragment;
@@ -86,7 +86,6 @@ public class NoRefundFragment extends MVPBaseFragment<RefundContract.View, Refun
     @Override
     public void onStart() {
         super.onStart();
-        pageNum=1;
     }
 
     @Override

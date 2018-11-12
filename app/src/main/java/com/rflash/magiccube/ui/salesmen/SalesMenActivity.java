@@ -13,6 +13,9 @@ import android.widget.ImageView;
 import com.rflash.basemodule.BaseActivity;
 import com.rflash.magiccube.R;
 import com.rflash.magiccube.mvp.MVPBaseActivity;
+import com.rflash.magiccube.ui.newmain.DirtData;
+import com.rflash.magiccube.ui.newmain.NewMainActivity;
+import com.rflash.magiccube.util.CatchManager;
 import com.rflash.magiccube.util.ToolUtils;
 
 import java.util.ArrayList;
@@ -143,10 +146,12 @@ public class SalesMenActivity extends MVPBaseActivity<SalesMenContract.View,Sale
         Log.i("lys",response.getClass().getName());
         if(response!=null){
             salesmenBean= (SalesmenBean) response;
+            CatchManager.putData2Cache(SalesMenActivity.this, DirtData.SALEMEN_KEY, salesmenBean.getResult());
             salesMenAdapter=new SalesMenAdapter(SalesMenActivity.this,salesmenBean.getResult());
             salesmen_rv.setAdapter(salesMenAdapter);
             if(salesmenBean.getResult().isEmpty())
                 salesMenAdapter.setEmptyView(notDataView);
+
         }
     }
 

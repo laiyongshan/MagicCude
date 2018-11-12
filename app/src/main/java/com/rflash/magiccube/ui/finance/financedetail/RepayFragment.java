@@ -20,9 +20,14 @@ import com.rflash.magiccube.mvp.MVPBaseFragment;
 import com.rflash.magiccube.ui.finance.FinanceBean;
 import com.rflash.magiccube.ui.finance.FinanceManagerContract;
 import com.rflash.magiccube.ui.finance.FinanceManagerPresenter;
+import com.rflash.magiccube.util.DateUtil;
+import com.rflash.magiccube.util.TimerPikerTools;
 import com.rflash.magiccube.util.ToolUtils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -46,27 +51,28 @@ public class RepayFragment extends MVPBaseFragment<FinanceManagerContract.View, 
 
     String cardNo = "";
     String tranType = "REPAY";
+    String state = "DEAL";
+    String startDate="";
+    String endDate="";
     String channelId = "";
     private int pageNum = 1;
     private int TOTAL_COUNTER; //所有的数据总数
     FinanceBean.ResultBean financeBean;
     FinanceDetailBean financeDetailBean;
 
+    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM");
+    Date date2;
+
     static RepayFragment repayFragment;
 
     public static RepayFragment getInstance(FinanceBean.ResultBean financeBean) {
-        if (repayFragment == null) {
-            repayFragment = new RepayFragment(financeBean);
-            return repayFragment;
-        }
-
+        repayFragment = new RepayFragment(financeBean);
         return repayFragment;
     }
 
     @SuppressLint("ValidFragment")
     public RepayFragment(FinanceBean.ResultBean financeBean) {
         this.financeBean = financeBean;
-        cardNo = financeBean.getCardNo() + "";
     }
 
 
@@ -78,20 +84,34 @@ public class RepayFragment extends MVPBaseFragment<FinanceManagerContract.View, 
     @Override
     protected void initView() {
 
+        try {
+            date2 = format.parse(DateUtil.formatDate2(financeBean.getReportDate()));
+            startDate= TimerPikerTools.getFirstDayOfMonth(date2).replace("-","");
+            endDate=TimerPikerTools.getLastDayOfMonth(date2).replace("-","");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        cardNo = financeBean.getCardNo() + "";
         queryPlan();
 
         refresh_layout.setColorSchemeColors(ToolUtils.Colors);
         refresh_layout.setOnRefreshListener(this);
 
         finance_repay_rv.setLayoutManager(new LinearLayoutManager(getActivity()));
-        financeDetailAdapter=new FinanceDetailAdapter(REPAY_List);
-        financeDetailAdapter.setOnLoadMoreListener(this,finance_repay_rv);
+        financeDetailAdapter = new FinanceDetailAdapter(REPAY_List);
+        financeDetailAdapter.setOnLoadMoreListener(this, finance_repay_rv);
         financeDetailAdapter.disableLoadMoreIfNotFullPage();
         finance_repay_rv.setAdapter(financeDetailAdapter);
     }
 
-    private void queryPlan() {
-        mPresenter.queryPlan(cardNo, tranType, channelId, pageNum + "");
+    public void queryPlan() {
+        mPresenter.queryPlan(cardNo, state, tranType, channelId,startDate,endDate, pageNum + "");
+    }
+
+    public void queryPlanByChannelId(String channelId) {
+        pageNum = 1;
+        mPresenter.queryPlan(cardNo, state, tranType, channelId, startDate,endDate,pageNum + "");
     }
 
     @Override
@@ -139,6 +159,9 @@ public class RepayFragment extends MVPBaseFragment<FinanceManagerContract.View, 
         if (response != null) {
             financeDetailBean = (FinanceDetailBean) response;
             TOTAL_COUNTER = financeDetailBean.getTotalNum();
+            for (FinanceDetailBean.ResultBean bean : REPAY_List) {
+                Log.i("lys", "还款：" + bean.getState());
+            }
             Log.i("lys", "总条数：" + TOTAL_COUNTER);
             if (pageNum == 1) {
                 REPAY_List.clear();
@@ -146,7 +169,8 @@ public class RepayFragment extends MVPBaseFragment<FinanceManagerContract.View, 
                 financeDetailAdapter.setNewData(REPAY_List);
             } else {
                 REPAY_List.addAll(financeDetailBean.getResult());
-                financeDetailAdapter.addData(REPAY_List);
+                financeDetailAdapter.notifyDataSetChanged();
+//                financeDetailAdapter.addData(REPAY_List);
                 financeDetailAdapter.loadMoreComplete();
             }
         }

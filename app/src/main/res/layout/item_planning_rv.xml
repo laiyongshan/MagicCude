@@ -3,14 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-<<<<<<< HEAD
-    android:layout_marginTop="12dp"
     android:layout_marginLeft="12dp"
     android:layout_marginRight="12dp"
-    >
-=======
     android:layout_marginTop="12dp">
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
+
 
     <CheckBox
         android:id="@+id/planning_cb"
@@ -18,13 +14,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-<<<<<<< HEAD
         android:gravity="center_vertical"
-        android:visibility="gone"
-        />
-=======
-        android:gravity="center_vertical" />
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
+        android:visibility="gone" />
+
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
@@ -43,13 +35,8 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-<<<<<<< HEAD
                 android:paddingLeft="6dp"
-=======
-                android:paddingLeft="12dp"
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
-                android:paddingRight="12dp"
-                >
+                android:paddingRight="12dp">
 
                 <ImageView
                     android:id="@+id/bank_icon_iv"
@@ -95,296 +82,195 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-               >
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="12dp"
-                    android:paddingRight="12dp"
-                    >
+                    android:paddingRight="12dp">
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-<<<<<<< HEAD
                         android:layout_weight="1.2"
                         android:text="渠道："
-                        android:textSize="12sp"
-                        />
-=======
-                        android:layout_weight="1.5"
-                        android:text="渠道：" />
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
+                        android:textSize="12sp" />
+
 
                     <TextView
                         android:id="@+id/channelName_tv"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-<<<<<<< HEAD
-                        android:textSize="12sp"
-=======
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
-                        android:text="" />
+                        android:textSize="12sp" />
 
                 </LinearLayout>
-
-<<<<<<< HEAD
 
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-=======
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
                     android:paddingLeft="12dp"
-                    android:paddingRight="12dp"
-                    >
+                    android:paddingRight="12dp">
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-<<<<<<< HEAD
                         android:layout_weight="1.2"
                         android:text="商户名称："
-                        android:textSize="12sp"
-                        />
-=======
-                        android:layout_weight="1.5"
-                        android:text="商户名称：" />
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
+                        android:textSize="12sp" />
+
 
                     <TextView
                         android:id="@+id/merchantName_tv"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-<<<<<<< HEAD
-                        android:textSize="12sp"
-=======
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
-                        android:text="" />
+                        android:textSize="12sp" />
+
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-<<<<<<< HEAD
                     android:layout_marginTop="4dp"
-=======
-                    android:layout_marginTop="6dp"
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
                     android:paddingLeft="12dp"
-                    android:paddingRight="12dp"
-                    >
+                    android:paddingRight="12dp">
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-<<<<<<< HEAD
                         android:layout_weight="1.2"
                         android:text="规划来源："
-                        android:textSize="12sp"
-                        />
-=======
-                        android:layout_weight="1.5"
-                        android:text="规划来源：" />
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
+                        android:textSize="12sp" />
+
 
                     <TextView
                         android:id="@+id/planSource_tv"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-<<<<<<< HEAD
-                        android:textSize="12sp"
-=======
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
-                        android:text="" />
+                        android:textSize="12sp" />
+
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-<<<<<<< HEAD
                     android:layout_marginTop="4dp"
-=======
-                    android:layout_marginTop="6dp"
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
                     android:paddingLeft="12dp"
-                    android:paddingRight="12dp"
-                    >
+                    android:paddingRight="12dp">
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-<<<<<<< HEAD
                         android:layout_weight="1.2"
                         android:text="同步状态："
-                        android:textSize="12sp"
-                        />
-=======
-                        android:layout_weight="1.5"
-                        android:text="同步状态：" />
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/syncStateName_tv"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-<<<<<<< HEAD
-                        android:textSize="12sp"
-=======
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
-                        android:text="" />
+                        android:textSize="12sp" />
+
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-<<<<<<< HEAD
                     android:layout_marginTop="4dp"
-                    android:paddingLeft="12dp"
-                    android:paddingRight="12dp"
                     android:paddingBottom="6dp"
-=======
-                    android:layout_marginTop="6dp"
                     android:paddingLeft="12dp"
-                    android:paddingRight="12dp"
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
-                    >
+                    android:paddingRight="12dp">
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-<<<<<<< HEAD
                         android:layout_weight="1.2"
                         android:text="交易时间："
-                        android:textSize="12sp"
-                        />
-=======
-                        android:layout_weight="1.5"
-                        android:text="交易时间：" />
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
+                        android:textSize="12sp" />
+
 
                     <TextView
                         android:id="@+id/date_tv"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-<<<<<<< HEAD
-                        android:textSize="12sp"
-=======
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
-                        android:text="" />
+                        android:textSize="12sp" />
+
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-<<<<<<< HEAD
                     android:layout_marginTop="4dp"
                     android:paddingLeft="12dp"
                     android:paddingRight="12dp"
                     android:textSize="12sp"
-                    android:visibility="gone"
-=======
-                    android:layout_marginTop="6dp"
-                    android:paddingLeft="12dp"
-                    android:paddingRight="12dp"
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
-                    >
+                    android:visibility="gone">
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1.5"
-<<<<<<< HEAD
                         android:text="操作时间："
-                        android:textSize="12sp"
-                        />
-=======
-                        android:text="操作时间：" />
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
+                        android:textSize="12sp" />
+
 
                     <TextView
                         android:id="@+id/operatorTime_tv"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-<<<<<<< HEAD
-                        android:textSize="12sp"
-=======
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
-                        android:text="" />
+                        android:textSize="12sp" />
+
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-<<<<<<< HEAD
+
                     android:layout_marginTop="4dp"
+                    android:paddingBottom="6dp"
                     android:paddingLeft="12dp"
                     android:paddingRight="12dp"
-                    android:paddingBottom="6dp"
-                    android:visibility="gone"
-=======
-                    android:layout_marginTop="6dp"
-                    android:paddingLeft="12dp"
-                    android:paddingRight="12dp"
-                    android:paddingBottom="6dp"
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
-                    >
+                    android:visibility="gone">
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1.5"
-<<<<<<< HEAD
                         android:text="修改时间："
-                        android:textSize="12sp"
-                        />
-=======
-                        android:text="修改时间：" />
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
+                        android:textSize="12sp" />
+
 
                     <TextView
                         android:id="@+id/modifyTime_tv"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-<<<<<<< HEAD
-                        android:textSize="12sp"
-=======
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
-                        android:text="" />
+                        android:textSize="12sp" />
+
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/planning_bottom_rll"
                     android:layout_width="match_parent"
-<<<<<<< HEAD
                     android:layout_height="48dp"
-=======
-                    android:layout_height="wrap_content"
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
-                    android:background="@mipmap/bg_planning_red"
                     android:paddingTop="6dp"
+                    android:background="@mipmap/bg_planning_blue"
                     >
+
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -398,11 +284,8 @@
                             android:layout_height="wrap_content"
                             android:text="卡位"
                             android:textColor="@color/white"
-<<<<<<< HEAD
                             android:textSize="12sp" />
-=======
-                            android:textSize="14sp" />
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
+
 
                         <TextView
                             android:id="@+id/cardSeqno_tv"
@@ -411,22 +294,17 @@
                             android:layout_marginTop="4dp"
                             android:text=""
                             android:textColor="@color/white"
-<<<<<<< HEAD
                             android:textSize="12sp" />
-=======
-                            android:textSize="14sp" />
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
+
 
                     </LinearLayout>
 
                     <View
                         android:layout_width="1dp"
-<<<<<<< HEAD
                         android:layout_height="40dp"
-=======
-                        android:layout_height="20dp"
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
-                        android:background="@color/color_while" />
+                        android:background="@color/white"
+                        />
+
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -440,11 +318,8 @@
                             android:layout_height="wrap_content"
                             android:text="账单类型"
                             android:textColor="@color/white"
-<<<<<<< HEAD
                             android:textSize="12sp" />
-=======
-                            android:textSize="14sp" />
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
+
 
                         <TextView
                             android:id="@+id/billType_tv"
@@ -453,21 +328,13 @@
                             android:layout_marginTop="4dp"
                             android:text=""
                             android:textColor="@color/white"
-<<<<<<< HEAD
                             android:textSize="12sp" />
-=======
-                            android:textSize="14sp" />
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
 
                     </LinearLayout>
 
                     <View
                         android:layout_width="1dp"
-<<<<<<< HEAD
                         android:layout_height="40dp"
-=======
-                        android:layout_height="20dp"
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
                         android:background="@color/color_while" />
 
                     <LinearLayout
@@ -482,11 +349,7 @@
                             android:layout_height="wrap_content"
                             android:text="到账类型"
                             android:textColor="@color/white"
-<<<<<<< HEAD
                             android:textSize="12sp" />
-=======
-                            android:textSize="13sp" />
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
 
                         <TextView
                             android:id="@+id/accountType_tv"
@@ -495,22 +358,15 @@
                             android:layout_marginTop="4dp"
                             android:text=""
                             android:textColor="@color/white"
-<<<<<<< HEAD
                             android:textSize="12sp" />
-=======
-                            android:textSize="16sp" />
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
 
                     </LinearLayout>
 
                     <View
                         android:layout_width="1dp"
-<<<<<<< HEAD
                         android:layout_height="40dp"
-=======
-                        android:layout_height="20dp"
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
-                        android:background="@color/color_while" />
+                        android:background="@color/color_while"
+                        />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -524,11 +380,7 @@
                             android:layout_height="wrap_content"
                             android:text="金额"
                             android:textColor="@color/white"
-<<<<<<< HEAD
                             android:textSize="12sp" />
-=======
-                            android:textSize="13sp" />
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
 
                         <TextView
                             android:id="@+id/amt_tv"
@@ -537,19 +389,15 @@
                             android:layout_marginTop="4dp"
                             android:text=""
                             android:textColor="@color/white"
-<<<<<<< HEAD
                             android:textSize="12sp" />
-=======
-                            android:textSize="16sp" />
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
 
                     </LinearLayout>
 
-
                 </LinearLayout>
-
             </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>
-
 </LinearLayout>
+
+
+

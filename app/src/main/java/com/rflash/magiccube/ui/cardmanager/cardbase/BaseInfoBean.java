@@ -2,8 +2,6 @@ package com.rflash.magiccube.ui.cardmanager.cardbase;
 
 import com.rflash.magiccube.http.BaseBean;
 
-import java.util.List;
-
 /**
  * Created by lenovo on 2018/10/27.
  */
@@ -109,9 +107,11 @@ public class BaseInfoBean extends BaseBean {
         private String state;
         private int tempLimit;
         private String tranPasswd;
+
         private String verifyState;
         private String verifyType;
-        private List<?> installmentList;
+
+//        private String installmentList;
 
         public int getAvailableAmt() {
             return availableAmt;
@@ -441,12 +441,12 @@ public class BaseInfoBean extends BaseBean {
             this.verifyType = verifyType;
         }
 
-        public List<?> getInstallmentList() {
-            return installmentList;
-        }
-
-        public void setInstallmentList(List<?> installmentList) {
-            this.installmentList = installmentList;
-        }
+//        public void setInstallmentList(String installmentList) {
+//            this.installmentList = installmentList;
+//        }
+//
+//        public String getInstallmentList() {
+//            return installmentList;
+//        }
     }
 }

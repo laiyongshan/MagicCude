@@ -9,7 +9,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.View;
-<<<<<<< HEAD
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -38,21 +37,6 @@ import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.OnClick;
 import me.drakeet.materialdialog.MaterialDialog;
-=======
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.rflash.magiccube.R;
-import com.rflash.magiccube.mvp.MVPBaseActivity;
-import com.rflash.magiccube.util.ToolUtils;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import butterknife.BindView;
-import butterknife.OnClick;
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
 
 /**
  * @author lys
@@ -80,7 +64,6 @@ public class QueryPlanningActvity extends MVPBaseActivity<QueryPlanningContract.
     @BindView(R.id.sure_filter_tv)
     TextView sure_filter_tv;
 
-<<<<<<< HEAD
     @BindViews({R.id.notOperatorSaleTranCost_tv,R.id.dealSaleTranCost_tv,R.id.notOperatorSale_tv,
             R.id.dealSale_tv,R.id.notOperatorRepay_tv,R.id.dealRepay_tv})
             TextView[] countTvs;
@@ -116,14 +99,11 @@ public class QueryPlanningActvity extends MVPBaseActivity<QueryPlanningContract.
 
     private View notDataView;
 
-=======
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
     PlanningAdapter planningAdapter;
     List<PlaningBean.ResultBean> planingList = new ArrayList<>();
 
     private int pageNum = 1;
     private int TOTAL_COUNTER; //所有的数据总数
-<<<<<<< HEAD
     String startDate = "",
      endDate = "", cardSeqno = "", customerName = "", cardNo = "", state = "", tranType = "", accountType = "", syncState = "",count="Y";
 
@@ -133,9 +113,6 @@ public class QueryPlanningActvity extends MVPBaseActivity<QueryPlanningContract.
     boolean isOption;
 
     DirtData dirtData;
-=======
-    String startDate = "", endDate = "", cardSeqno = "", customerName = "", cardNo = "", state = "", tranType = "", accountType = "", syncState = "";
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -148,7 +125,6 @@ public class QueryPlanningActvity extends MVPBaseActivity<QueryPlanningContract.
 
     private void initView() {
 
-<<<<<<< HEAD
         dirtData=new DirtData(this);
 
         state_sp.setItems(dirtData.stateArr);
@@ -159,23 +135,16 @@ public class QueryPlanningActvity extends MVPBaseActivity<QueryPlanningContract.
 
         notDataView = getLayoutInflater().inflate(R.layout.empty_view, (ViewGroup) planning_rv.getParent(), false);
 
-=======
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
         refreshLayout.setColorSchemeColors(ToolUtils.Colors);
         refreshLayout.setOnRefreshListener(this);
 
         planning_rv.setLayoutManager(new LinearLayoutManager(this));
-<<<<<<< HEAD
         planningAdapter = new PlanningAdapter(isOption,planingList);
-=======
-        planningAdapter = new PlanningAdapter(planingList);
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
         planningAdapter.setOnLoadMoreListener(this, planning_rv);
         planningAdapter.disableLoadMoreIfNotFullPage();
         planning_rv.setAdapter(planningAdapter);
     }
 
-<<<<<<< HEAD
     @OnClick({R.id.title_back_tv,R.id.filtrate_img, R.id.clear_filter_tv, R.id.sure_filter_tv,
             R.id.get_count_tv,R.id.syn_planning_rtv,R.id.fail_syncState_rtv,
             R.id.startDate_tv,R.id.endDate_tv
@@ -186,16 +155,10 @@ public class QueryPlanningActvity extends MVPBaseActivity<QueryPlanningContract.
                 finish();
                 break;
 
-=======
-    @OnClick({R.id.filtrate_img, R.id.clear_filter_tv, R.id.sure_filter_tv})
-    public void click(View view) {
-        switch (view.getId()) {
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
             case R.id.filtrate_img:
                 planning_drawerlayout.openDrawer(Gravity.RIGHT);
                 break;
 
-<<<<<<< HEAD
             case R.id.startDate_tv:
                 mTimePikerView = TimerPikerTools.creatTimePickerView(QueryPlanningActvity.this, "选择开始日期", true, true, true, new TimePickerView.OnTimeSelectListener() {
                     @Override
@@ -224,6 +187,7 @@ public class QueryPlanningActvity extends MVPBaseActivity<QueryPlanningContract.
 
             case R.id.sure_filter_tv:
                 syncState="";
+                pageNum=1;
                 queryPlanning();
                 planning_drawerlayout.closeDrawer(Gravity.RIGHT);
                 break;
@@ -256,32 +220,14 @@ public class QueryPlanningActvity extends MVPBaseActivity<QueryPlanningContract.
 
             case R.id.fail_syncState_rtv://查询失败规划
                 syncState="FAIL";
+                pageNum=1;
                 planning_drawerlayout.closeDrawer(Gravity.RIGHT);
                 queryPlanning();
                 break;
-=======
-            case R.id.clear_filter_tv:
-                startDate = "";
-                endDate = "";
-                cardSeqno = "";
-                customerName = "";
-                cardNo = "";
-                state = "";
-                tranType = "";
-                accountType = "";
-                syncState = "";
-                break;
-
-            case R.id.sure_filter_tv:
-                queryPlanning();
-                planning_drawerlayout.closeDrawer(Gravity.RIGHT);
-                break;
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
         }
     }
 
 
-<<<<<<< HEAD
     private void clearParams(){
         startDate = "";
         endDate = "";
@@ -318,16 +264,6 @@ public class QueryPlanningActvity extends MVPBaseActivity<QueryPlanningContract.
     //同步规划
     private void syncPlan(){
         mPresenter.syncPlan();
-=======
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-    }
-
-    private void queryPlanning() {
-        mPresenter.queryPlan(startDate, endDate, cardSeqno, customerName, cardNo, state, tranType, accountType, syncState, pageNum + "");
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
     }
 
     @Override
@@ -359,17 +295,13 @@ public class QueryPlanningActvity extends MVPBaseActivity<QueryPlanningContract.
                 planingList.clear();
                 planingList = response.getResult();
                 planningAdapter.setNewData(planingList);
-<<<<<<< HEAD
                 if(planingList.isEmpty())
                     planningAdapter.setEmptyView(notDataView);
-=======
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
             } else {
                 planingList.addAll(response.getResult());
                 planningAdapter.notifyDataSetChanged();
                 planningAdapter.loadMoreComplete();
             }
-<<<<<<< HEAD
 
             bindCountData(response);
         }
@@ -396,11 +328,6 @@ public class QueryPlanningActvity extends MVPBaseActivity<QueryPlanningContract.
         countTvs[5].setText("已还款总金额:￥"+StringUtil.getTwoPointString(response.getDealRepay()));
     }
 
-=======
-        }
-    }
-
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
 
     @Override
     public void onLoadMoreRequested() {
@@ -421,12 +348,4 @@ public class QueryPlanningActvity extends MVPBaseActivity<QueryPlanningContract.
             }
         }, 1500);
     }
-<<<<<<< HEAD
-=======
-
-    private void getCount(List<PlaningBean.ResultBean> list){
-        for(PlaningBean.ResultBean resultBean:list){
-        }
-    }
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
 }

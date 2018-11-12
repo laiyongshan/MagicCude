@@ -2,6 +2,7 @@ package com.rflash.magiccube.ui.salesmen;
 
 import com.rflash.magiccube.http.BaseBean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -45,7 +46,7 @@ public class SalesmenBean extends BaseBean {
         this.result = result;
     }
 
-    public static class ResultBean {
+    public static class ResultBean implements Serializable{
         /**
          * createTime : 1538135317000
          * createUser : ceshi

@@ -1,25 +1,18 @@
 package com.rflash.magiccube.ui.queryPlanning;
 
-<<<<<<< HEAD
 import android.graphics.Color;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-=======
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-<<<<<<< HEAD
 import com.rflash.basemodule.utils.StringUtil;
 import com.rflash.magiccube.R;
 import com.rflash.magiccube.util.SignUtil;
 import com.rflash.magiccube.util.ToolUtils;
-=======
-import com.rflash.magiccube.R;
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
 
 import java.util.List;
 
@@ -29,7 +22,6 @@ import java.util.List;
  * @desc:
  */
 
-<<<<<<< HEAD
 public class PlanningAdapter extends BaseQuickAdapter<PlaningBean.ResultBean, BaseViewHolder> {
 
     boolean isOption;
@@ -44,18 +36,11 @@ public class PlanningAdapter extends BaseQuickAdapter<PlaningBean.ResultBean, Ba
     public PlanningAdapter(boolean isOption, List<PlaningBean.ResultBean> data) {
         super(R.layout.item_planning_rv, data);
         this.isOption = isOption;
-=======
-public class PlanningAdapter  extends BaseQuickAdapter<PlaningBean.ResultBean,BaseViewHolder> {
-
-    public PlanningAdapter(List<PlaningBean.ResultBean> data) {
-        super(R.layout.item_planning_rv, data);
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
     }
 
     @Override
     protected void convert(BaseViewHolder helper, PlaningBean.ResultBean item) {
 
-<<<<<<< HEAD
         if (isOption)
             ((CheckBox) helper.getView(R.id.planning_cb)).setVisibility(View.VISIBLE);
         else
@@ -90,30 +75,10 @@ public class PlanningAdapter  extends BaseQuickAdapter<PlaningBean.ResultBean,Ba
         ((TextView) helper.getView(R.id.cardSeqno_tv)).setText(""+item.getCardSeqno());
         if(item.getBillType()!=null&&item.getBillType().equals("REPAY")) {
             ((TextView) helper.getView(R.id.billType_tv)).setText("还款账单");
-        }else if(item.getBillType()!=null&&item.getBillType().equals("")){
+        }else if(item.getBillType()!=null&&item.getBillType().equals("CARD_MANAGE")){
             ((TextView) helper.getView(R.id.billType_tv)).setText("空闲账单");
         }
         ((TextView) helper.getView(R.id.accountType_tv)).setText(""+item.getAccountType());
-        ((TextView) helper.getView(R.id.amt_tv)).setText(""+ StringUtil.getTwoPointString(item.getAmt()));
-=======
-//        ((CheckBox)helper.getView(R.id.planning_cb))
-//        ((ImageView)helper.getView(R.id.bank_icon_iv)).setImageResource();
-        ((TextView)helper.getView(R.id.bank_tv)).setText("");
-        ((TextView)helper.getView(R.id.state_tv)).setText("");
-        ((TextView)helper.getView(R.id.channelName_tv)).setText("");
-        ((TextView)helper.getView(R.id.merchantName_tv)).setText("");
-        ((TextView)helper.getView(R.id.planSource_tv)).setText("");
-        ((TextView)helper.getView(R.id.syncStateName_tv)).setText("");
-        ((TextView)helper.getView(R.id.date_tv)).setText("");
-        ((TextView)helper.getView(R.id.operatorTime_tv)).setText("");
-        ((TextView)helper.getView(R.id.modifyTime_tv)).setText("");
-
-//        ((LinearLayout)helper.getView(R.id.planning_bottom_rll))
-
-        ((TextView)helper.getView(R.id.cardSeqno_tv)).setText("");
-        ((TextView)helper.getView(R.id.billType_tv)).setText("");
-        ((TextView)helper.getView(R.id.accountType_tv)).setText("");
-        ((TextView)helper.getView(R.id.amt_tv)).setText("");
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
+        ((TextView) helper.getView(R.id.amt_tv)).setText("￥"+ StringUtil.getTwoPointString(item.getAmt()));
     }
 }

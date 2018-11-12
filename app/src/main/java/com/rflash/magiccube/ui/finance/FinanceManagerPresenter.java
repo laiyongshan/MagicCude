@@ -71,7 +71,7 @@ public class FinanceManagerPresenter extends BasePresenterImpl<FinanceManagerCon
     }
 
     @Override
-    public void queryPlan(String cardNo, String tranType, String channelId, String pageNum) {
+    public void queryPlan(String cardNo,String state, String tranType, String channelId,String startDate,String endDate, String pageNum) {
         String signature;
         String version = Config.VERSION_CODE;
         String requestNo = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
@@ -85,12 +85,15 @@ public class FinanceManagerPresenter extends BasePresenterImpl<FinanceManagerCon
         treeMap.put("account", account);
         treeMap.put("pageNum",pageNum);
         treeMap.put("cardNo",cardNo);
+        treeMap.put("state",state);
+        treeMap.put("startDate",startDate);
+        treeMap.put("endDate",endDate);
         treeMap.put("tranType",tranType);
         treeMap.put("channelId",channelId);
 
         try {
             signature = SignUtil.signDataWithStr(treeMap, SpUtil.getString(mView.getContext(), Config.USER_PRVKEY, ""));
-            Observable<BaseBean> confirm = RetrofitFactory.getApiService().queryPlan(version, requestNo, machineCode, account, signature, pageNum,cardNo,tranType,channelId);
+            Observable<BaseBean> confirm = RetrofitFactory.getApiService().queryPlan(version, requestNo, machineCode, account, signature, pageNum,cardNo,state,startDate,endDate,tranType,channelId);
             Observable<BaseBean> compose = confirm.compose(((BaseActivity) mView.getContext()).compose(((BaseActivity) mView.getContext()).<BaseBean>bindToLifecycle()));
             compose.subscribe(new DefaultObserver<FinanceDetailBean>((BaseActivity) mView.getContext()) {
                 @Override

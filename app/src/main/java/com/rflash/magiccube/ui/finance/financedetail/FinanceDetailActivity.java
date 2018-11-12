@@ -21,11 +21,13 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.jaredrummler.materialspinner.MaterialSpinner;
+import com.rflash.basemodule.utils.StringUtil;
 import com.rflash.magiccube.R;
 import com.rflash.magiccube.mvp.MVPBaseActivity;
 import com.rflash.magiccube.ui.finance.FinanceBean;
 import com.rflash.magiccube.ui.finance.FinanceManagerContract;
 import com.rflash.magiccube.ui.finance.FinanceManagerPresenter;
+import com.rflash.magiccube.ui.newmain.DirtData;
 import com.rflash.magiccube.util.ToolUtils;
 
 import java.util.ArrayList;
@@ -69,8 +71,14 @@ public class FinanceDetailActivity extends MVPBaseActivity<FinanceManagerContrac
     private MyPagerAdapter mAdapter;
 
     String cardNo = "";
+    String channel="";
 
     FinanceBean.ResultBean financeBean;
+
+    RepayFragment repayFragment;
+    SaleFragment saleFragment;
+
+    DirtData dirtData;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -80,14 +88,15 @@ public class FinanceDetailActivity extends MVPBaseActivity<FinanceManagerContrac
     }
 
     private void initView() {
+        dirtData=new DirtData(this);
 
         financeBean = (FinanceBean.ResultBean) getIntent().getSerializableExtra("financeBean");
         if (financeBean != null) {
             cardNo = financeBean.getCardNo() + "";
             financeInfoTvs[0].setText("总消费笔数：" + financeBean.getSaleNum());
-            financeInfoTvs[1].setText("总消费金额：￥" + Double.valueOf(financeBean.getSaleAmt())/100);
+            financeInfoTvs[1].setText("总消费金额：￥" + StringUtil.getTwoPointString(financeBean.getSaleAmt()));
             financeInfoTvs[2].setText("总还款笔数：" + financeBean.getRepayNum());
-            financeInfoTvs[3].setText("总还款金额：￥" + Double.valueOf(financeBean.getRepayAmt())/100);
+            financeInfoTvs[3].setText("总还款金额：￥" + StringUtil.getTwoPointString(financeBean.getRepayAmt()));
             if (financeBean.getServiceType().equals("FIXED_LIMIT")) {
                 financeInfoTvs[4].setText("费用基数类型：" + "固定额度");
             } else if (financeBean.getServiceType().equals("REPAY_LIMIT")) {
@@ -95,22 +104,35 @@ public class FinanceDetailActivity extends MVPBaseActivity<FinanceManagerContrac
             } else if (financeBean.getServiceType().equals("USER_DEFINED")) {
                 financeInfoTvs[4].setText("费用基数类型：" + "自定义");
             }
-            financeInfoTvs[5].setText("收费基数：￥" + Double.valueOf(financeBean.getServiceAmt())/100);
+            financeInfoTvs[5].setText("收费基数：￥" + StringUtil.getTwoPointString(financeBean.getServiceAmt()));
             financeInfoTvs[6].setText("收费比例：" + Double.valueOf(financeBean.getServiceRate())*100 + "%");
-            financeInfoTvs[7].setText("服务费用：￥" + Double.valueOf(financeBean.getServiceFee())/100 + "");
+            financeInfoTvs[7].setText("服务费用：￥" +StringUtil.getTwoPointString(financeBean.getServiceFee()) + "");
         }
 
 
-        channelName_sp.setItems("请选择渠道名");
+        channelName_sp.setItems(dirtData.ChannelArr);
         channelName_sp.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
             @Override
             public void onItemSelected(MaterialSpinner materialSpinner, int i, long l, Object o) {
+                if(i!=0){
+                    channel=dirtData.ChannelIDOptions3[i];
+                }else{
+                    channel="";
+                }
 
+                if(saleFragment!=null)
+                    saleFragment.queryPlanByChannelId(channel);
+                if(repayFragment!=null)
+                    repayFragment.queryPlanByChannelId(channel);
+                if(finance_detail_drawerlayout!=null)
+                    finance_detail_drawerlayout.closeDrawer(Gravity.RIGHT);
             }
         });
 
-        mFragments.add(SaleFragment.getInstance(financeBean));
-        mFragments.add(RepayFragment.getInstance(financeBean));
+        saleFragment=SaleFragment.getInstance(financeBean);
+        repayFragment=RepayFragment.getInstance(financeBean);
+        mFragments.add(saleFragment);
+        mFragments.add(repayFragment);
         mAdapter = new MyPagerAdapter(getSupportFragmentManager());
         viewpager.setAdapter(mAdapter);
         trand_type_stl.setViewPager(viewpager, mTitles);

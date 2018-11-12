@@ -25,11 +25,7 @@ public class QueryPlanningPresenter extends BasePresenterImpl<QueryPlanningContr
     //规划查询
     @Override
     public void queryPlan(String startDate,String endDate,String cardSeqno,String customerName,String cardNo,String state,
-<<<<<<< HEAD
                           String tranType,String accountType,String syncState,String pageNum,String count) {
-=======
-                          String tranType,String accountType,String syncState,String pageNum) {
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
         String signature;
         String version = Config.VERSION_CODE;
         String requestNo = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
@@ -51,19 +47,12 @@ public class QueryPlanningPresenter extends BasePresenterImpl<QueryPlanningContr
         treeMap.put("state",state);
         treeMap.put("accountType",accountType);
         treeMap.put("syncState",syncState);
-<<<<<<< HEAD
         treeMap.put("count",count);
-=======
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
 
         try {
             signature = SignUtil.signDataWithStr(treeMap, SpUtil.getString(mView.getContext(), Config.USER_PRVKEY, ""));
             Observable<BaseBean> confirm = RetrofitFactory.getApiService().queryPlanning(version, requestNo, machineCode, account, signature, pageNum,cardNo,tranType,
-<<<<<<< HEAD
                     cardSeqno,customerName,state,accountType,startDate,endDate,syncState,count);
-=======
-                    cardSeqno,customerName,state,accountType,startDate,endDate,syncState);
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
             Observable<BaseBean> compose = confirm.compose(((BaseActivity) mView.getContext()).compose(((BaseActivity) mView.getContext()).<BaseBean>bindToLifecycle()));
             compose.subscribe(new DefaultObserver<PlaningBean>((BaseActivity) mView.getContext()) {
                 @Override
@@ -87,7 +76,6 @@ public class QueryPlanningPresenter extends BasePresenterImpl<QueryPlanningContr
             e.printStackTrace();
         }
     }
-<<<<<<< HEAD
 
 
     //同步规划
@@ -133,6 +121,4 @@ public class QueryPlanningPresenter extends BasePresenterImpl<QueryPlanningContr
         }
     }
 
-=======
->>>>>>> 5c64c07fc2b402943511b72cdfc0a5fec84549ec
 }

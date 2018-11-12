@@ -23,14 +23,14 @@
             >
 
             <TextView
-                android:layout_width="120dp"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@mipmap/icon_red_start"
                 android:drawablePadding="6dp"
                 android:gravity="left"
                 android:text="节假日规划："
                 android:paddingLeft="16dp"
-                android:paddingRight="0dp"
+                android:paddingRight="26dp"
                 android:textColor="#000"
                 android:textSize="14sp" />
 
@@ -75,14 +75,14 @@
             >
 
             <TextView
-                android:layout_width="120dp"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@mipmap/icon_red_start"
                 android:drawablePadding="6dp"
                 android:gravity="left"
                 android:text="空闲时段规划："
                 android:paddingLeft="16dp"
-                android:paddingRight="0dp"
+                android:paddingRight="16dp"
                 android:textColor="#000"
                 android:textSize="14sp" />
 
@@ -128,7 +128,7 @@
             >
 
             <TextView
-                android:layout_width="120dp"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@mipmap/icon_red_start"
                 android:drawablePadding="6dp"
