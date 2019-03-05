@@ -20,7 +20,7 @@ public class RefundContract {
 
     interface  Presenter extends BasePresenter<View> {
 
-        void getRefundList(String pageNum);
+        void getRefundList(String pageNum,String pageSize);
 
     }
 }

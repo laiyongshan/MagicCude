@@ -16,6 +16,7 @@ public class AddCardContract {
         void verifyResult(VerfyBean data);//验证结果
         void toPayResult(PayBean payBean);//生成支付信息
         void queryProductDetailResult(ProductDetailBean productDetailBean);//查询征信产品信息结果
+        void getBankInfoResult(BankInfoBean bankInfoBean);
     }
 
     interface  Presenter extends BasePresenter<View> {
@@ -36,5 +37,8 @@ public class AddCardContract {
 
         //查询单一征信产品信息
         void productDetail(String creditType);
+
+        //获取发卡行信息
+        void getBankInfo(String cardNo);
     }
 }

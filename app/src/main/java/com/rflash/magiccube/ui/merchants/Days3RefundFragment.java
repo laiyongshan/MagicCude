@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.rflash.basemodule.BaseFragment;
+import com.rflash.basemodule.utils.StringUtil;
 import com.rflash.magiccube.R;
 import com.rflash.magiccube.mvp.MVPBaseFragment;
 import com.rflash.magiccube.util.DateUtil;
@@ -71,13 +72,16 @@ public class Days3RefundFragment extends BaseFragment {
         mYvalue.clear();
         mXvalue.clear();
         totalAmt=0;
+
+        mXvalue.add("");
+        mYvalue.add("0");
         for(HomeCountBean.ResultBean.Nearly3daysInfoBean nearly3daysInfoBean:nearly3daysInfo){
             mXvalue.add(DateUtil.formatDate1(nearly3daysInfoBean.getCurrentDate())+"");
-            mYvalue.add(nearly3daysInfoBean.getAmt()+"");
+            mYvalue.add(StringUtil.getTwoPointString(nearly3daysInfoBean.getAmt())+"");
             totalAmt+=Float.valueOf(nearly3daysInfoBean.getAmt());
         }
 
-        total_refund_tv.setText("￥"+totalAmt);
+        total_refund_tv.setText("￥"+ StringUtil.getTwoPointString(totalAmt));
 
         barChart.bindBarChart(mYvalue, mXvalue);
         // holder.barChart.chartEnum = ChartEnum.BarChart;
@@ -99,6 +103,7 @@ public class Days3RefundFragment extends BaseFragment {
 
         barChart.mBarChartSize = barChart.dp2px(26);
         barChart.mXScaleWidth = barChart.dp2px(68);
+
 
         barChart.mXAxisTextColor = Color.GRAY;
         barChart.refreshChartView();

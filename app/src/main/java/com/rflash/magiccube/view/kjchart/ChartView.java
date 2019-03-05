@@ -800,82 +800,82 @@ public class ChartView extends View {
 				isScroll = false;
 				mOffset = offsetMax;
 			} else {
-				isScroll = true;
+				isScroll = false;
 			}
 		}
 	}
 
 
-	@Override
-	public boolean dispatchTouchEvent(MotionEvent ev) {
-		// TODO Auto-generated method stub
-		//滑动处理
-		float mX = 0;
-		float mY = 0;
-		switch (ev.getAction()) {
-			case MotionEvent.ACTION_DOWN:
-				mX=ev.getX();
-				mY=ev.getY();
-				getParent().requestDisallowInterceptTouchEvent(true);//不拦截
-				break;
-			case MotionEvent.ACTION_MOVE:
-				if (Math.abs(ev.getX()-mX)> Math.abs(ev.getY()-mY)) {//如果横向滑动大于纵向滑动
-					getParent().requestDisallowInterceptTouchEvent(true);
-				}else {
-					getParent().requestDisallowInterceptTouchEvent(false);//交给父类处理
-				}
-				break;
-			case MotionEvent.ACTION_UP:
-			case MotionEvent.ACTION_CANCEL:
-				getParent().requestDisallowInterceptTouchEvent(false);
-				break;
+//	@Override
+//	public boolean dispatchTouchEvent(MotionEvent ev) {
+//		// TODO Auto-generated method stub
+//		//滑动处理
+//		float mX = 0;
+//		float mY = 0;
+//		switch (ev.getAction()) {
+//			case MotionEvent.ACTION_DOWN:
+//				mX=ev.getX();
+//				mY=ev.getY();
+//				getParent().requestDisallowInterceptTouchEvent(true);//不拦截
+//				break;
+//			case MotionEvent.ACTION_MOVE:
+//				if (Math.abs(ev.getX()-mX)> Math.abs(ev.getY()-mY)) {//如果横向滑动大于纵向滑动
+//					getParent().requestDisallowInterceptTouchEvent(true);
+//				}else {
+//					getParent().requestDisallowInterceptTouchEvent(false);//交给父类处理
+//				}
+//				break;
+//			case MotionEvent.ACTION_UP:
+//			case MotionEvent.ACTION_CANCEL:
+//				getParent().requestDisallowInterceptTouchEvent(false);
+//				break;
+//
+//			default:
+//				break;
+//		}
+//		return super.dispatchTouchEvent(ev);
+//	}
 
-			default:
-				break;
-		}
-		return super.dispatchTouchEvent(ev);
-	}
-
-	@Override
-	public boolean onTouchEvent(MotionEvent event) {
-		int rawX = (int) (event.getRawX());
-		// 计算当前速度
-		VelocityTracker velocityTracker = VelocityTracker.obtain();
-		velocityTracker.addMovement(event);
-		// 计算速度的单位时间
-		velocityTracker.computeCurrentVelocity(50);
-		switch (event.getAction()) {
-			case MotionEvent.ACTION_DOWN:
-				// 记录触摸点坐标
-				lastX = rawX;
-				mIsTouch = true;
-				break;
-			case MotionEvent.ACTION_MOVE:
-				// 计算便宜量
-				int offsetX = rawX - lastX;
-				// 在当前偏移量的基础上增加偏移量
-				mOffset = mOffset + offsetX;
-				setOffsetRange();
-				// 偏移量修改后下次重绘会有变化
-				lastX = rawX;
-				// 获取X方向上的速度
-				xVelocity = velocityTracker.getXVelocity();
-				mSpeed = (int) xVelocity;
-				break;
-			case MotionEvent.ACTION_UP:
-				mIsTouch = false;
-				break;
-		}
-		// 计算完成后回收内存
-		velocityTracker.clear();
-		velocityTracker.recycle();
-
-		if (mXScaleWidth*getMaxSize() < mAxisWidth){
-			return true;
-		}
-		invalidate();
-		return true;
-	}
+//	@Override
+//	public boolean onTouchEvent(MotionEvent event) {
+//		int rawX = (int) (event.getRawX());
+//		// 计算当前速度
+//		VelocityTracker velocityTracker = VelocityTracker.obtain();
+//		velocityTracker.addMovement(event);
+//		// 计算速度的单位时间
+//		velocityTracker.computeCurrentVelocity(50);
+//		switch (event.getAction()) {
+//			case MotionEvent.ACTION_DOWN:
+//				// 记录触摸点坐标
+//				lastX = rawX;
+//				mIsTouch = true;
+//				break;
+//			case MotionEvent.ACTION_MOVE:
+//				// 计算便宜量
+//				int offsetX = rawX - lastX;
+//				// 在当前偏移量的基础上增加偏移量
+//				mOffset = mOffset + offsetX;
+//				setOffsetRange();
+//				// 偏移量修改后下次重绘会有变化
+//				lastX = rawX;
+//				// 获取X方向上的速度
+//				xVelocity = velocityTracker.getXVelocity();
+//				mSpeed = (int) xVelocity;
+//				break;
+//			case MotionEvent.ACTION_UP:
+//				mIsTouch = false;
+//				break;
+//		}
+//		// 计算完成后回收内存
+//		velocityTracker.clear();
+//		velocityTracker.recycle();
+//
+//		if (mXScaleWidth*getMaxSize() < mAxisWidth){
+//			return true;
+//		}
+//		invalidate();
+//		return true;
+//	}
 
 	public void refreshChartView() {
 		super.invalidate();

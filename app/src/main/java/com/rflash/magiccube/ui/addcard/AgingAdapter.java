@@ -9,9 +9,11 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.flyco.roundview.RoundTextView;
+import com.rflash.basemodule.utils.StringUtil;
 import com.rflash.magiccube.R;
 import com.rflash.magiccube.event.DeleteAdingMessage;
 import com.rflash.magiccube.event.PositionMessage;
+import com.rflash.magiccube.util.DateUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -48,12 +50,12 @@ public class AgingAdapter extends BaseQuickAdapter<AgingBean,BaseViewHolder> {
             }
         });
 
-        ((EditText)helper.getView(R.id.partTotalAmt_et)).setText(item.getPartTotalAmt()+"");
+        ((EditText)helper.getView(R.id.partTotalAmt_et)).setText(StringUtil.getTwoPointString(item.getPartTotalAmt()+""));
         ((EditText)helper.getView(R.id.partSeqno_et)).setText(item.getPartSeqno()+"");
-        ((EditText)helper.getView(R.id.startTime_et)).setText(item.getStartTime()+"");
-        ((EditText)helper.getView(R.id.endTime_et)).setText(item.getEndTime()+"");
-        ((EditText)helper.getView(R.id.amt_et)).setText(item.getAmt()+"");
-        ((EditText)helper.getView(R.id.fee_et)).setText(item.getFee()+"");
+        ((EditText)helper.getView(R.id.startTime_et)).setText(DateUtil.formatDate1(item.getStartTime()+""));
+        ((EditText)helper.getView(R.id.endTime_et)).setText(DateUtil.formatDate1(item.getEndTime()+""));
+        ((EditText)helper.getView(R.id.amt_et)).setText(StringUtil.getTwoPointString(item.getAmt()+""));
+        ((EditText)helper.getView(R.id.fee_et)).setText(StringUtil.getTwoPointString(item.getFee()+""));
         if(item.getIsRepaied().equals("Y"))
             ((EditText)helper.getView(R.id.isRepaied_et)).setText("是");
         else

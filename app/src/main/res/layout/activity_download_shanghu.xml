@@ -46,6 +46,7 @@
                     rv:rv_textPressColor="@color/luncy"
                    android:layout_centerVertical="true"
                     android:layout_toLeftOf="@+id/filtrate_img"
+                    android:visibility="gone"
                     />
 
                 <ImageView
@@ -64,7 +65,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="22dp"
-                android:text="共200条数据"
+                android:text="共0条数据"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
 
@@ -99,7 +100,6 @@
                 android:layout_alignParentBottom="true"
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
-                android:visibility="gone"
                 >
 
                 <CheckBox
@@ -136,7 +136,7 @@
                         android:layout_centerVertical="true"
                         android:layout_toRightOf="@+id/all_selected_cb"
                         android:layout_marginLeft="4dp"
-                        android:text="2"
+                        android:text="0"
                         android:textSize="18sp"
                         android:textColor="@color/colorPrimary"
                         android:layout_marginRight="4dp"

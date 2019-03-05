@@ -123,8 +123,7 @@ public class AddIncreaseActivity extends MVPBaseActivity<CardIncreaseContract.Vi
 
             case R.id.add_increase_rtv:
                 if(amt_et.getText().toString().trim().equals("")||
-                        time_tv.getText().toString().trim().equals("")||
-                        creater_et.getText().toString().trim().equals("")){
+                        time_tv.getText().toString().trim().equals("")){
                     Toast.makeText(AddIncreaseActivity.this,"请填写完整信息",Toast.LENGTH_SHORT).show();
                 }else{
                     insertLimitChange();

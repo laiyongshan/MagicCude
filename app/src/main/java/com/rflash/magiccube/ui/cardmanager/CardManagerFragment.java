@@ -1,7 +1,6 @@
 package com.rflash.magiccube.ui.cardmanager;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -21,7 +20,6 @@ import com.bigkoo.pickerview.TimePickerView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.flyco.roundview.RoundTextView;
 import com.jaredrummler.materialspinner.MaterialSpinner;
-import com.rflash.basemodule.BaseFragment;
 import com.rflash.basemodule.utils.ActivityIntent;
 import com.rflash.basemodule.utils.StringUtil;
 import com.rflash.magiccube.R;
@@ -37,7 +35,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import butterknife.BindFloat;
 import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.OnClick;
@@ -48,9 +45,9 @@ import butterknife.OnClick;
  * @desc:
  */
 
-public class CardManagerFragment extends MVPBaseFragment<CardManagerContract.View,CardManagerPresenter> implements  BaseQuickAdapter.RequestLoadMoreListener, CardManagerContract.View, SwipeRefreshLayout.OnRefreshListener{
+public class CardManagerFragment extends MVPBaseFragment<CardManagerContract.View, CardManagerPresenter> implements BaseQuickAdapter.RequestLoadMoreListener, CardManagerContract.View, SwipeRefreshLayout.OnRefreshListener {
 
-    @BindViews({R.id.card_count_tv,R.id.availableAmt_tv,R.id.initAmt_tv,R.id.fixedLimit_tv})
+    @BindViews({R.id.card_count_tv, R.id.availableAmt_tv, R.id.initAmt_tv, R.id.fixedLimit_tv})
     TextView[] countTvs;
 
     @BindView(R.id.card_option_tv)
@@ -96,24 +93,24 @@ public class CardManagerFragment extends MVPBaseFragment<CardManagerContract.Vie
 
     private View notDataView;
 
-    String cardNo="";
-    String cardSeqno="";
-    String salesMan="";
-    String billDate="";
-    String repayDate="";
-    String state="";
-    int pageNum=1;
-    String count="Y";
+    String cardNo = "";
+    String cardSeqno = "";
+    String salesMan = "";
+    String billDate = "";
+    String repayDate = "";
+    String state = "";
+    int pageNum = 1;
+    String count = "Y";
 
     CardManagerAdapter cardManagerAdapter;
-    List<CardBean.ResultBean> cardBeanList=new ArrayList<>();
+    List<CardBean.ResultBean> cardBeanList = new ArrayList<>();
 
     TimePickerView mTimePikerView;//时间选择器
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd");
 
     boolean isOption;
 
-    private int TOTAL_COUNTER ; //所有的数据总数
+    private int TOTAL_COUNTER; //所有的数据总数
 
     DirtData dirtData;
 
@@ -129,15 +126,15 @@ public class CardManagerFragment extends MVPBaseFragment<CardManagerContract.Vie
         refresh_layout.setColorSchemeColors(ToolUtils.Colors);
         refresh_layout.setOnRefreshListener(this);
 
-        dirtData=new DirtData(getActivity());
+        dirtData = new DirtData(getActivity());
 
         notDataView = getLayoutInflater().inflate(R.layout.empty_view, (ViewGroup) card_manager_rv.getParent(), false);
 
 
         card_manager_rv.setLayoutManager(new LinearLayoutManager(getActivity()));
-        cardManagerAdapter=new CardManagerAdapter(isOption,cardBeanList);
+        cardManagerAdapter = new CardManagerAdapter(isOption, cardBeanList);
         cardManagerAdapter.setOnItemClickListener(onItemClickListener);
-        cardManagerAdapter.setOnLoadMoreListener(this,card_manager_rv);
+        cardManagerAdapter.setOnLoadMoreListener(this, card_manager_rv);
         cardManagerAdapter.disableLoadMoreIfNotFullPage();
         card_manager_rv.setAdapter(cardManagerAdapter);
 
@@ -149,37 +146,37 @@ public class CardManagerFragment extends MVPBaseFragment<CardManagerContract.Vie
     @Override
     public void onResume() {
         super.onResume();
-        pageNum=1;
+        pageNum = 1;
         queryCards();
     }
 
     //获取卡片数据
-    private void queryCards(){
+    private void queryCards() {
         showRefresh();
-        cardNo=cardNo_et.getText().toString().trim();
-        cardSeqno=cardSeqno_et.getText().toString().trim();
-        salesMan=dirtData.getSalesIdList().get(salesMan_sp.getSelectedIndex());
-        billDate=billDate_et.getText().toString().trim();
-        repayDate=repayDate_et.getText().toString().trim();
-        state=dirtData.cardStateOptions[state_sp.getSelectedIndex()];
-        mPresenter.queryCard(cardNo,cardSeqno,salesMan,billDate,repayDate,state,pageNum+"",count);
+        cardNo = cardNo_et.getText().toString().trim();
+        cardSeqno = cardSeqno_et.getText().toString().trim();
+        salesMan = dirtData.getSalesIdList().get(salesMan_sp.getSelectedIndex());
+        billDate = billDate_et.getText().toString().trim();
+        repayDate = repayDate_et.getText().toString().trim();
+        state = dirtData.cardStateOptions[state_sp.getSelectedIndex()];
+        mPresenter.queryCard(cardNo, cardSeqno, salesMan, billDate, repayDate, state, pageNum + "", count);
     }
 
-    @OnClick({R.id.card_option_tv,R.id.add_card_img,R.id.filtrate_img,
-            R.id.sure_filter_tv,R.id.clear_filter_tv,R.id.repayDate_et,R.id.billDate_et})
-    public void click(View view){
-        switch (view.getId()){
+    @OnClick({R.id.card_option_tv, R.id.add_card_img, R.id.filtrate_img, R.id.init_state_rtv, R.id.add_card_rtv,
+            R.id.sure_filter_tv, R.id.clear_filter_tv, R.id.repayDate_et, R.id.billDate_et})
+    public void click(View view) {
+        switch (view.getId()) {
             case R.id.card_option_tv:
-                isOption=!isOption;
-                if(isOption){
+                isOption = !isOption;
+                if (isOption) {
                     card_option_tv.setText("完成");
-                    cardManagerAdapter=new CardManagerAdapter(isOption,cardBeanList);
+                    cardManagerAdapter = new CardManagerAdapter(isOption, cardBeanList);
                     cardManagerAdapter.setOnItemClickListener(onItemClickListener);
                     card_manager_rv.setAdapter(cardManagerAdapter);
                     option_rl.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     card_option_tv.setText("下载");
-                    cardManagerAdapter=new CardManagerAdapter(isOption,cardBeanList);
+                    cardManagerAdapter = new CardManagerAdapter(isOption, cardBeanList);
                     cardManagerAdapter.setOnItemClickListener(onItemClickListener);
                     card_manager_rv.setAdapter(cardManagerAdapter);
                     option_rl.setVisibility(View.GONE);
@@ -194,24 +191,48 @@ public class CardManagerFragment extends MVPBaseFragment<CardManagerContract.Vie
                 cardmanager_drawerLayout.openDrawer(Gravity.RIGHT);
                 break;
 
-            case R.id.sure_filter_tv:
+            case R.id.sure_filter_tv://确定查询
+                pageNum = 1;
                 queryCards();
-                cardmanager_drawerLayout.closeDrawer(Gravity.RIGHT);
                 break;
-            case R.id.clear_filter_tv:
+            case R.id.clear_filter_tv://重置
                 repayDate_et.setText("");
                 billDate_et.setText("");
                 salesMan_sp.setSelectedIndex(0);
                 cardNo_et.setText("");
                 cardSeqno_et.setText("");
                 state_sp.setSelectedIndex(0);
-                cardNo="";
-                 cardSeqno="";
-                 salesMan="";
-                 billDate="";
-                 repayDate="";
-                 state="";
+                cardNo = "";
+                cardSeqno = "";
+                salesMan = "";
+                billDate = "";
+                repayDate = "";
+                state = "";
+                pageNum = 1;
+                queryCards();
                 break;
+
+            case R.id.init_state_rtv://恢复初始查询状态
+                repayDate_et.setText("");
+                billDate_et.setText("");
+                salesMan_sp.setSelectedIndex(0);
+                cardNo_et.setText("");
+                cardSeqno_et.setText("");
+                state_sp.setSelectedIndex(0);
+                cardNo = "";
+                cardSeqno = "";
+                salesMan = "";
+                billDate = "";
+                repayDate = "";
+                state = "";
+                pageNum = 1;
+                queryCards();
+                break;
+
+            case R.id.add_card_rtv:
+                ActivityIntent.readyGo(getActivity(), AddCardActivity.class);
+                break;
+
             case R.id.repayDate_et:
                 mTimePikerView = TimerPikerTools.creatTimePickerView(getActivity(), "选择账单日", false, false, true, new TimePickerView.OnTimeSelectListener() {
                     @Override
@@ -236,17 +257,18 @@ public class CardManagerFragment extends MVPBaseFragment<CardManagerContract.Vie
         }
     }
 
-    BaseQuickAdapter.OnItemClickListener onItemClickListener=new BaseQuickAdapter.OnItemClickListener() {
+    BaseQuickAdapter.OnItemClickListener onItemClickListener = new BaseQuickAdapter.OnItemClickListener() {
         @Override
         public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-            Intent intent=new Intent(getActivity(),CardDetailActivity.class);
-            intent.putExtra("cardDetail",cardBeanList.get(position));
+            Intent intent = new Intent(getActivity(), CardDetailActivity.class);
+            intent.putExtra("cardDetail", cardBeanList.get(position));
             startActivity(intent);
         }
     };
 
     @Override
     public void onRefresh() {
+        pageNum = 1;
         queryCards();
     }
 
@@ -263,7 +285,7 @@ public class CardManagerFragment extends MVPBaseFragment<CardManagerContract.Vie
     @Override
     public void getDataFail(String msg) {
         refresh_layout.setRefreshing(false);
-        if(pageNum!=1) {
+        if (pageNum != 1) {
             //获取更多数据失败
             Toast.makeText(getActivity(), "获取更多数据失败", Toast.LENGTH_LONG).show();
             cardManagerAdapter.loadMoreFail();
@@ -272,21 +294,29 @@ public class CardManagerFragment extends MVPBaseFragment<CardManagerContract.Vie
 
     @Override
     public void getDataSuccess(CardBean response) {
-        if(response!=null){
-            TOTAL_COUNTER=response.getTotalNum();
-            if(pageNum==1){
-                countTvs[0].setText("卡片数量："+response.getTotalNum());
-                countTvs[1].setText("可用总余额：￥"+ StringUtil.getTwoPointString(response.getAvailableAmt()));
-                countTvs[2].setText("初始金额总额：￥"+StringUtil.getTwoPointString(response.getInitAmt()));
-                countTvs[3].setText("固定额度总额：￥"+StringUtil.getTwoPointString(response.getFixedLimit()));
-                cardBeanList=response.getResult();
+        if (response != null) {
+            TOTAL_COUNTER = response.getTotalNum();
+            if (pageNum == 1) {
+                cardBeanList.clear();
+                countTvs[0].setText("卡片数量：" + TOTAL_COUNTER);
+                countTvs[1].setText("可用总余额：￥" + StringUtil.getTwoPointString(response.getAvailableAmt()));
+                countTvs[2].setText("初始金额总额：￥" + StringUtil.getTwoPointString(response.getInitAmt()));
+                countTvs[3].setText("固定额度总额：￥" + StringUtil.getTwoPointString(response.getFixedLimit()));
+                cardBeanList = response.getResult();
                 cardManagerAdapter.setNewData(response.getResult());
                 cardManagerAdapter.notifyDataSetChanged();
-                if(cardBeanList.isEmpty())
+                if (cardBeanList.isEmpty()) {
                     cardManagerAdapter.setEmptyView(notDataView);
-            }else{
+                    if (cardmanager_drawerLayout.isDrawerOpen(Gravity.RIGHT))
+                        Toast.makeText(getActivity(), "暂无符合该查询条件的卡片，请重置", Toast.LENGTH_LONG).show();
+                } else {
+                    if (cardmanager_drawerLayout.isDrawerOpen(Gravity.RIGHT))
+                        cardmanager_drawerLayout.closeDrawer(Gravity.RIGHT);
+                }
+            } else {
                 cardBeanList.addAll(response.getResult());
-                cardManagerAdapter.addData(response.getResult());
+                cardManagerAdapter.notifyDataSetChanged();
+//                cardManagerAdapter.addData(response.getResult());
                 cardManagerAdapter.loadMoreComplete();
             }
         }
@@ -304,10 +334,10 @@ public class CardManagerFragment extends MVPBaseFragment<CardManagerContract.Vie
                 } else {
                     //获取更多数据
                     pageNum++;
-                   queryCards();
+                    queryCards();
                 }
                 refresh_layout.setEnabled(true);
             }
-        },1500);
+        }, 1500);
     }
 }

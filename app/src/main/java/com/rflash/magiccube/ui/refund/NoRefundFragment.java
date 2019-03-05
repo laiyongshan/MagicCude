@@ -44,6 +44,7 @@ public class NoRefundFragment extends MVPBaseFragment<RefundContract.View, Refun
     List<RefundBean.ResultBean> NO_REPAID_List=new ArrayList<>();
     RefundBean refundBean;
     int pageNum=1;
+    int pageSize=50;
     private int TOTAL_COUNTER; //所有的数据总数
 
     static NoRefundFragment noRefundFragment;
@@ -64,7 +65,7 @@ public class NoRefundFragment extends MVPBaseFragment<RefundContract.View, Refun
     @Override
     protected void initView() {
 
-        mPresenter.getRefundList(pageNum+"");
+        mPresenter.getRefundList(pageNum+"",pageSize+"");
 
         notDataView = getLayoutInflater().inflate(R.layout.empty_view, (ViewGroup) no_refund_rv.getParent(), false);
 
@@ -91,7 +92,7 @@ public class NoRefundFragment extends MVPBaseFragment<RefundContract.View, Refun
     @Override
     public void onRefresh() {
         pageNum=1;
-        mPresenter.getRefundList(pageNum+"");
+        mPresenter.getRefundList(pageNum+"",pageSize+"");
     }
 
     @Override
@@ -106,7 +107,7 @@ public class NoRefundFragment extends MVPBaseFragment<RefundContract.View, Refun
                 } else {
                     //获取更多数据
                     pageNum++;
-                    mPresenter.getRefundList(pageNum+"");
+                    mPresenter.getRefundList(pageNum+"",pageSize+"");
                 }
                 refresh_layout.setEnabled(true);
             }
@@ -151,6 +152,11 @@ public class NoRefundFragment extends MVPBaseFragment<RefundContract.View, Refun
                         refundAdapter.addData(resultBean);
 
                 refundAdapter.loadMoreComplete();
+            }
+
+            if(refunList.size()<TOTAL_COUNTER) {
+                pageNum++;
+                mPresenter.getRefundList(pageNum+"",pageSize+"");
             }
         }
     }

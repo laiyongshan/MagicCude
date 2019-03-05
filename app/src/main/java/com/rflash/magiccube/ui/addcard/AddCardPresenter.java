@@ -224,4 +224,37 @@ public class AddCardPresenter extends BasePresenterImpl<AddCardContract.View> im
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void getBankInfo(String cardNo) {
+        String signature;
+        String version = Config.VERSION_CODE;
+        String requestNo = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+        String machineCode = SpUtil.getString(mView.getContext(), Config.MACHINECODE, "");
+        String account = SpUtil.getString(mView.getContext(), Config.ACCOUNT, "");
+        String pointId = SpUtil.getString(mView.getContext(), Config.POINT_ID, "");
+        TreeMap<String, String> treeMap = new TreeMap<>();
+        treeMap.put("version", version);
+        treeMap.put("requestNo", requestNo);
+        treeMap.put("machineCode", machineCode);
+        treeMap.put("account", account);
+        treeMap.put("cardNo",cardNo);
+
+        try {
+            signature = SignUtil.signDataWithStr(treeMap, SpUtil.getString(mView.getContext(), Config.USER_PRVKEY, ""));
+            Observable<BaseBean> addCard = RetrofitFactory.getApiService().getCardInfo(version, requestNo, machineCode, account, signature,
+                    cardNo);
+            Observable<BaseBean> compose = addCard.compose(((BaseActivity) mView.getContext()).compose(((BaseActivity) mView.getContext()).<BaseBean>bindToLifecycle()));
+            compose.subscribe(new DefaultObserver<BankInfoBean>((BaseActivity) mView.getContext()) {
+
+                @Override
+                protected void onSuccess(BankInfoBean bean) {
+                    mView.getBankInfoResult(bean);
+                }
+            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -33,7 +33,7 @@ public class CardBaseInfoContract {
         //修改卡片信息
         void updateCard(String cardNo, String customerName, String customerID, String phone, String billDate,
                         String repayDateType, String repayDate, String salesMan, String tempLimit,
-                        String tempLimitDate, String isHolidayPlan, String isFreePlan, String freePlanRate, String ebankinfo, String stagesList, String cardMedia);
+                        String tempLimitDate, String isHolidayPlan, String isFreePlan, String freePlanRate,String serviceRate, String ebankinfo, String stagesList, String cardMedia);
 
         //征信产品
         //creditType  产品编号

@@ -243,7 +243,8 @@ public class BillCheckActivity extends MVPBaseActivity<BillCheckContract.View, B
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch ( resultCode ) {
             case Config.INTENTOK :
-                tv_over_times.setText("剩余次数："+data.getExtras().getString( "count" ));
+                if(data!=null)
+                    tv_over_times.setText("剩余次数："+data.getExtras().getString( "count" ));
                 break;
             default :
                 break;

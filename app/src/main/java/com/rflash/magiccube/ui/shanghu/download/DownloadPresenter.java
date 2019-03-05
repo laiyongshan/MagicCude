@@ -56,8 +56,8 @@ public class DownloadPresenter extends BasePresenterImpl<DownloadContrat.View> i
 
 
                 @Override
-                protected void onSuccess(BaseBean data) {
-                    mView.bindSuccess(data);
+                protected void onSuccess() {
+                    mView.bindSuccess();
                 }
             });
 
@@ -68,7 +68,7 @@ public class DownloadPresenter extends BasePresenterImpl<DownloadContrat.View> i
     }
 
     @Override
-    public void queryShanghu(String channelName, String merchantName, String merchantCode, String state, String merchantType, String startDate, String endDate, String bind, String pageNum) {
+    public void queryShanghu(String channelName,String channelState, String merchantName, String merchantCode, String state, String merchantType, String startDate, String endDate, String bind, String pageNum,String pageSize) {
         String signature;
         String version = Config.VERSION_CODE;
         String requestNo = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
@@ -81,7 +81,9 @@ public class DownloadPresenter extends BasePresenterImpl<DownloadContrat.View> i
         treeMap.put("machineCode", machineCode);
         treeMap.put("account", account);
         treeMap.put("pageNum",pageNum);
+        treeMap.put("pageSize",pageSize);
         treeMap.put("channelName",channelName);
+        treeMap.put("channelState",channelState);
         treeMap.put("merchantName",merchantName);
         treeMap.put("merchantCode",merchantCode);
         treeMap.put("state",state);
@@ -92,7 +94,8 @@ public class DownloadPresenter extends BasePresenterImpl<DownloadContrat.View> i
 
         try {
             signature = SignUtil.signDataWithStr(treeMap, SpUtil.getString(mView.getContext(), Config.USER_PRVKEY, ""));
-            Observable<BaseBean> shanghu = RetrofitFactory.getApiService().queryShanghu(version, requestNo, machineCode, account, signature, pageNum, channelName,merchantName,merchantCode,state,merchantType,startDate,endDate,bind);
+            Observable<BaseBean> shanghu = RetrofitFactory.getApiService().queryShanghu(version, requestNo, machineCode, account, signature, pageNum,pageSize,
+                    channelName,channelState,merchantName,merchantCode,state,merchantType,startDate,endDate,bind);
             Observable<BaseBean> compose = shanghu.compose(((BaseActivity) mView.getContext()).compose(((BaseActivity) mView.getContext()).<BaseBean>bindToLifecycle()));
             compose.subscribe(new DefaultObserver<DownloadBean>((BaseActivity) mView.getContext()) {
                 @Override

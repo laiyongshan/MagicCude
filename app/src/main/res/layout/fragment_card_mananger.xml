@@ -54,13 +54,37 @@
                         android:visibility="gone"
                         />
 
+                    <com.flyco.roundview.RoundTextView
+                        android:id="@+id/init_state_rtv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="初始查询"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:padding="12dp"
+                        rv:rv_textPressColor="@color/luncy"
+                        />
+
+                    <com.flyco.roundview.RoundTextView
+                        android:id="@+id/add_card_rtv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="添加卡片"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:padding="12dp"
+                        rv:rv_textPressColor="@color/luncy"
+                        />
+
                     <ImageView
                         android:id="@+id/add_card_img"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="6dp"
                         android:scaleType="fitCenter"
-                        android:src="@mipmap/icon_add" />
+                        android:src="@mipmap/icon_add"
+                        android:visibility="gone"
+                        />
 
                     <ImageView
                         android:id="@+id/filtrate_img"

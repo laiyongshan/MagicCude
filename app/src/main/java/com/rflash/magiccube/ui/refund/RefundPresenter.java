@@ -27,7 +27,7 @@ public class RefundPresenter extends BasePresenterImpl<RefundContract.View> impl
      * 获取还款账单数据
      * */
     @Override
-    public void getRefundList(String pageNum) {
+    public void getRefundList(String pageNum,String pageSize) {
         String signature;
         String version = Config.VERSION_CODE;
         String requestNo = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
@@ -40,10 +40,11 @@ public class RefundPresenter extends BasePresenterImpl<RefundContract.View> impl
         treeMap.put("machineCode", machineCode);
         treeMap.put("account", account);
         treeMap.put("pageNum",pageNum);
+        treeMap.put("pageSize",pageSize);
 
         try {
             signature = SignUtil.signDataWithStr(treeMap, SpUtil.getString(mView.getContext(), Config.USER_PRVKEY, ""));
-            Observable<BaseBean> balance = RetrofitFactory.getApiService().getRefundList(version, requestNo, machineCode, account, signature, pageNum);
+            Observable<BaseBean> balance = RetrofitFactory.getApiService().getRefundList(version, requestNo, machineCode, account, signature, pageNum,pageSize);
             Observable<BaseBean> compose = balance.compose(((BaseActivity) mView.getContext()).compose(((BaseActivity) mView.getContext()).<BaseBean>bindToLifecycle()));
             compose.subscribe(new DefaultObserver<RefundBean>((BaseActivity) mView.getContext()) {
                 @Override

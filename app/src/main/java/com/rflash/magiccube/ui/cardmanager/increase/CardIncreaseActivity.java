@@ -84,6 +84,7 @@ public class CardIncreaseActivity extends MVPBaseActivity<CardIncreaseContract.V
     protected void onStart() {
         super.onStart();
         chageType=LIMIT_UP;
+        pageNum=1;
         queryLimitChange(LIMIT_UP);
     }
 

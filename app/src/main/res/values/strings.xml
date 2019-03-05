@@ -1,8 +1,15 @@
 <resources>
-    <string name="app_name">魔方信用卡管家</string>
-    <string name="app_update_name">魔方app更新</string>
     <!--<string name="app_name">熊猫金管家</string>-->
-    <!--<string name="app_update_name">熊猫app更新</string>-->
+    <!--<string name="app_update_name">熊猫金管家app更新</string>-->
+
+    <!--<string name="app_name">魔方卡管家</string>-->
+    <!--<string name="app_update_name">魔方卡管家app更新</string>-->
+
+    <!--<string name="app_name">创新天卡管家</string>-->
+    <!--<string name="app_update_name">创新天卡管家app更新</string>-->
+
+    <string name="app_name">信无忧智能管家</string>
+    <string name="app_update_name">信无忧智能管家app更新</string>
 
     <string name="main_user">你好！\n%s</string>
     <string name="card_num">卡位: %s</string>
@@ -17,5 +24,5 @@
     <string name="helpPay">代付账户余额\n(%s)</string>
     <string name="channel">渠道：%s</string>
     <string name="bottom">已选数量：%1$d\t\t选中金额：¥%2$s</string>
-    <string name="note">温馨提示：此功能与本系统没有任何联系，请勿用于规划消费，此功能只作为信用卡取款使用</string>
+    <string name="note">温馨提示：此功能与本系统没有任何联系，请勿用于规划消费，此功能只作为信用卡正常收款使用</string>
 </resources>

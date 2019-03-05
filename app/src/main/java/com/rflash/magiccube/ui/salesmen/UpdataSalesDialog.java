@@ -11,11 +11,11 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.flyco.roundview.RoundTextView;
 import com.rflash.magiccube.R;
+import com.rflash.magiccube.util.ToolUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -73,7 +73,7 @@ public class UpdataSalesDialog extends Dialog {
     private void initView(){
         setCanceledOnTouchOutside(false);
         salesmen_name_et.setText(salesmenBean.getName()+"");
-        salesman_profitRatio_et.setText(salesmenBean.getProfitRatio()+"");
+        salesman_profitRatio_et.setText(ToolUtils.getDouble(Double.valueOf(salesmenBean.getProfitRatio())*100)+"");
     }
 
     @OnClick({R.id.dismiss_dialog_iv,R.id.cancel_updata_tv,R.id.updata_salesmen_tv})
@@ -91,7 +91,7 @@ public class UpdataSalesDialog extends Dialog {
                 if(salesmen_name_et.getText().toString().trim().equals("")||salesman_profitRatio_et.getText().toString().trim().equals("")){
                     Toast.makeText(context,"请填写完整的信息",Toast.LENGTH_SHORT).show();
                 }else{
-                    updateSalesListener.updataSalesListener(salesmen_name_et.getText().toString().trim(),Double.valueOf(salesman_profitRatio_et.getText().toString().trim())/100+"");
+                    updateSalesListener.updataSalesListener(salesmen_name_et.getText().toString().trim(), ToolUtils.getDouble(Double.valueOf(salesman_profitRatio_et.getText().toString().trim())/100)+"");
                 }
                 break;
         }

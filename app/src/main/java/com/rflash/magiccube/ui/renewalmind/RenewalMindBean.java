@@ -13,26 +13,32 @@ import java.util.List;
 
 public class RenewalMindBean extends BaseBean {
 
+
+    /**
+     * result : [{"bankName":"商业银行","billDate":"22","calRepayDate":"11","cardId":4050,"cardNo":"6250808010422533","cardSeqno":"70","createTime":1543344758000,"customerName":"zeng","endTime":1543776758000,"remark":"卡片服务即将到期","remindType":"CARD_FEE_EXPIRES","repayDate":"11","serviceEndDate":"20181203","state":"REMIND"}]
+     * totalNum : 1
+     * totalPage : 1
+     */
+
     private int totalNum;
     private int totalPage;
-
-    public void setTotalNum(int totalNum) {
-        this.totalNum = totalNum;
-    }
+    private List<ResultBean> result;
 
     public int getTotalNum() {
         return totalNum;
     }
 
-    public void setTotalPage(int totalPage) {
-        this.totalPage = totalPage;
+    public void setTotalNum(int totalNum) {
+        this.totalNum = totalNum;
     }
 
     public int getTotalPage() {
         return totalPage;
     }
 
-    private List<ResultBean> result;
+    public void setTotalPage(int totalPage) {
+        this.totalPage = totalPage;
+    }
 
     public List<ResultBean> getResult() {
         return result;
@@ -43,46 +49,107 @@ public class RenewalMindBean extends BaseBean {
     }
 
     public static class ResultBean implements Serializable{
-       private String cardId;
-       private String remindType;
-       private String state;
-       private String endTime;
-       private String remark;
-       private String createTime;
-       private String cardNo;
-       private String customerName;
-       private String cardSeqno;
-       private String bankName;
+        /**
+         * bankName : 商业银行
+         * billDate : 22
+         * calRepayDate : 11
+         * cardId : 4050
+         * cardNo : 6250808010422533
+         * cardSeqno : 70
+         * createTime : 1543344758000
+         * customerName : zeng
+         * endTime : 1543776758000
+         * remark : 卡片服务即将到期
+         * remindType : CARD_FEE_EXPIRES
+         * repayDate : 11
+         * serviceEndDate : 20181203
+         * state : REMIND
+         */
 
-        public String getCardId() {
+        private String bankName;
+        private String billDate;
+        private String calRepayDate;
+        private int cardId;
+        private String cardNo;
+        private String cardSeqno;
+        private long createTime;
+        private String customerName;
+        private long endTime;
+        private String remark;
+        private String remindType;
+        private String repayDate;
+        private String serviceEndDate;
+        private String state;
+
+        public String getBankName() {
+            return bankName;
+        }
+
+        public void setBankName(String bankName) {
+            this.bankName = bankName;
+        }
+
+        public String getBillDate() {
+            return billDate;
+        }
+
+        public void setBillDate(String billDate) {
+            this.billDate = billDate;
+        }
+
+        public String getCalRepayDate() {
+            return calRepayDate;
+        }
+
+        public void setCalRepayDate(String calRepayDate) {
+            this.calRepayDate = calRepayDate;
+        }
+
+        public int getCardId() {
             return cardId;
         }
 
-        public void setCardId(String cardId) {
+        public void setCardId(int cardId) {
             this.cardId = cardId;
         }
 
-        public String getRemindType() {
-            return remindType;
+        public String getCardNo() {
+            return cardNo;
         }
 
-        public void setRemindType(String remindType) {
-            this.remindType = remindType;
+        public void setCardNo(String cardNo) {
+            this.cardNo = cardNo;
         }
 
-        public String getState() {
-            return state;
+        public String getCardSeqno() {
+            return cardSeqno;
         }
 
-        public void setState(String state) {
-            this.state = state;
+        public void setCardSeqno(String cardSeqno) {
+            this.cardSeqno = cardSeqno;
         }
 
-        public String getEndTime() {
+        public long getCreateTime() {
+            return createTime;
+        }
+
+        public void setCreateTime(long createTime) {
+            this.createTime = createTime;
+        }
+
+        public String getCustomerName() {
+            return customerName;
+        }
+
+        public void setCustomerName(String customerName) {
+            this.customerName = customerName;
+        }
+
+        public long getEndTime() {
             return endTime;
         }
 
-        public void setEndTime(String endTime) {
+        public void setEndTime(long endTime) {
             this.endTime = endTime;
         }
 
@@ -94,45 +161,36 @@ public class RenewalMindBean extends BaseBean {
             this.remark = remark;
         }
 
-        public String getCreateTime() {
-            return createTime;
+        public String getRemindType() {
+            return remindType;
         }
 
-        public void setCreateTime(String createTime) {
-            this.createTime = createTime;
+        public void setRemindType(String remindType) {
+            this.remindType = remindType;
         }
 
-        public String getCardNo() {
-            return cardNo;
+        public String getRepayDate() {
+            return repayDate;
         }
 
-        public void setCardNo(String cardNo) {
-            this.cardNo = cardNo;
+        public void setRepayDate(String repayDate) {
+            this.repayDate = repayDate;
         }
 
-        public String getCustomerName() {
-            return customerName;
+        public String getServiceEndDate() {
+            return serviceEndDate;
         }
 
-        public void setCustomerName(String customerName) {
-            this.customerName = customerName;
+        public void setServiceEndDate(String serviceEndDate) {
+            this.serviceEndDate = serviceEndDate;
         }
 
-        public String getCardSeqno() {
-            return cardSeqno;
+        public String getState() {
+            return state;
         }
 
-        public void setCardSeqno(String cardSeqno) {
-            this.cardSeqno = cardSeqno;
-        }
-
-        public String getBankName() {
-            return bankName;
-        }
-
-        public void setBankName(String bankName) {
-            this.bankName = bankName;
+        public void setState(String state) {
+            this.state = state;
         }
     }
-
 }

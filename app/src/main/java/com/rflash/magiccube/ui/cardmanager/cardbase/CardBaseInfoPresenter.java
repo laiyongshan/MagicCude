@@ -124,7 +124,7 @@ public class CardBaseInfoPresenter extends BasePresenterImpl<CardBaseInfoContrac
     @Override
     public void updateCard(String cardNo, String customerName, String customerID, String phone, String billDate,
                            String repayDateType, String repayDate, String salesMan, String tempLimit,
-                           String tempLimitDate, String isHolidayPlan, String isFreePlan, String freePlanRate, String ebankinfo, String stagesList, String cardMedia) {
+                           String tempLimitDate, String isHolidayPlan, String isFreePlan, String freePlanRate,String serviceRate, String ebankinfo, String stagesList, String cardMedia) {
         String signature;
         String version = Config.VERSION_CODE;
         String requestNo = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
@@ -149,6 +149,7 @@ public class CardBaseInfoPresenter extends BasePresenterImpl<CardBaseInfoContrac
         treeMap.put("isHolidayPlan", isHolidayPlan);
         treeMap.put("isFreePlan", isFreePlan);
         treeMap.put("freePlanRate", freePlanRate);
+        treeMap.put("serviceRate",serviceRate);
         treeMap.put("ebankinfo", ebankinfo);
         treeMap.put("stagesList", stagesList);
         treeMap.put("cardMedia", cardMedia);
@@ -159,7 +160,7 @@ public class CardBaseInfoPresenter extends BasePresenterImpl<CardBaseInfoContrac
                     cardNo, customerName,
                     customerID, phone, billDate, repayDateType,
                     repayDate, salesMan, tempLimit, tempLimitDate, isHolidayPlan,
-                    isFreePlan, freePlanRate, ebankinfo, stagesList, cardMedia);
+                    isFreePlan, freePlanRate,serviceRate, ebankinfo, stagesList, cardMedia);
             Observable<BaseBean> compose = addCard.compose(((BaseActivity) mView.getContext()).compose(((BaseActivity) mView.getContext()).<BaseBean>bindToLifecycle()));
             compose.subscribe(new DefaultObserver<BaseBean>((BaseActivity) mView.getContext()) {
                 @Override

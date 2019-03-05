@@ -28,7 +28,7 @@ import butterknife.OnClick;
  * @desc:
  */
 
-public class RenewalMindActivity  extends MVPBaseActivity<RenewalMindContract.View,RenewalMindPresenter> implements RenewalMindContract.View,SwipeRefreshLayout.OnRefreshListener,BaseQuickAdapter.RequestLoadMoreListener{
+public class RenewalMindActivity extends MVPBaseActivity<RenewalMindContract.View, RenewalMindPresenter> implements RenewalMindContract.View, SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener {
 
     @BindView(R.id.refresh_layout)
     SwipeRefreshLayout refresh_layout;
@@ -39,7 +39,7 @@ public class RenewalMindActivity  extends MVPBaseActivity<RenewalMindContract.Vi
     private View notDataView;
 
     RenewalMindAdapter renewalmindAdapter;
-    List<RenewalMindBean.ResultBean> renewalMindList=new ArrayList<>();
+    List<RenewalMindBean.ResultBean> renewalMindList = new ArrayList<>();
 
     private int pageNum = 1;
     private int TOTAL_COUNTER; //所有的数据总数
@@ -49,12 +49,18 @@ public class RenewalMindActivity  extends MVPBaseActivity<RenewalMindContract.Vi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_renewalmind);
         initView();
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        pageNum=1;
         getRemindList();
     }
 
+
     //初始化控件
-    private void initView(){
+    private void initView() {
 
         notDataView = getLayoutInflater().inflate(R.layout.empty_view, (ViewGroup) renewalmind_rv.getParent(), false);
 
@@ -62,15 +68,17 @@ public class RenewalMindActivity  extends MVPBaseActivity<RenewalMindContract.Vi
         refresh_layout.setOnRefreshListener(this);
 
         renewalmind_rv.setLayoutManager(new LinearLayoutManager(this));
-        renewalmindAdapter=new RenewalMindAdapter(renewalMindList);
-        renewalmindAdapter.setOnLoadMoreListener(this,renewalmind_rv);
+        renewalmindAdapter = new RenewalMindAdapter(renewalMindList);
+        renewalmindAdapter.setOnLoadMoreListener(this, renewalmind_rv);
         renewalmindAdapter.disableLoadMoreIfNotFullPage();
         renewalmindAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent=new Intent(RenewalMindActivity.this,RenewalActivity.class);
-                intent.putExtra("renewalMindBean",renewalMindList.get(position));
-                RenewalMindActivity.this.startActivity(intent);
+//                if (!renewalMindList.get(position).getState().equals("DEAL")) {
+                    Intent intent = new Intent(RenewalMindActivity.this, RenewalActivity.class);
+                    intent.putExtra("renewalMindBean", renewalMindList.get(position));
+                    RenewalMindActivity.this.startActivity(intent);
+//                }
             }
         });
         renewalmind_rv.setAdapter(renewalmindAdapter);
@@ -85,19 +93,15 @@ public class RenewalMindActivity  extends MVPBaseActivity<RenewalMindContract.Vi
         }
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
 
     //获取续期提醒列表
-    private  void getRemindList(){
-        mPresenter.getRenewalList(pageNum+"");
+    private void getRemindList() {
+        mPresenter.getRenewalList(pageNum + "");
     }
 
     @Override
     public void onRefresh() {
-        pageNum=1;
+        pageNum = 1;
         getRemindList();
     }
 
@@ -124,7 +128,7 @@ public class RenewalMindActivity  extends MVPBaseActivity<RenewalMindContract.Vi
                 renewalMindList.clear();
                 renewalMindList = renewalMindBean.getResult();
                 renewalmindAdapter.setNewData(renewalMindList);
-                if(renewalMindList.isEmpty())
+                if (renewalMindList.isEmpty())
                     renewalmindAdapter.setEmptyView(notDataView);
             } else {
                 renewalMindList.addAll(renewalMindBean.getResult());
@@ -148,7 +152,7 @@ public class RenewalMindActivity  extends MVPBaseActivity<RenewalMindContract.Vi
                     pageNum++;
                     getRemindList();
                 }
-                if(refresh_layout!=null)
+                if (refresh_layout != null)
                     refresh_layout.setEnabled(true);
             }
         }, 1500);

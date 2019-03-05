@@ -641,7 +641,8 @@ public interface ApiService {
                                             @Field(Config.MACHINECODE) String machineCode,
                                             @Field(Config.ACCOUNT) String account,
                                             @Field(Config.SIGNATURE) String signature,
-                                            @Field("pageNum") String pageNum);
+                                            @Field("pageNum") String pageNum,
+                                            @Field("pageSize")String pageSize);
 
     /**
      * 还款账单
@@ -660,10 +661,11 @@ public interface ApiService {
                                        @Field(Config.MACHINECODE) String machineCode,
                                        @Field(Config.ACCOUNT) String account,
                                        @Field(Config.SIGNATURE) String signature,
-                                       @Field("pageNum") String pageNum);
+                                       @Field("pageNum") String pageNum,
+                                       @Field("pageSize") String pageSize);
 
     /**
-     * 商户管理
+     * 商户查询
      *
      * @param version
      * @param requestNo
@@ -680,7 +682,9 @@ public interface ApiService {
                                       @Field(Config.ACCOUNT) String account,
                                       @Field(Config.SIGNATURE) String signature,
                                       @Field("pageNum") String pageNum,
+                                      @Field("pageSize")String pageSize,
                                       @Field("channelName") String channelName,
+                                      @Field("channelState")String channelState,
                                       @Field("merchantName") String merchantName,
                                       @Field("merchantCode") String merchantCode,
                                       @Field("state") String state,
@@ -851,7 +855,6 @@ public interface ApiService {
     );
 
     /**
-     * （规划查询）
      *
      * @param version
      * @param requestNo
@@ -898,7 +901,7 @@ public interface ApiService {
     );
 
     /**
-     * 查询卡片
+     //查询收款记录
      *
      * @param version
      * @param requestNo
@@ -983,8 +986,49 @@ public interface ApiService {
                                    @Field("pageNum") String pageNum,
                                    @Field("cardNo") String cardNo,
                                    @Field("billMonth") String billMonth,
-                                   @Field("available") String available
-    );
+                                   @Field("available") String available);
+
+    /**
+     * 查询账单
+     *
+     * @param version
+     * @param requestNo
+     * @param machineCode
+     * @param account
+     * @param signature
+     */
+    @FormUrlEncoded
+    @POST("card-gate-web/cardbill/queryCardBill")
+    Observable<BaseBean> queryBill2(@Field(Config.VERSION) String version,
+                                   @Field(Config.REQUEST_NO) String requestNo,
+                                   @Field(Config.MACHINECODE) String machineCode,
+                                   @Field(Config.ACCOUNT) String account,
+                                   @Field(Config.SIGNATURE) String signature,
+                                   @Field("cardNo") String cardNo,
+                                   @Field("billMonth") String billMonth,
+                                   @Field("available") String available,
+                                   @Field("isConfirm") String isConfirm);
+
+    /**
+     * 修改账单金额
+     *
+     * @param version     版本
+     * @param requestNo   请求流水号  （当天时间）
+     * @param machineCode 机身序列号
+     * @param account     养卡点账号
+     * @param signature   签名字段
+     * @param cardNo      卡号
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("card-gate-web/msg/updateMsginfo")
+    Observable<BaseBean> ignoreCardBill(@Field(Config.VERSION) String version,
+                                        @Field(Config.REQUEST_NO) String requestNo,
+                                        @Field(Config.MACHINECODE) String machineCode,
+                                        @Field(Config.ACCOUNT) String account,
+                                        @Field(Config.SIGNATURE) String signature,
+                                        @Field("cardNo") String cardNo,
+                                        @Field("remindType") String remindType);
 
 
     /**
@@ -1046,6 +1090,43 @@ public interface ApiService {
                                             @Field(Config.ACCOUNT) String account,
                                             @Field(Config.SIGNATURE) String signature,
                                             @Field("creditType") String creditType);
+
+    /**
+     * 查询四要素验证信息
+     * @param version
+     * @param requestNo
+     * @param machineCode
+     * @param account
+     * @param signature
+     *
+     * */
+    @FormUrlEncoded
+    @POST("card-gate-web/card/getBank")
+    Observable<BaseBean> getCardInfo(@Field(Config.VERSION) String version,
+                                            @Field(Config.REQUEST_NO) String requestNo,
+                                            @Field(Config.MACHINECODE) String machineCode,
+                                            @Field(Config.ACCOUNT) String account,
+                                            @Field(Config.SIGNATURE) String signature,
+                                            @Field("cardNo") String cardNo);
+
+    /**
+     * 终端查询
+     * @param version
+     * @param requestNo
+     * @param machineCode
+     * @param account
+     * @param signature
+     *
+     * */
+    @FormUrlEncoded
+    @POST("card-gate-web/term/query")
+    Observable<BaseBean> queryTerm(@Field(Config.VERSION) String version,
+                                     @Field(Config.REQUEST_NO) String requestNo,
+                                     @Field(Config.MACHINECODE) String machineCode,
+                                     @Field(Config.ACCOUNT) String account,
+                                     @Field(Config.SIGNATURE) String signature,
+                                     @Field("channel") String channel,
+                                     @Field("merchantCode")String merchantCode);
 
 
     /**
@@ -1143,6 +1224,7 @@ public interface ApiService {
                                     @Field("isHolidayPlan") String isHolidayPlan,
                                     @Field("isFreePlan") String isFreePlan,
                                     @Field("freePlanRate") String freePlanRate,
+                                    @Field("serviceRate") String serviceRate,
                                     @Field("ebankinfo") String ebankinfo,
                                     @Field("stagesList") String stagesList,
                                     @Field("cardMedia") String cardMedia);
@@ -1210,7 +1292,7 @@ public interface ApiService {
                                    @Field(Config.SIGNATURE) String signature);
 
     /**
-     * 卡片續期
+     * 卡片續期  卡片已過期
      * @param version
      * @param requestNo
      * @param machineCode
@@ -1236,6 +1318,30 @@ public interface ApiService {
                                      @Field("initAmt") String initAmt,
                                      @Field("serviceStartDate") String serviceStartDate,
                                      @Field("availableAmt") String availableAmt,
+                                     @Field("state") String state);
+
+    /**
+     * 卡片續期  卡片未過期
+     * @param version
+     * @param requestNo
+     * @param machineCode
+     * @param account
+     * @param signature
+     *
+     * */
+    @FormUrlEncoded
+    @POST("card-gate-web/card/renewalCard")
+    Observable<BaseBean> noOverrenewalCard(@Field(Config.VERSION) String version,
+                                     @Field(Config.REQUEST_NO) String requestNo,
+                                     @Field(Config.MACHINECODE) String machineCode,
+                                     @Field(Config.ACCOUNT) String account,
+                                     @Field(Config.SIGNATURE) String signature,
+                                     @Field("cardNo") String cardNo,
+                                     @Field("serviceEndDate") String serviceEndDate,
+                                     @Field("serviceType") String serviceType,
+                                     @Field("serviceAmt") String serviceAmt,
+                                     @Field("serviceRate") String serviceRate,
+                                     @Field("paidAmt") String paidAmt,
                                      @Field("state") String state);
 
 
@@ -1301,4 +1407,23 @@ public interface ApiService {
                                         @Field(Config.SIGNATURE) String signature,
                                         @Field("password") String password,
                                         @Field("newPassword") String newPassword);
+
+    /**
+     * 公告列表
+     *
+     * @param version
+     * @param requestNo
+     * @param machineCode
+     * @param account
+     * @param signature
+     */
+    @FormUrlEncoded
+    @POST("card-gate-web/notice/query")
+    Observable<BaseBean> queryNotice(@Field(Config.VERSION) String version,
+                                     @Field(Config.REQUEST_NO) String requestNo,
+                                     @Field(Config.MACHINECODE) String machineCode,
+                                     @Field(Config.ACCOUNT) String account,
+                                     @Field(Config.SIGNATURE) String signature,
+                                     @Field("pageNum") String pageNum,
+                                     @Field("pageSize") String pageSize);
 }

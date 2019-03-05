@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import com.rflash.basemodule.utils.StringUtil;
 import com.rflash.magiccube.R;
-import com.rflash.magiccube.http.BaseBean;
 import com.rflash.magiccube.mvp.MVPBaseActivity;
 import com.rflash.magiccube.ui.cardmanager.CardBean;
 import com.rflash.magiccube.ui.cardmanager.addplan.AddPlanActivity;
@@ -24,8 +23,6 @@ import com.rflash.magiccube.ui.renewal.RenewalActivity;
 import com.rflash.magiccube.util.DateUtil;
 import com.rflash.magiccube.util.ToolUtils;
 import com.rflash.magiccube.view.SuccessProgressDialog;
-
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.BindViews;
@@ -62,6 +59,9 @@ public class CardDetailActivity extends MVPBaseActivity<CardDetailContract.View,
     String FREEZE="FREEZE";
     String EXPIRE="EXPIRE";
     String DELETE="DELETE";
+
+
+    private final int RENEWAL_REQUEST_CODE=100;//
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -165,8 +165,8 @@ public class CardDetailActivity extends MVPBaseActivity<CardDetailContract.View,
                 if(cardState.equals("VALID")||cardState.equals("EXPIRE")){//正常或过期
                     intent=new Intent(CardDetailActivity.this,RenewalActivity.class);
                     intent.putExtra("cardDetail",cardDetailBean);
-                    startActivity(intent);
-                    finish();
+                    startActivityForResult(intent,RENEWAL_REQUEST_CODE);
+//                    finish();
                 }else if(cardState.equals("FREEZE")){//冻结
                     Toast.makeText(CardDetailActivity.this,"卡片冻结，无法进行该操作",Toast.LENGTH_SHORT).show();
                 }
@@ -297,4 +297,11 @@ public class CardDetailActivity extends MVPBaseActivity<CardDetailContract.View,
     }
 
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode==RENEWAL_REQUEST_CODE){
+            finish();
+        }
+    }
 }

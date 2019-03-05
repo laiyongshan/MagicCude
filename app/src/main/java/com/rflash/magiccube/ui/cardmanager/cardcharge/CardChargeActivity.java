@@ -126,8 +126,8 @@ public class CardChargeActivity extends MVPBaseActivity<CardChargeContract.View,
                 mTimePikerView = TimerPikerTools.creatTimePickerView(CardChargeActivity.this, "服务开始时间", true, true, true, new TimePickerView.OnTimeSelectListener() {
                     @Override
                     public void onTimeSelect(Date date, View v) {
-                        startTime = simpleDateFormat.format(date);
-                        service_start_time_tv.setText(startTime + "");
+                        startTime = simpleDateFormat.format(date).replace("-","");
+                        service_start_time_tv.setText(simpleDateFormat.format(date) + "");
                     }
                 });
                 mTimePikerView.show();
@@ -185,6 +185,7 @@ public class CardChargeActivity extends MVPBaseActivity<CardChargeContract.View,
             }else{
                 cardChargerBeanList.addAll(response.getResult());
                 cardChargeAdapter.addData(response.getResult());
+                cardChargeAdapter.notifyDataSetChanged();
                 cardChargeAdapter.loadMoreComplete();
             }
         }
@@ -204,7 +205,8 @@ public class CardChargeActivity extends MVPBaseActivity<CardChargeContract.View,
                     pageNum++;
                     queryCardfee();
                 }
-                refresh_layout.setEnabled(true);
+                if(refresh_layout!=null)
+                    refresh_layout.setEnabled(true);
             }
         },1500);
     }

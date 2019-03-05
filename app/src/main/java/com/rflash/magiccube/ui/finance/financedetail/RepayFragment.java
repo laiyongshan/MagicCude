@@ -60,6 +60,9 @@ public class RepayFragment extends MVPBaseFragment<FinanceManagerContract.View, 
     FinanceBean.ResultBean financeBean;
     FinanceDetailBean financeDetailBean;
 
+    private View notDataView;
+
+
     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM");
     Date date2;
 
@@ -83,7 +86,7 @@ public class RepayFragment extends MVPBaseFragment<FinanceManagerContract.View, 
 
     @Override
     protected void initView() {
-
+        notDataView = getLayoutInflater().inflate(R.layout.empty_view, (ViewGroup) finance_repay_rv.getParent(), false);
         try {
             date2 = format.parse(DateUtil.formatDate2(financeBean.getReportDate()));
             startDate= TimerPikerTools.getFirstDayOfMonth(date2).replace("-","");
@@ -159,14 +162,12 @@ public class RepayFragment extends MVPBaseFragment<FinanceManagerContract.View, 
         if (response != null) {
             financeDetailBean = (FinanceDetailBean) response;
             TOTAL_COUNTER = financeDetailBean.getTotalNum();
-            for (FinanceDetailBean.ResultBean bean : REPAY_List) {
-                Log.i("lys", "还款：" + bean.getState());
-            }
-            Log.i("lys", "总条数：" + TOTAL_COUNTER);
             if (pageNum == 1) {
                 REPAY_List.clear();
                 REPAY_List = financeDetailBean.getResult();
                 financeDetailAdapter.setNewData(REPAY_List);
+                if(REPAY_List.isEmpty())
+                    financeDetailAdapter.setEmptyView(notDataView);
             } else {
                 REPAY_List.addAll(financeDetailBean.getResult());
                 financeDetailAdapter.notifyDataSetChanged();

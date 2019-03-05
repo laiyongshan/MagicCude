@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import com.rflash.magiccube.R;
 
 import java.lang.reflect.Field;
+import java.text.NumberFormat;
 
 /**
  * @author lys
@@ -208,6 +209,16 @@ public class ToolUtils {
             return  R.mipmap.bg_planning_red;
 
         return R.mipmap.bg_planning_blue;
+    }
+
+    public static String getDouble(double d){
+        NumberFormat nf = NumberFormat.getNumberInstance();
+        /**
+         * setMaximumFractionDigits(int newValue)
+         设置数的小数部分所允许的最大位数。
+         */
+        nf.setMaximumFractionDigits(3);
+        return nf.format(d);
     }
 
 }

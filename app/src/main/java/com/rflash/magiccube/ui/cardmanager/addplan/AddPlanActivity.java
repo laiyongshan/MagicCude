@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.CardView;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -13,6 +15,7 @@ import com.bigkoo.pickerview.TimePickerView;
 import com.flyco.roundview.RoundTextView;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.rflash.basemodule.utils.SpUtil;
+import com.rflash.basemodule.utils.StringUtil;
 import com.rflash.magiccube.Config;
 import com.rflash.magiccube.R;
 import com.rflash.magiccube.mvp.MVPBaseActivity;
@@ -59,10 +62,10 @@ public class AddPlanActivity extends MVPBaseActivity<AddPlanContract.View, AddPl
     MaterialSpinner isNeedT0_sp;
 
     @BindView(R.id.repayDate_et)
-    EditText repayDate_et;//还款时间
+    TextView repayDate_et;//还款时间
 
     @BindView(R.id.swipecardDate_et)
-    EditText swipecardDate_et;//刷卡时间
+    TextView swipecardDate_et;//刷卡时间
 
     @BindView(R.id.add_plan_rtv)
     RoundTextView add_plan_rtv;
@@ -85,6 +88,12 @@ public class AddPlanActivity extends MVPBaseActivity<AddPlanContract.View, AddPl
             CardView mcc_cd;
     @BindView(R.id.mcc_et)
             EditText mcc_et;
+
+    @BindView(R.id.mcc_sp)
+    MaterialSpinner mcc_sp;
+    List<String> MccTypeList=new ArrayList<>();
+    String mccId="";
+
     @BindView(R.id.isNeedT0_cd)
             CardView isNeedT0_cd;
 
@@ -94,14 +103,14 @@ public class AddPlanActivity extends MVPBaseActivity<AddPlanContract.View, AddPl
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     CardBean.ResultBean cardDetailBean;
-    String tranType;
-    String channel;
+    String tranType="";
+    String channel="";
     String merchantCode="";
-    String termCode;
-    String amt;
-    String isNeedT0;
-    String plandate;
-    String state;
+    String termCode="";
+    String amt="";
+    String isNeedT0="";
+    String plandate="";
+    String state="";
     String cardNo = "";
 
     DirtData dirtData;
@@ -132,6 +141,10 @@ public class AddPlanActivity extends MVPBaseActivity<AddPlanContract.View, AddPl
 
         dirtData = new DirtData(this);
 
+        MccTypeList=dirtData.getMccList();
+        MccTypeList.add(0,"请选择商户类型");
+        mcc_sp.setItems("请选择商户类型");
+
         tranType_sp.setItems(dirtData.tranTypeArr);
         tranType_sp.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
             @Override
@@ -144,6 +157,12 @@ public class AddPlanActivity extends MVPBaseActivity<AddPlanContract.View, AddPl
                     mcc_cd.setVisibility(View.VISIBLE);
                     isNeedT0_cd.setVisibility(View.VISIBLE);
                     channel_sp.setItems(dirtData.ChannelArr);
+
+                    channel_sp.setSelectedIndex(0);
+                    mcc_sp.setSelectedIndex(0);
+                    merchantName_sp.setSelectedIndex(0);
+                    merchantCode_et.setText("");
+                    isNeedT0_sp.setSelectedIndex(0);
                 } else if (i == 1) {//还款
                     repayDate_cd.setVisibility(View.VISIBLE);
                     swipecardDate_cd.setVisibility(View.GONE);
@@ -152,6 +171,12 @@ public class AddPlanActivity extends MVPBaseActivity<AddPlanContract.View, AddPl
                     mcc_cd.setVisibility(View.GONE);
                     isNeedT0_cd.setVisibility(View.GONE);
                     channel_sp.setItems(dirtData.ChannelArr2);
+
+                    channel_sp.setSelectedIndex(0);
+                    mcc_sp.setSelectedIndex(0);
+                    merchantName_sp.setSelectedIndex(0);
+                    merchantCode_et.setText("");
+                    isNeedT0_sp.setSelectedIndex(0);
                 }
             }
         });
@@ -169,20 +194,51 @@ public class AddPlanActivity extends MVPBaseActivity<AddPlanContract.View, AddPl
             @Override
             public void onItemSelected(MaterialSpinner materialSpinner, int i, long l, Object o) {
                 if(i!=0){
+                    mcc_sp.setItems(MccTypeList);
                     if(tranType_sp.getSelectedIndex()==0) {
                         channel = dirtData.ChannelIDOptions[i];
                         if(i==1){//盛01
-                            merchantName_sp.setItems(merchantList01);
-                            merchantCode_et.setText(shanghuList01.get(0).getMerchantCode()+"");
-                            mcc_et.setText(shanghuList01.get(0).getMerchantMccSmallClassName());
+                            if(!getMerchantList(channel,mccId,shanghuList01).isEmpty()) {
+                                merchantName_sp.setItems(MerchantList);
+                                if(!shanghuList01.isEmpty()) {
+                                    merchantCode=getMerchantCode(shanghuList01,MerchantList.get(0))+"";
+                                    merchantCode_et.setText(merchantCode);
+//                                    merchantCode_et.setText(shanghuList01.get(0).getMerchantCode() + "");
+                                    mcc_et.setText(shanghuList01.get(0).getMerchantMccSmallClassName());
+                                }
+                            }else{
+                                merchantName_sp.setItems("");
+                                merchantCode_et.setText("");
+                                mcc_et.setText("");
+                            }
                         }else if(i==2){//汇02
-                            merchantName_sp.setItems(merchantList02);
-                            merchantCode_et.setText(shanghuList02.get(0).getMerchantCode()+"");
-                            mcc_et.setText(shanghuList02.get(0).getMerchantMccSmallClassName());
+                            if(!getMerchantList(channel,mccId,shanghuList02).isEmpty()) {
+                                merchantName_sp.setItems(MerchantList);
+                                if(!shanghuList02.isEmpty()) {
+                                    merchantCode=getMerchantCode(shanghuList02,MerchantList.get(0))+"";
+                                    merchantCode_et.setText(merchantCode);
+//                                    merchantCode_et.setText(shanghuList02.get(0).getMerchantCode() + "");
+                                    mcc_et.setText(shanghuList02.get(0).getMerchantMccSmallClassName());
+                                }
+                            }else{
+                                merchantName_sp.setItems("");
+                                merchantCode_et.setText("");
+                                mcc_et.setText("");
+                            }
                         }else if(i==3){//中04
-                            merchantName_sp.setItems(merchantList04);
-                            merchantCode_et.setText(shanghuList04.get(0).getMerchantCode()+"");
-                            mcc_et.setText(shanghuList04.get(0).getMerchantMccSmallClassName());
+                            if(!getMerchantList(channel,mccId,shanghuList04).isEmpty()) {
+                                merchantName_sp.setItems(MerchantList);
+                                if(!shanghuList04.isEmpty()) {
+                                    merchantCode=getMerchantCode(shanghuList04,MerchantList.get(0))+"";
+                                    merchantCode_et.setText(merchantCode);
+//                                    merchantCode_et.setText(shanghuList04.get(0).getMerchantCode() + "");
+                                    mcc_et.setText(shanghuList04.get(0).getMerchantMccSmallClassName());
+                                }
+                            }else{
+                                merchantName_sp.setItems("");
+                                merchantCode_et.setText("");
+                                mcc_et.setText("");
+                            }
                         }
                     }else {
                         channel = dirtData.ChannelIDOptions2[i];
@@ -190,8 +246,57 @@ public class AddPlanActivity extends MVPBaseActivity<AddPlanContract.View, AddPl
                     }
                 }else{
                     channel="";
+
                 }
 
+            }
+        });
+
+        mcc_sp.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(MaterialSpinner materialSpinner, int i, long l, Object o) {
+                if(i==0){
+                    mccId="";
+                }else{
+                    mccId=dirtData.mccOptions.get(i-1).getDictId()+"";
+                    if(channel.equals("38")){//盛01
+                        if(!getMerchantList(channel,mccId,shanghuList01).isEmpty()) {
+                            merchantName_sp.setItems(getMerchantList(channel, mccId, shanghuList01));
+//                            merchantCode_et.setText(shanghuList01.get(0).getMerchantCode() + "");
+                            merchantCode=getMerchantCode(shanghuList01,MerchantList.get(0))+"";
+                            merchantCode_et.setText(merchantCode);
+                            mcc_et.setText(shanghuList01.get(0).getMerchantMccSmallClassName());
+                        }else{
+                            merchantName_sp.setItems("");
+                            merchantCode_et.setText("");
+                            mcc_et.setText("");
+                        }
+                    }else if(channel.equals("17")){//汇02
+                        if(!getMerchantList(channel,mccId,shanghuList02).isEmpty()) {
+                            merchantName_sp.setItems(getMerchantList(channel, mccId, shanghuList02));
+//                            merchantCode_et.setText(shanghuList02.get(0).getMerchantCode() + "");
+                            merchantCode=getMerchantCode(shanghuList02,MerchantList.get(0))+"";
+                            merchantCode_et.setText(merchantCode);
+                            mcc_et.setText(shanghuList02.get(0).getMerchantMccSmallClassName());
+                        }else{
+                            merchantName_sp.setItems("");
+                            merchantCode_et.setText("");
+                            mcc_et.setText("");
+                        }
+                    }else if(channel.equals("42")){//中04
+                        if(!getMerchantList(channel,mccId,shanghuList04).isEmpty()) {
+                            merchantName_sp.setItems(getMerchantList(channel, mccId, shanghuList04));
+//                            merchantCode_et.setText(shanghuList04.get(0).getMerchantCode() + "");
+                            merchantCode=getMerchantCode(shanghuList04,MerchantList.get(0))+"";
+                            merchantCode_et.setText(merchantCode);
+                            mcc_et.setText(shanghuList04.get(0).getMerchantMccSmallClassName());
+                        }else{
+                            merchantName_sp.setItems("");
+                            merchantCode_et.setText("");
+                            mcc_et.setText("");
+                        }
+                    }
+                }
             }
         });
 
@@ -199,17 +304,17 @@ public class AddPlanActivity extends MVPBaseActivity<AddPlanContract.View, AddPl
             @Override
             public void onItemSelected(MaterialSpinner materialSpinner, int i, long l, Object o) {
                 if(channel_sp.getSelectedIndex()==1){
-                    merchantCode_et.setText(shanghuList01.get(i).getMerchantCode()+"");
                     mcc_et.setText(shanghuList01.get(i).getMerchantMccSmallClassName());
-                    merchantCode=shanghuList01.get(i).getMerchantCode();
+                    merchantCode=getMerchantCode(shanghuList01,MerchantList.get(i))+"";
+                    merchantCode_et.setText(merchantCode);
                 }else if(channel_sp.getSelectedIndex()==2){
-                    merchantCode_et.setText(shanghuList02.get(i).getMerchantCode()+"");
                     mcc_et.setText(shanghuList02.get(i).getMerchantMccSmallClassName());
-                    merchantCode=shanghuList02.get(i).getMerchantCode();
+                    merchantCode=getMerchantCode(shanghuList02,MerchantList.get(i))+"";
+                    merchantCode_et.setText(merchantCode);
                 }else if (channel_sp.getSelectedIndex()==3){
-                    merchantCode_et.setText(shanghuList04.get(i).getMerchantCode()+"");
                     mcc_et.setText(shanghuList04.get(i).getMerchantMccSmallClassName());
-                    merchantCode=shanghuList04.get(i).getMerchantCode();
+                    merchantCode=getMerchantCode(shanghuList04,MerchantList.get(i))+"";
+                    merchantCode_et.setText(merchantCode);
                 }
             }
         });
@@ -222,6 +327,31 @@ public class AddPlanActivity extends MVPBaseActivity<AddPlanContract.View, AddPl
 //            }
 //        });
 
+    }
+
+    List<String> MerchantList=new ArrayList<>();
+    private List<String> getMerchantList(String channelId,String mccId,List<ShanghuBean.ResultBean> shanghuList){
+        MerchantList.clear();
+        for (ShanghuBean.ResultBean resultBean:shanghuList){
+            Log.i("lys","channelId is："+channelId+"\n"+"resultBean.getChannel() is:"+resultBean.getChannel());
+            Log.i("lys","mccId is："+mccId+"\n"+"resultBean.getMcc() is:"+resultBean.getMcc());
+           if(resultBean.getChannel().equals(channelId)&&mccId.equals(resultBean.getMerchantMccSmallClass()+"")){
+                MerchantList.add(resultBean.getMerchantName());
+            }
+        }
+        Log.i("lys","MerchantList 一共有多少条数据： "+MerchantList.size());
+        return  MerchantList;
+    }
+
+    private String getMerchantCode(List<ShanghuBean.ResultBean> shanghuList,String merchantName){
+        for(ShanghuBean.ResultBean resultBean:shanghuList){
+            if(merchantName.equals(resultBean.getMerchantName())){
+                return resultBean.getMerchantCode()+"";
+            }else{
+                continue;
+            }
+        }
+        return  "";
     }
 
 
@@ -275,22 +405,26 @@ public class AddPlanActivity extends MVPBaseActivity<AddPlanContract.View, AddPl
         }
     }
 
+
+
     private void addPlan() {
         if (amt_et.getText().toString().trim().equals("")) {
             Toast.makeText(AddPlanActivity.this, "请输入交易金额", Toast.LENGTH_SHORT).show();
         }else if(channel_sp.getSelectedIndex()==0){
-            Toast.makeText(AddPlanActivity.this, "请输入交易渠道号", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddPlanActivity.this, "请选择交易渠道号", Toast.LENGTH_SHORT).show();
         } else {
-            amt = amt_et.getText().toString().trim();
+            amt = StringUtil.getFen(amt_et.getText().toString().trim());
             tranType = dirtData.tranTypeOptions[tranType_sp.getSelectedIndex()];
             state = dirtData.planStateOptionArr[state_sp.getSelectedIndex()];
+
+            merchantCode=merchantCode_et.getText().toString().trim();
 //            if(tranType_sp.getSelectedIndex()==0) {//消费
 //                channel = dirtData.channelOptions.get(channel_sp.getSelectedIndex()).getDictId();
 //            }else if(tranType_sp.getSelectedIndex()==1){//还款
 //
 //            }
 //            merchantCode = dirtData.merchantsTypeOptions.get(merchantCode_sp.getSelectedIndex()).getDictId();
-            termCode = SpUtil.getString(AddPlanActivity.this, Config.TERMCODE, "");
+//            termCode = SpUtil.getString(AddPlanActivity.this, Config.TERMCODE, "");
             isNeedT0 = dirtData.isNeedOptions[isNeedT0_sp.getSelectedIndex()];
             if (tranType.equals("SALE")) {
                 plandate = swipecardDate_et.getText().toString().trim();
@@ -298,9 +432,16 @@ public class AddPlanActivity extends MVPBaseActivity<AddPlanContract.View, AddPl
                 plandate = repayDate_et.getText().toString().trim();
             }
 
-            mPresenter.addPlan(tranType, cardNo, channel, merchantCode, termCode, amt, isNeedT0, plandate.replace("-",""), state);
+            getTermCode(channel,merchantCode);//先获取终端号，成功后再调用添加规划的接口
+
+//            mPresenter.addPlan(tranType, cardNo, channel, merchantCode, termCode, amt, isNeedT0, plandate.replace("-",""), state);
         }
 
+    }
+
+    //终端查询 获取 termCode
+    private void getTermCode(String channel,String merchantCode ){
+        mPresenter.queryTerm(channel,merchantCode);
     }
 
 
@@ -324,14 +465,20 @@ public class AddPlanActivity extends MVPBaseActivity<AddPlanContract.View, AddPl
     }
 
     private void getMerchantData(){
-        mPresenter.queryShanghu("","","","","","","","Y","","200");
+        mPresenter.queryShanghu("","","","","","","","Y","","500");
     }
 
 
     @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        cancel();
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_BACK:
+                cancel();
+                return false;//拦截事件
+            default:
+                break;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     @Override
@@ -359,6 +506,15 @@ public class AddPlanActivity extends MVPBaseActivity<AddPlanContract.View, AddPl
                 finish();
             }
         }, 1500);
+    }
+
+    @Override
+    public void queryTermSuccess(TermBean data) {
+        if(data!=null) {
+            termCode = data.getTermCode() + "";
+            Log.i("lys","終端號為："+termCode);
+            mPresenter.addPlan(tranType, cardNo, channel, merchantCode_et.getText().toString().trim(), termCode, amt, isNeedT0, plandate.replace("-", ""), state);
+        }
     }
 
     @Override

@@ -2,25 +2,16 @@ package com.rflash.magiccube.ui.billconfirm;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
 import com.flyco.tablayout.SlidingTabLayout;
 import com.rflash.magiccube.R;
 import com.rflash.magiccube.mvp.MVPBaseActivity;
-import com.rflash.magiccube.ui.refund.HadRefundFragment;
-import com.rflash.magiccube.ui.refund.NoRefundFragment;
-import com.rflash.magiccube.ui.refund.OverTimeFragment;
-import com.rflash.magiccube.ui.refund.RefundActivity;
-import com.rflash.magiccube.util.ToolUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,6 +58,8 @@ public class BillConfirmActivity extends MVPBaseActivity<BillConfirmContract.Vie
         viewpager.setAdapter(mAdapter);
         trand_type_stl.setViewPager(viewpager, mTitles);
     }
+
+
 
     @OnClick({R.id.title_back_tv})
     public void click(View view){

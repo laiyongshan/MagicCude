@@ -2,6 +2,8 @@ package com.rflash.magiccube.ui.cardmanager.cardbase;
 
 import com.rflash.magiccube.http.BaseBean;
 
+import java.util.List;
+
 /**
  * Created by lenovo on 2018/10/27.
  */
@@ -9,7 +11,7 @@ import com.rflash.magiccube.http.BaseBean;
 public class BaseInfoBean extends BaseBean {
 
     /**
-     * result : {"availableAmt":489900,"bankCode":"03080010","billDate":"1","cardBankName":"招商银行","cardId":1996,"cardMedia":"IC_CARD","cardNo":"4392250810275866","cardSeqno":"A01","createTime":1524815698000,"createUser":"ceshi","currentRepayAmt":4000000,"customerID":"4322222222222222222","customerName":"何海华","fixedLimit":4489900,"freePlanRate":"0.0000","initAmt":500000,"installmentList":[],"isFreePlan":"N","isHaveKey":"","isHolidayPlan":"Y","loginPasswd":"9f47a81f8fa4790fa3400c357d399e6a","loginUsername":"9f47a81f8fa4790fa3400c357d399e6a","modifyTime":1540613053000,"modifyUser":"ceshi","paidAmt":67500,"phone":"18555555552","pointId":154,"queryPasswd":"9f47a81f8fa4790fa3400c357d399e6a","repayDate":"20","repayDateType":"FIXED","salesMan":45,"serviceAmt":4500000,"serviceEndDate":"20180630","serviceRate":"0.0150","serviceStartDate":"20180427","serviceState":"expired","serviceType":"FIXED_LIMIT","state":"EXPIRE","tempLimit":0,"tranPasswd":"9f47a81f8fa4790fa3400c357d399e6a","verifyState":"N","verifyType":"VERIFY2"}
+     * result : {"availableAmt":23563,"bankCode":"03041100","billDate":"23","cardBankName":"华夏银行","cardId":4194,"cardMedia":"IC_CARD","cardNo":"6259691131986193","cardSeqno":"74","createTime":1540346296000,"createUser":"zengyan","currentRepayAmt":25689,"customerID":"200104166204060512","customerName":"zeng","fixedLimit":100003,"freePlanRate":"0","initAmt":25588,"installmentList":[{"amt":2000000,"createTime":1544111294000,"createUser":"zengyan","endTime":"20190104","fee":2000,"isRepaied":"N","modifyTime":1544111294000,"partSeqno":2,"partTotalAmt":2000000,"startTime":"20031206"}],"isFreePlan":"N","isHaveKey":"N","isHolidayPlan":"Y","lastPlanTime":1543235734000,"loginPasswd":"9f47a81f8fa4790fa3400c357d399e6a","loginUsername":"9f47a81f8fa4790fa3400c357d399e6a","modifyTime":1544111294000,"modifyUser":"zengyan","paidAmt":10000,"phone":"16200247891","planState":"SUCCESS","pointId":88,"queryPasswd":"9f47a81f8fa4790fa3400c357d399e6a","repayDate":"10","repayDateType":"FIXED","salesMan":108,"serviceAmt":100000,"serviceEndDate":"20181231","serviceRate":"60.0","serviceStartDate":"20181024","serviceState":"unexpired","serviceType":"FIXED_LIMIT","state":"VALID","tempLimit":0,"tranPasswd":"9f47a81f8fa4790fa3400c357d399e6a","verifyState":"N","verifyType":"VERIFY2"}
      */
 
     private ResultBean result;
@@ -24,44 +26,46 @@ public class BaseInfoBean extends BaseBean {
 
     public static class ResultBean {
         /**
-         * availableAmt : 489900
-         * bankCode : 03080010
-         * billDate : 1
-         * cardBankName : 招商银行
-         * cardId : 1996
+         * availableAmt : 23563
+         * bankCode : 03041100
+         * billDate : 23
+         * cardBankName : 华夏银行
+         * cardId : 4194
          * cardMedia : IC_CARD
-         * cardNo : 4392250810275866
-         * cardSeqno : A01
-         * createTime : 1524815698000
-         * createUser : ceshi
-         * currentRepayAmt : 4000000
-         * customerID : 4322222222222222222
-         * customerName : 何海华
-         * fixedLimit : 4489900
-         * freePlanRate : 0.0000
-         * initAmt : 500000
-         * installmentList : []
+         * cardNo : 6259691131986193
+         * cardSeqno : 74
+         * createTime : 1540346296000
+         * createUser : zengyan
+         * currentRepayAmt : 25689
+         * customerID : 200104166204060512
+         * customerName : zeng
+         * fixedLimit : 100003
+         * freePlanRate : 0
+         * initAmt : 25588
+         * installmentList : [{"amt":2000000,"createTime":1544111294000,"createUser":"zengyan","endTime":"20190104","fee":2000,"isRepaied":"N","modifyTime":1544111294000,"partSeqno":2,"partTotalAmt":2000000,"startTime":"20031206"}]
          * isFreePlan : N
-         * isHaveKey :
+         * isHaveKey : N
          * isHolidayPlan : Y
+         * lastPlanTime : 1543235734000
          * loginPasswd : 9f47a81f8fa4790fa3400c357d399e6a
          * loginUsername : 9f47a81f8fa4790fa3400c357d399e6a
-         * modifyTime : 1540613053000
-         * modifyUser : ceshi
-         * paidAmt : 67500
-         * phone : 18555555552
-         * pointId : 154
+         * modifyTime : 1544111294000
+         * modifyUser : zengyan
+         * paidAmt : 10000
+         * phone : 16200247891
+         * planState : SUCCESS
+         * pointId : 88
          * queryPasswd : 9f47a81f8fa4790fa3400c357d399e6a
-         * repayDate : 20
+         * repayDate : 10
          * repayDateType : FIXED
-         * salesMan : 45
-         * serviceAmt : 4500000
-         * serviceEndDate : 20180630
-         * serviceRate : 0.0150
-         * serviceStartDate : 20180427
-         * serviceState : expired
+         * salesMan : 108
+         * serviceAmt : 100000
+         * serviceEndDate : 20181231
+         * serviceRate : 60.0
+         * serviceStartDate : 20181024
+         * serviceState : unexpired
          * serviceType : FIXED_LIMIT
-         * state : EXPIRE
+         * state : VALID
          * tempLimit : 0
          * tranPasswd : 9f47a81f8fa4790fa3400c357d399e6a
          * verifyState : N
@@ -87,12 +91,14 @@ public class BaseInfoBean extends BaseBean {
         private String isFreePlan;
         private String isHaveKey;
         private String isHolidayPlan;
+        private long lastPlanTime;
         private String loginPasswd;
         private String loginUsername;
         private long modifyTime;
         private String modifyUser;
         private int paidAmt;
         private String phone;
+        private String planState;
         private int pointId;
         private String queryPasswd;
         private String repayDate;
@@ -107,11 +113,9 @@ public class BaseInfoBean extends BaseBean {
         private String state;
         private int tempLimit;
         private String tranPasswd;
-
         private String verifyState;
         private String verifyType;
-
-//        private String installmentList;
+        private List<InstallmentListBean> installmentList;
 
         public int getAvailableAmt() {
             return availableAmt;
@@ -265,6 +269,14 @@ public class BaseInfoBean extends BaseBean {
             this.isHolidayPlan = isHolidayPlan;
         }
 
+        public long getLastPlanTime() {
+            return lastPlanTime;
+        }
+
+        public void setLastPlanTime(long lastPlanTime) {
+            this.lastPlanTime = lastPlanTime;
+        }
+
         public String getLoginPasswd() {
             return loginPasswd;
         }
@@ -311,6 +323,14 @@ public class BaseInfoBean extends BaseBean {
 
         public void setPhone(String phone) {
             this.phone = phone;
+        }
+
+        public String getPlanState() {
+            return planState;
+        }
+
+        public void setPlanState(String planState) {
+            this.planState = planState;
         }
 
         public int getPointId() {
@@ -441,12 +461,118 @@ public class BaseInfoBean extends BaseBean {
             this.verifyType = verifyType;
         }
 
-//        public void setInstallmentList(String installmentList) {
-//            this.installmentList = installmentList;
-//        }
-//
-//        public String getInstallmentList() {
-//            return installmentList;
-//        }
+        public List<InstallmentListBean> getInstallmentList() {
+            return installmentList;
+        }
+
+        public void setInstallmentList(List<InstallmentListBean> installmentList) {
+            this.installmentList = installmentList;
+        }
+
+        public static class InstallmentListBean {
+            /**
+             * amt : 2000000
+             * createTime : 1544111294000
+             * createUser : zengyan
+             * endTime : 20190104
+             * fee : 2000
+             * isRepaied : N
+             * modifyTime : 1544111294000
+             * partSeqno : 2
+             * partTotalAmt : 2000000
+             * startTime : 20031206
+             */
+
+            private int amt;
+            private long createTime;
+            private String createUser;
+            private String endTime;
+            private int fee;
+            private String isRepaied;
+            private long modifyTime;
+            private int partSeqno;
+            private int partTotalAmt;
+            private String startTime;
+
+            public int getAmt() {
+                return amt;
+            }
+
+            public void setAmt(int amt) {
+                this.amt = amt;
+            }
+
+            public long getCreateTime() {
+                return createTime;
+            }
+
+            public void setCreateTime(long createTime) {
+                this.createTime = createTime;
+            }
+
+            public String getCreateUser() {
+                return createUser;
+            }
+
+            public void setCreateUser(String createUser) {
+                this.createUser = createUser;
+            }
+
+            public String getEndTime() {
+                return endTime;
+            }
+
+            public void setEndTime(String endTime) {
+                this.endTime = endTime;
+            }
+
+            public int getFee() {
+                return fee;
+            }
+
+            public void setFee(int fee) {
+                this.fee = fee;
+            }
+
+            public String getIsRepaied() {
+                return isRepaied;
+            }
+
+            public void setIsRepaied(String isRepaied) {
+                this.isRepaied = isRepaied;
+            }
+
+            public long getModifyTime() {
+                return modifyTime;
+            }
+
+            public void setModifyTime(long modifyTime) {
+                this.modifyTime = modifyTime;
+            }
+
+            public int getPartSeqno() {
+                return partSeqno;
+            }
+
+            public void setPartSeqno(int partSeqno) {
+                this.partSeqno = partSeqno;
+            }
+
+            public int getPartTotalAmt() {
+                return partTotalAmt;
+            }
+
+            public void setPartTotalAmt(int partTotalAmt) {
+                this.partTotalAmt = partTotalAmt;
+            }
+
+            public String getStartTime() {
+                return startTime;
+            }
+
+            public void setStartTime(String startTime) {
+                this.startTime = startTime;
+            }
+        }
     }
 }

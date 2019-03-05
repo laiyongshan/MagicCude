@@ -49,7 +49,6 @@
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
                 app:cardBackgroundColor="@color/white"
                 app:cardUseCompatPadding="true"
                 app:cardCornerRadius="6dp"
@@ -89,15 +88,21 @@
                         android:background="@null"
                         android:paddingRight="12dp"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="14sp" />
+                        android:textSize="12sp" />
 
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
+            <LinearLayout
+                android:id="@+id/limit_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
                 app:cardBackgroundColor="@color/white"
                 app:cardUseCompatPadding="true"
                 app:cardCornerRadius="6dp"
@@ -156,7 +161,6 @@
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
                 app:cardUseCompatPadding="true"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="6dp"
@@ -215,7 +219,6 @@
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
                 app:cardUseCompatPadding="true"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="6dp"
@@ -273,7 +276,6 @@
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
                 app:cardUseCompatPadding="true"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="6dp"
@@ -328,11 +330,60 @@
 
             </android.support.v7.widget.CardView>
 
+            </LinearLayout>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/zhuijiaEndDate_cb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardUseCompatPadding="true"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="6dp"
+                app:cardElevation="3dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@mipmap/icon_red_start"
+                        android:drawablePadding="6dp"
+                        android:gravity="left"
+                        android:paddingLeft="16dp"
+                        android:text="追加日期："
+                        android:textColor="#000"
+                        android:textSize="14sp" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="4dp"
+                        android:layout_marginRight="12dp"
+                        android:layout_marginTop="4dp"
+                        android:background="#c0c0c0" />
+
+                    <TextView
+                        android:id="@+id/zhuijiaEndDate_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:background="@null"
+                        android:drawableRight="@mipmap/icon_time"
+                        android:hint="请选择追加日期"
+                        android:paddingRight="12dp"
+                        android:textColor="#000"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
                 app:cardUseCompatPadding="true"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="6dp"
@@ -380,9 +431,9 @@
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
+                android:id="@+id/baseAmt_cb"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
                 app:cardUseCompatPadding="true"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="6dp"
@@ -414,7 +465,7 @@
                         android:background="#c0c0c0" />
 
                     <EditText
-                        android:id="@+id/paidAmt_et"
+                        android:id="@+id/baseAmt_et"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="4"
@@ -422,6 +473,7 @@
                         android:hint="请输入费用基数"
                         android:paddingRight="12dp"
                         android:textColor="#000"
+                        android:editable="false"
                         android:inputType="numberDecimal"
                         android:textSize="14sp" />
 
@@ -438,68 +490,9 @@
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-                app:cardUseCompatPadding="true"
-            app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="6dp"
-            app:cardElevation="3dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="46dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@mipmap/icon_red_start"
-                    android:drawablePadding="6dp"
-                    android:gravity="left"
-                    android:paddingLeft="16dp"
-                    android:text="收费比例："
-                    android:textColor="#000"
-                    android:textSize="14sp" />
-
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="4dp"
-                    android:layout_marginRight="12dp"
-                    android:layout_marginTop="4dp"
-                    android:background="#c0c0c0" />
-
-                <EditText
-                    android:id="@+id/serviceRate_et"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="4"
-                    android:background="@null"
-                    android:hint="请输入收费比例"
-                    android:paddingRight="12dp"
-                    android:textColor="#000"
-                    android:inputType="numberDecimal"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingRight="12dp"
-                    android:text="%"
-                    android:textColor="#000"
-                    android:textSize="14sp" />
-
-            </LinearLayout>
-
-        </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
                 android:id="@+id/serviceAmt_cd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
                 android:visibility="gone"
                 app:cardUseCompatPadding="true"
                 app:cardBackgroundColor="@color/white"
@@ -555,9 +548,131 @@
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+                app:cardUseCompatPadding="true"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="6dp"
+            app:cardElevation="3dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@mipmap/icon_red_start"
+                    android:drawablePadding="6dp"
+                    android:gravity="left"
+                    android:paddingLeft="16dp"
+                    android:text="收费比例："
+                    android:textColor="#000"
+                    android:textSize="14sp" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginTop="4dp"
+                    android:background="#c0c0c0" />
+
+                <EditText
+                    android:id="@+id/serviceRate_et"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:background="@null"
+                    android:hint="请输入收费比例"
+                    android:paddingRight="12dp"
+                    android:textColor="#000"
+                    android:inputType="numberDecimal"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="12dp"
+                    android:text="%"
+                    android:textColor="#000"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
+                app:cardUseCompatPadding="true"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="6dp"
+                app:cardElevation="3dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@mipmap/icon_red_start"
+                        android:drawablePadding="6dp"
+                        android:gravity="left"
+                        android:paddingLeft="16dp"
+                        android:text="实收费用："
+                        android:textColor="#000"
+                        android:textSize="14sp" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="4dp"
+                        android:layout_marginRight="12dp"
+                        android:layout_marginTop="4dp"
+                        android:background="#c0c0c0" />
+
+                    <EditText
+                        android:id="@+id/paidAmt_et"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:background="@null"
+                        android:hint="请输入实收费用"
+                        android:paddingRight="12dp"
+                        android:textColor="#000"
+                        android:inputType="numberDecimal"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="12dp"
+                        android:text="元"
+                        android:textColor="#000"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+
+            <LinearLayout
+                android:id="@+id/date_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 app:cardUseCompatPadding="true"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="6dp"
@@ -605,7 +720,6 @@
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
                 app:cardUseCompatPadding="true"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="6dp"
@@ -650,6 +764,8 @@
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
+            </LinearLayout>
+
 
             <com.flyco.roundview.RoundTextView
                 android:id="@+id/cancel_rtv"
@@ -677,7 +793,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="10dp"
-                android:text="确定"
+                android:layout_marginTop="16dp"
+                android:text="开始服务"
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 rv:rv_backgroundColor="@color/colorPrimary"

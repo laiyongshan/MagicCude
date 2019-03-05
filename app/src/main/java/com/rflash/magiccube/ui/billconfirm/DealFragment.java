@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.rflash.magiccube.R;
 import com.rflash.magiccube.mvp.MVPBaseFragment;
+import com.rflash.magiccube.ui.cardmanager.cardbill.CardBillBean;
 import com.rflash.magiccube.util.ToolUtils;
 
 import java.util.ArrayList;
@@ -30,12 +31,15 @@ public class DealFragment extends MVPBaseFragment<BillConfirmContract.View, Bill
     @BindView(R.id.bill_deal_rv)
     RecyclerView bill_deal_rv;
 
+    String factAmt = "";
+
     private View notDataView;
 
     BillConfirmAdapter billConfirmAdapter;
-    List<BillConfirmBean.ResultBean> billConfirmBeanList=new ArrayList<>();
-    List<BillConfirmBean.ResultBean> DEAL_List=new ArrayList<>();
-    int pageNum=1;
+    List<BillConfirmBean.ResultBean> billConfirmBeanList = new ArrayList<>();
+    List<BillConfirmBean.ResultBean> DEAL_List = new ArrayList<>();
+    int pageNum = 1;
+    int pageSize = 50;
     private int TOTAL_COUNTER; //所有的数据总数
 
     static DealFragment dealFragment;
@@ -56,7 +60,7 @@ public class DealFragment extends MVPBaseFragment<BillConfirmContract.View, Bill
 
     @Override
     protected void initView() {
-        mPresenter.getBillConfirmList(pageNum+"");
+        getBillConfirmList();
 
         notDataView = getLayoutInflater().inflate(R.layout.empty_view, (ViewGroup) bill_deal_rv.getParent(), false);
 
@@ -65,11 +69,27 @@ public class DealFragment extends MVPBaseFragment<BillConfirmContract.View, Bill
         refresh_layout.setOnRefreshListener(this);
 
         bill_deal_rv.setLayoutManager(new LinearLayoutManager(getActivity()));
-        billConfirmAdapter=new BillConfirmAdapter(DEAL_List,mPresenter);
-        billConfirmAdapter.setOnLoadMoreListener(this,bill_deal_rv);
-        billConfirmAdapter.disableLoadMoreIfNotFullPage();
+        billConfirmAdapter = new BillConfirmAdapter(dealFragment, DEAL_List, mPresenter);
+        billConfirmAdapter.setOnLoadMoreListener(this, bill_deal_rv);
         bill_deal_rv.setAdapter(billConfirmAdapter);
     }
+
+
+    //获取账单提醒
+    private void getBillConfirmList() {
+        mPresenter.getBillConfirmList(pageNum + "", pageSize + "");
+    }
+
+//    //查询账单
+//    public void accurateQueryBill(String cardNo, String billMonth, String available, String factAmt) {
+//        if(factAmt==null||factAmt.equals("")){
+//            Toast.makeText(getActivity(),"请输入实际账单金额",Toast.LENGTH_SHORT).show();
+//        }else {
+//            this.factAmt = factAmt;
+//            mPresenter.accurateQueryBill(cardNo, billMonth, available, "N");
+//        }
+//    }
+
 
     @Override
     public void onStart() {
@@ -78,8 +98,8 @@ public class DealFragment extends MVPBaseFragment<BillConfirmContract.View, Bill
 
     @Override
     public void onRefresh() {
-        pageNum=1;
-        mPresenter.getBillConfirmList(pageNum+"");
+        pageNum = 1;
+        mPresenter.getBillConfirmList(pageNum + "", pageSize + "");
     }
 
     @Override
@@ -94,7 +114,7 @@ public class DealFragment extends MVPBaseFragment<BillConfirmContract.View, Bill
                 } else {
                     //获取更多数据
                     pageNum++;
-                    mPresenter.getBillConfirmList(pageNum+"");
+                    mPresenter.getBillConfirmList(pageNum + "", pageSize + "");
                 }
                 refresh_layout.setEnabled(true);
             }
@@ -125,25 +145,73 @@ public class DealFragment extends MVPBaseFragment<BillConfirmContract.View, Bill
                 billConfirmBeanList.clear();
                 DEAL_List.clear();
                 billConfirmBeanList.addAll(response.getResult());
-                for(BillConfirmBean.ResultBean bean:response.getResult())
-                    if(bean.getState().equals("DEAL"))
+                for (BillConfirmBean.ResultBean bean : response.getResult())
+                    if (bean.getState().equals("DEAL"))
                         DEAL_List.add(bean);
                 billConfirmAdapter.setNewData(DEAL_List);
-                if(DEAL_List.isEmpty())
+                if (DEAL_List.isEmpty()) {
                     billConfirmAdapter.setEmptyView(notDataView);
+                    if (billConfirmBeanList.size() < TOTAL_COUNTER) {
+                        pageNum++;
+                        getBillConfirmList();
+                    }
+                }
             } else {
                 billConfirmBeanList.addAll(response.getResult());
-                for(BillConfirmBean.ResultBean bean:response.getResult())
-                    if(bean.getState().equals("DEAL"))
+                for (BillConfirmBean.ResultBean bean : response.getResult())
+                    if (bean.getState().equals("DEAL"))
                         billConfirmAdapter.addData(bean);
                 billConfirmAdapter.loadMoreComplete();
+
+                if (billConfirmAdapter.getData().isEmpty()) {
+                    if (billConfirmBeanList.size() < TOTAL_COUNTER) {
+                        pageNum++;
+                        getBillConfirmList();
+                    }
+                }
             }
         }
     }
 
     @Override
     public void updateCardBillSuccess() {
+        getBillConfirmList();
+    }
+
+    @Override
+    public void confirmCardBillSuccess() {
 
     }
 
+    @Override
+    public void ignoreCardBillSuccess() {
+        getBillConfirmList();
+    }
+
+    @Override
+    public void queryBillDataSuccess(CardBillBean cardBillBean) {
+//        if (cardBillBean != null) {
+//            if (factAmt == null || factAmt.equals("")) {
+//                factAmt = cardBillBean.getResult().get(0).getBillAmt() + "";
+//            }
+//            //确认
+//            mPresenter.updateCardBill(cardBillBean.getResult().get(0).getBillId() + "", cardBillBean.getResult().get(0).getCardNo(), cardBillBean.getResult().get(0).getBillMonth(), factAmt, "CONFIRM");
+//            //修改
+//            mPresenter.updateCardBill(cardBillBean.getResult().get(0).getBillId() + "", cardBillBean.getResult().get(0).getCardNo(), cardBillBean.getResult().get(0).getBillMonth(), factAmt, "UPDATE");
+//
+//        }
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (hidden) {
+
+        } else {
+            if (billConfirmAdapter.getData().isEmpty()) {
+                pageNum = 1;
+                mPresenter.getBillConfirmList(pageNum + "", pageSize + "");
+            }
+        }
+    }
 }

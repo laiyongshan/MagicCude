@@ -12,8 +12,10 @@ import android.widget.Toast;
 import com.bigkoo.pickerview.TimePickerView;
 import com.flyco.roundview.RoundTextView;
 import com.jaredrummler.materialspinner.MaterialSpinner;
+import com.rflash.basemodule.utils.StringUtil;
 import com.rflash.magiccube.R;
 import com.rflash.magiccube.ui.newmain.DirtData;
+import com.rflash.magiccube.util.DateUtil;
 import com.rflash.magiccube.util.TimerPikerTools;
 
 import java.text.SimpleDateFormat;
@@ -138,12 +140,14 @@ public class AgingSettingDialog extends Dialog {
             Toast.makeText(context,"请填写录入人",Toast.LENGTH_SHORT).show();
         }else{
             agingBean=new AgingBean();
-            agingBean.setPartTotalAmt(agingEts[0].getText().toString().trim());
-            agingBean.setPartSeqno(agingEts[1].getText().toString().trim());
-            agingBean.setStartTime(agingEts[2].getText().toString().trim());
-            agingBean.setEndTime(agingEts[3].getText().toString().trim());
-            agingBean.setAmt(agingEts[4].getText().toString().trim());
-            agingBean.setFee(agingEts[5].getText().toString().trim());
+            agingBean.setPartTotalAmt(Integer.valueOf(StringUtil.getFen(agingEts[0].getText().toString().trim())));
+            agingBean.setPartSeqno(Integer.valueOf(agingEts[1].getText().toString().trim()));
+            agingBean.setStartTime(agingEts[2].getText().toString().trim().replace("-",""));
+            agingBean.setEndTime(agingEts[3].getText().toString().trim().replace("-",""));
+            agingBean.setAmt(Integer.valueOf(StringUtil.getFen(agingEts[4].getText().toString().trim())));
+            agingBean.setFee(Integer.valueOf(StringUtil.getFen(agingEts[5].getText().toString().trim())));
+            agingBean.setCreateTime(System.currentTimeMillis());
+            agingBean.setModifyTime(System.currentTimeMillis());
             agingBean.setCreateUser(agingEts[6].getText().toString().trim());
             agingBean.setIsRepaied(dirtData.isOrNoOptions[isRepaied_sp.getSelectedIndex()]);
             agingListener.sure(agingBean);

@@ -7,6 +7,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.rflash.basemodule.utils.StringUtil;
 import com.rflash.magiccube.R;
 import com.rflash.magiccube.util.DateUtil;
+import com.rflash.magiccube.util.ToolUtils;
 
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class CardChargeAdapter extends BaseQuickAdapter<CardChargerBean.ResultBe
         }
         ((TextView)helper.getView(R.id.serviceDate_tv)).setText(DateUtil.formatDate1(item.getServiceStartDate())+"至"+DateUtil.formatDate1(item.getServiceEndDate()));
         ((TextView)helper.getView(R.id.paidTime_tv)).setText(""+DateUtil.mills2Date2(item.getPaidTime()));
-        ((TextView)helper.getView(R.id.serviceRate_tv)).setText(""+Double.valueOf(item.getServiceRate())*100+"%");
+        ((TextView)helper.getView(R.id.serviceRate_tv)).setText(ToolUtils.getDouble(Double.valueOf(item.getServiceRate())*100)+"%");
         ((TextView)helper.getView(R.id.reciveAmt_tv)).setText("￥"+ StringUtil.getTwoPointString(item.getReciveAmt()));
         ((TextView)helper.getView(R.id.paidAmt_tv)).setText("+"+StringUtil.getTwoPointString(item.getPaidAmt()));
     }

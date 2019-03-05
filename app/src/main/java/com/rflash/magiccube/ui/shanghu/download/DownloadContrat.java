@@ -16,7 +16,7 @@ public class DownloadContrat {
         void finishRefresh();
         void getDataFail(String msg);
         void bindFail(String msg);
-        void bindSuccess(BaseBean response);
+        void bindSuccess();
         void getDataSuccess(DownloadBean response);
     }
 
@@ -25,6 +25,6 @@ public class DownloadContrat {
         void bindShanghu(String merchant);
 
         //商户查询
-        void queryShanghu(String channelName, String merchantName, String merchantCode, String state, String merchantType, String startDate, String endDate, String bind, String pageNum);
+        void queryShanghu(String channelName,String channelState, String merchantName, String merchantCode, String state, String merchantType, String startDate, String endDate, String bind, String pageNum,String pageSize);
     }
 }

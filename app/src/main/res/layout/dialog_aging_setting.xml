@@ -75,7 +75,7 @@
                     android:paddingRight="12dp"
                     android:layout_weight="4"
                     android:background="@null"
-                    android:inputType="numberDecimal"
+                    android:inputType="number"
                     android:hint="分期总金额"
                     android:textColor="#000"
                     android:textSize="14sp" />
@@ -299,7 +299,7 @@
                     android:layout_weight="4"
                     android:background="@null"
                     android:hint="分期金额"
-                    android:inputType="numberDecimal"
+                    android:inputType="number"
                     android:textColor="#000"
                     android:textSize="14sp" />
 
@@ -358,7 +358,7 @@
                     android:paddingRight="12dp"
                     android:layout_weight="4"
                     android:background="@null"
-                    android:inputType="numberDecimal"
+                    android:inputType="number"
                     android:hint="分期手续费"
                     android:textColor="#000"
                     android:textSize="14sp" />

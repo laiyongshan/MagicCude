@@ -132,4 +132,35 @@ public class AddPlanPresenter extends BasePresenterImpl<AddPlanContract.View> im
         }
     }
 
+    @Override
+    public void queryTerm(String channel,String merchantCode) {
+        String signature = "";
+        String version = Config.VERSION_CODE;
+        String requestNo = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+        String machineCode = SpUtil.getString(mView.getContext(), Config.MACHINECODE, "");
+        String account = SpUtil.getString(mView.getContext(), Config.ACCOUNT, "");
+        TreeMap<String, String> treeMap = new TreeMap<>();
+        treeMap.put("version", version);
+        treeMap.put("requestNo", requestNo);
+        treeMap.put("machineCode", machineCode);
+        treeMap.put("account", account);
+        treeMap.put("channel",channel);
+        treeMap.put("merchantCode",merchantCode);
+
+        try {
+            signature = SignUtil.signDataWithStr(treeMap, SpUtil.getString(mView.getContext(), Config.USER_PRVKEY, ""));
+            Observable<BaseBean> queryTerm = RetrofitFactory.getApiService().queryTerm(version, requestNo, machineCode, account, signature,channel,merchantCode);
+            Observable<BaseBean> compose = queryTerm.compose(((BaseActivity) mView).compose(((BaseActivity) mView).<BaseBean>bindToLifecycle()));
+            compose.subscribe(new DefaultObserver<TermBean>((BaseActivity) mView) {
+                @Override
+                protected void onSuccess(TermBean data) {
+                    mView.queryTermSuccess(data);
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }

@@ -162,7 +162,7 @@ public class EquipmentDialog extends Dialog {
         try {
             if(sb != null){
                 JSONObject jsonAllData = new JSONObject(sb.toString());
-                String city=jsonAllData.getString("city")+"市";
+                String city=jsonAllData.getString("city")+"";
                 String provice=jsonAllData.getString("regionName")+"省";
                 local_area_tv.setText("当前区域是："+provice+city);
                 Log.e("lys","获取到的城市是："+provice+city+"");

@@ -24,7 +24,7 @@ public class ShanghuContract {
 
     interface  Presenter extends BasePresenter<View> {
         //查询商户
-        void queryShanghu(String channelName, String merchantName, String merchantCode, String state, String merchantType, String startDate, String endDate, String bind, String pageNum);
+        void queryShanghu(String channelName, String channelState,String merchantName, String merchantCode, String state, String merchantType, String startDate, String endDate, String bind, String pageNum,String pageSize);
 
         //删除商户
         /**

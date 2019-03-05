@@ -26,6 +26,7 @@ import com.rflash.magiccube.event.PositionMessage2;
 import com.rflash.magiccube.http.BaseBean;
 import com.rflash.magiccube.mvp.MVPBaseActivity;
 import com.rflash.magiccube.ui.newmain.DirtData;
+import com.rflash.magiccube.ui.shanghu.ShanghuAdapter;
 import com.rflash.magiccube.ui.shanghu.ShanghuBean;
 import com.rflash.magiccube.util.TimerPikerTools;
 import com.rflash.magiccube.util.ToolUtils;
@@ -119,6 +120,7 @@ public class DownloadShanghuActivity extends MVPBaseActivity<DownloadContrat.Vie
     String endDate = "";
     String bind = "N";
     int pageNum=1;
+    int pageSize=100;
 
     DirtData dirtData;
 
@@ -126,7 +128,7 @@ public class DownloadShanghuActivity extends MVPBaseActivity<DownloadContrat.Vie
 
     List<String> MerchantsTypeList=new ArrayList<>();
 
-    boolean isOption;
+    boolean isOption=true;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -187,11 +189,11 @@ public class DownloadShanghuActivity extends MVPBaseActivity<DownloadContrat.Vie
         download_rv.setLayoutManager(new LinearLayoutManager(this));
         downloadAdapter = new DownloadAdapter(isOption, downloadBeanList);
         downloadAdapter.setOnLoadMoreListener(this, download_rv);
-        downloadAdapter.disableLoadMoreIfNotFullPage();
         download_rv.setAdapter(downloadAdapter);
     }
 
-    @OnClick({R.id.title_back_tv, R.id.filtrate_img, R.id.download_option_tv, R.id.download_shanghu_rtv})
+    @OnClick({R.id.title_back_tv, R.id.filtrate_img, R.id.download_shanghu_rtv,
+            R.id.startDate_tv,R.id.endDate_tv,R.id.clear_filter_tv,R.id.sure_filter_tv})
     public void click(View view) {
         switch (view.getId()) {
             case R.id.title_back_tv:
@@ -268,7 +270,7 @@ public class DownloadShanghuActivity extends MVPBaseActivity<DownloadContrat.Vie
     }
 
     private void getMerchantData() {
-        mPresenter.queryShanghu(channelName, "", "", "", merchantType, startDate, endDate, bind, pageNum + "");
+        mPresenter.queryShanghu(channelName, "valid","", "", "VALID", merchantType, startDate, endDate, bind, pageNum + "",pageSize+"");
     }
 
     @Override
@@ -302,16 +304,15 @@ public class DownloadShanghuActivity extends MVPBaseActivity<DownloadContrat.Vie
     }
 
     @Override
-    public void bindSuccess(BaseBean response) {
+    public void bindSuccess() {
         successProgressDialog.showDialog();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 successProgressDialog.dismiss();
+                all_selected_cb.setSelected(false);
                 pageNum=1;
                 getMerchantData();
-                option_rl.setVisibility(View.GONE);
-                download_option_tv.setText("操作");
             }
         },1500);
     }
@@ -324,6 +325,11 @@ public class DownloadShanghuActivity extends MVPBaseActivity<DownloadContrat.Vie
             if (pageNum == 1) {
                 downloadBeanList = response.getResult();
                 downloadAdapter.setNewData(downloadBeanList);
+                downloadAdapter = new DownloadAdapter(isOption,downloadBeanList);
+                downloadAdapter.setOnLoadMoreListener(this, download_rv);
+                download_rv.setAdapter(downloadAdapter);
+
+                selected_count_tv.setText("0");
             } else {
                 downloadBeanList.addAll(response.getResult());
                 downloadAdapter.addData(response.getResult());

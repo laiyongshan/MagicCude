@@ -88,7 +88,7 @@
                 android:drawablePadding="12dp"
                 android:drawableRight="@mipmap/icon_right"
                 android:padding="12dp"
-                android:text="关于我们"
+                android:text="关于设备"
                 android:textColor="@color/black_de"
                 android:textSize="16sp" />
 

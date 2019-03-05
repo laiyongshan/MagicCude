@@ -40,7 +40,7 @@
 
                 <com.rflash.magiccube.view.AlwaysMarqueeTextView
                     android:id="@+id/merchantName_tv"
-                    android:layout_width="220dp"
+                    android:layout_width="210dp"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@mipmap/icon_dianpu"
                     android:drawablePadding="12dp"
@@ -161,7 +161,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1.8"
-                        android:text="上次下载时间："
+                        android:text="创建时间："
                         />
 
                     <TextView

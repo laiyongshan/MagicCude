@@ -139,7 +139,7 @@
                 android:drawableLeft="@mipmap/icon_red_start"
                 android:drawablePadding="6dp"
                 android:gravity="left"
-                android:text="初始代还金额："
+                android:text="初始待还金额："
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
                 android:textColor="#000"

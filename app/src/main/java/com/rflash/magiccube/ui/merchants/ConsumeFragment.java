@@ -132,8 +132,8 @@ public class ConsumeFragment extends BaseFragment {
         String total = Integer.toString(sum);
         SpannableString s = new SpannableString(date[0] +"/"+date[1]+ "\n 笔数");
         s.setSpan(new RelativeSizeSpan(3f), 0, (date[0]+"").length()+(date[1]+"").length()+1, 2);
-        s.setSpan(new ForegroundColorSpan(Color.rgb(153, 153, 153)), 0, (date[0]+"").length()+1, 0);
-        s.setSpan(new ForegroundColorSpan(Color.parseColor("#FF6C5B")), (date[1]+"").length(), s.length(), 0);
+        s.setSpan(new ForegroundColorSpan(Color.rgb(199, 199, 199)), 0, (date[0]+"").length()+1, 0);
+        s.setSpan(new ForegroundColorSpan(Color.parseColor("#FF6C5B")), (date[1]+"").length()+1, s.length(), 0);
         return s;
     }
 
@@ -171,7 +171,7 @@ public class ConsumeFragment extends BaseFragment {
         });
 
         ArrayList<Integer> colors = new ArrayList<>();
-        colors.add(Color.rgb(153, 153, 153));
+        colors.add(Color.rgb(199, 199, 199));
         colors.add(Color.parseColor("#FF6C5B"));
         pieDataSet.setColors(colors);//颜色设置
 
@@ -206,7 +206,7 @@ public class ConsumeFragment extends BaseFragment {
 
         ArrayList<Integer> colors = new ArrayList<>();
         colors.add(Color.parseColor("#FF6C5B"));
-        colors.add(Color.rgb(153, 153, 153));
+        colors.add(Color.rgb(199, 199, 199));
         pieDataSet.setColors(colors);
 
         pieDataSet.setSliceSpace(2f);

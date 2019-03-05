@@ -1,48 +1,33 @@
 package com.rflash.magiccube.ui.merchants;
 
-import android.content.Intent;
-import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.CardView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.rflash.basemodule.BaseFragment;
 import com.rflash.basemodule.utils.ActivityIntent;
 import com.rflash.magiccube.R;
 import com.rflash.magiccube.mvp.MVPBaseFragment;
 import com.rflash.magiccube.ui.billconfirm.BillConfirmActivity;
 import com.rflash.magiccube.ui.collection.CollectionActivity;
-import com.rflash.magiccube.ui.main.MainActivity;
 import com.rflash.magiccube.ui.mine.MineActivity;
-import com.rflash.magiccube.ui.operationtoday.OperationTodayActivity;
+import com.rflash.magiccube.ui.notify.NotifyActivity;
 import com.rflash.magiccube.ui.presentoperation.PresentOperationActivity;
 import com.rflash.magiccube.ui.queryPlanning.QueryPlanningActvity;
 import com.rflash.magiccube.ui.refund.RefundActivity;
-import com.rflash.magiccube.ui.renewal.RenewalActivity;
 import com.rflash.magiccube.ui.renewalmind.RenewalMindActivity;
 import com.rflash.magiccube.ui.salesmen.SalesMenActivity;
 import com.rflash.magiccube.util.ToolUtils;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
-
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import q.rorbin.badgeview.QBadgeView;
 
@@ -82,6 +67,9 @@ public class MerchantsFragment extends MVPBaseFragment<MerchantsContract.View,Me
 
     @BindView(R.id.refund_tips_ll)
     LinearLayout refund_tips_ll;
+
+    @BindView(R.id.notic_ll)
+    LinearLayout notic_ll;
 
     // 包裹小圆点的LinearLayout
     @BindView(R.id.layout_dot)
@@ -204,7 +192,7 @@ public class MerchantsFragment extends MVPBaseFragment<MerchantsContract.View,Me
 
 
     @OnClick({R.id.pre_iv, R.id.next_iv,R.id.mine_tv,R.id.to_collection_cv,R.id.to_salesmen_cv,R.id.renewal_mind_ll,
-            R.id.bill_sure_ll,R.id.refund_tips_ll,R.id.to_optionToday_cv,R.id.to_query_planning})
+            R.id.bill_sure_ll,R.id.refund_tips_ll,R.id.notic_ll,R.id.to_optionToday_cv,R.id.to_query_planning})
     public void click(View view) {
         switch (view.getId()) {
             case R.id.pre_iv:
@@ -252,7 +240,18 @@ public class MerchantsFragment extends MVPBaseFragment<MerchantsContract.View,Me
             case R.id.mine_tv:
                 ActivityIntent.readyGo(getActivity(), MineActivity.class);
                 break;
+
+            case R.id.notic_ll:
+                ActivityIntent.readyGo(getActivity(), NotifyActivity.class);
+                break;
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mPresenter.getCount();
+        mPresenter.getRemindCount();
     }
 
     @Override
@@ -346,7 +345,6 @@ public class MerchantsFragment extends MVPBaseFragment<MerchantsContract.View,Me
             } else
                 return mCardsSituationFragment;
         }
-
         @Override
         public int getCount() {
             return 4;

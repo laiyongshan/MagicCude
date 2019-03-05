@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -79,7 +78,7 @@ public class ConsumeModifyActivity extends MVPBaseActivity<ConsumeModifyContract
     private String planId;
 
     //输入框中的商户名
-    private String merchantName;
+    private String merchantName="";
 
     private int pageNum = 1;
     private int mTotalPage;
@@ -144,9 +143,7 @@ public class ConsumeModifyActivity extends MVPBaseActivity<ConsumeModifyContract
             Toast.makeText(this, "请完善规划参数", Toast.LENGTH_SHORT).show();
             return;
         }
-
         mPresenter.modify(planId, amt, merchantCode, channel);
-
     }
 
 
@@ -228,6 +225,10 @@ public class ConsumeModifyActivity extends MVPBaseActivity<ConsumeModifyContract
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         channel = channelList.get(position).getChannel();
+
+        pageNum = 1;
+        loadMore = false;
+        mPresenter.queryMerchant(channel, merchantName, pageNum + "");
     }
 
     @Override
@@ -250,18 +251,18 @@ public class ConsumeModifyActivity extends MVPBaseActivity<ConsumeModifyContract
      */
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-        if (TextUtils.isEmpty(channel)) {
-            Toast.makeText(this, "渠道不能为空", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        pageNum = 1;
-        loadMore = false;
-        merchantName = s.toString();
-        if (TextUtils.isEmpty(merchantName)) {
-            Toast.makeText(this, "渠道商户不能为空", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        mPresenter.queryMerchant(channel, merchantName, pageNum + "");
+//        if (TextUtils.isEmpty(channel)) {
+//            Toast.makeText(this, "渠道不能为空", Toast.LENGTH_SHORT).show();
+//            return;
+//        }
+//        pageNum = 1;
+//        loadMore = false;
+//        merchantName = s.toString();
+//        if (TextUtils.isEmpty(merchantName)) {
+//            Toast.makeText(this, "渠道商户不能为空", Toast.LENGTH_SHORT).show();
+//            return;
+//        }
+//        mPresenter.queryMerchant(channel, merchantName, pageNum + "");
     }
 
     @Override

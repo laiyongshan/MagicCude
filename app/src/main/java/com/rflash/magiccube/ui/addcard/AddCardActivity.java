@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -21,7 +22,9 @@ import android.widget.Toast;
 
 import com.bigkoo.pickerview.TimePickerView;
 import com.flyco.roundview.RoundTextView;
+import com.google.gson.Gson;
 import com.jaredrummler.materialspinner.MaterialSpinner;
+import com.rflash.basemodule.utils.StringUtil;
 import com.rflash.magiccube.Config;
 import com.rflash.magiccube.R;
 import com.rflash.magiccube.event.DeleteAdingMessage;
@@ -78,7 +81,7 @@ public class AddCardActivity extends MVPBaseActivity<AddCardContract.View, AddCa
     @BindViews({R.id.base_info_arrow_iv, R.id.lines_info_arrow_iv, R.id.plan_info_arrow_iv, R.id.service_cost_arrow_iv, R.id.aging_info_arrow_iv, R.id.ebank_info_arrow_iv})
     ImageView[] arrowIvs;
 
-    boolean isShowBaseArrow, isShowLinesArrow, isShowPlanArow, isShowServiceArrow, isShowAging, isShowEbank;
+    boolean isShowBaseArrow, isShowLinesArrow, isShowPlanArow=true, isShowServiceArrow=true, isShowAging=true, isShowEbank=true;
 
 
     //基本信息
@@ -181,6 +184,7 @@ public class AddCardActivity extends MVPBaseActivity<AddCardContract.View, AddCa
 
     TimePickerView mTimePikerView;//时间选择器
     SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
+    SimpleDateFormat simpleDateFormat3= new SimpleDateFormat("yyyy-MM-30");
     SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("dd");
 
     AgingSettingDialog agingSettingDialog;
@@ -208,6 +212,20 @@ public class AddCardActivity extends MVPBaseActivity<AddCardContract.View, AddCa
         successProgressDialog = new SuccessProgressDialog(this);
 
         bankName_tv.setVisibility(View.INVISIBLE);
+
+        cardNo_et.setOnFocusChangeListener(new android.view.View.
+                OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    // 此处为得到焦点时的处理内容
+
+                } else {
+                    // 此处为失去焦点时的处理内容
+                    getBankInfo(cardNo_et.getText().toString().trim());
+                }
+            }
+        });
 
         repayDateType_sp.setItems(dirtData.repayDateArr);
         repayDateType_sp.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
@@ -250,6 +268,8 @@ public class AddCardActivity extends MVPBaseActivity<AddCardContract.View, AddCa
                 }
             }
         });
+        isFreePlan_sp.setSelectedIndex(1);
+        freePlanRate_cd.setVisibility(View.GONE);
 
         serviceType_sp.setItems(dirtData.serviceTypeArr);
         serviceType_sp.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
@@ -342,7 +362,7 @@ public class AddCardActivity extends MVPBaseActivity<AddCardContract.View, AddCa
                 break;
 
             case R.id.billDate_et:
-                mTimePikerView = TimerPikerTools.creatTimePickerView(AddCardActivity.this, "选择账单日", false, false, true, new TimePickerView.OnTimeSelectListener() {
+                mTimePikerView = TimerPikerTools.creatTimePickerView5(AddCardActivity.this, "选择账单日", false, false, true, new TimePickerView.OnTimeSelectListener() {
                     @Override
                     public void onTimeSelect(Date date, View v) {
                         billDate = simpleDateFormat2.format(date);
@@ -353,7 +373,7 @@ public class AddCardActivity extends MVPBaseActivity<AddCardContract.View, AddCa
                 break;
 
             case R.id.repayDate_et:
-                mTimePikerView = TimerPikerTools.creatTimePickerView(AddCardActivity.this, "选择还款日", false, false, true, new TimePickerView.OnTimeSelectListener() {
+                mTimePikerView = TimerPikerTools.creatTimePickerView5(AddCardActivity.this, "选择还款日", false, false, true, new TimePickerView.OnTimeSelectListener() {
                     @Override
                     public void onTimeSelect(Date date, View v) {
                         repayDate = simpleDateFormat2.format(date);
@@ -408,7 +428,7 @@ public class AddCardActivity extends MVPBaseActivity<AddCardContract.View, AddCa
                 mTimePikerView = TimerPikerTools.creatTimePickerView(AddCardActivity.this, "选择日期", true, true, true, new TimePickerView.OnTimeSelectListener() {
                     @Override
                     public void onTimeSelect(Date date, View v) {
-                        serviceEndDate = simpleDateFormat1.format(date);
+                        serviceEndDate = simpleDateFormat3.format(date);
                         serviceEndDate_tv.setText(serviceEndDate + "");
                     }
                 });
@@ -426,9 +446,9 @@ public class AddCardActivity extends MVPBaseActivity<AddCardContract.View, AddCa
                         agingAdapter.notifyDataSetChanged();
                         AllpartSeqno_et.setText(agingBeanList.size() + "");
                         for (AgingBean bean : agingBeanList) {
-                            Allamt += Double.valueOf(bean.getAmt());
+                            Allamt += Double.valueOf(bean.getAmt())+Double.valueOf(bean.getFee());
                         }
-                        AllpartTotalAmt_et.setText(Allamt + "");
+                        AllpartTotalAmt_et.setText(StringUtil.getTwoPointString(Allamt + ""));
                     }
                 });
                 agingSettingDialog.show();
@@ -475,6 +495,19 @@ public class AddCardActivity extends MVPBaseActivity<AddCardContract.View, AddCa
         mMaterialDialog.show();
     }
 
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_BACK:
+                cancel();
+                return false;//拦截事件
+            default:
+                break;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
     /**
      * 四要素验证
      */
@@ -492,7 +525,6 @@ public class AddCardActivity extends MVPBaseActivity<AddCardContract.View, AddCa
                     customerID_et.getText().toString().trim(), phone_et.getText().toString().trim(), dirtData.cardMediaOptions[cardMedia_sp.getSelectedIndex()]
             );
         }
-
     }
 
     /**
@@ -502,9 +534,25 @@ public class AddCardActivity extends MVPBaseActivity<AddCardContract.View, AddCa
         mPresenter.productBuy(Config.FOUR_ELEMNETS_VERICATION, num, payType);
     }
 
+    /**
+     * 获取发卡行信息
+     * */
+    private void getBankInfo(String cardNo){
+        mPresenter.getBankInfo(cardNo);
+    }
+
 
     /**
      * 添加卡片
+     * else if (serviceAmt.equals("")) {
+     Toast.makeText(AddCardActivity.this, "请填写费用基数金额：", Toast.LENGTH_SHORT).show();
+     } else if (serviceRate.equals("")) {
+     Toast.makeText(AddCardActivity.this, "请填写收费比例", Toast.LENGTH_SHORT).show();
+     } else if (serviceEndDate.equals("")) {
+     Toast.makeText(AddCardActivity.this, "请选择截止服务日期", Toast.LENGTH_SHORT).show();
+     } else if (paidAmt.equals("")) {
+     Toast.makeText(AddCardActivity.this, "请填写实收服务费", Toast.LENGTH_SHORT).show();
+     }
      */
     private void insertCard() {
 
@@ -512,6 +560,8 @@ public class AddCardActivity extends MVPBaseActivity<AddCardContract.View, AddCa
 
         if (cardSeqno_et.getText().toString().trim().equals("")) {
             Toast.makeText(AddCardActivity.this, "请填写卡位", Toast.LENGTH_SHORT).show();
+        }else if(bankCode.equals("")){
+            Toast.makeText(AddCardActivity.this, "发卡行信息未获取，请重新填写卡号", Toast.LENGTH_SHORT).show();
         } else if (cardNo_et.getText().toString().trim().equals("")) {
             Toast.makeText(AddCardActivity.this, "请填写卡号", Toast.LENGTH_SHORT).show();
         } else if (customerName_et.getText().toString().trim().equals("")) {
@@ -534,29 +584,21 @@ public class AddCardActivity extends MVPBaseActivity<AddCardContract.View, AddCa
             Toast.makeText(AddCardActivity.this, "请填写初始金额", Toast.LENGTH_SHORT).show();
         } else if (isHolidayPlan.equals("Y") && isFreePlan.equals("Y") && freePlanRate.equals("")) {
             Toast.makeText(AddCardActivity.this, "请填写规划比例", Toast.LENGTH_SHORT).show();
-        } else if (serviceAmt.equals("")) {
-            Toast.makeText(AddCardActivity.this, "请填写费用基数金额：", Toast.LENGTH_SHORT).show();
-        } else if (serviceRate.equals("")) {
-            Toast.makeText(AddCardActivity.this, "请填写收费比例", Toast.LENGTH_SHORT).show();
-        } else if (serviceEndDate.equals("")) {
-            Toast.makeText(AddCardActivity.this, "请选择截止服务日期", Toast.LENGTH_SHORT).show();
-        } else if (paidAmt.equals("")) {
-            Toast.makeText(AddCardActivity.this, "请填写实收服务费", Toast.LENGTH_SHORT).show();
         } else {
             mPresenter.insertCard(cardNo, cardSeqno, bankCode, customerName, customerID, phone,
                     billDate, repayDateType, repayDate, salesMan,
-                    Double.valueOf(fixedLimit) * 100 + "",
-                    Double.valueOf(availableAmt) * 100 + "",
-                    Double.valueOf(currentRepayAmt) * 100 + "",
-                    Double.valueOf(initAmt) * 100 + "",
-                    Double.valueOf(tempLimit) + "",
+                    StringUtil.getFen(fixedLimit),
+                    StringUtil.getFen(availableAmt),
+                    StringUtil.getFen(currentRepayAmt),
+                    StringUtil.getFen(initAmt),
+                    StringUtil.getFen(tempLimit),
                     tempLimitDate,
                     isHolidayPlan, isFreePlan,
-                    Double.valueOf(freePlanRate) / 100 + "",
-                    serviceType, Double.valueOf(serviceAmt) * 100 + "",
-                    Double.valueOf(serviceRate) / 100 + "",
+                    freePlanRate,
+                    serviceType, StringUtil.getFen(serviceAmt),
+                    serviceRate,
                     serviceStartDate, serviceEndDate,
-                    Double.valueOf(paidAmt) * 100 + "",
+                    StringUtil.getFen(paidAmt),
                     ebankinfo,
                     stagesList, cardMedia);
         }
@@ -566,7 +608,6 @@ public class AddCardActivity extends MVPBaseActivity<AddCardContract.View, AddCa
     private void getParams() {
         cardNo = cardNo_et.getText().toString().trim();
         cardSeqno = cardSeqno_et.getText().toString().trim();
-        bankCode = "";
         customerName = customerName_et.getText().toString().trim();
         customerID = customerID_et.getText().toString().trim();
         phone = phone_et.getText().toString().trim();
@@ -589,17 +630,39 @@ public class AddCardActivity extends MVPBaseActivity<AddCardContract.View, AddCa
 
         isHolidayPlan = dirtData.isHolidayOptions[isHolidayPlan_sp.getSelectedIndex()];
         isFreePlan = dirtData.isFreePlanOptions[isFreePlan_sp.getSelectedIndex()];
-        freePlanRate = freePlanRate_et.getText().toString().trim();
+        if(freePlanRate_et.getText().toString().trim().equals("")){
+            freePlanRate="0";
+        }else {
+            freePlanRate = Float.valueOf(freePlanRate_et.getText().toString().trim()) / 100 + "";
+        }
 
         serviceType = dirtData.serviceTypeOptions[serviceType_sp.getSelectedIndex()];
-        serviceAmt = setviceEts[0].getText().toString().trim();
-        serviceRate = setviceEts[1].getText().toString().trim();
+        if( setviceEts[0].getText().toString().trim().equals("")){
+            serviceAmt="0";
+        }else {
+            serviceAmt = setviceEts[0].getText().toString().trim();
+        }
+        if(setviceEts[1].getText().toString().trim().equals("")) {
+            serviceRate = "0";
+        }else{
+            serviceRate = Float.valueOf(setviceEts[1].getText().toString().trim())/100+"";
+        }
         serviceStartDate = serviceStartDate_tv.getText().toString().trim().replace("-", "");
-        serviceEndDate = serviceEndDate_tv.getText().toString().trim().replace("-", "");
-        paidAmt = setviceEts[2].getText().toString().trim();
+        if(serviceEndDate_tv.getText().toString().trim().equals("")) {
+            serviceEndDate = TimerPikerTools.get10YearLaterDate().replace("-", "");
+        }else{
+            serviceEndDate = serviceEndDate_tv.getText().toString().trim().replace("-", "");
+        }
+
+        if(setviceEts[2].getText().toString().trim().equals("")) {
+            paidAmt ="0";
+        }else{
+            paidAmt = setviceEts[2].getText().toString().trim();
+        }
 
         ebankinfo = getEbankInfo();
         stagesList = getStagesList();
+        Log.i("lys","新增卡片 stagesList is:"+stagesList);
     }
 
     @Override
@@ -659,7 +722,7 @@ public class AddCardActivity extends MVPBaseActivity<AddCardContract.View, AddCa
     //生成支付信息
     @Override
     public void toPayResult(PayBean payBean) {
-        if (payDialog != null & payDialog.isShowing()) {
+        if (payDialog != null && payDialog.isShowing()) {
             payDialog.dismiss();
         }
         try {
@@ -683,6 +746,16 @@ public class AddCardActivity extends MVPBaseActivity<AddCardContract.View, AddCa
             relcard_times_tv.setText("剩余次数：" + productDetailBean.getTimes() + "");
     }
 
+    @Override
+    public void getBankInfoResult(BankInfoBean bankInfoBean) {
+        if(bankInfoBean!=null){
+            bankName_tv.setVisibility(View.VISIBLE);
+            bankName_tv.setText(bankInfoBean.getResult().getBankName()+"");
+            bankCode=bankInfoBean.getResult().getBankCode()+"";
+        }
+
+    }
+
     //獲取分期設置信息
     private String getStagesList() {
 
@@ -690,7 +763,8 @@ public class AddCardActivity extends MVPBaseActivity<AddCardContract.View, AddCa
             return "";
         }
         try {
-            JSONArray json = new JSONArray();
+
+            JSONArray jsonArr = new JSONArray();
             for (AgingBean a : agingBeanList) {
                 JSONObject jo = new JSONObject();
                 jo.put("partTotalAmt", a.getPartTotalAmt() + "");
@@ -701,13 +775,18 @@ public class AddCardActivity extends MVPBaseActivity<AddCardContract.View, AddCa
                 jo.put("fee", a.getFee() + "");
                 jo.put("isRepaied", a.getIsRepaied() + "");
                 jo.put("createUser", a.getCreateUser() + "");
-                json.put(jo);
+                jsonArr.put(jo);
             }
-            return Base64.encode(json.toString().getBytes());
+            JSONObject  jsonObject=new JSONObject ();
+            jsonObject.put("",jsonArr.toString());
+
+           ;String json= new Gson().toJson(agingBeanList);
+            Log.i("lys","jsonObject is:"+json);
+            return Base64.encode( json.getBytes());
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return "";
+        return stagesList;
     }
 
     //获取网银信息
@@ -731,9 +810,9 @@ public class AddCardActivity extends MVPBaseActivity<AddCardContract.View, AddCa
         aging_rv.setAdapter(agingAdapter);
         AllpartSeqno_et.setText(agingBeanList.size() + "");
         for (AgingBean bean : agingBeanList) {
-            Allamt += Double.valueOf(bean.getAmt());
+            Allamt +=Double.valueOf(StringUtil.getTwoPointString(bean.getAmt()+""))+Double.valueOf(StringUtil.getTwoPointString(bean.getFee()+""));
         }
-        AllpartTotalAmt_et.setText(Allamt + "");
+        AllpartTotalAmt_et.setText(Allamt+"");
 
         if (agingBeanList.isEmpty())
             aging_emty_tv.setVisibility(View.VISIBLE);

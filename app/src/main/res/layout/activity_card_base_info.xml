@@ -182,7 +182,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
                     android:layout_centerVertical="true"
-                    android:src="@mipmap/icon_arrow_down"
+                    android:src="@mipmap/icon_arrow_up"
                     android:layout_marginLeft="6dp"
                     android:layout_toRightOf="@+id/tv3"
                     />
@@ -223,7 +223,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
                     android:layout_centerVertical="true"
-                    android:src="@mipmap/icon_arrow_down"
+                    android:src="@mipmap/icon_arrow_up"
                     android:layout_marginLeft="6dp"
                     android:layout_toRightOf="@+id/tv4"
                     />
@@ -264,7 +264,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
                     android:layout_centerVertical="true"
-                    android:src="@mipmap/icon_arrow_down"
+                    android:src="@mipmap/icon_arrow_up"
                     android:layout_marginLeft="6dp"
                     android:layout_toRightOf="@+id/tv5"
                     />
@@ -305,7 +305,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
                     android:layout_centerVertical="true"
-                    android:src="@mipmap/icon_arrow_down"
+                    android:src="@mipmap/icon_arrow_up"
                     android:layout_marginLeft="6dp"
                     android:layout_toRightOf="@+id/tv6"
                     />
@@ -347,7 +347,7 @@
                 android:layout_marginTop="16dp"
                 android:gravity="center"
                 android:padding="10dp"
-                android:text="确定"
+                android:text="保存修改"
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 rv:rv_backgroundColor="@color/colorPrimary"

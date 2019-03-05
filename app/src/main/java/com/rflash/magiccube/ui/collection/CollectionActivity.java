@@ -7,12 +7,10 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Switch;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.rflash.basemodule.BaseActivity;
 import com.rflash.magiccube.R;
-import com.rflash.magiccube.mvp.MVPBaseActivity;
 import com.rflash.magiccube.ui.handswipecode.HandSwipeCodeActivity;
 
 import java.util.ArrayList;
@@ -24,7 +22,7 @@ import butterknife.OnClick;
 /**
  * @author lys
  * @time 2018/10/8 17:02
- * @desc:
+ * @desc: 收款
  */
 
 public class CollectionActivity extends BaseActivity {

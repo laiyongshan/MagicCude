@@ -1,6 +1,8 @@
 package com.rflash.magiccube.util;
-import java.io.ByteArrayOutputStream;  
-  
+import java.io.ByteArrayOutputStream;
+import java.io.UnsupportedEncodingException;
+import java.util.logging.Logger;
+
 public class Base64  
 {  
     private static char[] base64EncodeChars = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',  
@@ -48,8 +50,8 @@ public class Base64
             sb.append(base64EncodeChars[b3 & 0x3f]);  
         }  
         return sb.toString();  
-    }  
-  
+    }
+
     public static synchronized byte[] decode(String str)  
     {  
         byte[] data = str.getBytes();  

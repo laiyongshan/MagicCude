@@ -129,6 +129,7 @@ public class ShangHuFragment extends MVPBaseFragment<ShanghuContract.View,Shangh
     String endDate;
     String bind="Y";
     int pageNum=1;
+    int pageSize=100;
 
     private View notDataView;
 
@@ -339,7 +340,7 @@ public class ShangHuFragment extends MVPBaseFragment<ShanghuContract.View,Shangh
     private void getMerchantData(){
         merchantName=merchantName_et.getText().toString().trim();
         merchantCode=merchantCode_et.getText().toString().trim();
-        mPresenter.queryShanghu(channelName,merchantName,state,merchantCode,merchantType,startDate,endDate,bind,pageNum+"");
+        mPresenter.queryShanghu(channelName,"",merchantName,state,merchantCode,merchantType,startDate,endDate,bind,pageNum+"",pageSize+"");
     }
 
     @Override
@@ -411,8 +412,10 @@ public class ShangHuFragment extends MVPBaseFragment<ShanghuContract.View,Shangh
             }
         },1500);
         option_rl.setVisibility(View.GONE);
+        all_selected_cb.setSelected(false);
         shanghu_option_tv.setText("操作");
         shanghuAdapter = new ShanghuAdapter(false, shanghuBeanList);
+        shanghuAdapter.setOnLoadMoreListener(this,shanghu_rv);
         shanghuAdapter.disableLoadMoreIfNotFullPage();
         shanghu_rv.setAdapter(shanghuAdapter);
     }

@@ -8,7 +8,9 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Base64;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -19,6 +21,7 @@ import android.widget.Toast;
 
 import com.bigkoo.pickerview.TimePickerView;
 import com.flyco.roundview.RoundTextView;
+import com.google.gson.Gson;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.rflash.basemodule.utils.ActivityIntent;
 import com.rflash.basemodule.utils.StringUtil;
@@ -26,6 +29,7 @@ import com.rflash.magiccube.Config;
 import com.rflash.magiccube.R;
 import com.rflash.magiccube.event.DeleteAdingMessage;
 import com.rflash.magiccube.mvp.MVPBaseActivity;
+import com.rflash.magiccube.ui.addcard.AddCardActivity;
 import com.rflash.magiccube.ui.addcard.AgingAdapter;
 import com.rflash.magiccube.ui.addcard.AgingBean;
 import com.rflash.magiccube.ui.addcard.AgingSettingDialog;
@@ -38,7 +42,6 @@ import com.rflash.magiccube.ui.cardmanager.CardBean;
 import com.rflash.magiccube.ui.newmain.DirtData;
 import com.rflash.magiccube.ui.renewal.RenewalActivity;
 import com.rflash.magiccube.util.AESUtil;
-import com.rflash.magiccube.util.Base64;
 import com.rflash.magiccube.util.DateUtil;
 import com.rflash.magiccube.util.ImgHelper;
 import com.rflash.magiccube.util.TimerPikerTools;
@@ -98,7 +101,7 @@ public class CardBaseInforActivity extends MVPBaseActivity<CardBaseInfoContract.
     @BindViews({R.id.base_info_arrow_iv, R.id.lines_info_arrow_iv, R.id.plan_info_arrow_iv, R.id.service_cost_arrow_iv, R.id.aging_info_arrow_iv, R.id.ebank_info_arrow_iv})
     ImageView[] arrowIvs;
 
-    boolean isShowBaseArrow, isShowLinesArrow, isShowPlanArow, isShowServiceArrow, isShowAging, isShowEbank;
+    boolean isShowBaseArrow, isShowLinesArrow, isShowPlanArow = true, isShowServiceArrow = true, isShowAging = true, isShowEbank = true;
 
     //基本信息
     @BindView(R.id.cardSeqno_et)
@@ -149,7 +152,7 @@ public class CardBaseInforActivity extends MVPBaseActivity<CardBaseInfoContract.
     @BindView(R.id.tempLimitDate_tv)
     TextView tempLimitDate_tv;
     @BindView(R.id.tempLimitDate_cb)
-            CardView tempLimitDate_cb;
+    CardView tempLimitDate_cb;
 
     String fixedLimit, availableAmt, currentRepayAmt, initAmt, tempLimit, tempLimitDate;
 
@@ -195,6 +198,7 @@ public class CardBaseInforActivity extends MVPBaseActivity<CardBaseInfoContract.
     AgingSettingDialog agingSettingDialog;
 
     String stagesList = "";//分期信息
+    List<BaseInfoBean.ResultBean.InstallmentListBean>  installmentList=new ArrayList<>();
     List<AgingBean> agingBeanList = new ArrayList<>();
     AgingAdapter agingAdapter;
 
@@ -375,7 +379,7 @@ public class CardBaseInforActivity extends MVPBaseActivity<CardBaseInfoContract.
                 break;
 
             case R.id.billDate_et:
-                mTimePikerView = TimerPikerTools.creatTimePickerView(CardBaseInforActivity.this, "选择账单日", false, false, true, new TimePickerView.OnTimeSelectListener() {
+                mTimePikerView = TimerPikerTools.creatTimePickerView5(CardBaseInforActivity.this, "选择账单日", false, false, true, new TimePickerView.OnTimeSelectListener() {
                     @Override
                     public void onTimeSelect(Date date, View v) {
                         billDate = simpleDateFormat2.format(date);
@@ -386,7 +390,7 @@ public class CardBaseInforActivity extends MVPBaseActivity<CardBaseInfoContract.
                 break;
 
             case R.id.repayDate_et:
-                mTimePikerView = TimerPikerTools.creatTimePickerView(CardBaseInforActivity.this, "选择还款日", false, false, true, new TimePickerView.OnTimeSelectListener() {
+                mTimePikerView = TimerPikerTools.creatTimePickerView5(CardBaseInforActivity.this, "选择还款日", false, false, true, new TimePickerView.OnTimeSelectListener() {
                     @Override
                     public void onTimeSelect(Date date, View v) {
                         repayDate = simpleDateFormat2.format(date);
@@ -412,7 +416,7 @@ public class CardBaseInforActivity extends MVPBaseActivity<CardBaseInfoContract.
                         productBuy(num, Config.ALIPAY);
                     }
                 });
-            payDialog.show();
+                payDialog.show();
                 break;
 
             case R.id.tempLimitDate_tv:
@@ -459,9 +463,9 @@ public class CardBaseInforActivity extends MVPBaseActivity<CardBaseInfoContract.
                         agingAdapter.notifyDataSetChanged();
                         AllpartSeqno_et.setText(agingBeanList.size() + "");
                         for (AgingBean bean : agingBeanList) {
-                            Allamt += Double.valueOf(bean.getAmt());
+                            Allamt += (Double.valueOf(bean.getAmt())+Double.valueOf(bean.getFee()));
                         }
-                        AllpartTotalAmt_et.setText(Allamt + "");
+                        AllpartTotalAmt_et.setText(StringUtil.getTwoPointString(Allamt + ""));
                     }
                 });
                 agingSettingDialog.show();
@@ -499,6 +503,18 @@ public class CardBaseInforActivity extends MVPBaseActivity<CardBaseInfoContract.
         mMaterialDialog.show();
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_BACK:
+                cancel();
+                return false;//拦截事件
+            default:
+                break;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
     /**
      * 获取卡信息
      */
@@ -534,6 +550,17 @@ public class CardBaseInforActivity extends MVPBaseActivity<CardBaseInfoContract.
 
     /**
      * 修改卡片信息
+     *  else if (isHolidayPlan.equals("Y") && isFreePlan.equals("Y") && freePlanRate.equals("")) {
+     Toast.makeText(CardBaseInforActivity.this, "请填写规划比例", Toast.LENGTH_SHORT).show();
+     } else if (serviceAmt.equals("")) {
+     Toast.makeText(CardBaseInforActivity.this, "请填写费用基数金额：", Toast.LENGTH_SHORT).show();
+     } else if (serviceRate.equals("")) {
+     Toast.makeText(CardBaseInforActivity.this, "请填写收费比例", Toast.LENGTH_SHORT).show();
+     } else if (serviceEndDate.equals("")) {
+     Toast.makeText(CardBaseInforActivity.this, "请选择截止服务日期", Toast.LENGTH_SHORT).show();
+     } else if (paidAmt.equals("")) {
+     Toast.makeText(CardBaseInforActivity.this, "请填写实收服务费", Toast.LENGTH_SHORT).show();
+     }
      */
     private void updateCard() {
         getParams();
@@ -559,23 +586,16 @@ public class CardBaseInforActivity extends MVPBaseActivity<CardBaseInfoContract.
             Toast.makeText(CardBaseInforActivity.this, "请填写初始代还", Toast.LENGTH_SHORT).show();
         } else if (initAmt.equals("")) {
             Toast.makeText(CardBaseInforActivity.this, "请填写初始金额", Toast.LENGTH_SHORT).show();
-        } else if (isHolidayPlan.equals("Y") && isFreePlan.equals("Y") && freePlanRate.equals("")) {
+        }else if (isHolidayPlan.equals("Y") && isFreePlan.equals("Y") && freePlanRate.equals("")) {
             Toast.makeText(CardBaseInforActivity.this, "请填写规划比例", Toast.LENGTH_SHORT).show();
-        } else if (serviceAmt.equals("")) {
-            Toast.makeText(CardBaseInforActivity.this, "请填写费用基数金额：", Toast.LENGTH_SHORT).show();
-        } else if (serviceRate.equals("")) {
-            Toast.makeText(CardBaseInforActivity.this, "请填写收费比例", Toast.LENGTH_SHORT).show();
-        } else if (serviceEndDate.equals("")) {
-            Toast.makeText(CardBaseInforActivity.this, "请选择截止服务日期", Toast.LENGTH_SHORT).show();
-        } else if (paidAmt.equals("")) {
-            Toast.makeText(CardBaseInforActivity.this, "请填写实收服务费", Toast.LENGTH_SHORT).show();
-        } else {
+        }else {
             mPresenter.updateCard(cardNo, customerName, customerID, phone,
                     billDate, repayDateType, repayDate, salesMan,
-                    Double.valueOf(tempLimit) + "",
+                    StringUtil.getFen(tempLimit) + "",
                     tempLimitDate,
                     isHolidayPlan, isFreePlan,
-                    Double.valueOf(freePlanRate) / 100 + "",
+                    freePlanRate + "",
+                    serviceRate+"",
                     ebankinfo,
                     stagesList, cardMedia);
         }
@@ -698,7 +718,8 @@ public class CardBaseInforActivity extends MVPBaseActivity<CardBaseInfoContract.
 //        tempLimitDate=resultBean.getTe
 
         //分期设置
-//        stagesList = resultBean.getInstallmentList();
+        installmentList = resultBean.getInstallmentList();
+
 //        try {
 //            JSONArray jsonArray = new JSONArray(stagesList);
 //            for (int i = 0; i < jsonArray.length(); i++) {
@@ -707,7 +728,31 @@ public class CardBaseInforActivity extends MVPBaseActivity<CardBaseInfoContract.
 //        } catch (JSONException e) {
 //            e.printStackTrace();
 //        }
-        if (!agingBeanList.isEmpty()) {
+        if (!installmentList.isEmpty()) {
+            agingBeanList.clear();
+            AgingBean agingBean;
+            for(BaseInfoBean.ResultBean.InstallmentListBean installmentListBean:installmentList){
+                agingBean=new AgingBean();
+                agingBean.setAmt(installmentListBean.getAmt());
+                agingBean.setIsRepaied(installmentListBean.getIsRepaied()+"");
+                agingBean.setCreateUser(installmentListBean.getCreateUser()+"");
+                agingBean.setFee(installmentListBean.getFee());
+                agingBean.setStartTime(installmentListBean.getStartTime()+"");
+                agingBean.setEndTime(installmentListBean.getEndTime()+"");
+                agingBean.setPartSeqno(installmentListBean.getPartSeqno());
+                agingBean.setModifyTime(installmentListBean.getModifyTime());
+                agingBean.setCreateTime(installmentListBean.getCreateTime());
+                agingBean.setPartTotalAmt(installmentListBean.getPartTotalAmt());
+                agingBeanList.add(agingBean);
+            }
+            double Allamt = 0;
+            AllpartSeqno_et.setText(agingBeanList.size() + "");
+            for (AgingBean bean : agingBeanList) {
+                Allamt += (Double.valueOf(StringUtil.getTwoPointString(bean.getAmt()))+Double.valueOf(StringUtil.getTwoPointString(bean.getFee())));
+            }
+            AllpartTotalAmt_et.setText(Allamt + "");
+
+
             agingAdapter.setNewData(agingBeanList);
             agingAdapter.notifyDataSetChanged();
             aging_emty_tv.setVisibility(View.GONE);
@@ -741,6 +786,13 @@ public class CardBaseInforActivity extends MVPBaseActivity<CardBaseInfoContract.
             cardMedia_sp.setSelectedIndex(1);
         }
 
+        for (int i = 0; i < dirtData.getSalesIdList().size(); i++) {
+            if (dirtData.salesIdList.get(i).equals(resultBean.getSalesMan()+"")) {
+                salesMan_sp.setItems(dirtData.getSalesMenList().get(i) + "");
+                salesMan_sp.setSelectedIndex(0);
+            }
+        }
+
         //规划策略
         if (resultBean.getIsHolidayPlan().equals("Y")) {
             isHolidayPlan_sp.setSelectedIndex(0);
@@ -752,7 +804,7 @@ public class CardBaseInforActivity extends MVPBaseActivity<CardBaseInfoContract.
         } else {
             isFreePlan_sp.setSelectedIndex(1);
         }
-        freePlanRate_et.setText(getFloatValue(resultBean.getFreePlanRate()) * 100 + "");
+        freePlanRate_et.setText(ToolUtils.getDouble(Double.valueOf(resultBean.getFreePlanRate())*100) + "");
 
 
         //额度信息
@@ -764,16 +816,16 @@ public class CardBaseInforActivity extends MVPBaseActivity<CardBaseInfoContract.
             serviceType_sp.setSelectedIndex(2);
         }
         linesEts[0].setText(StringUtil.getTwoPointString(resultBean.getFixedLimit()) + "");
-        linesEts[1].setText(StringUtil.getTwoPointString(resultBean.getAvailableAmt() ) + "");
-        linesEts[2].setText(StringUtil.getTwoPointString(resultBean.getCurrentRepayAmt())+ "");
-        linesEts[3].setText(StringUtil.getTwoPointString(resultBean.getInitAmt())+ "");
+        linesEts[1].setText(StringUtil.getTwoPointString(resultBean.getAvailableAmt()) + "");
+        linesEts[2].setText(StringUtil.getTwoPointString(resultBean.getCurrentRepayAmt()) + "");
+        linesEts[3].setText(StringUtil.getTwoPointString(resultBean.getInitAmt()) + "");
         linesEts[4].setText(StringUtil.getTwoPointString(resultBean.getTempLimit()) + "");
 //        tempLimitDate_tv.setText(resultBean.getT);
 
 
         //服务费用
         serviceEts[0].setText(StringUtil.getTwoPointString(resultBean.getServiceAmt()) + "");
-        serviceEts[1].setText(Double.valueOf(resultBean.getServiceRate())*100 + "");
+        serviceEts[1].setText(ToolUtils.getDouble(Double.valueOf(resultBean.getServiceRate())*100)+ "");
         serviceStartDate_tv.setText(DateUtil.formatDate1(resultBean.getServiceStartDate()) + "");
         serviceEndDate_tv.setText(DateUtil.formatDate1(resultBean.getServiceEndDate()) + "");
         serviceEts[2].setText(StringUtil.getTwoPointString(resultBean.getPaidAmt()) + "");
@@ -819,28 +871,35 @@ public class CardBaseInforActivity extends MVPBaseActivity<CardBaseInfoContract.
 
         isHolidayPlan = dirtData.isHolidayOptions[isHolidayPlan_sp.getSelectedIndex()];
         isFreePlan = dirtData.isFreePlanOptions[isFreePlan_sp.getSelectedIndex()];
-        freePlanRate = freePlanRate_et.getText().toString().trim();
+        if(freePlanRate_et.getText().toString().trim().equals("")){
+            freePlanRate="0";
+        }else {
+            freePlanRate = Float.valueOf(freePlanRate_et.getText().toString().trim()) / 100 + "";
+        }
 
         serviceType = dirtData.serviceTypeOptions[serviceType_sp.getSelectedIndex()];
         serviceAmt = serviceEts[0].getText().toString().trim();
-        serviceRate = serviceEts[1].getText().toString().trim();
+        if(serviceEts[1].getText().toString().trim().equals("")) {
+            serviceRate = "0";
+        }else{
+            serviceRate = Float.valueOf(serviceEts[1].getText().toString().trim())/100+"";
+        }
         serviceStartDate = serviceStartDate_tv.getText().toString().trim().replace("-", "");
         serviceEndDate = serviceEndDate_tv.getText().toString().trim().replace("-", "");
         paidAmt = serviceEts[2].getText().toString().trim();
 
         ebankinfo = getEbankInfo();
-        stagesList = getStagesList();
+        stagesList =getStagesList();
     }
 
 
     //獲取分期設置信息
     private String getStagesList() {
-
         if (null == agingBeanList) {
             return "";
         }
         try {
-            JSONArray json = new JSONArray();
+            JSONArray jsonArr = new JSONArray();
             for (AgingBean a : agingBeanList) {
                 JSONObject jo = new JSONObject();
                 jo.put("partTotalAmt", a.getPartTotalAmt() + "");
@@ -851,9 +910,14 @@ public class CardBaseInforActivity extends MVPBaseActivity<CardBaseInfoContract.
                 jo.put("fee", a.getFee() + "");
                 jo.put("isRepaied", a.getIsRepaied() + "");
                 jo.put("createUser", a.getCreateUser() + "");
-                json.put(jo);
+                jsonArr.put(jo);
             }
-            return Base64.encode(json.toString().getBytes());
+//            JSONObject  jsonObject=new JSONObject ();
+//            jsonObject.put("",jsonArr.toString());
+            String json= new Gson().toJson(agingBeanList);
+            Log.i("lys","jsonObject is:"+json);
+            return   Base64.encodeToString(json.getBytes(), Base64.DEFAULT);
+//            return Base64.encode( json.getBytes());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -881,9 +945,9 @@ public class CardBaseInforActivity extends MVPBaseActivity<CardBaseInfoContract.
         aging_rv.setAdapter(agingAdapter);
         AllpartSeqno_et.setText(agingBeanList.size() + "");
         for (AgingBean bean : agingBeanList) {
-            Allamt += Double.valueOf(bean.getAmt());
+            Allamt +=Double.valueOf(StringUtil.getTwoPointString(bean.getAmt()+""))+Double.valueOf(StringUtil.getTwoPointString(bean.getFee()+""));
         }
-        AllpartTotalAmt_et.setText(Allamt + "");
+        AllpartTotalAmt_et.setText(Allamt+"");
 
         if (agingBeanList.isEmpty())
             aging_emty_tv.setVisibility(View.VISIBLE);

@@ -36,11 +36,11 @@ import butterknife.OnClick;
 
 
 /**
- *  云信贷申请反欺诈
- *  Created by Guobaihui on 2018/03/12.
+ * 云信贷申请反欺诈
+ * Created by Guobaihui on 2018/03/12.
  */
 
-public class CreditApplicationActivity extends MVPBaseActivity<CreditApplicationContract.View, CreditApplicationPresenter> implements CreditApplicationContract.View, SwipeRefreshLayout.OnRefreshListener, LoadRecyclerView.OnLoadMoreListener, CreditApplicationAdapter.QueryReportListener, CreditApplicationAdapter.PersonalMessageListener{
+public class CreditApplicationActivity extends MVPBaseActivity<CreditApplicationContract.View, CreditApplicationPresenter> implements CreditApplicationContract.View, SwipeRefreshLayout.OnRefreshListener, LoadRecyclerView.OnLoadMoreListener, CreditApplicationAdapter.QueryReportListener, CreditApplicationAdapter.PersonalMessageListener {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -87,7 +87,8 @@ public class CreditApplicationActivity extends MVPBaseActivity<CreditApplication
         });
 
         Bundle bundle = this.getIntent().getExtras();
-        unitPrice = (String) bundle.get("unitPrice");
+        if (bundle != null)
+            unitPrice = (String) bundle.get("unitPrice");
 
         //下拉时圆圈颜色
         swipeRefreshLayout.setColorSchemeColors(Color.parseColor("#474E7A"));
@@ -165,20 +166,20 @@ public class CreditApplicationActivity extends MVPBaseActivity<CreditApplication
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_recharge://充值次数
-                Intent intentCharge = new Intent(this,CreditreChargeActivity.class);
+                Intent intentCharge = new Intent(this, CreditreChargeActivity.class);
                 Bundle bundleCharge = new Bundle();
-                bundleCharge.putString("total","云信贷申请反欺诈");
+                bundleCharge.putString("total", "云信贷申请反欺诈");
                 bundleCharge.putString("creditType", Config.CLOUD_CREDIT_APPLICATION);
-                bundleCharge.putString("unitPrice",unitPrice);
+                bundleCharge.putString("unitPrice", unitPrice);
                 intentCharge.putExtras(bundleCharge);
                 startActivityForResult(intentCharge, Config.INTENTOK);
                 break;
             case R.id.btn_query://查询
-                if("0".equals(count)){
-                    Toast.makeText(this,"当前查询次数为0，请充值次数。",Toast.LENGTH_SHORT).show();
+                if ("0".equals(count)) {
+                    Toast.makeText(this, "当前查询次数为0，请充值次数。", Toast.LENGTH_SHORT).show();
                     break;
                 }
-                Intent intent = new Intent(this,CreditQueryItemActivity.class);
+                Intent intent = new Intent(this, CreditQueryItemActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("count", count);
                 bundle.putString("total", "云信贷申请反欺诈");
@@ -199,12 +200,12 @@ public class CreditApplicationActivity extends MVPBaseActivity<CreditApplication
     public void getCreditApplication(CreditShareItem creditApplication) {
         totalPage = creditApplication.getTotalPage();
         List<CreditShareItem.ResultBean> result = creditApplication.getResult();
-        if(StringUtil.isEmpty(creditApplication.getTimes())){
+        if (StringUtil.isEmpty(creditApplication.getTimes())) {
             tv_over_times.setText("剩余次数：0");
             count = "0";
-        }else{
+        } else {
             count = creditApplication.getTimes();
-            tv_over_times.setText("剩余次数："+count);
+            tv_over_times.setText("剩余次数：" + count);
         }
         if (result != null) {
             if (refresh) {
@@ -220,32 +221,32 @@ public class CreditApplicationActivity extends MVPBaseActivity<CreditApplication
     @Override
     public void goPersonalMessage(int position, CreditShareItem.ResultBean userPortraitBean) {
         Bundle bundle = new Bundle();
-        bundle.putString("name",userPortraitBean.getName());
-        bundle.putString("identityCard",userPortraitBean.getIdentityCard());
-        bundle.putString("cardNo",userPortraitBean.getCardNo());
-        bundle.putString("mobile",userPortraitBean.getMobile());
-        bundle.putString("date",userPortraitBean.getDate());
-        bundle.putString("orderNo",userPortraitBean.getOrderNo());
-        ActivityIntent.readyGo(this, CreditPersonalMessageActivity.class,bundle);
+        bundle.putString("name", userPortraitBean.getName());
+        bundle.putString("identityCard", userPortraitBean.getIdentityCard());
+        bundle.putString("cardNo", userPortraitBean.getCardNo());
+        bundle.putString("mobile", userPortraitBean.getMobile());
+        bundle.putString("date", userPortraitBean.getDate());
+        bundle.putString("orderNo", userPortraitBean.getOrderNo());
+        ActivityIntent.readyGo(this, CreditPersonalMessageActivity.class, bundle);
     }
 
     // 跳转到报告查看页面
     @Override
     public void goQueryReport(int position, CreditShareItem.ResultBean userPortraitBean) {
         Bundle bundle = new Bundle();
-        bundle.putSerializable("creditShareItem",userPortraitBean);
-        bundle.putString("creditType",Config.CLOUD_CREDIT_APPLICATION);
-        ActivityIntent.readyGo(this,CreditReportMessageActivity.class,bundle);
+        bundle.putSerializable("creditShareItem", userPortraitBean);
+        bundle.putString("creditType", Config.CLOUD_CREDIT_APPLICATION);
+        ActivityIntent.readyGo(this, CreditReportMessageActivity.class, bundle);
     }
 
     // 从充值或查询界面获取剩余次数
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch ( resultCode ) {
-            case Config.INTENTOK :
-                tv_over_times.setText("剩余次数："+data.getExtras().getString( "count" ));
+        switch (resultCode) {
+            case Config.INTENTOK:
+                tv_over_times.setText("剩余次数：" + data.getExtras().getString("count"));
                 break;
-            default :
+            default:
                 break;
         }
     }

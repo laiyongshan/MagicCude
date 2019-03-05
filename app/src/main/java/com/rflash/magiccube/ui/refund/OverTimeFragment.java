@@ -5,7 +5,6 @@ import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -23,7 +22,7 @@ import butterknife.BindView;
  * Created by lenovo on 2018/10/31.
  */
 
-public class OverTimeFragment extends MVPBaseFragment<RefundContract.View, RefundPresenter> implements RefundContract.View, BaseQuickAdapter.RequestLoadMoreListener, SwipeRefreshLayout.OnRefreshListener{
+public class OverTimeFragment extends MVPBaseFragment<RefundContract.View, RefundPresenter> implements RefundContract.View, BaseQuickAdapter.RequestLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.refresh_layout)
     SwipeRefreshLayout refresh_layout;
@@ -34,10 +33,11 @@ public class OverTimeFragment extends MVPBaseFragment<RefundContract.View, Refun
     private View notDataView;
 
     RefundAdapter refundAdapter;
-    List<RefundBean.ResultBean> refunList=new ArrayList<>();
-    List<RefundBean.ResultBean> OVERDUE_List=new ArrayList<>();
+    List<RefundBean.ResultBean> refunList = new ArrayList<>();
+    List<RefundBean.ResultBean> OVERDUE_List = new ArrayList<>();
     RefundBean refundBean;
-    int pageNum=1;
+    int pageNum = 1;
+    int pageSize = 50;
     private int TOTAL_COUNTER; //所有的数据总数
 
     static OverTimeFragment overTimeFragment;
@@ -57,7 +57,7 @@ public class OverTimeFragment extends MVPBaseFragment<RefundContract.View, Refun
 
     @Override
     protected void initView() {
-        mPresenter.getRefundList(pageNum+"");
+        mPresenter.getRefundList(pageNum + "", pageSize + "");
 
         notDataView = getLayoutInflater().inflate(R.layout.empty_view, (ViewGroup) overtime_refund_rv.getParent(), false);
 
@@ -65,8 +65,8 @@ public class OverTimeFragment extends MVPBaseFragment<RefundContract.View, Refun
         refresh_layout.setOnRefreshListener(this);
 
         overtime_refund_rv.setLayoutManager(new LinearLayoutManager(getActivity()));
-        refundAdapter=new RefundAdapter(OVERDUE_List);
-        refundAdapter.setOnLoadMoreListener(this,overtime_refund_rv);
+        refundAdapter = new RefundAdapter(OVERDUE_List);
+        refundAdapter.setOnLoadMoreListener(this, overtime_refund_rv);
         refundAdapter.disableLoadMoreIfNotFullPage();
         overtime_refund_rv.setAdapter(refundAdapter);
     }
@@ -83,8 +83,8 @@ public class OverTimeFragment extends MVPBaseFragment<RefundContract.View, Refun
 
     @Override
     public void onRefresh() {
-        pageNum=1;
-        mPresenter.getRefundList(pageNum+"");
+        pageNum = 1;
+        mPresenter.getRefundList(pageNum + "", pageSize + "");
     }
 
     @Override
@@ -99,7 +99,7 @@ public class OverTimeFragment extends MVPBaseFragment<RefundContract.View, Refun
                 } else {
                     //获取更多数据
                     pageNum++;
-                    mPresenter.getRefundList(pageNum+"");
+                    mPresenter.getRefundList(pageNum + "", pageSize + "");
                 }
                 refresh_layout.setEnabled(true);
             }
@@ -131,19 +131,24 @@ public class OverTimeFragment extends MVPBaseFragment<RefundContract.View, Refun
                 OVERDUE_List.clear();
                 refunList.clear();
                 refunList.addAll(refundBean.getResult());
-                for(RefundBean.ResultBean resultBean:refundBean.getResult())
-                    if(resultBean.getRepayState().equals("OVERDUE"))
+                for (RefundBean.ResultBean resultBean : refundBean.getResult())
+                    if (resultBean.getRepayState().equals("OVERDUE"))
                         OVERDUE_List.add(resultBean);
                 refundAdapter.setNewData(OVERDUE_List);
-                if(OVERDUE_List.isEmpty())
+                if (OVERDUE_List.isEmpty())
                     refundAdapter.setEmptyView(notDataView);
             } else {
                 refunList.addAll(refundBean.getResult());
-                for(RefundBean.ResultBean resultBean:refundBean.getResult()) {
+                for (RefundBean.ResultBean resultBean : refundBean.getResult()) {
                     if (resultBean.getRepayState().equals("OVERDUE"))
                         refundAdapter.addData(resultBean);
                 }
                 refundAdapter.loadMoreComplete();
+            }
+
+            if (refunList.size() < TOTAL_COUNTER) {
+                pageNum++;
+                mPresenter.getRefundList(pageNum + "", pageSize + "");
             }
         }
     }

@@ -38,6 +38,7 @@ public class HadRefundFragment extends MVPBaseFragment<RefundContract.View, Refu
     List<RefundBean.ResultBean> REPAID_List=new ArrayList<>();
     RefundBean refundBean;
     int pageNum=1;
+    int pageSize=50;
     private int TOTAL_COUNTER; //所有的数据总数
 
     static HadRefundFragment hadRefundFragment;
@@ -58,7 +59,7 @@ public class HadRefundFragment extends MVPBaseFragment<RefundContract.View, Refu
 
     @Override
     protected void initView() {
-        mPresenter.getRefundList(pageNum+"");
+        mPresenter.getRefundList(pageNum+"",pageSize+"");
 
         notDataView = getLayoutInflater().inflate(R.layout.empty_view, (ViewGroup) had_refund_rv.getParent(), false);
 
@@ -85,7 +86,7 @@ public class HadRefundFragment extends MVPBaseFragment<RefundContract.View, Refu
     @Override
     public void onRefresh() {
         pageNum=1;
-        mPresenter.getRefundList(pageNum+"");
+        mPresenter.getRefundList(pageNum+"",pageSize+"");
     }
 
     @Override
@@ -100,7 +101,7 @@ public class HadRefundFragment extends MVPBaseFragment<RefundContract.View, Refu
                 } else {
                     //获取更多数据
                     pageNum++;
-                    mPresenter.getRefundList(pageNum+"");
+                    mPresenter.getRefundList(pageNum+"",pageSize+"");
                 }
                 refresh_layout.setEnabled(true);
             }
@@ -128,13 +129,16 @@ public class HadRefundFragment extends MVPBaseFragment<RefundContract.View, Refu
             refundBean = (RefundBean) response;
 
             TOTAL_COUNTER = refundBean.getTotalNum();
+            Log.i("lys", "数据总条数："+TOTAL_COUNTER);
             if (pageNum == 1) {
                 REPAID_List.clear();
                 refunList.clear();
                 refunList.addAll(response.getResult());
-                for(RefundBean.ResultBean resultBean:refundBean.getResult())
-                    if(resultBean.getRepayState().equals("REPAID"))
+                for(RefundBean.ResultBean resultBean:refundBean.getResult()) {
+                    if (resultBean.getRepayState().equals("REPAID")) {
                         REPAID_List.add(resultBean);
+                    }
+                }
                 refundAdapter.setNewData(REPAID_List);
                 if(REPAID_List.isEmpty())
                     refundAdapter.setEmptyView(notDataView);
@@ -144,6 +148,11 @@ public class HadRefundFragment extends MVPBaseFragment<RefundContract.View, Refu
                     if(resultBean.getRepayState().equals("REPAID"))
                         refundAdapter.addData(resultBean);
                 refundAdapter.loadMoreComplete();
+            }
+
+            if(refunList.size()<TOTAL_COUNTER) {
+                pageNum++;
+                mPresenter.getRefundList(pageNum+"",pageSize+"");
             }
         }
     }

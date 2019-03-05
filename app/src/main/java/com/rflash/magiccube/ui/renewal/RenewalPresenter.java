@@ -7,6 +7,7 @@ import com.rflash.magiccube.http.BaseBean;
 import com.rflash.magiccube.http.DefaultObserver;
 import com.rflash.magiccube.http.RetrofitFactory;
 import com.rflash.magiccube.mvp.BasePresenterImpl;
+import com.rflash.magiccube.ui.cardmanager.cardbase.BaseInfoBean;
 import com.rflash.magiccube.ui.newmain.DirtBean;
 import com.rflash.magiccube.util.SignUtil;
 
@@ -86,7 +87,100 @@ public class RenewalPresenter extends BasePresenterImpl<RenewalContract.View> im
     }
 
     @Override
-    public void noOverdueRewal() {
+    public void noOverdueRewal(String cardNo, String serviceEndDate, String serviceType, String serviceAmt, String serviceRate, String paidAmt, String state) {
+        String signature = "";
+        String version = Config.VERSION_CODE;
+        String requestNo = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+        String machineCode = SpUtil.getString(mView.getContext(), Config.MACHINECODE, "");
+        String account = SpUtil.getString(mView.getContext(), Config.ACCOUNT, "");
+        TreeMap<String, String> treeMap = new TreeMap<>();
+        treeMap.put("version", version);
+        treeMap.put("requestNo", requestNo);
+        treeMap.put("machineCode", machineCode);
+        treeMap.put("account", account);
+        treeMap.put("cardNo",cardNo);
+        treeMap.put("serviceEndDate",serviceEndDate);
+        treeMap.put("serviceType",serviceType);
+        treeMap.put("serviceAmt",serviceAmt);
+        treeMap.put("serviceRate",serviceRate);
+        treeMap.put("paidAmt",paidAmt);
+        treeMap.put("state",state);
 
+
+        try {
+            signature = SignUtil.signDataWithStr(treeMap, SpUtil.getString(mView.getContext(), Config.USER_PRVKEY, ""));
+            Observable<BaseBean> updateApp = RetrofitFactory.getApiService().noOverrenewalCard(version, requestNo, machineCode, account, signature,
+                    cardNo,  serviceEndDate,  serviceType,  serviceAmt,
+                    serviceRate,  paidAmt, state);
+            Observable<BaseBean> compose = updateApp.compose(((BaseActivity) mView).compose(((BaseActivity) mView).<BaseBean>bindToLifecycle()));
+            compose.subscribe(new DefaultObserver<BaseBean>((BaseActivity) mView) {
+
+                @Override
+                public void onComplete() {
+                    super.onComplete();
+                }
+
+                @Override
+                public void onError(Throwable e) {
+                    super.onError(e);
+                }
+
+                @Override
+                protected void onSuccess() {
+                    mView.renewalResult();
+                }
+            });
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
+
+    //卡片详情
+    @Override
+    public void queryCardDetail(String cardNo) {
+        String signature;
+        String version = Config.VERSION_CODE;
+        String requestNo = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+        String machineCode = SpUtil.getString(mView.getContext(), Config.MACHINECODE, "");
+        String account = SpUtil.getString(mView.getContext(), Config.ACCOUNT, "");
+        String pointId = SpUtil.getString(mView.getContext(), Config.POINT_ID, "");
+        TreeMap<String, String> treeMap = new TreeMap<>();
+        treeMap.put("version", version);
+        treeMap.put("requestNo", requestNo);
+        treeMap.put("machineCode", machineCode);
+        treeMap.put("account", account);
+        treeMap.put("cardNo", cardNo);
+
+        try {
+            signature = SignUtil.signDataWithStr(treeMap, SpUtil.getString(mView.getContext(), Config.USER_PRVKEY, ""));
+            Observable<BaseBean> cardbaseinfo = RetrofitFactory.getApiService().queryCardDetail(version, requestNo, machineCode, account, signature, cardNo);
+            Observable<BaseBean> compose = cardbaseinfo.compose(((BaseActivity) mView.getContext()).compose(((BaseActivity) mView.getContext()).<BaseBean>bindToLifecycle()));
+            compose.subscribe(new DefaultObserver<BaseInfoBean>((BaseActivity) mView.getContext()) {
+                @Override
+                public void onError(Throwable e) {
+                    mView.getDataFail(e.getMessage());
+                }
+
+                @Override
+                public void onComplete() {
+                    super.onComplete();
+                    mView.finishRefresh();
+                }
+
+
+                @Override
+                protected void onSuccess(BaseInfoBean data) {
+                    mView.getDataSuccess(data);
+                }
+            });
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

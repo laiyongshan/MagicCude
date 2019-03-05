@@ -1,5 +1,6 @@
 package com.rflash.magiccube.ui.shanghu.download;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -56,11 +57,17 @@ public class DownloadAdapter extends BaseQuickAdapter<DownloadBean.ResultBean,Ba
         });
         //从map集合获取状态
         ((CheckBox)helper.getView(R.id.shanghu_cb)).setChecked(item.getSelected());;
-        ((TextView)helper.getView(R.id.address_tv)).setText(item.getRegion()+"");
+        ((TextView)helper.getView(R.id.address_tv)).setText((item.getRegion()+"").substring(3));
         ((TextView)helper.getView(R.id.merchantName_tv)).setText(item.getMerchantName()+"");
         ((TextView)helper.getView(R.id.channelName_tv)).setText(item.getChannelName()+"");
-        ((TextView)helper.getView(R.id.merchantType_tv)).setText(item.getMerchantTypeName()+"");
+        ((TextView)helper.getView(R.id.merchantType_tv)).setText(item.getMerchantMccSmallClassName()+"");
         ((TextView)helper.getView(R.id.merchantCode_tv)).setText(item.getMerchantCode()+"");
         ((TextView)helper.getView(R.id.download_date_tv)).setText(item.getDate()+"");
+
+        if(item.getMerchantCode().contains("3114818")){
+            Log.i("lys","aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa:"+item.getMerchantName()+""+item.getState()+""+item.getMerchantTypeName()+item.getChannelState());
+        }else{
+            Log.i("lys",item.getMerchantName()+""+item.getState()+""+item.getMerchantTypeName()+item.getChannelState());
+        }
     }
 }

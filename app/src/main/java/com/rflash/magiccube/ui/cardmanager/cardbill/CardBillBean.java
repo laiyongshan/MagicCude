@@ -12,7 +12,7 @@ public class CardBillBean extends BaseBean {
 
 
     /**
-     * result : [{"bankName":"华夏银行","billAmt":90000,"billEndDate":"20181110","billId":25508,"billMonth":"201810","billStartDate":"20181023","billType":"REPAY","cardId":4194,"cardNo":"6259691131986193","cardSeqno":"74","consumeAmt":0,"consumeNum":0,"createTime":1540346297000,"customerID":"200104166204060512","customerName":"zeng","isConfirm":"Y","isPlan":"Y","modifyTime":1540346307000,"repayAmt":0,"repayNum":0,"state":"VALID"}]
+     * result : [{"bankName":"华夏银行","billAmt":90000,"billEndDate":"20181110","billId":25508,"billMonth":"201810","billStartDate":"20181023","billType":"REPAY","cardId":4194,"cardNo":"6259691131986193","cardSeqno":"74","consumeAmt":0,"consumeNum":0,"createTime":1540346297000,"customerID":"200104166204060512","customerName":"zeng","isConfirm":"Y","isPlan":"Y","modifyTime":1541698109000,"origBillAmt":90000,"repayAmt":0,"repayNum":0,"state":"VALID"}]
      * totalNum : 1
      * totalPage : 1
      */
@@ -64,7 +64,8 @@ public class CardBillBean extends BaseBean {
          * customerName : zeng
          * isConfirm : Y
          * isPlan : Y
-         * modifyTime : 1540346307000
+         * modifyTime : 1541698109000
+         * origBillAmt : 90000
          * repayAmt : 0
          * repayNum : 0
          * state : VALID
@@ -88,6 +89,7 @@ public class CardBillBean extends BaseBean {
         private String isConfirm;
         private String isPlan;
         private long modifyTime;
+        private int origBillAmt;
         private int repayAmt;
         private int repayNum;
         private String state;
@@ -234,6 +236,14 @@ public class CardBillBean extends BaseBean {
 
         public void setModifyTime(long modifyTime) {
             this.modifyTime = modifyTime;
+        }
+
+        public int getOrigBillAmt() {
+            return origBillAmt;
+        }
+
+        public void setOrigBillAmt(int origBillAmt) {
+            this.origBillAmt = origBillAmt;
         }
 
         public int getRepayAmt() {

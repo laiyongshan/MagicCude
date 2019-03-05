@@ -5,6 +5,7 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.rflash.basemodule.utils.StringUtil;
 import com.rflash.magiccube.R;
 
 import java.util.List;
@@ -32,8 +33,8 @@ public class FinanceDetailAdapter extends BaseQuickAdapter<FinanceDetailBean.Res
             ((TextView) helper.getView(R.id.tranType_tv)).setTextColor(Color.parseColor("#3F51B5"));
         }
         ((TextView)helper.getView(R.id.channelName_tv)).setText(item.getChannelName()+"");
-        ((TextView)helper.getView(R.id.tranCost_tv)).setText(item.getTranCost()+"");
-        ((TextView)helper.getView(R.id.amt_tv)).setText("￥"+Double.valueOf(item.getAmt())/100+"");
+        ((TextView)helper.getView(R.id.tranCost_tv)).setText("￥"+StringUtil.getTwoPointString(item.getTranCost())+"");
+        ((TextView)helper.getView(R.id.amt_tv)).setText("￥"+ StringUtil.getTwoPointString(item.getAmt())+"");
         ((TextView)helper.getView(R.id.operatorTime_tv)).setText(item.getModifyTime()+"");
     }
 }

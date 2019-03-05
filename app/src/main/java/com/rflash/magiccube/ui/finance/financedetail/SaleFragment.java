@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.rflash.magiccube.R;
@@ -58,6 +59,8 @@ public class SaleFragment extends MVPBaseFragment<FinanceManagerContract.View, F
     FinanceBean.ResultBean financeBean;
     FinanceDetailBean financeDetailBean;
 
+    private View notDataView;
+
     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM");
     Date date2;
 
@@ -79,7 +82,7 @@ public class SaleFragment extends MVPBaseFragment<FinanceManagerContract.View, F
 
     @Override
     protected void initView() {
-
+        notDataView = getLayoutInflater().inflate(R.layout.empty_view, (ViewGroup) finance_sale_rv.getParent(), false);
         try {
             date2 = format.parse(DateUtil.formatDate2(financeBean.getReportDate()));
             Log.i("lys",date2.getYear()+"");
@@ -162,9 +165,8 @@ public class SaleFragment extends MVPBaseFragment<FinanceManagerContract.View, F
                 SALE_List.clear();
                 SALE_List = financeDetailBean.getResult();
                 financeDetailAdapter.setNewData(SALE_List);
-                for (FinanceDetailBean.ResultBean bean : SALE_List) {
-                    Log.i("lys", "消费：" + bean.getState());
-                }
+                if(SALE_List.isEmpty())
+                    financeDetailAdapter.setEmptyView(notDataView);
             } else {
                 SALE_List.addAll(financeDetailBean.getResult());
                 financeDetailAdapter.notifyDataSetChanged();

@@ -16,6 +16,8 @@ public class AddPlanContract {
         void getDataFail(String msg);
         void getResult();
         void queryShanghuResult(ShanghuBean response);
+
+        void queryTermSuccess(TermBean data);
     }
 
     interface  Presenter extends BasePresenter<View> {
@@ -25,6 +27,13 @@ public class AddPlanContract {
 
         //查询商户
         void queryShanghu(String channelName, String merchantName, String merchantCode, String state, String merchantType, String startDate, String endDate, String bind, String pageNum,String pageSize);
+
+
+        //终端查询 获取终端号
+        //channel 渠道ID
+        //merchantCode 商户号
+        void queryTerm(String channel,String merchantCode);
+
 
     }
 }

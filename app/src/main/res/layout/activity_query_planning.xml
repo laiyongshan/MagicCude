@@ -82,7 +82,7 @@
                     android:layout_weight="1"
                     android:text="未消费成本："
                     android:textColor="@color/white"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/dealSaleTranCost_tv"
@@ -91,7 +91,7 @@
                     android:layout_weight="1"
                     android:text="已消费成本："
                     android:textColor="@color/white"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -108,7 +108,7 @@
                     android:layout_weight="1"
                     android:text="未消费总金额："
                     android:textColor="@color/white"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/dealSale_tv"
@@ -117,7 +117,7 @@
                     android:layout_weight="1"
                     android:text="已消费总金额："
                     android:textColor="@color/white"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -134,7 +134,7 @@
                     android:layout_weight="1"
                     android:text="未还款总金额："
                     android:textColor="@color/white"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/dealRepay_tv"
@@ -143,7 +143,7 @@
                     android:layout_weight="1"
                     android:text="已还款总金额："
                     android:textColor="@color/white"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
             </LinearLayout>
 
         </LinearLayout>

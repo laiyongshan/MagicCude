@@ -4,7 +4,9 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/card_plan_info_layout">
+    android:id="@+id/card_plan_info_layout"
+    android:visibility="gone"
+    >
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
@@ -25,12 +27,11 @@
             <TextView
                 android:layout_width="110dp"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@mipmap/icon_red_start"
                 android:drawablePadding="6dp"
                 android:gravity="left"
                 android:text="节假日规划："
                 android:paddingLeft="16dp"
-                android:paddingRight="26dp"
+                android:paddingRight="0dp"
                 android:textColor="#000"
                 android:textSize="14sp" />
 
@@ -77,12 +78,11 @@
             <TextView
                 android:layout_width="110dp"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@mipmap/icon_red_start"
                 android:drawablePadding="6dp"
                 android:gravity="left"
                 android:text="空闲时段规划："
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
+                android:paddingLeft="6dp"
+                android:paddingRight="0dp"
                 android:textColor="#000"
                 android:textSize="14sp" />
 
@@ -130,7 +130,6 @@
             <TextView
                 android:layout_width="110dp"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@mipmap/icon_red_start"
                 android:drawablePadding="6dp"
                 android:gravity="left"
                 android:text="规划比例："

@@ -147,6 +147,49 @@ public class TimerPikerTools {
     }
 
 
+    /**
+     *
+     * @param isMonth   是否是只显示到月
+    //     * @param selectedDate  当前控件中该显示时间
+     */
+    public static TimePickerView creatTimePickerView5(Context context, String TileText, boolean isYear, boolean isMonth, boolean isDay, TimePickerView.OnTimeSelectListener onTimeSelectListener){
+
+        Calendar startDate = Calendar.getInstance();
+        startDate.set(2009, 0, 1);
+        Calendar  endDate= Calendar.getInstance() ;//系统当前时间
+//        endDate.add(Calendar.DATE,0); //取到昨天的日期
+        endDate.set(2019, 0, 31);
+        //时间选择器 ，自定义布局
+        mtimePickerView = new TimePickerView.Builder(context,onTimeSelectListener)
+                .setCancelText("")//取消按钮文字
+                .setSubmitText("确定 ")//确认按钮文字
+                .setContentSize(18)
+                .setTitleSize(20)
+                .setTitleText(TileText+"")
+                .setTitleColor(Color.parseColor("#5EB9F2"))
+                .setLineSpacingMultiplier(2f)//设置两横线之间的间隔倍数
+                .setSubmitColor(Color.parseColor("#5EB9F2"))
+                .setCancelColor(Color.parseColor("#5EB9F2"))
+                .setOutSideCancelable(false)//点击屏幕，点在控件外部范围时，是否取消显示
+                .setDate(endDate)
+                .isCyclic(false)//是否循环滚动
+                .setType(new boolean[]{isYear,isMonth,isDay, false, false, false})
+                .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
+                .setDividerColor(Color.RED)
+                .isDialog(true)
+                .build();
+
+        mtimePickerView.setOnDismissListener(new OnDismissListener() {
+            @Override
+            public void onDismiss(Object o) {
+//                mtimePickerView.show(true);
+            }
+        });
+        return mtimePickerView;
+    }
+
+
+
 
     public static String getTodayDate(){
         Calendar   cal   =   Calendar.getInstance();
@@ -184,6 +227,12 @@ public class TimerPikerTools {
         return format;
     }
 
+    public static String get10YearLaterDate(){
+        Calendar   cal   =   Calendar.getInstance();
+        cal.add(Calendar.YEAR, 10); //年份减1
+        String format = new SimpleDateFormat("yyyy-MM-dd").format(cal.getTime());
+        return format;
+    }
 
     //System.currentTimeMillis()与日期之间转换
     public static long Date2Mills(String date){
